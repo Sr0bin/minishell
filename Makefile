@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/05/12 13:39:11 by rorollin         ###   ########.fr        #
+#    Updated: 2025/05/13 09:28:50 by lserodon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SOURCES_DIR = src
 
 SOURCES_NAME = main.c
 
-SOURCES_PIPEX = pipex.c pipex_utils.c 
+SOURCES_PIPEX = pipex.c
 
 SOURCES_DEBUG = debug.c
 
