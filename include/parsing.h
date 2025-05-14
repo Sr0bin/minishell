@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/14 14:29:18 by rorollin          #+#    #+#             */
+/*   Created: 2025/05/14 14:30:03 by rorollin          #+#    #+#             */
 /*   Updated: 2025/05/14 14:31:12 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "parsing.h"
-# include "struct.h"
+#ifndef	PARSING_H
+# define PARSING_H
+
 #endif
