@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/15 17:20:54 by lserodon          #+#    #+#             */
-/*   Updated: 2025/05/17 09:49:21 by lserodon         ###   ########.fr       */
+/*   Created: 2025/05/17 09:49:30 by lserodon          #+#    #+#             */
+/*   Updated: 2025/05/17 14:10:39 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void    ft_echo(int argc, char **argv)
+void    ft_cd(int argc, char **argv)
 {
-	int	i;
+    char *path;
 
-	i = 1;
-	while (ft_strncmp(argv[i], "-n", ft_strlen(argv[i])) == 0)
-		i++;
-	while (i < argc)
+	if (argc == 2)
 	{
-		printf("%s", argv[i]);
-		if (i < argc - 1)
-			printf(" ");
-		i++;
+		path = getenv("HOME");
+		if (!path || chdir(path) == -1)
+            perror("minishell : cd");
 	}
-	if (ft_strncmp(argv[1], "-n", ft_strlen(argv[1])) != 0)
-		printf("\n");
+	else
+	{
+		path = argv[2];
+		if (chdir(path) == -1)
+			perror("minishell : cd ");
+	}
 }
+
+/* int main(int argc, char **argv)
+{
+    ft_cd(argc, argv);
+	char cwd[1024];
+	getcwd(cwd, sizeof(cwd));
+	printf("Répertoire courant : %s\n", cwd);
+} */

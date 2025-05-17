@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/05/06 15:22:33 by rorollin         ###   ########.fr        #
+#    Updated: 2025/05/17 16:28:39 by lserodon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,16 @@ SOURCES_DIR = src
 
 SOURCES_NAME = main.c
 
-SOURCES_= 
+SOURCES_BUILTINS = echo.c cd.c pwd.c
+
+SOURCES_PIPEX = pipex.c pipes.c exec.c
 
 SOURCES_DEBUG = debug.
 
 SOURCES = $(addprefix $(SOURCES_DIR)/,\
 		  $(SOURCES_NAME)\
-		  $(addprefix placeholder/, $(SOURCES_))\
+		  $(addprefix builtins/, $(SOURCES_BUILTINS))\
+		  $(addprefix pipex/, $(SOURCES_PIPEX))\
 		  )
 		  # $(addprefix .hidden/, $(SOURCES_DEBUG))\
 		  
@@ -56,7 +59,7 @@ LIBFT_PATH = $(LIBFT)/$(LIBFT).a
 
 COMPILER = cc
 
-CFLAGS_DEBUG = -Wall -Wextra -Werror -MMD -MP -ggdb3 -Wshadow -Wconversion -Wsign-conversion -Wmissing-prototypes \
+CFLAGS_DEBUG = -Wall -Wextra -Werror -g -MMD -MP -ggdb3 -Wshadow -Wconversion -Wsign-conversion -Wmissing-prototypes \
 -Wformat=2 -Wformat-security -Wnull-dereference -Wstack-protector -Wfloat-equal -Wpointer-arith \
 -Wcast-align -Wundef -Wbad-function-cast -Wstrict-overflow=4 -Wdouble-promotion -Walloca -Wvla \
 -Wwrite-strings -Wuninitialized -fno-delete-null-pointer-checks -fno-omit-frame-pointer -std=c11

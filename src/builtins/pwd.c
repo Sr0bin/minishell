@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/15 17:20:54 by lserodon          #+#    #+#             */
-/*   Updated: 2025/05/17 09:49:21 by lserodon         ###   ########.fr       */
+/*   Created: 2025/05/17 13:57:41 by lserodon          #+#    #+#             */
+/*   Updated: 2025/05/17 14:11:56 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void    ft_echo(int argc, char **argv)
-{
-	int	i;
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 30
 
-	i = 1;
-	while (ft_strncmp(argv[i], "-n", ft_strlen(argv[i])) == 0)
-		i++;
-	while (i < argc)
-	{
-		printf("%s", argv[i]);
-		if (i < argc - 1)
-			printf(" ");
-		i++;
-	}
-	if (ft_strncmp(argv[1], "-n", ft_strlen(argv[1])) != 0)
-		printf("\n");
+#endif
+
+void	ft_pwd()
+{
+	char buffer[BUFFER_SIZE];
+	if (getcwd(buffer, BUFFER_SIZE) == NULL)
+		perror("minishell: pwd");
+	printf("%s\n", buffer);
+}
+
+int main()
+{
+	ft_pwd();
 }
