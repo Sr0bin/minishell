@@ -6,12 +6,12 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:10:10 by lserodon          #+#    #+#             */
-/*   Updated: 2025/05/15 17:10:44 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:24:56 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
+/*
 void	close_fds(t_utils *utils)
 {
 	int	i;
@@ -46,4 +46,4 @@ void	init_pipes(t_utils *utils)
 			return ;
 		i++;
 	}
-}
+}*/

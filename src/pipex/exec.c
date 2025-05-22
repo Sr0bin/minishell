@@ -6,12 +6,12 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:08:44 by lserodon          #+#    #+#             */
-/*   Updated: 2025/05/15 17:09:06 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:25:05 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
+/* 
 void	exec_first_cmd(t_utils *utils)
 {
 	pid_t pid;
@@ -93,3 +93,4 @@ void	exec_pipex(t_utils *utils)
 	while (wait(NULL) > 0)
 	;
 }
+ */

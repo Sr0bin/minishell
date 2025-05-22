@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 14:08:59 by lserodon          #+#    #+#             */
-/*   Updated: 2025/05/15 17:14:48 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:30:46 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include "../../libft/include/libft.h"
+#include "struct.h"
 
 /* ----- STRUCTURE ----- */
 
@@ -46,7 +47,13 @@ void	close_fds(t_utils *utils);
 /* ----- PIPES.C ----- */
 
 void	init_pipes(t_utils *utils);
-
+char	***ast_to_cmds(t_ast_node *root);
+int		count_commands(t_ast_node *node);
+void 	free_cmds(char ***cmds);
+void	print_cmds(char ***cmds);
+void	fill_cmds(t_ast_node *node, char ***cmds, int *i);
+int		count_nbr_token(t_token *token);
+void	token_to_argv(t_token *token, char ***cmds, int *i);
 /* ----- EXEC.C ----- */
 
 void	exec_first_cmd(t_utils *utils);
