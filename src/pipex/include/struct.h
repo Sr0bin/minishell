@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:17:00 by lserodon          #+#    #+#             */
-/*   Updated: 2025/05/21 14:24:09 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/05/24 15:07:31 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # define STRUCT_H
 typedef struct s_token t_token;
 typedef struct s_ast_node t_ast_node;
-
 
 typedef	enum	e_token_type
 {
@@ -78,4 +77,5 @@ typedef struct s_ast_node
 	t_ast_node	*right;
 	t_token		*token_list;
 } t_ast_node;
+
 #endif

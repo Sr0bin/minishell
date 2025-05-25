@@ -6,91 +6,75 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:08:44 by lserodon          #+#    #+#             */
-/*   Updated: 2025/05/21 14:25:05 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/05/25 11:29:30 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-/* 
-void	exec_first_cmd(t_utils *utils)
-{
-	pid_t pid;
+#include "include/pipex.h"
 
-	pid = fork();
-	if (pid == -1)
-		exit(1);
-	else if (pid == 0)
+void	exec_cmd(t_utils *utils, int i)
+{
+	int		fd_in;
+	int		fd_out;
+
+	fd_in = -1;
+	fd_out = -1;
+	if (utils->cmds[i].fd_in)
 	{
-		dup2(utils->infile, STDIN_FILENO);
-		dup2(utils->fd[0][1], STDOUT_FILENO);
-		close_fds(utils);
-		utils->path = find_path(utils->envp, utils->cmds[0]);
-		if (execve(utils->path, utils->cmds[0], utils->envp) == -1)
-		{
-			free_all(utils);
-			exit(1);
-		}
+		fd_in = open(utils->cmds[i].fd_in, O_RDONLY);
+		if (fd_in < 0)
+			perror("fd_in");
+		dup2(fd_in, STDIN_FILENO);
 	}
-}
-
-void	exec_mid_cmd(t_utils *utils, int i)
-{
-	pid_t pid;
-
-	pid = fork();
-	if (pid == -1)
-		exit(1);
-	else if (pid == 0)
-	{
+	else if (i > 0)
 		dup2(utils->fd[i - 1][0], STDIN_FILENO);
+	if (utils->cmds[i].fd_out)
+	{	
+		fd_out = open(utils->cmds[i].fd_out, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+		if (fd_out < 0)
+			perror("fd_out");
+		dup2(fd_out, STDOUT_FILENO);
+	}
+	else if (i < utils->nb_cmds - 1)
 		dup2(utils->fd[i][1], STDOUT_FILENO);
-		close_fds(utils);
-		utils->path = find_path(utils->envp, utils->cmds[i]);
-		if (execve(utils->path, utils->cmds[i], utils->envp) == -1)
-		{
-			free_all(utils);
-			exit(1);
-		}
-	}
-}
-
-void	exec_last_cmd(t_utils *utils, int i)
-{
-	pid_t pid;
-
-	pid = fork();
-	if (pid == -1)
-		exit(1);
-	else if (pid == 0)
+	if (fd_in > 2)
+		close(fd_in);
+	if (fd_out > 2)
+		close(fd_out);
+	close_all_fds(utils);
+	utils->cmds[i].path = find_path(utils->envp, utils->cmds[i].cmd[0]);
+	if (execve(utils->cmds[i].path, utils->cmds[i].cmd, utils->envp) == -1)
 	{
-		dup2(utils->fd[i - 1][0], STDIN_FILENO);
-		dup2(utils->outfile, STDOUT_FILENO);
-		close_fds(utils);
-		utils->path =find_path(utils->envp, utils->cmds[utils->nb_commands - 1]);
-		if (execve(utils->path, utils->cmds[i], utils->envp) == -1)
-		{
-			free_all(utils);
-			exit(1);
-		}
+		perror("execve");
+		exit (EXIT_FAILURE);
 	}
 }
 
 void	exec_pipex(t_utils *utils)
 {
-	int	i;
+	int		i;
+	pid_t	pid;
 
 	i = 0;
-	while (i < utils->nb_commands)
+	while (i < utils->nb_cmds)
 	{
-		if (i == 0)
-			exec_first_cmd(utils);
-		else if (i == utils->nb_commands - 1)
-			exec_last_cmd(utils, i);
+		if (i < utils->nb_cmds - 1)
+		{
+			if(pipe(utils->fd[i]) == -1)
+				perror("pipe");
+		}
+		pid = fork();
+		if (pid == 0)
+			exec_cmd(utils, i);
 		else
-			exec_mid_cmd(utils, i);
+		{
+			if (i > 0)
+				close(utils->fd[i - 1][0]);
+			if (i < utils->nb_cmds - 1)
+				close(utils->fd[i][1]);
+		}
 		i++;
 	}
 	while (wait(NULL) > 0)
 	;
 }
- */
