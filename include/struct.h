@@ -6,12 +6,14 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:30:44 by rorollin          #+#    #+#             */
-/*   Updated: 2025/05/14 16:58:43 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/05/26 16:19:34 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+# include "libft.h"
+
 typedef struct s_token t_token;
 typedef struct s_ast_node t_ast_node;
 
@@ -31,10 +33,12 @@ typedef	enum	e_token_type
 	TOKEN_EOF,				// ctrl-d
 } t_token_type;
 
+typedef t_list t_token_list;
+
 typedef struct s_token
 {
-	t_token_type type;
 	char		*content;
+	t_token_type type;
 	t_token 	*next;
 	t_token 	*prev;
 }	t_token;
@@ -67,7 +71,10 @@ typedef	enum	e_char_type
 typedef enum e_node_type
 {
 	NODE_COMMAND,
-	NODE_PIPE
+	NODE_PIPE,
+	NODE_REDIR_IN,
+	NODE_REDIR_OUT,
+	NODE_REDIR_APPEND,
 } t_node_type;
 
 typedef struct s_ast_node

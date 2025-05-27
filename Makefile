@@ -6,7 +6,7 @@
 #    By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/05/14 13:39:41 by rorollin         ###   ########.fr        #
+#    Updated: 2025/05/26 14:55:03 by rorollin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = minishell
 
 SOURCES_DIR = src
 
-SOURCES_NAME = main.c
+SOURCES_NAME = main.c token_utils.c
 
 SOURCES_= 
 

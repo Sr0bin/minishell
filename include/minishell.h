@@ -6,12 +6,13 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:29:18 by rorollin          #+#    #+#             */
-/*   Updated: 2025/05/14 14:31:12 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:42:05 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+# include "libft.h"
 # include "parsing.h"
 # include "struct.h"
 #endif
