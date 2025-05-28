@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:17:00 by lserodon          #+#    #+#             */
-/*   Updated: 2025/05/24 15:07:31 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/05/28 13:42:13 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ typedef	enum	e_char_type
 typedef enum e_node_type
 {
 	NODE_COMMAND,
-	NODE_PIPE
+	NODE_PIPE,
+	NODE_REDIR_IN,
+	NODE_REDIR_OUT,
+	NODE_REDIR_APPEND,
 } t_node_type;
 
 typedef struct s_ast_node

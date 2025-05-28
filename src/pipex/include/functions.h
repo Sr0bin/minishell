@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 10:02:07 by lserodon          #+#    #+#             */
-/*   Updated: 2025/05/24 15:22:32 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:46:16 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		count_nbr_token(t_token *token);
 void	token_to_argv(t_token *token, char ***cmds, int *i);
 int		is_next_of_redir(t_token *token);
 int		count_nbr_args(t_token *token);
+void    fill_redir(t_utils *utils, t_node_type redir_type, t_ast_node *node, int *i);
 void	fill_one_cmd(t_utils *utils, t_token *token, int *i);
 void	fill_cmds(t_utils *utils, t_ast_node *node, int *i);
 void	ast_to_cmds(t_utils *utils, t_ast_node *root);

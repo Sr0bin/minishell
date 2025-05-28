@@ -6,7 +6,7 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/05/25 11:28:05 by lserodon         ###   ########.fr        #
+#    Updated: 2025/05/28 14:51:45 by lserodon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SOURCES_DIR = src
 
 SOURCES_NAME = main.c
 
-SOURCES_PIPEX = pipex.c ast_to_cmds.c main.c path.c print_utils.c pipes.c exec.c
+SOURCES_PIPEX = pipex.c ast_to_cmds.c main.c path.c pipes.c exec.c
 
 SOURCES_DEBUG = debug.c
 
@@ -56,7 +56,7 @@ LIBFT_PATH = $(LIBFT)/$(LIBFT).a
 
 COMPILER = cc
 
-CFLAGS_DEBUG = -Wall -Wextra -MMD -MP -ggdb3 -Wshadow -Wconversion -Wsign-conversion -Wmissing-prototypes \
+CFLAGS_DEBUG = -Wall -Wextra -Werror -MMD -MP -ggdb3 -Wshadow -Wconversion -Wsign-conversion -Wmissing-prototypes \
 -Wformat=2 -Wformat-security -Wnull-dereference -Wstack-protector -Wfloat-equal -Wpointer-arith \
 -Wcast-align -Wundef -Wbad-function-cast -Wstrict-overflow=4 -Wdouble-promotion -Walloca -Wvla \
 -Wwrite-strings -Wuninitialized -fno-delete-null-pointer-checks -fno-omit-frame-pointer -std=c11

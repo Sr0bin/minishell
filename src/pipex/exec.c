@@ -6,11 +6,16 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:08:44 by lserodon          #+#    #+#             */
-/*   Updated: 2025/05/25 11:29:30 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:31:19 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/pipex.h"
+
+void	free_all(t_utils *utils)
+{
+	
+}
 
 void	exec_cmd(t_utils *utils, int i)
 {
@@ -77,4 +82,5 @@ void	exec_pipex(t_utils *utils)
 	}
 	while (wait(NULL) > 0)
 	;
+	free_all(all);
 }

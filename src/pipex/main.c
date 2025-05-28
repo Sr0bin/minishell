@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 09:32:03 by lserodon          #+#    #+#             */
-/*   Updated: 2025/05/25 10:04:20 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:52:18 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,73 +16,44 @@ int main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;
+	// Fichiers
+t_token token_infile = {TOKEN_WORD, "infile.txt", NULL, NULL};
+t_token token_outfile = {TOKEN_WORD, "output.txt", NULL, NULL};
 
-// --- TOKENS ---
+// Commandes
+t_token token_grep1 = {TOKEN_WORD, "grep", NULL, NULL};
+t_token token_grep2 = {TOKEN_WORD, "hello", NULL, &token_grep1};
+token_grep1.next = &token_grep2;
 
-// Redirection in
-t_token redir_in     = {TOKEN_REDIR_IN, "<", NULL, NULL};
-t_token infile       = {TOKEN_WORD, "input.txt", NULL, &redir_in};
-redir_in.next = &infile;
+t_token token_sort = {TOKEN_WORD, "sort", NULL, NULL};
 
-// grep hello
-t_token grep_tok     = {TOKEN_WORD, "grep", NULL, &infile};
-infile.next = &grep_tok;
-t_token hello_tok    = {TOKEN_WORD, "hello", NULL, &grep_tok};
-grep_tok.next = &hello_tok;
+t_token token_wc1 = {TOKEN_WORD, "wc", NULL, NULL};
+t_token token_wc2 = {TOKEN_WORD, "-l", NULL, &token_wc1};
+token_wc1.next = &token_wc2;
 
-// sort
-t_token sort_tok     = {TOKEN_WORD, "sort", NULL, NULL};
+// CMD nodes
+t_ast_node cmd_grep = {NODE_COMMAND, NULL, NULL, &token_grep1};
+t_ast_node cmd_sort = {NODE_COMMAND, NULL, NULL, &token_sort};
+t_ast_node cmd_wc = {NODE_COMMAND, NULL, NULL, &token_wc1};
 
-// wc -l + redir out
-t_token wc_tok       = {TOKEN_WORD, "wc", NULL, NULL};
-t_token dash_l_tok   = {TOKEN_WORD, "-l", NULL, &wc_tok};
-wc_tok.next = &dash_l_tok;
-t_token redir_out    = {TOKEN_REDIR_OUT, ">", NULL, &dash_l_tok};
-dash_l_tok.next = &redir_out;
-t_token outfile      = {TOKEN_WORD, "output.txt", NULL, &redir_out};
-redir_out.next = &outfile;
+// FILE nodes (sous forme de commande simple contenant le token fichier)
+t_ast_node file_in = {NODE_COMMAND, NULL, NULL, &token_infile};
+t_ast_node file_out = {NODE_COMMAND, NULL, NULL, &token_outfile};
 
-// --- AST NODES ---
+// REDIR_IN : < input.txt grep hello
+t_ast_node redir_in = {NODE_REDIR_IN, &cmd_grep, &file_in, NULL};
 
-// grep hello + < input.txt
-t_ast_node node_cmd1 = {
-	NODE_COMMAND,
-	NULL,
-	NULL,
-	&redir_in
-};
+// PIPE gauche : (grep < input.txt) | sort
+t_ast_node pipe1 = {NODE_PIPE, &redir_in, &cmd_sort, NULL};
 
-// sort
-t_ast_node node_cmd2 = {
-	NODE_COMMAND,
-	NULL,
-	NULL,
-	&sort_tok
-};
+// REDIR_OUT : wc -l > output.txt
+t_ast_node redir_out = {NODE_REDIR_OUT, &cmd_wc, &file_out, NULL};
 
-// wc -l > output.txt
-t_ast_node node_cmd3 = {
-	NODE_COMMAND,
-	NULL,
-	NULL,
-	&wc_tok
-};
+// PIPE racine : (pipe1) | (wc -l > output.txt)
+t_ast_node pipe2 = {NODE_PIPE, &pipe1, &redir_out, NULL};
 
-// Pipe 1: grep hello < input.txt | sort
-t_ast_node pipe1 = {
-	NODE_PIPE,
-	&node_cmd1,
-	&node_cmd2,
-	NULL
-};
+// 👑 AST final
+t_ast_node *ast_root = &pipe2;
 
-// Pipe 2: (grep hello | sort) | wc -l > output.txt
-t_ast_node root = {
-	NODE_PIPE,
-	&pipe1,
-	&node_cmd3,
-	NULL
-};
-
-	exec_multipipe(&root, envp);
+	exec_multipipe(ast_root, envp);
 }
