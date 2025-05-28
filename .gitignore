@@ -1,6 +1,6 @@
 .gitmodules
 .gdb_history
-fdf
+minishell
 compile_commands.json
 .cache
 obj

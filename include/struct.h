@@ -6,13 +6,36 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:30:44 by rorollin          #+#    #+#             */
-/*   Updated: 2025/05/26 16:19:34 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/05/28 13:35:09 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 # include "libft.h"
+
+typedef struct s_var
+{
+	char	*key;
+	char	*value;
+}	t_var;
+
+typedef t_list t_env;
+
+typedef enum e_shell_state
+{
+	INIT,	// Reflexion around the state machine approach. Placeholder while we think about it.
+	PROMPT,
+	INPUT,
+	HEREDOC,
+} t_shell_state;
+
+typedef struct s_context
+{
+	t_env	*env;
+	t_shell_state state;
+
+} t_context;
 
 typedef struct s_token t_token;
 typedef struct s_ast_node t_ast_node;
@@ -43,14 +66,14 @@ typedef struct s_token
 	t_token 	*prev;
 }	t_token;
 
-typedef enum e_state
+typedef enum e_parsing_state
 {
 	STATE_DEFAULT,
 	STATE_WORD,
 	STATE_SQUOTE,
 	STATE_DQUOTE,
 	STATE_OPERATOR,
-}	t_state;
+}	t_parsing_state;
 
 typedef	enum	e_char_type
 {
