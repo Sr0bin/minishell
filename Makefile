@@ -6,11 +6,11 @@
 #    By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/05/06 15:22:33 by rorollin         ###   ########.fr        #
+#    Updated: 2025/05/28 13:21:29 by rorollin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minitalk
+NAME = minishell
 
 #SOURCES######################
 
