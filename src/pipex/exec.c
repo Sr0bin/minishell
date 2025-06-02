@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:08:44 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/02 11:53:23 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:14:43 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,15 @@ int	set_input_fd(t_utils *utils, int i)
 	{
 		fd_in = open(utils->cmds[i].fd_in, O_RDONLY);
 		if (fd_in < 0)
-			perror("fd_in");
-		dup2(fd_in, STDIN_FILENO);
+			ft_error(utils, "Error: fd_in failed", 1);
+		if (dup2(fd_in, STDIN_FILENO) == -1)
+			ft_error(utils, "Error: dup2 failed", 1); 
 	}
 	else if (i > 0)
-		dup2(utils->fd[i -1][0], STDIN_FILENO);
+	{
+		if (dup2(utils->fd[i -1][0], STDIN_FILENO) == -1)
+			ft_error(utils, "Error: dup2 failed", 1);
+	}
 	return (fd_in);
 }
 
@@ -43,11 +47,15 @@ int	set_output_fd(t_utils *utils, int i)
 			fd_out = open(utils->cmds[i].fd_out,
 					O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd_out < 0)
-			perror("fd_out");
-		dup2(fd_out, STDOUT_FILENO);
+			ft_error(utils, "Error : open failed", 1);
+		if (dup2(fd_out, STDOUT_FILENO) == -1)
+			ft_error(utils, "Error : dup2 failed", 1);
 	}
 	else if (i < utils->nb_cmds - 1)
-		dup2(utils->fd[i][1], STDOUT_FILENO);
+	{
+		if (dup2(utils->fd[i][1], STDOUT_FILENO) == -1)
+			ft_error(utils, "Error : dup2 failed", 1);
+	}
 	return (fd_out);
 }
 
@@ -63,12 +71,11 @@ void	exec_cmd(t_utils *utils, int i)
 	if (fd_out > 2)
 		close(fd_out);
 	close_pipes(utils);
-	utils->cmds[i].path = find_path(utils->envp, utils->cmds[i].cmd[0]);
+	utils->cmds[i].path = find_path(utils, i);
+	if (!utils->cmds[i].path)
+		ft_error(utils, "Error: command not found", 127);
 	if (execve(utils->cmds[i].path, utils->cmds[i].cmd, utils->envp) == -1)
-	{
-		perror("execve");
-		exit (EXIT_FAILURE);
-	}
+		ft_error(utils, "Error : execve failed", 1);
 }
 
 void	close_parent_fds(t_utils *utils, int i)
@@ -93,7 +100,9 @@ void	exec_pipex(t_utils *utils)
 				perror("pipe");
 		}
 		pid = fork();
-		if (pid == 0)
+		if (pid == -1)
+			ft_error(utils, "Error : fork failed", 1);
+		else if (pid == 0)
 			exec_cmd(utils, i);
 		else
 			close_parent_fds(utils, i);
@@ -102,4 +111,5 @@ void	exec_pipex(t_utils *utils)
 	while (wait(NULL) > 0)
 		;
 	free_utils(utils);
+	exit (0);
 }

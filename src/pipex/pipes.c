@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:10:10 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/02 11:53:23 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:16:30 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void	init_pipes(t_utils *utils)
 	i = 0;
 	utils->fd = malloc(sizeof(int *) * (long unsigned int)(utils->nb_cmds));
 	if (!utils->fd)
-		return ;
+		ft_error(utils, "Error : malloc failed", 1);
 	while (i < utils->nb_cmds - 1)
 	{
 		utils->fd[i] = malloc(sizeof(int) * 2);
 		if (!utils->fd[i])
-			return ;
+			ft_error(utils, "Error : malloc failed", 1);
 		utils->fd[i][0] = -1;
 		utils->fd[i][1] = -1;
 		i++;

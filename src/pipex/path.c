@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 09:36:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/02 12:17:22 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:16:10 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,24 @@ char	*get_env_path(char **envp)
 	return (NULL);
 }
 
-char	*find_path(char **envp, char *cmd)
+char	*find_path(t_utils *utils, int i)
 {
 	char	*path;
 	char	*tmp_path;
 	char	*cmd_path;
 	char	**path_array;
-	int		i;
+	int		j;
 
-	path = get_env_path(envp);
+	path = get_env_path(utils->envp);
+	if (!path)
+		ft_error(utils, "Error: Missing PATH in environment", 127);
 	path_array = ft_split(path, ':');
 	free (path);
-	i = -1;
-	while (path_array[++i])
+	j = -1;
+	while (path_array[++j])
 	{
-		tmp_path = ft_strjoin(path_array[i], (char *)"/");
-		cmd_path = ft_strjoin(tmp_path, cmd);
+		tmp_path = ft_strjoin(path_array[j], (char *)"/");
+		cmd_path = ft_strjoin(tmp_path, utils->cmds[i].cmd[0]);
 		free(tmp_path);
 		if (access(cmd_path, X_OK) == 0)
 		{

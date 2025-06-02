@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   multipipes.c                                       :+:      :+:    :+:   */
+/*   exec_multipipes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/02 12:01:51 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:13:54 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	exec_multipipes(t_ast_node *root, char **envp)
 
 	utils = malloc(sizeof(t_utils));
 	if (!utils)
-		return ;
+		ft_error(utils, "Error : malloc failed", 1);
 	*utils = (t_utils){0};
 	utils->envp = envp;
 	ast_to_cmds(utils, root);

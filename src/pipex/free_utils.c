@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:04:52 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/02 12:16:34 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:12:36 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,18 @@ void	free_fds(int **fd)
 
 void	free_utils(t_utils *utils)
 {
-	free_cmds(utils);
-	free_fds(utils->fd);
+	if (!utils)
+		exit (1);
+	if (utils->cmds)
+		free_cmds(utils);
+	if (utils->fd)
+		free_fds(utils->fd);
 	free (utils);
-	exit (1);
+}
+
+void	ft_error(t_utils *utils, const char *msg, int exit_code)
+{
+	perror(msg);
+	free_utils(utils);
+	exit (exit_code);
 }
