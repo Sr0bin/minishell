@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 14:08:59 by lserodon          #+#    #+#             */
-/*   Updated: 2025/05/24 11:12:29 by lserodon         ###   ########.fr       */
+/*   Created: 2025/06/02 11:50:26 by lserodon          #+#    #+#             */
+/*   Updated: 2025/06/02 12:22:09 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
-/* ----- LIBRARIES ----- */
-
-#include <stdio.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/wait.h>
-#include "../../libft/include/libft.h"
-#include "struct.h"
-#include "functions.h"
-
-/* ----- STRUCTURE ----- */
+typedef enum s_redir_type
+{
+	REDIR_INPUT,
+	REDIR_OUTPUT,
+	REDIR_APPEND,
+	REDIR_HEREDOC,
+}			t_redir_type;
 
 typedef struct s_cmds
 {
-	char 	**cmd;
-	char	*path;
-	char	*fd_in;
-	char	*fd_out;
+	char			**cmd;
+	char			*path;
+	char			*fd_in;
+	char			*fd_out;
+	t_redir_type	redir_type;
 }	t_cmds;
 
 typedef struct s_utils

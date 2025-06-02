@@ -1,48 +1,68 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipes.c                                            :+:      :+:    :+:   */
+/*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/15 17:10:10 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/02 11:53:23 by lserodon         ###   ########.fr       */
+/*   Created: 2025/06/02 11:04:52 by lserodon          #+#    #+#             */
+/*   Updated: 2025/06/02 12:16:34 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/multipipes.h"
 
-void	close_pipes(t_utils *utils)
+void	free_cmd(t_cmds *cmd)
 {
 	int	i;
 
 	i = 0;
-	while (i < utils->nb_cmds - 1)
+	if (cmd->cmd)
 	{
-		if (utils->fd[i][0] > 1)
-			close(utils->fd[i][0]);
-		if (utils->fd[i][1] > 1)
-			close(utils->fd[i][1]);
-		i++;
+		while (cmd->cmd[i])
+		{
+			free(cmd->cmd[i]);
+			i++;
+		}
+		free(cmd->cmd);
 	}
+	free(cmd->fd_in);
+	free(cmd->fd_out);
 }
 
-void	init_pipes(t_utils *utils)
+void	free_cmds(t_utils *utils)
 {
 	int	i;
 
 	i = 0;
-	utils->fd = malloc(sizeof(int *) * (long unsigned int)(utils->nb_cmds));
-	if (!utils->fd)
-		return ;
-	while (i < utils->nb_cmds - 1)
+	while (i < utils->nb_cmds)
 	{
-		utils->fd[i] = malloc(sizeof(int) * 2);
-		if (!utils->fd[i])
-			return ;
-		utils->fd[i][0] = -1;
-		utils->fd[i][1] = -1;
+		free_cmd(&utils->cmds[i]);
 		i++;
 	}
-	utils->fd[i] = NULL;
+	free(utils->cmds);
+}
+
+void	free_fds(int **fd)
+{
+	int	i;
+
+	i = 0;
+	if (fd)
+	{
+		while (fd[i])
+		{
+			free(fd[i]);
+			i++;
+		}
+	}
+	free(fd);
+}
+
+void	free_utils(t_utils *utils)
+{
+	free_cmds(utils);
+	free_fds(utils->fd);
+	free (utils);
+	exit (1);
 }

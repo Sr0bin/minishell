@@ -6,24 +6,41 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 09:36:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/05/24 09:37:25 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:17:22 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/pipex.h"
+#include "include/multipipes.h"
 
 void	free_array(char **array)
 {
-	int i;
+	int	i;
 
 	i = 0;
-
 	while (array[i])
 	{
 		free(array[i]);
 		i++;
 	}
 	free(array);
+}
+
+char	*get_env_path(char **envp)
+{
+	int		i;
+	char	*path;
+
+	i = 0;
+	while (envp && envp[i])
+	{
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+		{
+			path = ft_substr(envp[i], 5, ft_strlen(envp[i]) - 5);
+			return (path);
+		}
+		i++;
+	}
+	return (NULL);
 }
 
 char	*find_path(char **envp, char *cmd)
@@ -34,12 +51,7 @@ char	*find_path(char **envp, char *cmd)
 	char	**path_array;
 	int		i;
 
-	i = -1;
-	while (envp && envp[++i])
-	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
-			path = ft_substr(envp[i], 5, ft_strlen(envp[i]) - 5);
-	}
+	path = get_env_path(envp);
 	path_array = ft_split(path, ':');
 	free (path);
 	i = -1;

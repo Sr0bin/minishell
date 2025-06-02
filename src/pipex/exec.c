@@ -6,24 +6,17 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:08:44 by lserodon          #+#    #+#             */
-/*   Updated: 2025/05/28 15:31:19 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/02 11:53:23 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/pipex.h"
+#include "include/multipipes.h"
 
-void	free_all(t_utils *utils)
+int	set_input_fd(t_utils *utils, int i)
 {
-	
-}
-
-void	exec_cmd(t_utils *utils, int i)
-{
-	int		fd_in;
-	int		fd_out;
+	int	fd_in;
 
 	fd_in = -1;
-	fd_out = -1;
 	if (utils->cmds[i].fd_in)
 	{
 		fd_in = open(utils->cmds[i].fd_in, O_RDONLY);
@@ -32,27 +25,58 @@ void	exec_cmd(t_utils *utils, int i)
 		dup2(fd_in, STDIN_FILENO);
 	}
 	else if (i > 0)
-		dup2(utils->fd[i - 1][0], STDIN_FILENO);
+		dup2(utils->fd[i -1][0], STDIN_FILENO);
+	return (fd_in);
+}
+
+int	set_output_fd(t_utils *utils, int i)
+{
+	int	fd_out;
+
+	fd_out = -1;
 	if (utils->cmds[i].fd_out)
-	{	
-		fd_out = open(utils->cmds[i].fd_out, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	{
+		if (utils->cmds[i].redir_type == REDIR_APPEND)
+			fd_out = open(utils->cmds[i].fd_out,
+					O_WRONLY | O_CREAT | O_APPEND, 0644);
+		else if (utils->cmds[i].redir_type == REDIR_OUTPUT)
+			fd_out = open(utils->cmds[i].fd_out,
+					O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd_out < 0)
 			perror("fd_out");
 		dup2(fd_out, STDOUT_FILENO);
 	}
 	else if (i < utils->nb_cmds - 1)
 		dup2(utils->fd[i][1], STDOUT_FILENO);
+	return (fd_out);
+}
+
+void	exec_cmd(t_utils *utils, int i)
+{
+	int		fd_in;
+	int		fd_out;
+
+	fd_in = set_input_fd(utils, i);
+	fd_out = set_output_fd(utils, i);
 	if (fd_in > 2)
 		close(fd_in);
 	if (fd_out > 2)
 		close(fd_out);
-	close_all_fds(utils);
+	close_pipes(utils);
 	utils->cmds[i].path = find_path(utils->envp, utils->cmds[i].cmd[0]);
 	if (execve(utils->cmds[i].path, utils->cmds[i].cmd, utils->envp) == -1)
 	{
 		perror("execve");
 		exit (EXIT_FAILURE);
 	}
+}
+
+void	close_parent_fds(t_utils *utils, int i)
+{
+	if (i > 0)
+		close(utils->fd[i - 1][0]);
+	if (i < utils->nb_cmds - 1)
+		close(utils->fd[i][1]);
 }
 
 void	exec_pipex(t_utils *utils)
@@ -65,22 +89,17 @@ void	exec_pipex(t_utils *utils)
 	{
 		if (i < utils->nb_cmds - 1)
 		{
-			if(pipe(utils->fd[i]) == -1)
+			if (pipe(utils->fd[i]) == -1)
 				perror("pipe");
 		}
 		pid = fork();
 		if (pid == 0)
 			exec_cmd(utils, i);
 		else
-		{
-			if (i > 0)
-				close(utils->fd[i - 1][0]);
-			if (i < utils->nb_cmds - 1)
-				close(utils->fd[i][1]);
-		}
+			close_parent_fds(utils, i);
 		i++;
 	}
 	while (wait(NULL) > 0)
-	;
-	free_all(all);
+		;
+	free_utils(utils);
 }

@@ -6,15 +6,15 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 09:32:03 by lserodon          #+#    #+#             */
-/*   Updated: 2025/05/28 14:52:18 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:16:58 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/pipex.h"
+#include "include/multipipes.h"
 
 int main(int argc, char **argv, char **envp)
 {
-	(void)argc;
+	 (void)argc;
 	(void)argv;
 	// Fichiers
 t_token token_infile = {TOKEN_WORD, "infile.txt", NULL, NULL};
@@ -47,13 +47,13 @@ t_ast_node redir_in = {NODE_REDIR_IN, &cmd_grep, &file_in, NULL};
 t_ast_node pipe1 = {NODE_PIPE, &redir_in, &cmd_sort, NULL};
 
 // REDIR_OUT : wc -l > output.txt
-t_ast_node redir_out = {NODE_REDIR_OUT, &cmd_wc, &file_out, NULL};
+t_ast_node redir_out = {NODE_REDIR_APPEND, &cmd_wc, &file_out, NULL};
 
 // PIPE racine : (pipe1) | (wc -l > output.txt)
 t_ast_node pipe2 = {NODE_PIPE, &pipe1, &redir_out, NULL};
 
-// 👑 AST final
+//  AST final
 t_ast_node *ast_root = &pipe2;
 
-	exec_multipipe(ast_root, envp);
+	exec_multipipes(ast_root, envp);
 }
