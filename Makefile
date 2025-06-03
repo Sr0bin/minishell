@@ -6,7 +6,7 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/06/02 12:13:26 by lserodon         ###   ########.fr        #
+#    Updated: 2025/06/03 15:01:42 by lserodon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,14 +18,16 @@ SOURCES_DIR = src
 
 SOURCES_NAME = main.c
 
-SOURCES_PIPEX = exec_multipipes.c ast_to_cmds.c ast_utils.c main.c path.c\
-				pipes.c exec.c free_utils.c\
+SOURCES_PIPEX_EXEC = exec_multipipes.c  main.c path.c pipes.c exec.c free_utils.c\
+
+SOURCES_PIPEX_AST = ast_to_cmds.c ast_utils.c\
 
 SOURCES_DEBUG = debug.c
 
 SOURCES = $(addprefix $(SOURCES_DIR)/,\
 		  $(SOURCES_NAME)\
-		  $(addprefix pipex/, $(SOURCES_PIPEX))\
+		  $(addprefix pipex/exec/, $(SOURCES_PIPEX_EXEC))\
+		  $(addprefix pipex/ast/, $(SOURCES_PIPEX_AST))\
 		  )
 		  # $(addprefix .hidden/, $(SOURCES_DEBUG))\
 		  

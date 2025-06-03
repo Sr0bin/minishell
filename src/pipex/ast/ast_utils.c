@@ -6,11 +6,11 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:47:55 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/02 12:16:25 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:02:47 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/multipipes.h"
+#include "../include/multipipes.h"
 
 int	count_commands(t_ast_node *node)
 {

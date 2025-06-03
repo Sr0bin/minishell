@@ -6,11 +6,11 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 09:32:03 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/02 12:16:58 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:02:47 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/multipipes.h"
+#include "../include/multipipes.h"
 
 int main(int argc, char **argv, char **envp)
 {

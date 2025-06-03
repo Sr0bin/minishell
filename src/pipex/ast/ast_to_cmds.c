@@ -6,11 +6,11 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:31:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/02 16:13:43 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:03:33 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/multipipes.h"
+#include "../include/multipipes.h"
 #include <stdio.h>
 
 void	init_utils(t_utils *utils, t_ast_node *root)
@@ -30,7 +30,6 @@ void	init_utils(t_utils *utils, t_ast_node *root)
 		utils->cmds[i].fd_out = NULL;
 		i++;
 	}
-	utils->cmds[i].cmd = '\0';
 }
 
 void	fill_one_cmd(t_utils *utils, t_token *token, int *i)

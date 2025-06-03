@@ -6,11 +6,11 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:08:44 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/02 16:14:43 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:13:14 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/multipipes.h"
+#include "../include/multipipes.h"
 
 int	set_input_fd(t_utils *utils, int i)
 {
@@ -23,7 +23,7 @@ int	set_input_fd(t_utils *utils, int i)
 		if (fd_in < 0)
 			ft_error(utils, "Error: fd_in failed", 1);
 		if (dup2(fd_in, STDIN_FILENO) == -1)
-			ft_error(utils, "Error: dup2 failed", 1); 
+			ft_error(utils, "Error: dup2 failed", 1);
 	}
 	else if (i > 0)
 	{
