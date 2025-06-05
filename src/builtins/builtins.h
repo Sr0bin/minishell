@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:21:09 by lserodon          #+#    #+#             */
-/*   Updated: 2025/05/17 14:10:14 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:59:32 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,16 @@
 void    ft_echo(int argc, char **argv);
 void	ft_cd(int argc, char **argv);
 void	ft_pwd(void);
+void	ft_env(t_list *env);
+void    ft_unset(t_list **env, char **args);
+void	check_var(t_list **env, char **args);
+void	delete_var(t_list **env, char *args);
+void	free_var(void	*content);
+
+typedef struct s_var
+{
+	char *key;
+	char *value;
+}	t_var;
 
 #endif
