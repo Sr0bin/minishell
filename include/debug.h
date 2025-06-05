@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   debug.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 15:22:49 by rorollin          #+#    #+#             */
-/*   Updated: 2025/06/05 18:34:58 by rorollin         ###   ########.fr       */
+/*   Created: 2025/06/05 18:32:23 by rorollin          #+#    #+#             */
+/*   Updated: 2025/06/05 18:33:34 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include <stdio.h>
+#ifndef DEBUG_H
+# define DEBUG_H
+# include "struct.h"
+void	print_token(t_token token);
+void	print_token_list(t_token_list *list);
+#endif
 
-void	print_token(t_token token)
-{
-	printf("\n Token content : %s \n token Type : %i", token.content, token.type);
-	
-}
-void	print_token_list(t_token_list *list)
-{
-	t_token_list *temp;
-
-	temp = list;
-	while (temp != NULL && temp->content != NULL)
-	{
-		print_token(*(t_token *) temp->content);
-		temp = temp->next;
-	}
-
-}

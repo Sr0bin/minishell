@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   handle_dquote.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 15:22:49 by rorollin          #+#    #+#             */
-/*   Updated: 2025/06/05 18:34:58 by rorollin         ###   ########.fr       */
+/*   Created: 2025/06/05 15:49:00 by rorollin          #+#    #+#             */
+/*   Updated: 2025/06/05 16:06:09 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdio.h>
 
-void	print_token(t_token token)
+void	handle_dquote_end(t_parser *p)
 {
-	printf("\n Token content : %s \n token Type : %i", token.content, token.type);
-	
+	p->state = STATE_NORMAL;
+	generate_token(p, TOKEN_WORD);
 }
-void	print_token_list(t_token_list *list)
+
+// This is POSIX 2.2.3
+void	handle_dquote_escape(t_parser *p)
 {
-	t_token_list *temp;
-
-	temp = list;
-	while (temp != NULL && temp->content != NULL)
+	if (*(p->crnt_pos) == '$' || *(p->crnt_pos) == '`' || *(p->crnt_pos) == '"'\
+		|| *(p->crnt_pos) == '\\' || *(p->crnt_pos) == '\n')
 	{
-		print_token(*(t_token *) temp->content);
-		temp = temp->next;
+		remove_char(p->crnt_pos);
+		p->crnt_pos++;
+		return ;
 	}
+	p->crnt_pos++;
+}
 
+void	handle_dquote_other(t_parser *p)
+{
+		p->crnt_pos++;
 }

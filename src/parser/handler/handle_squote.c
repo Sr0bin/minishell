@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   handle_squote.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 15:22:49 by rorollin          #+#    #+#             */
-/*   Updated: 2025/06/05 18:34:58 by rorollin         ###   ########.fr       */
+/*   Created: 2025/06/05 15:44:40 by rorollin          #+#    #+#             */
+/*   Updated: 2025/06/05 15:55:59 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdio.h>
 
-void	print_token(t_token token)
+
+void	handle_squote_end(t_parser *p)
 {
-	printf("\n Token content : %s \n token Type : %i", token.content, token.type);
+	p->state = STATE_NORMAL;
+	generate_token(p, TOKEN_WORD);
 	
 }
-void	print_token_list(t_token_list *list)
+
+void	handle_squote_other(t_parser *p)
 {
-	t_token_list *temp;
-
-	temp = list;
-	while (temp != NULL && temp->content != NULL)
-	{
-		print_token(*(t_token *) temp->content);
-		temp = temp->next;
-	}
-
+	p->crnt_pos++;
 }

@@ -6,7 +6,7 @@
 #    By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/05/26 14:55:03 by rorollin         ###   ########.fr        #
+#    Updated: 2025/06/05 18:33:34 by rorollin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,15 +18,21 @@ SOURCES_DIR = src
 
 SOURCES_NAME = main.c token_utils.c
 
-SOURCES_= 
+SOURCES_PARSER_HANDLER = handle_normal.c handle_dquote.c handle_squote.c
+
+SOURCES_PARSER_STATE = transition_utils.c
+
+SOURCES_PARSER = $(addprefix handler/, $(SOURCES_PARSER_HANDLER))\
+				 $(addprefix state/, $(SOURCES_PARSER_STATE)) \
+				 parser_utils.c string_utils.c
 
 SOURCES_DEBUG = debug.c
 
 SOURCES = $(addprefix $(SOURCES_DIR)/,\
 		  $(SOURCES_NAME)\
-		  $(addprefix placeholder/, $(SOURCES_))\
+		  $(addprefix parser/, $(SOURCES_PARSER))\
+		  $(addprefix .hidden/, $(SOURCES_DEBUG))\
 		  )
-		  # $(addprefix .hidden/, $(SOURCES_DEBUG))\
 		  
 
 

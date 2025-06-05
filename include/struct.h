@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:30:44 by rorollin          #+#    #+#             */
-/*   Updated: 2025/05/28 16:26:01 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/06/03 16:48:05 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ typedef enum e_shell_state
 typedef enum e_char_type
 {
 	CHAR_WHITESPACE,
-	CHAR_QUOTE,
+	CHAR_SQUOTE,
+	CHAR_DQUOTE,
 	CHAR_OPERATOR,
 	CHAR_NEWLINE,
 	CHAR_ESCAPE,
@@ -110,7 +111,9 @@ typedef struct s_parser
 {
 	t_ps_state		state;
 	char			*input;
-	char			*pos;
+	char			*crnt_pos;
+	char			*start_pos;
+	t_token			*crnt_token;
 	t_list			*token_list;
 }	t_parser;
 

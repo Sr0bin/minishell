@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 14:10:20 by rorollin          #+#    #+#             */
-/*   Updated: 2025/05/28 17:10:04 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:26:38 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ t_char_type	char_type(char c)
 		return (CHAR_EOF);
 	if (c == ' ' || c == '\t')
 		return (CHAR_WHITESPACE);
-	if (c == '\'' || c == '"')
-		return (CHAR_QUOTE);
+	if (c == '\'')
+		return (CHAR_SQUOTE);
+	if (c == '"')
+		return (CHAR_DQUOTE);
 	if (c == '<' || c == '>' || c == '|' || c == '&' || c == ';')
 		return (CHAR_OPERATOR);
 	if (c == '\n')
@@ -31,33 +33,47 @@ t_char_type	char_type(char c)
 	return (CHAR_OTHER);
 }
 
-
-void	handle_normal(char c, t_parser *p)
+void	handle_normal(t_parser *p)
 {
 	t_char_type type;
 
-	type = char_type(c);
+	type = char_type(*p->crnt_pos);
 	if (type == CHAR_WHITESPACE)
-		handle_normal_whitespace(c, p);
-	else if (type == CHAR_QUOTE)
-		handle_normal_quote(c, p);
+		handle_normal_whitespace(p);
+	else if (type == CHAR_SQUOTE || type == CHAR_DQUOTE)
+		handle_normal_quote(p);
 	else if (type == CHAR_OPERATOR)
-		handle_normal_operator(c, p);
+		handle_normal_operator(p);
 	else if (type == CHAR_NEWLINE)
-		handle_normal_newline(c, p);
+		handle_normal_newline(p);
 	else if (type == CHAR_ESCAPE)
-		handle_normal_escape(c, p);
+		handle_normal_escape(p);
 	else if (type == CHAR_EOF)
-		handle_normal_eof(c, p);
+		handle_normal_eof(p);
 	else if (type == CHAR_OTHER)
-		handle_normal_other(c, p);
+		handle_normal_other(p);
 }
-void	handle_squote(char c, t_parser *p)
+
+void	handle_squote(t_parser *p)
 {
 	t_char_type type;
 
-	type = char_type(c);
-	if (c == '\'')
-		handle_squote_end(c, p);
+	type = char_type(*p->crnt_pos);
+	if (type == CHAR_SQUOTE)
+		handle_squote_end(p);
+	else
+		handle_squote_other(p);
 }
 
+void	handle_dquote(t_parser *p)
+{
+	t_char_type type;
+
+	type = char_type(*p->crnt_pos);
+	if (type == CHAR_DQUOTE)
+		handle_dquote_end(p);
+	else if (type == CHAR_ESCAPE)
+		handle_dquote_escape(p);
+	else
+		handle_dquote_other(p);
+}
