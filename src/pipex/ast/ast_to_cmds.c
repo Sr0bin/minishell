@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:31:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/03 15:03:33 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/10 14:15:56 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ void	fill_redir(t_utils *utils, t_node_type redir, t_ast_node *node, int *i)
 		free(utils->cmds[*i].fd_in);
 		utils->cmds[*i].redir_type = REDIR_INPUT;
 		utils->cmds[*i].fd_in = ft_strdup(node->token_list->content);
-		if (!utils->cmds[*i].fd_in)
-			ft_error(utils, "Error : strdup failed", 1);
+		if (!utils->cmds[*i].fd_in ||
+				access(utils->cmds[*i].fd_in, F_OK | R_OK) == -1)
+			ft_error(utils, "minishell: fd_in failed", 1);
 	}
 	else if (redir == NODE_REDIR_OUT)
 	{
