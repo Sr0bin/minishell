@@ -6,11 +6,11 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/06/04 16:59:57 by lserodon         ###   ########.fr        #
+#    Updated: 2025/06/06 16:10:01 by lserodon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minitalk
+NAME = minishell
 
 #SOURCES######################
 
@@ -18,7 +18,7 @@ SOURCES_DIR = src
 
 SOURCES_NAME = main.c
 
-SOURCES_BUILTINS = unset.c main.c
+SOURCES_BUILTINS = export.c main.c
 
 SOURCES_PIPEX = pipex.c pipes.c exec.c
 
@@ -59,11 +59,7 @@ LIBFT_PATH = $(LIBFT)/$(LIBFT).a
 
 COMPILER = cc
 
-CFLAGS_DEBUG = -Wall -Wextra -g -MMD -MP -ggdb3 -Wshadow -Wconversion -Wsign-conversion -Wmissing-prototypes \
--Wformat=2 -Wformat-security -Wnull-dereference -Wstack-protector -Wfloat-equal -Wpointer-arith \
--Wcast-align -Wundef -Wbad-function-cast -Wstrict-overflow=4 -Wdouble-promotion -Walloca -Wvla \
--Wwrite-strings -Wuninitialized -fno-delete-null-pointer-checks -fno-omit-frame-pointer -std=c11
-
+CFLAGS_DEBUG = -Wall -Wextra -Werror
 CFLAGS_PROD = -Wall -Wextra -Werror -MMD -MP -ggdb3 -O3
 
 CFLAGS = $(CFLAGS_DEBUG)
