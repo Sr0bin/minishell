@@ -3,22 +3,23 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/05/06 15:22:33 by rorollin         ###   ########.fr        #
+#    Updated: 2025/06/17 09:25:53 by lserodon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minitalk
+NAME = minishell
 
 #SOURCES######################
 
 SOURCES_DIR = src
 
-SOURCES_NAME = main.c
+SOURCES_NAME = exec.c cmd_utils.c exec_single_cmd.c path_utils.c\
+				 redir_utils.c error.c
 
-SOURCES_= 
+SOURCES_EXEC = 
 
 SOURCES_DEBUG = debug.
 
@@ -56,7 +57,7 @@ LIBFT_PATH = $(LIBFT)/$(LIBFT).a
 
 COMPILER = cc
 
-CFLAGS_DEBUG = -Wall -Wextra -Werror -MMD -MP -ggdb3 -Wshadow -Wconversion -Wsign-conversion -Wmissing-prototypes \
+CFLAGS_DEBUG = -Wall -Wextra -Werror -MMD -MP -ggdb3 -Wshadow -Wconversion -Wsign-conversion \
 -Wformat=2 -Wformat-security -Wnull-dereference -Wstack-protector -Wfloat-equal -Wpointer-arith \
 -Wcast-align -Wundef -Wbad-function-cast -Wstrict-overflow=4 -Wdouble-promotion -Walloca -Wvla \
 -Wwrite-strings -Wuninitialized -fno-delete-null-pointer-checks -fno-omit-frame-pointer -std=c11
