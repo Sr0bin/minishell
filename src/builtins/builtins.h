@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:21:09 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/06 16:08:16 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/17 16:30:44 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 # define BUILTINS_H
 
 /* ----- LIBRARIES ----- */
-#include <stdio.h>
-#include "../../libft/include/libft.h"
-#include "../pipex/pipex.h"
+# include <stdio.h>
+# include "../../libft/include/libft.h"
 
-typedef struct s_list t_env;
+typedef struct s_list	t_env;
 
 typedef struct s_var
 {
-	char *key;
-	char *value;
-}	t_var;
+	char	*key;
+	char	*value;
+}			t_var;
+
 /* ----- FUNCTIONS.C ----- */
-void    ft_echo(int argc, char **argv);
+void	ft_echo(int argc, char **argv);
 void	ft_cd(int argc, char **argv);
 void	ft_pwd(void);
 void	ft_env(t_list *env);
-void    ft_unset(t_list **env, char **args);
+void	ft_unset(t_list **env, char **args);
 void	check_var(t_list **env, char **args);
 void	delete_var(t_list **env, char *args);
 void	free_var(void	*content);
@@ -43,6 +43,5 @@ void	print_export_list(t_env *env);
 void	export_without_args(t_env *env);
 void	ft_swap(t_env *a, t_env *b);
 int		is_sorted(t_env *env);
-
 
 #endif

@@ -6,21 +6,21 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:20:54 by lserodon          #+#    #+#             */
-/*   Updated: 2025/05/27 12:58:28 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/17 16:38:32 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int		newline(char *str)
+int	newline(char *str)
 {
-	int newline;
+	int	newline;
 	int	i;
 
 	if (!str || str[0] != '-')
 		return (0);
 	i = 1;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] != 'n')
 			return (0);
@@ -29,7 +29,7 @@ int		newline(char *str)
 	return (1);
 }
 
-void    ft_echo(int argc, char **argv)
+void	ft_echo(int argc, char **argv)
 {
 	int	i;
 	int	j;
@@ -41,7 +41,7 @@ void    ft_echo(int argc, char **argv)
 	{
 		no_newline = 1;
 		i++;
-	} 
+	}
 	while (i < argc)
 	{
 		printf("%s", argv[i]);
@@ -53,7 +53,7 @@ void    ft_echo(int argc, char **argv)
 		printf("\n");
 }
 
-int	main(int argc, char **argv)
+/* int	main(int argc, char **argv)
 {
 	ft_echo(argc, argv);
-}
+} */

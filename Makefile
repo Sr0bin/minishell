@@ -6,7 +6,7 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/06/06 16:10:01 by lserodon         ###   ########.fr        #
+#    Updated: 2025/06/17 16:23:27 by lserodon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,16 +18,13 @@ SOURCES_DIR = src
 
 SOURCES_NAME = main.c
 
-SOURCES_BUILTINS = export.c main.c
-
-SOURCES_PIPEX = pipex.c pipes.c exec.c
+SOURCES_BUILTINS = export.c export_args.c export_no_args.c main.c
 
 SOURCES_DEBUG = debug.
 
 SOURCES = $(addprefix $(SOURCES_DIR)/,\
 		  $(SOURCES_NAME)\
 		  $(addprefix builtins/, $(SOURCES_BUILTINS))\
-		  $(addprefix pipex/, $(SOURCES_PIPEX))\
 		  )
 		  # $(addprefix .hidden/, $(SOURCES_DEBUG))\
 		  

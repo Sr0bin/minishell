@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 13:31:46 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/06 16:09:45 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/17 16:22:41 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 #include <stdio.h>
 
 #include <stdlib.h>
-#include <stdio.h>
-#include "builtins.h"    // Ton export.h si tu en as un
-#include "libft.h"       // Pour t_list, ft_lstnew, ft_strdup, etc.
 
 int	main(void)
 {
-	t_env	*env = NULL; // ta liste de variables d’environnement
+	t_env	*env = NULL;
 	char	*args1[] = {"USER=lulussi", "SHELL=/bin/bash", "PATH", NULL};
 	char	*args2[] = {"EDITOR=vim", "USER=root", NULL};
 
@@ -32,9 +29,6 @@ int	main(void)
 
 	printf("\n>>> Export sans arguments (affichage trié) :\n");
 	ft_export(&env, NULL);
-
-	// libération de la mémoire (bonus)
-	// à faire si tu veux éviter les leaks
 
 	return (0);
 }
