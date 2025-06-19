@@ -6,11 +6,11 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:49:30 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/17 16:37:56 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/19 13:48:32 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "include/builtins.h""
 
 void	ft_cd(int argc, char **argv)
 {
@@ -29,11 +29,3 @@ void	ft_cd(int argc, char **argv)
 			perror("minishell: cd");
 	}
 }
-
-/* int main(int argc, char **argv)
-{
-    ft_cd(argc, argv);
-	char cwd[1024];
-	getcwd(cwd, sizeof(cwd));
-	printf("Répertoire courant : %s\n", cwd);
-} */
