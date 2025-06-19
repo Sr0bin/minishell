@@ -6,7 +6,7 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/06/17 09:25:53 by lserodon         ###   ########.fr        #
+#    Updated: 2025/06/19 13:37:38 by lserodon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,18 +19,19 @@ SOURCES_DIR = src
 SOURCES_NAME = exec.c cmd_utils.c exec_single_cmd.c path_utils.c\
 				 redir_utils.c error.c
 
-SOURCES_EXEC = 
+SOURCES_PIPEX_EXEC = exec_multipipes.c  main.c path.c pipes.c exec.c free_utils.c\
 
-SOURCES_DEBUG = debug.
+SOURCES_PIPEX_AST = ast_to_cmds.c ast_utils.c\
+
+SOURCES_DEBUG = debug.c
 
 SOURCES = $(addprefix $(SOURCES_DIR)/,\
 		  $(SOURCES_NAME)\
-		  $(addprefix placeholder/, $(SOURCES_))\
+		  $(addprefix pipex/exec/, $(SOURCES_PIPEX_EXEC))\
+		  $(addprefix pipex/ast/, $(SOURCES_PIPEX_AST))\
 		  )
 		  # $(addprefix .hidden/, $(SOURCES_DEBUG))\
 		  
-
-
 #OBJECTS#######################
 
 OBJ_DIR = obj
