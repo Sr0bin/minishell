@@ -3,3 +3,10 @@
 *.txt
 minishell
 obj/
+.gitmodules
+.gdb_history
+fdf
+compile_commands.json
+.cache
+.gdbinit
+.txt
