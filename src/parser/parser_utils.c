@@ -6,10 +6,11 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:40:49 by rorollin          #+#    #+#             */
-/*   Updated: 2025/06/05 16:16:55 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/06/23 20:13:44 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "debug.h"
 #include "list.h"
 #include "minishell.h"
 #include "struct.h"
@@ -32,6 +33,7 @@ t_parser	*parser_init(char *input)
 
 void	advance_parser(t_parser	*parser)
 {
+	print_parser_state(parser);
 	if (parser->state == STATE_NORMAL)
 		handle_normal(parser);
 	else if (parser->state == STATE_SQUOTE)
@@ -42,10 +44,41 @@ void	advance_parser(t_parser	*parser)
 
 void	*update_parser_token(t_parser *parser)
 {
-	parser->crnt_token = NULL;
-	while (*(parser->crnt_pos) != '\0')
+	while (parser->crnt_token == NULL)
 		advance_parser(parser);
 	return (parser->crnt_token);
+}
+
+int	parser_stop(t_parser *p)
+{
+	if (*(p->crnt_pos) == '\0')
+	{
+		if (p->state == STATE_DQUOTE || p->state == STATE_SQUOTE)	
+			return (1);
+		return (0);
+	}
+	return (1);
+}
+
+t_token_list	*generate_token_list(t_parser *parser)
+{
+	t_token_list	*final_list;
+	t_token_list	*lst_temp;
+	t_token	*tkn_temp;
+
+	final_list = NULL;
+	while (parser_stop(parser))
+	{
+		tkn_temp = update_parser_token(parser);
+		if (tkn_temp == NULL)	// if memory error in token creation
+			return (free_token_list(&final_list));
+		lst_temp = ft_lstnew(tkn_temp);
+		if (lst_temp == NULL)
+			return (free_token_list(&final_list));
+		ft_lstadd_back(&final_list, lst_temp);
+		parser->crnt_token = NULL;
+	}
+	return (final_list);
 }
 
 t_token	*generate_token(t_parser *parser, t_token_type type)
@@ -69,29 +102,6 @@ t_token	*generate_token(t_parser *parser, t_token_type type)
 	parser->crnt_pos++;
 	parser->start_pos = parser->crnt_pos;
 	return (token);
-}
-
-t_token_list	*generate_token_list(t_parser *parser)
-{
-	t_token_list	*list;
-	t_token_list	*temp;
-
-	list = NULL;
-	while (*(parser->crnt_pos) != '\0')
-	{
-		while (parser->crnt_token == NULL)
-		{
-			if (update_parser_token(parser) == NULL)	// if memory error in token creation
-				return (free_token_list(&list));
-		}
-		temp = ft_lstnew(parser->crnt_token);
-		if (temp == NULL)
-			return (free_token_list(&list));
-		ft_lstadd_back(&list, temp);
-	}
-
-
-	return (list);
 }
 
 t_token_list	*shell_tokenizer(char *input)

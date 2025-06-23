@@ -6,12 +6,33 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:44:40 by rorollin          #+#    #+#             */
-/*   Updated: 2025/06/05 15:55:59 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/06/23 19:23:08 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+
+void	quote_eof(t_parser *p)
+{
+	/*if (p->crnt_pos == p->input || char_type(p->crnt_pos[-1]) != CHAR_WHITESPACE)*/
+	/*{*/
+	/*	generate_token(p, TOKEN_WORD);*/
+	/*	p->start_pos--;*/
+	/*	p->crnt_pos--;*/
+	/*}*/
+	/*else*/
+	/*{*/
+		p->crnt_token = create_token(ft_strdup("ERROR"), TOKEN_EOF);
+		p->state = STATE_NORMAL;
+	/*}*/
+
+}
+
+void	handle_squote_eof(t_parser *p)
+{
+	quote_eof(p);
+}
 
 void	handle_squote_end(t_parser *p)
 {

@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:30:03 by rorollin          #+#    #+#             */
-/*   Updated: 2025/06/05 15:55:59 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/06/23 19:21:47 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ t_token_list	*generate_token_list(t_parser *parser);
 void	*update_parser_token(t_parser *parser);
 void	advance_parser(t_parser	*parser);
 t_parser	*parser_init(char *input);
+int	parser_stop(t_parser *p);
 void	remove_char(char *text);
 #endif

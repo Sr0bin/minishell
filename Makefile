@@ -6,7 +6,7 @@
 #    By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/06/05 18:33:34 by rorollin         ###   ########.fr        #
+#    Updated: 2025/06/23 17:08:11 by rorollin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ DEPS = $(SOURCES:%.c=$(OBJ_DIR)/%.d)
 
 HEADERS_DIR = include/ libft/include/
 
-INCLUDES = $(addprefix -I , $(HEADERS_DIR))
+INCLUDES = $(addprefix -I , $(HEADERS_DIR)) 
 
 #LIBFT########################
 
@@ -73,10 +73,10 @@ CFLAGS = $(CFLAGS_DEBUG)
 
 export CFLAGS
 
-all: git make_libft $(NAME)
+all: make_libft $(NAME)
 
 $(NAME):  $(OBJECTS) $(LIBFT_PATH)
-	$(COMPILER) $(CFLAGS) $(INCLUDES) $^ -o $@
+	$(COMPILER) $(CFLAGS) $(INCLUDES) -lreadline $^ -o $@
 	@echo "$(NAME) built succesfully."
 
 

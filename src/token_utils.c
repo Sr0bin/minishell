@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:53:27 by rorollin          #+#    #+#             */
-/*   Updated: 2025/05/28 17:08:07 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:31:17 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	*add_token(t_token_list **list, t_token_list *token)
 	return (token);
 }
 
-void	*free_token(t_token **token)
+void	*free_token(t_token *token)
 {
-	free(*token);
-	*token = NULL;
+	free(token->content);
+	free(token);
 	return (NULL);
 }
 

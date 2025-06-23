@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:10:17 by rorollin          #+#    #+#             */
-/*   Updated: 2025/06/05 16:07:20 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/06/23 19:14:58 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,19 @@ void	handle_normal_quote(t_parser *p)
 		p->state = STATE_SQUOTE;
 	else
 		p->state = STATE_DQUOTE;
-	generate_token(p, TOKEN_WORD);
+	if (p->crnt_pos == p->input || char_type(p->crnt_pos[-1]) != CHAR_WHITESPACE)
+		generate_token(p, TOKEN_WORD);
+	/*if (*(p->crnt_pos) != '\0')*/
+	/*{*/
+	/*	p->crnt_pos++;*/
+	/*	p->start_pos++;*/
+	/*}*/
 }
 
 void	handle_normal_operator(t_parser *p)
 {
-	generate_token(p, TOKEN_WORD);
+	p->crnt_pos++;
+	/*generate_token(p, TOKEN_WORD);*/
 }
 
 void	handle_normal_other(t_parser *p)
@@ -61,4 +68,6 @@ void	handle_normal_newline(t_parser *p)
 void	handle_normal_eof(t_parser *p)
 {
 	generate_token(p, TOKEN_WORD);
+	p->start_pos--;
+	p->crnt_pos--;
 }

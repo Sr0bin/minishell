@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 15:00:00 by rorollin          #+#    #+#             */
-/*   Updated: 2025/06/03 16:45:17 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:39:34 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,14 @@ void	handle_word_eof(t_parser *p);
 
 void	handle_squote_end(t_parser *p);
 void	handle_squote_other(t_parser *p);
+void	handle_squote_eof(t_parser *p);
 
 void	handle_dquote_end(t_parser *p);
 void	handle_dquote_escape(t_parser *p);
 void	handle_dquote_other(t_parser *p);
+void	handle_dquote_eof(t_parser *p);
+
+void	quote_eof(t_parser *p);
 
 void	handle_op_extend(t_parser *p);
 void	handle_op_other(t_parser *p);

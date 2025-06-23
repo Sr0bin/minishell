@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:49:00 by rorollin          #+#    #+#             */
-/*   Updated: 2025/06/05 16:06:09 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:38:39 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,16 @@ void	handle_dquote_end(t_parser *p)
 	generate_token(p, TOKEN_WORD);
 }
 
+void	handle_dquote_eof(t_parser *p)
+{
+	quote_eof(p);
+}
+
 // This is POSIX 2.2.3
 void	handle_dquote_escape(t_parser *p)
 {
-	if (*(p->crnt_pos) == '$' || *(p->crnt_pos) == '`' || *(p->crnt_pos) == '"'\
-		|| *(p->crnt_pos) == '\\' || *(p->crnt_pos) == '\n')
+	if (*(p->crnt_pos + 1) == '$' || *(p->crnt_pos + 1) == '`' || *(p->crnt_pos + 1) == '"'\
+		|| *(p->crnt_pos + 1) == '\\' || *(p->crnt_pos + 1) == '\n')
 	{
 		remove_char(p->crnt_pos);
 		p->crnt_pos++;
