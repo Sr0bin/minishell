@@ -6,10 +6,15 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 13:43:14 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/19 13:48:32 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/20 11:13:29 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/builtins.h""
+#ifndef PWD_H
+# define PWD_H
+
+#include "builtins.h"
 
 void	ft_pwd(void);
+
+#endif

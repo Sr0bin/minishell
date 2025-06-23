@@ -6,11 +6,11 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:04:52 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/03 15:02:47 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/20 14:48:12 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/multipipes.h"
+#include "multipipes/multipipes.h"
 
 void	free_cmd(t_cmds *cmd)
 {
@@ -26,8 +26,8 @@ void	free_cmd(t_cmds *cmd)
 		}
 		free(cmd->cmd);
 	}
-	free(cmd->fd_in);
-	free(cmd->fd_out);
+	free(cmd->fd_in.fd);
+	free(cmd->fd_out.fd);
 }
 
 void	free_cmds(t_utils *utils)

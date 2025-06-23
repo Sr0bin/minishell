@@ -6,7 +6,7 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/06/19 13:40:15 by lserodon         ###   ########.fr        #
+#    Updated: 2025/06/20 14:55:52 by lserodon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,10 @@ NAME = minishell
 
 SOURCES_DIR = src
 
-SOURCES_NAME = exec.c cmd_utils.c exec_single_cmd.c path_utils.c\
-				 redir_utils.c error.c
-
 SOURCES_PIPEX_EXEC = exec_multipipes.c  main.c path.c pipes.c exec.c free_utils.c\
 
-SOURCES_BUILTINS = export.c export_args.c export_no_args.c main.c
+SOURCES_BUILTINS = export.c export_args.c export_no_args.c cd.c echo.c env.c pwd.c\
+				unset.c
 
 SOURCES_PIPEX_AST = ast_to_cmds.c ast_utils.c\
 
@@ -29,8 +27,8 @@ SOURCES_DEBUG = debug.c
 
 SOURCES = $(addprefix $(SOURCES_DIR)/,\
 		  $(SOURCES_NAME)\
-		  $(addprefix pipex/exec/, $(SOURCES_PIPEX_EXEC))\
-		  $(addprefix pipex/ast/, $(SOURCES_PIPEX_AST))\
+		  $(addprefix multipipes/exec/, $(SOURCES_PIPEX_EXEC))\
+		  $(addprefix multipipes/ast/, $(SOURCES_PIPEX_AST))\
 		  $(addprefix builtins/, $(SOURCES_BUILTINS))\
 		  )
 		  # $(addprefix .hidden/, $(SOURCES_DEBUG))\
@@ -64,7 +62,8 @@ COMPILER = cc
 CFLAGS_DEBUG = -Wall -Wextra -Werror -MMD -MP -ggdb3 -Wshadow -Wconversion -Wsign-conversion \
 -Wformat=2 -Wformat-security -Wnull-dereference -Wstack-protector -Wfloat-equal -Wpointer-arith \
 -Wcast-align -Wundef -Wbad-function-cast -Wstrict-overflow=4 -Wdouble-promotion -Walloca -Wvla \
--Wwrite-strings -Wuninitialized -fno-delete-null-pointer-checks -fno-omit-frame-pointer -std=c11
+-Wwrite-strings -Wuninitialized -fno-delete-null-pointer-checks -fno-omit-frame-pointer -std=c11 \
+-Iinclude
 
 CFLAGS_PROD = -Wall -Wextra -Werror -MMD -MP -ggdb3 -O3
 

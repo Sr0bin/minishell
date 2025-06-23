@@ -1,15 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.h                                               :+:      :+:    :+:   */
+/*   path.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 13:41:25 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/19 13:48:32 by lserodon         ###   ########.fr       */
+/*   Created: 2025/06/02 11:32:19 by lserodon          #+#    #+#             */
+/*   Updated: 2025/06/20 11:06:34 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/builtins.h""
+#ifndef PATH_H
+# define PATH_H
 
-void	ft_cd(int argc, char **argv);
+char	*find_path(t_utils *utils);
+char	*get_env_path(t_utils *utils, char **envp);
+void	free_array(char **array);
+
+#endif

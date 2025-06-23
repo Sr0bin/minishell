@@ -6,11 +6,11 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:19:22 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/19 13:48:32 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/23 13:30:55 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/builtins.h""
+#include "builtins/builtins.h"
 
 int	check_export_var(char *args)
 {
@@ -50,9 +50,9 @@ void	parse_args(char *arg, t_var *var)
 	}
 	else
 	{
-		key_len = equal - arg;
+		key_len = (size_t)(equal - arg);
 		var->key = ft_substr(arg, 0, key_len);
-		var->value = ft_substr(arg, key_len + 1,
+		var->value = ft_substr(arg, (unsigned int)(key_len + 1),
 				ft_strlen(arg) - (key_len + 1));
 	}
 }

@@ -1,5 +1,7 @@
 {
 	"files.associations": {
-		"exec.h": "c"
+		"exec.h": "c",
+		"builtins.h": "c",
+		"multipipes.h": "c"
 	}
 }

@@ -1,41 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   echo.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 11:50:26 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/02 12:22:09 by lserodon         ###   ########.fr       */
+/*   Created: 2025/06/19 13:43:06 by lserodon          #+#    #+#             */
+/*   Updated: 2025/06/20 11:12:43 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTS_H
-# define STRUCTS_H
+#ifndef ECHO_H
+# define ECHO_H
 
-typedef enum s_redir_type
-{
-	REDIR_INPUT,
-	REDIR_OUTPUT,
-	REDIR_APPEND,
-	REDIR_HEREDOC,
-}			t_redir_type;
+#include "builtins.h"
 
-typedef struct s_cmds
-{
-	char			**cmd;
-	char			*path;
-	char			*fd_in;
-	char			*fd_out;
-	t_redir_type	redir_type;
-}	t_cmds;
-
-typedef struct s_utils
-{
-	t_cmds	*cmds;
-	int		nb_cmds;
-	int		**fd;
-	char	**envp;
-}	t_utils;
+void	ft_echo(int argc, char **argv);
+int		newline(char *str);
 
 #endif

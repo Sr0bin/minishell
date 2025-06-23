@@ -6,11 +6,11 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:07:58 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/19 13:48:32 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/20 11:20:04 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/builtins.h""
+#include "builtins/builtins.h"
 
 void	free_var(void	*content)
 {

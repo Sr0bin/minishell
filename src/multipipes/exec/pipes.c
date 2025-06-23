@@ -6,11 +6,11 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:10:10 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/17 15:31:30 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/23 13:01:41 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/multipipes.h"
+#include "multipipes/multipipes.h"
 
 void	close_pipes(t_utils *utils)
 {
@@ -19,14 +19,16 @@ void	close_pipes(t_utils *utils)
 	i = 0;
 	while (i < utils->nb_cmds - 1)
 	{
-		if (utils->fd[i][0] > 2 && close(utils->fd[i][0]) == -1)
-			perror("minishell: close pipe read");
-		else
-			utils->fd[i][0] == -1;
-		if (utils->fd[i][1] > 2 && close(utils->fd[i][1]) == -1)
-			perror("minishell: close pipe write");
-		else
-			utils->fd[i][1] == -1;
+		if (utils->fd[i][0] > 2)
+		{
+			if ((close(utils->fd[i][0])) == -1)
+				perror("minishell: close pipe read");
+		}
+		if (utils->fd[i][1] > 2)
+		{
+			if ((close(utils->fd[i][1])) == -1)
+				perror("minishell: close pipe write");
+		}
 		i++;
 	}
 }

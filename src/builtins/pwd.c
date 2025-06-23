@@ -6,11 +6,11 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 13:57:41 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/19 13:48:32 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/20 11:19:59 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/builtins.h""
+#include "builtins/builtins.h"
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 30

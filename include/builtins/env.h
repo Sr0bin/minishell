@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_multipipes.h                                  :+:      :+:    :+:   */
+/*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 12:12:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/02 12:13:38 by lserodon         ###   ########.fr       */
+/*   Created: 2025/06/19 13:43:09 by lserodon          #+#    #+#             */
+/*   Updated: 2025/06/20 11:12:20 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_MULTIPIPES_H
-# define EXEC_MULTIPIPES_H
+#ifndef ENV_H
+# define ENV_H
 
-void	exec_multipipes(t_ast_node *root, char **envp);
+#include "builtins.h"
+
+void	ft_env(t_list *env);
 
 #endif

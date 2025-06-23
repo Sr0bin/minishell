@@ -6,11 +6,11 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 09:36:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/17 16:04:52 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/20 11:18:45 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/multipipes.h"
+#include "multipipes/multipipes.h"
 
 void	free_array(char **array)
 {
@@ -65,7 +65,7 @@ char	*build_cmd_path(t_utils *utils, char *dir)
 	char	*tmp_path;
 	char	*cmd_path;
 
-	tmp_path = ft_strjoin(dir, '/');
+	tmp_path = ft_strjoin(dir, "/");
 	if (!tmp_path)
 		ft_error(utils, "minishell: ft_strjoin", 1);
 	cmd_path = ft_strjoin(tmp_path, utils->cmds->cmd[0]);

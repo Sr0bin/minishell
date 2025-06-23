@@ -6,12 +6,16 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 13:43:11 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/19 13:48:32 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/20 11:22:48 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/builtins.h""
+#ifndef EXPORT_H
+# define EXPORT_H
 
+typedef struct s_list	t_env;
+typedef struct s_var	t_var;
+ 
 int		check_export_var(char *args);
 int		check_in_env(t_env *env, t_var *var);
 int		is_sorted(t_env *env);
@@ -24,3 +28,5 @@ void	ft_export(t_env **env, char **args);
 void	ft_swap(t_env *a, t_env *b);
 void	parse_args(char *arg, t_var *var);
 void	print_export_list(t_env *env);
+
+#endif

@@ -6,12 +6,11 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:31:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/17 15:54:07 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/23 12:54:14 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/multipipes.h"
-#include <stdio.h>
+#include "multipipes/multipipes.h"
 
 void	init_utils(t_utils *utils, t_ast_node *root)
 {
@@ -26,8 +25,8 @@ void	init_utils(t_utils *utils, t_ast_node *root)
 	while (i < utils->nb_cmds)
 	{
 		utils->cmds[i].cmd = NULL;
-		utils->cmds[i].fd_in = NULL;
-		utils->cmds[i].fd_out = NULL;
+		utils->cmds[i].fd_in.fd = NULL;
+		utils->cmds[i].fd_out.fd = NULL;
 		i++;
 	}
 }
@@ -58,27 +57,27 @@ void	fill_redir(t_utils *utils, t_node_type redir, t_ast_node *node, int *i)
 {
 	if (redir == NODE_REDIR_IN)
 	{
-		free(utils->cmds[*i].fd_in);
-		utils->cmds[*i].redir_type = REDIR_INPUT;
-		utils->cmds[*i].fd_in = ft_strdup(node->token_list->content);
-		if (!utils->cmds[*i].fd_in
-			|| access(utils->cmds[*i].fd_in, F_OK | R_OK) == -1)
+		free(utils->cmds[*i].fd_in.fd);
+		utils->cmds[*i].fd_in.redir_type = REDIR_INPUT;
+		utils->cmds[*i].fd_in.fd = ft_strdup(node->token_list->content);
+		if (!utils->cmds[*i].fd_in.fd
+			|| access(utils->cmds[*i].fd_in.fd, F_OK | R_OK) == -1)
 			ft_error(utils, "minishell: fd_in failed", 1);
 	}
 	else if (redir == NODE_REDIR_OUT)
 	{
-		free(utils->cmds[*i].fd_out);
-		utils->cmds[*i].redir_type = REDIR_OUTPUT;
-		utils->cmds[*i].fd_out = ft_strdup(node->token_list->content);
-		if (!utils->cmds[*i].fd_out)
+		free(utils->cmds[*i].fd_out.fd);
+		utils->cmds[*i].fd_out.redir_type = REDIR_OUTPUT;
+		utils->cmds[*i].fd_out.fd = ft_strdup(node->token_list->content);
+		if (!utils->cmds[*i].fd_out.fd)
 			ft_error(utils, "minishell : strdup failed", 1);
 	}
 	else if (redir == NODE_REDIR_APPEND)
 	{
-		free(utils->cmds[*i].fd_out);
-		utils->cmds[*i].redir_type = REDIR_APPEND;
-		utils->cmds[*i].fd_out = ft_strdup(node->token_list->content);
-		if (!utils->cmds[*i].fd_out)
+		free(utils->cmds[*i].fd_out.fd);
+		utils->cmds[*i].fd_out.redir_type = REDIR_APPEND;
+		utils->cmds[*i].fd_out.fd = ft_strdup(node->token_list->content);
+		if (!utils->cmds[*i].fd_out.fd)
 			ft_error(utils, "minishell : strdup failed", 1);
 	}
 }

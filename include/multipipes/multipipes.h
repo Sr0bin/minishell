@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path.h                                             :+:      :+:    :+:   */
+/*   multipipes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 11:32:19 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/02 15:53:18 by lserodon         ###   ########.fr       */
+/*   Created: 2025/05/08 14:08:59 by lserodon          #+#    #+#             */
+/*   Updated: 2025/06/20 10:30:20 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PATH_H
-# define PATH_H
+#ifndef MULTIPIPES_H
+# define MULTIPIPES_H
 
-char	*find_path(t_utils *utils, int i);
-char	*get_env_path(char **envp);
-void	free_array(char **array);
+# include "ast_to_cmds.h"
+# include "exec_multipipes.h"
+# include "exec.h"
+# include "free.h"
+# include "path.h"
+# include "pipes.h"
+# include "structs.h"
+# include <stdlib.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <sys/wait.h>
+# include "../../libft/include/libft.h"
 
 #endif

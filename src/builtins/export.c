@@ -6,11 +6,11 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:09:13 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/19 13:47:54 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/06/20 11:19:54 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/builtins.h"
+#include "builtins/builtins.h"
 
 void	ft_export(t_env **env, char **args)
 {
