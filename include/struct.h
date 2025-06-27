@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:30:44 by rorollin          #+#    #+#             */
-/*   Updated: 2025/06/03 16:48:05 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/06/27 20:58:20 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef enum e_shell_state
 
 typedef enum e_char_type
 {
+	CHAR_ERROR = -1,
 	CHAR_WHITESPACE,
 	CHAR_SQUOTE,
 	CHAR_DQUOTE,
