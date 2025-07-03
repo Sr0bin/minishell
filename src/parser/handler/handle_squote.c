@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:44:40 by rorollin          #+#    #+#             */
-/*   Updated: 2025/06/23 19:23:08 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/07/03 13:23:42 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,12 @@ void	handle_squote_eof(t_parser *p)
 void	handle_squote_end(t_parser *p)
 {
 	p->state = STATE_NORMAL;
+	p->crnt_pos++;
 	generate_token(p, TOKEN_WORD);
-	
+	if (char_type(p->crnt_pos[-1]) != CHAR_SQUOTE && p->crnt_pos[-1] != '\0')
+		p->crnt_pos--;
+	if (p->start_pos != p->input)
+		p->start_pos--;
 }
 
 void	handle_squote_other(t_parser *p)

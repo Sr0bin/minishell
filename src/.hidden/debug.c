@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:49 by rorollin          #+#    #+#             */
-/*   Updated: 2025/06/23 17:18:58 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/07/03 16:03:44 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static const char	*get_state_name(t_ps_state state)
 		return ("STATE_SQUOTE");
 	if (state == STATE_DQUOTE)
 		return ("STATE_DQUOTE");
+	if (state == STATE_OP)
+		return ("STATE_OP");
 	return ("UNKNOWN_STATE");
 }
 

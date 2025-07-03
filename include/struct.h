@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:30:44 by rorollin          #+#    #+#             */
-/*   Updated: 2025/06/27 20:58:20 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/07/03 16:22:51 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef enum e_char_type
 typedef enum e_token_type
 {
 	TOKEN_WORD,
+	TOKEN_OPERATOR,
 	TOKEN_PIPE,
 	TOKEN_REDIR_IN,
 	TOKEN_REDIR_OUT,
@@ -68,6 +69,7 @@ typedef enum e_parse_state
 	STATE_NORMAL,
 	STATE_SQUOTE,
 	STATE_DQUOTE,
+	STATE_OP,
 }	t_ps_state;
 # define STATE_COUNT 3
 

@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:40:49 by rorollin          #+#    #+#             */
-/*   Updated: 2025/06/23 20:13:44 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/07/03 16:21:29 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	advance_parser(t_parser	*parser)
 		handle_squote(parser);
 	else if (parser->state == STATE_DQUOTE)
 		handle_dquote(parser);
+	else if (parser->state == STATE_OP)
+		handle_op(parser);
 }
 
 void	*update_parser_token(t_parser *parser)
@@ -53,7 +55,7 @@ int	parser_stop(t_parser *p)
 {
 	if (*(p->crnt_pos) == '\0')
 	{
-		if (p->state == STATE_DQUOTE || p->state == STATE_SQUOTE)	
+		if (p->state == STATE_DQUOTE || p->state == STATE_SQUOTE || p->state == STATE_OP)	
 			return (1);
 		return (0);
 	}
@@ -66,6 +68,7 @@ t_token_list	*generate_token_list(t_parser *parser)
 	t_token_list	*lst_temp;
 	t_token	*tkn_temp;
 
+	tkn_temp = NULL;
 	final_list = NULL;
 	while (parser_stop(parser))
 	{
@@ -99,8 +102,11 @@ t_token	*generate_token(t_parser *parser, t_token_type type)
 		return (NULL);
 	}
 	parser->crnt_token = token;
-	parser->crnt_pos++;
-	parser->start_pos = parser->crnt_pos;
+	if (*parser->crnt_pos != '\0')
+	{
+		parser->crnt_pos++;
+		parser->start_pos = parser->crnt_pos;
+	}
 	return (token);
 }
 

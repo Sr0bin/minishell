@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   handle_operator.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 15:22:52 by rorollin          #+#    #+#             */
-/*   Updated: 2025/06/30 17:11:41 by rorollin         ###   ########.fr       */
+/*   Created: 2025/07/03 15:53:29 by rorollin          #+#    #+#             */
+/*   Updated: 2025/07/03 16:14:58 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "parsing.h"
-#include <readline/readline.h>
-#include <readline/history.h>
 
-int	main (int argc, char **argv)
+void	handle_op_extend(t_parser *p)
 {
-	(void) argc;
-	(void) argv;
-	t_list	*token_list;
-	char	*read;
+	p->crnt_pos++;
+}
 
-	while (1)
-	{
-		read = readline("Enter a string to Tokenize :");
-		add_history(read);
-		token_list = shell_tokenizer(read);
-		print_token_list(token_list);
-		free_token_list(&token_list);
-		free(read);
-	}
+void	handle_op_other(t_parser *p)
+{
+	p->state = STATE_NORMAL;
+	generate_token(p, TOKEN_OPERATOR);
+	if (char_type(p->crnt_pos[-1]) != CHAR_OPERATOR && p->crnt_pos[-1] != '\0')
+		p->crnt_pos--;
+	if (p->start_pos != p->input)
+		p->start_pos--;
 }
