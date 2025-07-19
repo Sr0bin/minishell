@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:30:44 by rorollin          #+#    #+#             */
-/*   Updated: 2025/07/03 16:22:51 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/07/19 18:08:30 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 typedef struct s_var		t_var;
 typedef struct s_token		t_token;
-typedef struct s_ast_node	t_ast_node;
+typedef struct s_ast_node	t_ast;
 typedef struct s_parser		t_parser;
 typedef struct s_transition	t_transition;
 
@@ -80,6 +80,7 @@ typedef enum e_node_type
 	NODE_REDIR_IN,
 	NODE_REDIR_OUT,
 	NODE_REDIR_APPEND,
+	NODE_ERROR,
 }	t_node_type;
 
 typedef struct s_var
@@ -99,10 +100,10 @@ typedef struct s_token
 typedef struct s_ast_node
 {
 	t_node_type	type;
-	t_ast_node	*left;
-	t_ast_node	*right;
-	t_token		*token_list;
-}	t_ast_node;
+	t_ast	*left;
+	t_ast	*right;
+	t_token		*token;
+}	t_ast;
 
 typedef struct s_context
 {
