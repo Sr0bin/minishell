@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:23:50 by rorollin          #+#    #+#             */
-/*   Updated: 2025/07/19 16:44:40 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/07/29 17:54:15 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static t_token	*assign_token_operator(t_token *token)
 		token->type = TOKEN_HEREDOC;
 	return (token);
 }
+
 t_token	*assign_token_type(t_token *token)
 {
 	assign_token_operator(token);

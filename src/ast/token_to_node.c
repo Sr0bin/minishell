@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 17:54:22 by rorollin          #+#    #+#             */
-/*   Updated: 2025/07/19 17:55:53 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/07/30 19:49:52 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	*free_token_only_list(t_token_list **t_list)
 
 int	token_type_redir(t_token *token)
 {
+	if (token->type == TOKEN_PIPE)
+		return (TOKEN_PIPE);
 	if (token->type == TOKEN_REDIR_IN)
 		return (TOKEN_REDIR_IN);
 	if (token->type == TOKEN_REDIR_OUT)
@@ -36,7 +38,7 @@ int	token_type_redir(t_token *token)
 		return (TOKEN_HEREDOC);
 	return (0);
 }
-t_node_type token_to_node_type(t_token_type type)
+t_node_type	token_to_node_type(t_token_type type)
 {
 	if (type == TOKEN_PIPE)
 		return (NODE_PIPE);
@@ -46,7 +48,7 @@ t_node_type token_to_node_type(t_token_type type)
 		return (NODE_REDIR_OUT);
 	if (type == TOKEN_REDIR_APPEND)
 		return (NODE_REDIR_APPEND);
-	return (NODE_ERROR);
+	return (0);
 }
 t_token_list	*find_first_redir(t_token_list *list)
 {
@@ -54,4 +56,3 @@ t_token_list	*find_first_redir(t_token_list *list)
 		list = list->next;
 	return (list);
 }
-

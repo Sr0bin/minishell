@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:40:49 by rorollin          #+#    #+#             */
-/*   Updated: 2025/07/03 16:21:29 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/07/30 19:46:17 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ t_parser	*parser_init(char *input)
 
 void	advance_parser(t_parser	*parser)
 {
-	print_parser_state(parser);
 	if (parser->state == STATE_NORMAL)
 		handle_normal(parser);
 	else if (parser->state == STATE_SQUOTE)

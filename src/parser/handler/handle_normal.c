@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:10:17 by rorollin          #+#    #+#             */
-/*   Updated: 2025/07/03 17:23:05 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/07/29 20:47:16 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 
 void	handle_normal_whitespace(t_parser *p)
 {
-	/*ptrdiff_t len;*/
-
-	
 	if (p->crnt_pos != p->input\
 		&& char_type((p->crnt_pos)[-1]) != CHAR_WHITESPACE\
 		&& char_type((p->crnt_pos)[-1]) != CHAR_DQUOTE\
@@ -32,7 +29,6 @@ void	handle_normal_whitespace(t_parser *p)
 		p->crnt_pos++;
 		p->start_pos++;
 	}
-	/*len = p->crnt_pos - p->start_pos;*/
 }
 
 void	handle_normal_quote(t_parser *p)
@@ -50,22 +46,18 @@ void	handle_normal_quote(t_parser *p)
 	p->start_pos = p->crnt_pos;
 	if (*(p->crnt_pos) != '\0')
 		p->crnt_pos++;
-	
 }
 
 void	handle_normal_operator(t_parser *p)
 {
 	p->state = STATE_OP;
-
 	if (p->input != p->crnt_pos && safe_char_type(p, -1) != CHAR_WHITESPACE)
 	{
 		generate_token(p, TOKEN_WORD);
 		p->crnt_pos--;
 		p->start_pos--;
 	}
-	/*p->start_pos = p->crnt_pos;*/
-	/*if (*(p->crnt_pos) != '\0')*/
-		p->crnt_pos++;
+	p->crnt_pos++;
 }
 
 void	handle_normal_other(t_parser *p)
