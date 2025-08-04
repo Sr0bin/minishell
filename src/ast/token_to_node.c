@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 17:54:22 by rorollin          #+#    #+#             */
-/*   Updated: 2025/07/30 19:49:52 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/07/31 18:34:04 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,18 @@ t_node_type	token_to_node_type(t_token_type type)
 		return (NODE_REDIR_APPEND);
 	return (0);
 }
+
+t_token_list	*find_first_pipe(t_token_list *list)
+{
+	while (list != NULL && token_type_redir((t_token *) list->content) != TOKEN_PIPE)
+		list = list->next;
+	return (list);
+}
+
 t_token_list	*find_first_redir(t_token_list *list)
 {
-	while (list != NULL && token_type_redir((t_token *) list->content) == 0)
+	while (list != NULL && (token_type_redir((t_token *) list->content) == 0\
+	|| token_type_redir((t_token *) list->content) == TOKEN_PIPE))
 		list = list->next;
 	return (list);
 }

@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:40:49 by rorollin          #+#    #+#             */
-/*   Updated: 2025/07/30 19:46:17 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/07/30 21:05:36 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,31 +83,6 @@ t_token_list	*generate_token_list(t_parser *parser)
 	return (final_list);
 }
 
-t_token	*generate_token(t_parser *parser, t_token_type type)
-{
-	t_token	*token;
-	char	*token_content;
-	ptrdiff_t	len;
-
-	len = parser->crnt_pos - parser->start_pos;
-	token_content = malloc((unsigned) (len + 1) * sizeof(char));
-	if (token_content == NULL)
-		return (NULL);
-	ft_strlcpy(token_content, parser->start_pos, (unsigned) len + 1);
-	token = create_token(token_content, type);
-	if (token == NULL)
-	{
-		free(token_content);
-		return (NULL);
-	}
-	parser->crnt_token = token;
-	if (*parser->crnt_pos != '\0')
-	{
-		parser->crnt_pos++;
-		parser->start_pos = parser->crnt_pos;
-	}
-	return (token);
-}
 
 t_token_list	*shell_tokenizer(char *input)
 {
