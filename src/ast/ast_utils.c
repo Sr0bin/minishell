@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 17:53:12 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/01 00:20:26 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/05 14:41:28 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@ t_ast_machine	*create_ast_machine(t_token_list *input_list)
 	ast_machine = ft_calloc(1, sizeof(t_ast_machine));
 	if (ast_machine == NULL)
 		return (NULL);
-	ast_machine->tkn_lst = input_list;
 	ast_machine->crnt_tkn_lst = input_list;
-	ast_machine->crnt_pipe = input_list;
-	ast_machine->crnt_redir_ptr = input_list;
 	ast_machine->crnt_tkn = input_list->content;
 	return (ast_machine);
 }

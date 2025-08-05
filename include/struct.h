@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:30:44 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/01 00:20:26 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/05 14:41:16 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,8 @@ typedef struct s_ast_node
 
 typedef struct s_ast_machine
 {
-	t_token_list	*tkn_lst;
 	t_token_list	*crnt_tkn_lst;
-	t_token_list	*crnt_pipe;
-	t_token_list	*crnt_redir_ptr;
 	t_token			*crnt_tkn;
-	t_ast			*crnt_node;
-	t_ast			*top_node;
 }	t_ast_machine;
 
 typedef struct s_context

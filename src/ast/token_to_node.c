@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 17:54:22 by rorollin          #+#    #+#             */
-/*   Updated: 2025/07/31 18:34:04 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/05 14:33:24 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,9 @@ t_token_list	*find_first_pipe(t_token_list *list)
 
 t_token_list	*find_first_redir(t_token_list *list)
 {
-	while (list != NULL && (token_type_redir((t_token *) list->content) == 0\
-	|| token_type_redir((t_token *) list->content) == TOKEN_PIPE))
+	while (list != NULL && (token_type_redir((t_token *) list->content) == 0))
 		list = list->next;
+	if (list != NULL && token_type_redir((t_token *) list->content) == TOKEN_PIPE)
+		return (NULL);
 	return (list);
 }

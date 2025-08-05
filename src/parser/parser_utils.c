@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:40:49 by rorollin          #+#    #+#             */
-/*   Updated: 2025/07/30 21:05:36 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/05 13:06:35 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,5 @@ t_token_list	*shell_tokenizer(char *input)
 		return (NULL);
 	final_list = generate_token_list(parser);
 	free(parser);
-	if (final_list == NULL)
-		return (NULL);
 	return (final_list);
 }

@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 18:25:17 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/04 20:02:45 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/05 14:46:24 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_ast	*generate_simple_command(t_ast_machine *mchn)
 {
 	t_ast	*node;
 
+	print_ast_state(mchn, "generate_simple_command ENTRY");
 	node = generate_node(NODE_COMMAND, NULL);
 	if (node == NULL)
 		return (NULL);
@@ -64,36 +65,41 @@ t_ast	*generate_simple_command(t_ast_machine *mchn)
 t_ast	*generate_redir_node(t_ast_machine *mchn)
 {
 	t_ast	*node;
+	t_token_list	*crnt_redir_ptr;
 
-	mchn->crnt_redir_ptr = find_first_redir(mchn->crnt_redir_ptr);
-	if (mchn->crnt_redir_ptr == NULL)
+	print_ast_state(mchn, "generate_redir_node ENTRY");
+	crnt_redir_ptr = find_first_redir(mchn->crnt_tkn_lst);
+	if (crnt_redir_ptr == NULL)
+	{
+		print_ast_state(mchn, "generate_redir_node - NO REDIR FOUND");
 		return (generate_simple_command(mchn));
-	node = generate_node(token_to_node_type(((t_token *)(mchn->crnt_redir_ptr->content))->type), mchn->crnt_redir_ptr->content);
-	mchn->crnt_redir_ptr = mchn->crnt_redir_ptr->next;
+	}
+	mchn->crnt_tkn_lst = crnt_redir_ptr->next;
+	print_ast_state(mchn, "generate_redir_node - REDIR FOUND");
+	node = generate_node(token_to_node_type(((t_token *)(crnt_redir_ptr->content))->type), crnt_redir_ptr->content);
 	node->left = generate_redir_node(mchn);
 	// super important que ce soit juste le token après le crnt_redir en debut de fonction psk l'etat de la machine peut changer entre temps
-	node->right = generate_simple_command(mchn);
+	if (crnt_redir_ptr->next != NULL)
+		node->right = generate_node(NODE_FILE, crnt_redir_ptr->next->content);
 	return(node);
 }
+
 t_ast	*generate_pipe_node(t_ast_machine *mchn)
 {
 	t_ast		*node;
+	t_token_list	*crnt_pipe_ptr;
 
-	mchn->crnt_pipe = find_first_pipe(mchn->crnt_pipe);
-	if (mchn->crnt_pipe == NULL)
+	print_ast_state(mchn, "generate_pipe_node ENTRY");
+	crnt_pipe_ptr = find_first_pipe(mchn->crnt_tkn_lst);
+	if (crnt_pipe_ptr == NULL)
 		return (generate_redir_node(mchn));
-	node = generate_node(token_to_node_type(((t_token *)(mchn->crnt_pipe->content))->type), mchn->crnt_pipe->content);
-	mchn->crnt_pipe = mchn->crnt_pipe->next;
+	mchn->crnt_tkn_lst = crnt_pipe_ptr->next;
+	node = generate_node(token_to_node_type(((t_token *)(crnt_pipe_ptr->content))->type), crnt_pipe_ptr->content);
 	node->left = generate_pipe_node(mchn);
-	/*if (advance_token(mchn) == NULL)*/
-	/*	return (node);*/
-	/*if (token_to_node_type(mchn->crnt_tkn->type) != 0)*/
-	/*{*/
-	/*	if (advance_token(mchn) == NULL)*/
-	/*		return (node);*/
-	/**/
-	/*}*/
-	node->right = generate_redir_node(mchn);
+	// super important que ce soit juste le token après le crnt_pipe en debut de fonction psk l'etat de la machine peut changer entre temps
+	if (crnt_pipe_ptr->next != NULL)
+		node->right = generate_redir_node(mchn);
+	return(node);
 	return (node);
 }
 

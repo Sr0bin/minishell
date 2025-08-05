@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:49 by rorollin          #+#    #+#             */
-/*   Updated: 2025/07/19 18:08:30 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/05 14:43:54 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 void	print_token(t_token token)
 {
-	printf("\n Token content : \"%s\" \n token Type : %i\n", token.content, token.type);
+	printf("Token content : \"%s\"\n", token.content);
+	/*printf("Token Type : %i\n",token.type);*/
 	
 }
 
@@ -79,6 +80,8 @@ static const char *get_node_type_string(t_node_type type)
 			return "REDIR_APPEND";
 		case NODE_ERROR:
 			return "ERROR";
+		case NODE_FILE:
+			return "FILE";
 		default:
 			return "UNKNOWN";
 	}
@@ -87,22 +90,18 @@ static const char *get_node_type_string(t_node_type type)
 static void print_ast_helper(t_ast *node, int depth)
 {
 	int i;
-
 	if (!node)
 	{
 		for (i = 0; i < depth; i++)
-			printf("  ");
+			printf("│  ");
 		printf("(null)\n");
 		return;
 	}
-
-	// Print indentation
+	// Print indentation with vertical lines
 	for (i = 0; i < depth; i++)
-		printf("  ");
-
+		printf("│  ");
 	// Print node type
 	printf("%s", get_node_type_string(node->type));
-
 	// Print token if present
 	if (node->token)
 	{
@@ -111,20 +110,65 @@ static void print_ast_helper(t_ast *node, int depth)
 	}
 	else
 		printf("\n");
-
 	// Recursively print children
 	if (node->left || node->right)
 	{
 		for (i = 0; i < depth; i++)
-			printf("  ");
+			printf("│  ");
 		printf("├─ left:\n");
 		print_ast_helper(node->left, depth + 1);
-
 		for (i = 0; i < depth; i++)
-			printf("  ");
+			printf("│  ");
 		printf("└─ right:\n");
 		print_ast_helper(node->right, depth + 1);
 	}
+}
+
+void print_ast_state(t_ast_machine *mchn, const char *location)
+{
+	printf("\n=== AST MACHINE STATE at %s ===\n", location);
+	
+	if (!mchn)
+	{
+		printf("Machine is NULL!\n");
+		printf("=====================================\n\n");
+		return;
+	}
+	
+	printf("Current token: ");
+	if (mchn->crnt_tkn)
+		print_token(*(mchn->crnt_tkn));
+	else
+		printf("(null)\n");
+	
+	printf("Current position in token list:\n");
+	if (mchn->crnt_tkn_lst)
+	{
+		printf("  -> ");
+		print_token(*((t_token*)mchn->crnt_tkn_lst->content));
+	}
+	else
+		printf("  -> (null)\n");
+	
+	printf("Remaining tokens from current position:\n");
+	if (mchn->crnt_tkn_lst)
+	{
+		int count = 0;
+		t_token_list *temp = mchn->crnt_tkn_lst;
+		while (temp && count < 5) // Show next 5 tokens max
+		{
+			printf("  [%d] ", count);
+			print_token(*((t_token*)temp->content));
+			temp = temp->next;
+			count++;
+		}
+		if (temp)
+			printf("  ... (more tokens)\n");
+	}
+	else
+		printf("  (no remaining tokens)\n");
+	
+	printf("=====================================\n\n");
 }
 
 void print_ast(t_ast *root)
