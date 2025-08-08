@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/14 14:29:18 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/06 17:02:12 by rorollin         ###   ########.fr       */
+/*   Created: 2025/08/06 17:01:09 by rorollin          #+#    #+#             */
+/*   Updated: 2025/08/08 13:12:47 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "libft.h"
-# include "parsing.h"
-# include "ast.h"
-# include "cmd.h"
+#ifndef CMD_H
+# define CMD_H
 # include "struct.h"
-# include "token.h"
-# include "handler.h"
-# include "debug.h"
-# include "parsing/enums.h"
-# include "parsing/parsing_struct.h"
+
+t_redir	*create_redir(t_redir_type type, char *filename);
+void	*free_redir(t_redir **redir);
+t_cmd	*create_cmd(t_redir_list *redir, char *path, char **args, char **envp);
+void	*free_cmd(t_cmd **cmd);
 #endif
+

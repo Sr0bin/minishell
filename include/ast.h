@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 16:48:47 by rorollin          #+#    #+#             */
-/*   Updated: 2025/07/31 19:02:47 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/05 15:59:58 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define AST_H
 # include "struct.h"
 t_ast	*generate_full_ast(t_token_list **list);
-t_ast	*generate_simple_command(t_ast_machine *mchn);
-t_ast	*generate_redir_node(t_ast_machine *mchn);
+t_ast	*generate_simple_command(t_token_list *tkn_lst);
+t_ast	*generate_redir_node(t_token_list *tkn_lst);
 t_ast	*generate_pipe_node(t_ast_machine *mchn);
 t_ast	*generate_node(t_node_type type, t_token *token);
 t_ast_machine	*create_ast_machine(t_token_list *input_list);
