@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:08:38 by rorollin          #+#    #+#             */
-/*   Updated: 2025/07/29 18:12:42 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/08 14:27:56 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct s_var		t_var;
 typedef struct s_token		t_token;
-typedef struct s_ast_node	t_ast;
+typedef struct s_ast	t_ast;
 typedef struct s_parser		t_parser;
 typedef struct s_transition	t_transition;
 

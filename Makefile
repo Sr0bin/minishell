@@ -6,7 +6,7 @@
 #    By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/08/04 19:29:14 by rorollin         ###   ########.fr        #
+#    Updated: 2025/08/08 16:27:12 by rorollin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SOURCES_DIR = src
 
 SOURCES_NAME = main.c token_utils.c
 
-SOURCES_AST = ast_generation.c  ast_utils.c token_to_node.c
+SOURCES_AST = ast_generation.c  ast_utils.c token_to_node.c cmd_utils.c
 
 SOURCES_PARSER_HANDLER = handle_normal.c handle_dquote.c handle_squote.c handle_op.c
 

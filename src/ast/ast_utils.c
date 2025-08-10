@@ -6,23 +6,24 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 17:53:12 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/05 14:41:28 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/10 17:03:27 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parsing/enums.h"
 
-void	*free_ast(t_ast **node)
-{
-	if ((*node)->left != NULL)
-		free_ast(&(*node)->left);
-	if ((*node)->right != NULL)
-		free_ast(&(*node)->right);
-	clean_free_token(&((*node)->token));
-	(*node)->token = NULL;
-	free_node(node);
-	return (NULL);
-}
+/*void	*free_ast(t_ast **node)*/
+/*{*/
+/*	if ((*node)->left != NULL)*/
+/*		free_ast(&(*node)->left);*/
+/*	if ((*node)->right != NULL)*/
+/*		free_ast(&(*node)->right);*/
+/*	clean_free_token(&((*node)->token));*/
+/*	(*node)->token = NULL;*/
+/*	free_node(node);*/
+/*	return (NULL);*/
+/*}*/
 
 void	*free_ast_machine(t_ast_machine **machine)
 {
@@ -43,7 +44,7 @@ t_ast_machine	*create_ast_machine(t_token_list *input_list)
 	return (ast_machine);
 }
 
-t_ast	*generate_node(t_node_type type, t_token *token)
+t_ast	*generate_node(t_node_type type, t_cmd cmd)
 {
 	t_ast	*node;
 
@@ -51,7 +52,9 @@ t_ast	*generate_node(t_node_type type, t_token *token)
 	if (node == NULL)
 		return (NULL);
 	node->type = type;
-	node->token = token;
+	if (node->type == NODE_COMMAND)
+		node->cmd = cmd;
+	/*node->token = token;*/
 	return (node);
 }
 

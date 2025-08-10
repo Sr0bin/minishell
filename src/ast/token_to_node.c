@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 17:54:22 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/05 14:33:24 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/10 17:47:05 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,60 @@ t_node_type	token_to_node_type(t_token_type type)
 	return (0);
 }
 
-t_token_list	*find_first_pipe(t_token_list *list)
+t_token_list	*pipe_find_first(t_token_list *list)
 {
 	while (list != NULL && token_type_redir((t_token *) list->content) != TOKEN_PIPE)
 		list = list->next;
 	return (list);
 }
 
-t_token_list	*find_first_redir(t_token_list *list)
+int	pipe_count(t_token_list	*tkn_lst, t_token_list *last)
+{
+	int	count;
+
+	count = 0;
+	while (tkn_lst != NULL && tkn_lst != last)
+	{
+		if (lst_to_tkn(tkn_lst)->type == TOKEN_PIPE)
+			count++;
+		tkn_lst = tkn_lst->next;
+	}
+	return (count);
+}
+t_token_list	*pipe_find_n(t_token_list *list, int count)
+{
+	t_token_list	*crnt_pipe;
+	int				counter;
+
+	counter = 0;
+	crnt_pipe = list;
+	if (count == 0)
+		return (NULL);
+	while (list != NULL && counter < count)
+	{
+		if (lst_to_tkn(list)->type == TOKEN_PIPE)
+		{
+			crnt_pipe = list;
+			counter++;
+		}
+		list = list->next;
+	}
+	return (crnt_pipe);
+}
+t_token_list	*pipe_find_last(t_token_list *list)
+{
+	t_token_list	*crnt_pipe;
+	crnt_pipe = list;
+	while (list != NULL)
+	{
+		if (lst_to_tkn(list)->type == TOKEN_PIPE)
+			crnt_pipe = list;
+		list = list->next;
+	}
+	return (crnt_pipe);
+}
+
+t_token_list	*redir_find_first(t_token_list *list)
 {
 	while (list != NULL && (token_type_redir((t_token *) list->content) == 0))
 		list = list->next;

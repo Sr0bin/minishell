@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:52 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/05 13:09:11 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/10 17:54:57 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	main (int argc, char **argv)
 	(void) argc;
 	(void) argv;
 	t_list	*token_list;
+	/*t_redir_list	*redir_list;*/
+	t_ast	*node;
 	char	*read;
 
 	while (1)
@@ -30,8 +32,12 @@ int	main (int argc, char **argv)
 		clean_token_list(&token_list);
 		printf("Token Cleaned :\n");
 		print_token_list(token_list);
-		generate_full_ast(&token_list);
-		free_token_only_list(&token_list);
+		node = ast_create(&token_list);
+		print_ast(node);
+		/*redir_list = redir_list_create(token_list);*/
+		/*print_redir_list(redir_list);*/
+		/*ft_lstclear(&redir_list, (void(*))free_redir);*/
+		free_token_list(&token_list);
 		free(read);
 	}
 }

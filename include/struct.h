@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:30:44 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/08 13:12:07 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/10 17:52:19 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct s_var		t_var;
 typedef struct s_token		t_token;
-typedef struct s_ast_node	t_ast;
+typedef struct s_ast	t_ast;
 typedef struct s_parser		t_parser;
 typedef struct s_transition	t_transition;
 typedef struct s_cmd		t_cmd;
@@ -26,6 +26,9 @@ typedef struct s_cmd		t_cmd;
 typedef t_list				t_env;
 typedef t_list				t_token_list;
 typedef t_list				t_transition_list;
+
+typedef struct s_redir		t_redir;
+typedef t_list  t_redir_list;
 
 typedef enum e_shell_state
 {
@@ -43,14 +46,24 @@ typedef struct s_var
 	char	*value;
 }	t_var;
 
+typedef struct s_cmd
+{
+	t_redir_list	*redir;
+	char	*path;
+	char	**args;
+	char	**envp;
+}	t_cmd;
 
-typedef struct s_ast_node
+typedef struct s_ast
 {
 	t_node_type	type;
-	t_ast		*left;
-	t_ast		*right;
-	t_token		*token;
-	t_cmd		*cmd;
+	union {
+		t_cmd	cmd;
+		struct {
+			t_ast	*left;
+			t_ast	*right;
+		} pipe;
+	};
 }	t_ast;
 typedef struct s_ast_machine
 {
@@ -73,16 +86,7 @@ typedef struct s_redir
 	char			*filename;
 }	t_redir;
 
-typedef t_redir *t_redir_array;
-typedef t_list  t_redir_list;
 
-typedef struct s_cmd
-{
-	t_redir_list	*redir;
-	char	*path;
-	char	**args;
-	char	**envp;
-}	t_cmd;
 
 typedef struct s_context
 {

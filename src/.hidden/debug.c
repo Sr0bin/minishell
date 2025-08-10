@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:49 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/05 14:43:54 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/10 17:54:30 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,77 @@ static const char *get_node_type_string(t_node_type type)
 			return "UNKNOWN";
 	}
 }
+void print_redir(t_redir *redir)
+{
+    if (!redir)
+    {
+        printf("Redirection: NULL\n");
+        return;
+    }
+
+    printf("Redirection: ");
+    
+    switch (redir->type)
+    {
+        case REDIR_INPUT:
+            printf("INPUT (<) ");
+            break;
+        case REDIR_OUTPUT:
+            printf("OUTPUT (>) ");
+            break;
+        case REDIR_APPEND:
+            printf("APPEND (>>) ");
+            break;
+        case REDIR_HEREDOC:
+            printf("HEREDOC (<<) ");
+            break;
+        case REDIR_PIPE:
+            printf("PIPE (|) ");
+            break;
+        default:
+            printf("UNKNOWN ");
+            break;
+    }
+    
+    if (redir->filename)
+        printf("-> '%s'\n", redir->filename);
+    else
+        printf("-> (no filename)\n");
+}
+
+static void print_cmd_details(t_cmd *cmd, int depth)
+{
+	int i;
+	
+	if (cmd->path)
+	{
+		for (i = 0; i < depth; i++)
+			printf("│  ");
+		printf("├─ path: %s\n", cmd->path);
+	}
+	
+	if (cmd->args)
+	{
+		for (i = 0; i < depth; i++)
+			printf("│  ");
+		printf("├─ args: ");
+		for (i = 0; cmd->args[i]; i++)
+		{
+			if (i > 0)
+				printf(", ");
+			printf("%s", cmd->args[i]);
+		}
+		printf("\n");
+	}
+	
+	if (cmd->redir)
+	{
+		for (i = 0; i < depth; i++)
+			printf("│  ");
+		printf("├─ redirections:\n");
+		print_redir_list(cmd->redir);
+	}
+}
 
 static void print_ast_helper(t_ast *node, int depth)
 {
@@ -97,80 +168,58 @@ static void print_ast_helper(t_ast *node, int depth)
 		printf("(null)\n");
 		return;
 	}
+	
 	// Print indentation with vertical lines
 	for (i = 0; i < depth; i++)
 		printf("│  ");
+	
 	// Print node type
-	printf("%s", get_node_type_string(node->type));
-	// Print token if present
-	if (node->token)
+	printf("%s\n", get_node_type_string(node->type));
+	
+	// Print additional details based on node type
+	if (node->type == NODE_COMMAND)
 	{
-		printf(" - ");
-		print_token(*node->token);
+		print_cmd_details(&node->cmd, depth);
 	}
-	else
-		printf("\n");
-	// Recursively print children
-	if (node->left || node->right)
+	
+	// Recursively print children based on node type
+	if (node->type == NODE_PIPE)
 	{
 		for (i = 0; i < depth; i++)
 			printf("│  ");
 		printf("├─ left:\n");
-		print_ast_helper(node->left, depth + 1);
+		print_ast_helper(node->pipe.left, depth + 1);
+		
 		for (i = 0; i < depth; i++)
 			printf("│  ");
 		printf("└─ right:\n");
-		print_ast_helper(node->right, depth + 1);
+		print_ast_helper(node->pipe.right, depth + 1);
 	}
 }
-
-void print_ast_state(t_ast_machine *mchn, const char *location)
+void print_redir_list(t_list *redir_list)
 {
-	printf("\n=== AST MACHINE STATE at %s ===\n", location);
-	
-	if (!mchn)
-	{
-		printf("Machine is NULL!\n");
-		printf("=====================================\n\n");
-		return;
-	}
-	
-	printf("Current token: ");
-	if (mchn->crnt_tkn)
-		print_token(*(mchn->crnt_tkn));
-	else
-		printf("(null)\n");
-	
-	printf("Current position in token list:\n");
-	if (mchn->crnt_tkn_lst)
-	{
-		printf("  -> ");
-		print_token(*((t_token*)mchn->crnt_tkn_lst->content));
-	}
-	else
-		printf("  -> (null)\n");
-	
-	printf("Remaining tokens from current position:\n");
-	if (mchn->crnt_tkn_lst)
-	{
-		int count = 0;
-		t_token_list *temp = mchn->crnt_tkn_lst;
-		while (temp && count < 5) // Show next 5 tokens max
-		{
-			printf("  [%d] ", count);
-			print_token(*((t_token*)temp->content));
-			temp = temp->next;
-			count++;
-		}
-		if (temp)
-			printf("  ... (more tokens)\n");
-	}
-	else
-		printf("  (no remaining tokens)\n");
-	
-	printf("=====================================\n\n");
+    int i = 0;
+    t_list *current;
+    
+    if (!redir_list)
+    {
+        printf("Redirection list: empty\n");
+        return;
+    }
+    
+    printf("Redirection list:\n");
+    current = redir_list;
+    
+    while (current)
+    {
+        printf("[%d] ", i);
+        print_redir((t_redir *)current->content);
+        current = current->next;
+        i++;
+    }
+    
+    printf("Total redirections: %d\n", i);
 }
-
 void print_ast(t_ast *root)
 {
 	printf("AST Structure:\n");
