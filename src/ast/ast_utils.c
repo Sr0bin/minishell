@@ -6,24 +6,25 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 17:53:12 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/10 17:03:27 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/10 19:36:12 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parsing/enums.h"
 
-/*void	*free_ast(t_ast **node)*/
-/*{*/
-/*	if ((*node)->left != NULL)*/
-/*		free_ast(&(*node)->left);*/
-/*	if ((*node)->right != NULL)*/
-/*		free_ast(&(*node)->right);*/
-/*	clean_free_token(&((*node)->token));*/
-/*	(*node)->token = NULL;*/
-/*	free_node(node);*/
-/*	return (NULL);*/
-/*}*/
+void	*free_ast(t_ast **node)
+{
+	if ((*node)->type == NODE_PIPE)
+	{
+		if ((*node)->pipe.left != NULL)
+			free_ast(&(*node)->pipe.left);
+		if ((*node)->pipe.right != NULL)
+			free_ast(&(*node)->pipe.right);
+	}
+	free_node(node);
+	return (NULL);
+}
 
 void	*free_ast_machine(t_ast_machine **machine)
 {
@@ -60,6 +61,8 @@ t_ast	*generate_node(t_node_type type, t_cmd cmd)
 
 void	*free_node(t_ast **node)
 {
+	if ((*node)->type == NODE_COMMAND)
+		free_cmd((*node)->cmd);
 	free(*node);
 	*node = NULL;
 	return (NULL);

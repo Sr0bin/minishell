@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 18:25:17 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/10 18:06:02 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/10 19:38:11 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,16 @@ t_ast	*node_pipe_create(t_token_list *tkn_lst, t_token_list *last_pipe)
 	t_ast		*node;
 	t_token_list	*crnt_pipe_ptr;
 
+	if (!tkn_lst || tkn_lst == last_pipe)
+		return node_cmd_create(tkn_lst);
 	crnt_pipe_ptr = pipe_find_n(tkn_lst, pipe_count(tkn_lst, last_pipe));
 	if (crnt_pipe_ptr == NULL)
 		return (node_cmd_create(tkn_lst));
 	node = generate_node(token_to_node_type(((t_token *)(crnt_pipe_ptr->content))->type), (t_cmd){0});
 
 	node->pipe.left = node_pipe_create(tkn_lst, crnt_pipe_ptr);
-	/*node->pipe.left = node_pipe_create(tkn_lst, pipe_find_n(tkn_lst, pipe_count(tkn_lst, last_pipe) - 1));*/
-	//!
-	node->pipe.right = node_pipe_create(crnt_pipe_ptr->next, NULL);
+	if (crnt_pipe_ptr->next != NULL)
+		node->pipe.right = node_cmd_create(crnt_pipe_ptr->next);
 	return (node);
 }
 
@@ -107,6 +108,6 @@ t_ast	*ast_create(t_token_list **list)
 {
 	t_ast *node;
 
-	node = node_pipe_create(*list, pipe_find_last(*list));
+	node = node_pipe_create(*list, pipe_find_last(*list)->next);
 	return (node);
 }

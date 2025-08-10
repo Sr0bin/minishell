@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 16:48:47 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/10 17:47:05 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/10 19:36:12 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_ast	*node_pipe_create(t_token_list *tkn_lst, t_token_list *last_pipe);
 t_ast	*generate_node(t_node_type type, t_cmd cmd);
 t_ast_machine	*create_ast_machine(t_token_list *input_list);
 t_ast_machine	*advance_token(t_ast_machine *mchn);
-/*void	*free_ast(t_ast **node);*/
+void	*free_ast(t_ast **node);
 void	*free_ast_machine(t_ast_machine **machine);
 void	*free_node(t_ast **node);
 t_node_type token_to_node_type(t_token_type type);

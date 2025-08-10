@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 16:56:00 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/08 18:50:54 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/10 19:33:04 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ t_cmd	*create_cmd(t_redir_list *redir, char *path, char **args, char **envp)
 	return (cmd);
 }
 
-void	*free_cmd(t_cmd **cmd)
+void	*free_cmd(t_cmd cmd)
 {
 
-	free(*cmd);
-	*cmd = NULL;
+	ft_lstclear(&cmd.redir, (void (*)) free_redir);
+	free(cmd.path);
 	return (NULL);
 }
 

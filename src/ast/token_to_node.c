@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 17:54:22 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/10 17:47:05 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/10 19:00:27 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	pipe_count(t_token_list	*tkn_lst, t_token_list *last)
 	int	count;
 
 	count = 0;
-	while (tkn_lst != NULL && tkn_lst != last)
+	while (tkn_lst != NULL && (last == NULL || tkn_lst != last))
 	{
 		if (lst_to_tkn(tkn_lst)->type == TOKEN_PIPE)
 			count++;
