@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
 #    Updated: 2025/08/08 16:27:12 by rorollin         ###   ########.fr        #
@@ -27,6 +27,12 @@ SOURCES_PARSER_STATE = transition_utils.c
 SOURCES_PARSER = $(addprefix handler/, $(SOURCES_PARSER_HANDLER))\
 				 $(addprefix state/, $(SOURCES_PARSER_STATE)) \
 				 parser_utils.c string_utils.c clean_token.c assign_token.c
+SOURCES_PIPEX_EXEC = exec_multipipes.c  main.c path.c pipes.c exec.c free_utils.c\
+
+SOURCES_BUILTINS = export.c export_args.c export_no_args.c cd.c echo.c env.c pwd.c\
+				unset.c
+
+SOURCES_PIPEX_AST = ast_to_cmds.c ast_utils.c\
 
 SOURCES_DEBUG = debug.c
 
@@ -35,10 +41,11 @@ SOURCES = $(addprefix $(SOURCES_DIR)/,\
 		  $(addprefix parser/, $(SOURCES_PARSER))\
 		  $(addprefix ast/, $(SOURCES_AST))\
 		  $(addprefix .hidden/, $(SOURCES_DEBUG))\
+		  $(addprefix multipipes/exec/, $(SOURCES_PIPEX_EXEC))\
+		  $(addprefix multipipes/ast/, $(SOURCES_PIPEX_AST))\
+		  $(addprefix builtins/, $(SOURCES_BUILTINS))\
 		  )
 		  
-
-
 #OBJECTS#######################
 
 OBJ_DIR = obj
@@ -65,10 +72,11 @@ LIBFT_PATH = $(LIBFT)/$(LIBFT).a
 
 COMPILER = cc
 
-CFLAGS_DEBUG = -Wall -Wextra -Werror -MMD -MP -ggdb3 -Wshadow -Wconversion -Wsign-conversion -Wmissing-prototypes \
+CFLAGS_DEBUG = -Wall -Wextra -Werror -MMD -MP -ggdb3 -Wshadow -Wconversion -Wsign-conversion \
 -Wformat=2 -Wformat-security -Wnull-dereference -Wstack-protector -Wfloat-equal -Wpointer-arith \
 -Wcast-align -Wundef -Wbad-function-cast -Wstrict-overflow=4 -Wdouble-promotion -Walloca -Wvla \
--Wwrite-strings -Wuninitialized -fno-delete-null-pointer-checks -fno-omit-frame-pointer -std=c11
+-Wwrite-strings -Wuninitialized -fno-delete-null-pointer-checks -fno-omit-frame-pointer -std=c11 \
+-Iinclude
 
 CFLAGS_PROD = -Wall -Wextra -Werror -MMD -MP -ggdb3 -O3
 
