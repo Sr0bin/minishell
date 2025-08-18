@@ -6,13 +6,13 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 15:00:00 by rorollin          #+#    #+#             */
-/*   Updated: 2025/07/03 15:55:50 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/18 15:33:44 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HANDLER_H
 # define HANDLER_H
-# include "struct.h"
+# include "../struct.h"
 
 void	handle_normal_whitespace(t_parser *p);
 void	handle_normal_quote(t_parser *p);

@@ -6,13 +6,13 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 16:48:47 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/10 19:36:12 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/18 15:34:03 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AST_H
 # define AST_H
-# include "struct.h"
+# include "../struct.h"
 t_ast	*ast_create(t_token_list **list);
 t_redir	*create_redir_token(t_token_list *tkn_lst);
 void	*redir_destroy(t_redir_list **redir_list, t_redir **redir);

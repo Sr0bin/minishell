@@ -6,7 +6,7 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/08/08 16:27:12 by rorollin         ###   ########.fr        #
+#    Updated: 2025/08/18 15:29:23 by rorollin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ SOURCES_DEBUG = debug.c
 SOURCES = $(addprefix $(SOURCES_DIR)/,\
 		  $(SOURCES_NAME)\
 		  $(addprefix parser/, $(SOURCES_PARSER))\
-		  $(addprefix ast/, $(SOURCES_AST))\
+		  $(addprefix ast_generation/, $(SOURCES_AST))\
 		  $(addprefix .hidden/, $(SOURCES_DEBUG))\
 		  $(addprefix multipipes/exec/, $(SOURCES_PIPEX_EXEC))\
 		  $(addprefix multipipes/ast/, $(SOURCES_PIPEX_AST))\

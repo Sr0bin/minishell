@@ -6,14 +6,12 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:10:17 by rorollin          #+#    #+#             */
-/*   Updated: 2025/07/29 20:47:16 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/18 15:38:53 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "handler.h"
 #include "list.h"
 #include "minishell.h"
-#include "parsing.h"
 #include "struct.h"
 
 void	handle_normal_whitespace(t_parser *p)

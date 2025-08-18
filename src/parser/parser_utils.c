@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:40:49 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/05 13:06:35 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/18 15:39:08 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "list.h"
 #include "minishell.h"
 #include "struct.h"
-#include "token.h"
 #include <stddef.h>
 
 t_parser	*parser_init(char *input)

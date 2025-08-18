@@ -6,12 +6,11 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:52 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/10 19:37:30 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/18 15:38:17 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "parsing.h"
 #include <readline/readline.h>
 #include <readline/history.h>
 

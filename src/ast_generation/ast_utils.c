@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 17:53:12 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/10 19:36:12 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/18 15:37:21 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_ast	*generate_node(t_node_type type, t_cmd cmd)
 void	*free_node(t_ast **node)
 {
 	if ((*node)->type == NODE_COMMAND)
-		free_cmd((*node)->cmd);
+		free_parser_cmd((*node)->cmd);
 	free(*node);
 	*node = NULL;
 	return (NULL);

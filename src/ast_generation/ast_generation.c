@@ -6,12 +6,10 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 18:25:17 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/10 19:38:11 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/18 15:36:03 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ast.h"
-#include "list.h"
 #include "minishell.h"
 #include <stdio.h>
 

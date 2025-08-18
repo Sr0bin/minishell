@@ -6,17 +6,17 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 17:01:09 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/10 19:32:00 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/18 15:37:31 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CMD_H
 # define CMD_H
-# include "struct.h"
+# include "../struct.h"
 
 t_redir	*create_redir(t_redir_type type, char *filename);
 void	*free_redir(t_redir *redir);
 t_cmd	*create_cmd(t_redir_list *redir, char *path, char **args, char **envp);
 t_redir_list	*redir_list_create(t_token_list *tkn_lst);
-void	*free_cmd(t_cmd cmd);
+void	*free_parser_cmd(t_cmd cmd);
 #endif

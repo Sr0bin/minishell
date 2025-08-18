@@ -6,13 +6,13 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:35:19 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/08 14:51:03 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/18 15:33:44 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKEN_H
 # define TOKEN_H
-# include "struct.h"
+# include "../struct.h"
 
 t_token	*create_token(char *text, t_token_type type);
 t_token_list	*create_token_list(t_token *first);

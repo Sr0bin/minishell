@@ -6,13 +6,13 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:30:03 by rorollin          #+#    #+#             */
-/*   Updated: 2025/06/27 21:08:05 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/18 15:33:44 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	PARSING_H
 # define PARSING_H
-# include "struct.h"
+# include "../struct.h"
 
 t_token	*generate_token(t_parser *parser, t_token_type type);
 t_token_list	*shell_tokenizer(char *input);
