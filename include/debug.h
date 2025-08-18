@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   debug.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/14 14:29:18 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/06 17:02:12 by rorollin         ###   ########.fr       */
+/*   Created: 2025/06/05 18:32:23 by rorollin          #+#    #+#             */
+/*   Updated: 2025/08/08 16:25:24 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "libft.h"
-# include "parsing.h"
-# include "ast.h"
-# include "cmd.h"
+#ifndef DEBUG_H
+# define DEBUG_H
 # include "struct.h"
-# include "token.h"
-# include "handler.h"
-# include "debug.h"
-# include "parsing/enums.h"
-# include "parsing/parsing_struct.h"
+void	print_token(t_token token);
+void	print_token_list(t_token_list *list);
+void	print_parser_state(t_parser *parser);
+void	print_ast(t_ast *root);
+void print_ast_state(t_ast_machine *mchn, const char *location);
+void print_redir_list(t_list *redir_list);
+void print_redir(t_redir *redir);
 #endif
+

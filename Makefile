@@ -6,7 +6,7 @@
 #    By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/05/28 13:21:29 by rorollin         ###   ########.fr        #
+#    Updated: 2025/08/08 16:27:12 by rorollin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,17 +16,26 @@ NAME = minishell
 
 SOURCES_DIR = src
 
-SOURCES_NAME = main.c
+SOURCES_NAME = main.c token_utils.c
 
-SOURCES_= 
+SOURCES_AST = ast_generation.c  ast_utils.c token_to_node.c cmd_utils.c
 
-SOURCES_DEBUG = debug.
+SOURCES_PARSER_HANDLER = handle_normal.c handle_dquote.c handle_squote.c handle_op.c
+
+SOURCES_PARSER_STATE = transition_utils.c
+
+SOURCES_PARSER = $(addprefix handler/, $(SOURCES_PARSER_HANDLER))\
+				 $(addprefix state/, $(SOURCES_PARSER_STATE)) \
+				 parser_utils.c string_utils.c clean_token.c assign_token.c
+
+SOURCES_DEBUG = debug.c
 
 SOURCES = $(addprefix $(SOURCES_DIR)/,\
 		  $(SOURCES_NAME)\
-		  $(addprefix placeholder/, $(SOURCES_))\
+		  $(addprefix parser/, $(SOURCES_PARSER))\
+		  $(addprefix ast/, $(SOURCES_AST))\
+		  $(addprefix .hidden/, $(SOURCES_DEBUG))\
 		  )
-		  # $(addprefix .hidden/, $(SOURCES_DEBUG))\
 		  
 
 
@@ -44,7 +53,7 @@ DEPS = $(SOURCES:%.c=$(OBJ_DIR)/%.d)
 
 HEADERS_DIR = include/ libft/include/
 
-INCLUDES = $(addprefix -I , $(HEADERS_DIR))
+INCLUDES = $(addprefix -I , $(HEADERS_DIR)) 
 
 #LIBFT########################
 
@@ -67,10 +76,10 @@ CFLAGS = $(CFLAGS_DEBUG)
 
 export CFLAGS
 
-all: git make_libft $(NAME)
+all: make_libft $(NAME)
 
 $(NAME):  $(OBJECTS) $(LIBFT_PATH)
-	$(COMPILER) $(CFLAGS) $(INCLUDES) $^ -o $@
+	$(COMPILER) $(CFLAGS) $(INCLUDES) -lreadline $^ -o $@
 	@echo "$(NAME) built succesfully."
 
 

@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   handle_operator.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/14 14:29:18 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/06 17:02:12 by rorollin         ###   ########.fr       */
+/*   Created: 2025/07/03 15:53:29 by rorollin          #+#    #+#             */
+/*   Updated: 2025/08/10 19:06:22 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "libft.h"
-# include "parsing.h"
-# include "ast.h"
-# include "cmd.h"
-# include "struct.h"
-# include "token.h"
-# include "handler.h"
-# include "debug.h"
-# include "parsing/enums.h"
-# include "parsing/parsing_struct.h"
-#endif
+#include "minishell.h"
+
+void	handle_op_extend(t_parser *p)
+{
+	p->crnt_pos++;
+}
+
+void	handle_op_other(t_parser *p)
+{
+	p->state = STATE_NORMAL;
+	generate_token(p, TOKEN_OPERATOR);
+	if (char_type(p->crnt_pos[-1]) != CHAR_OPERATOR && p->crnt_pos[-1] != '\0')
+		p->crnt_pos--;
+	if (p->start_pos != p->input)
+		p->start_pos--;
+}
