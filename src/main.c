@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:52 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/18 15:38:17 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/18 16:05:28 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ int	main (int argc, char **argv)
 		read = readline("Enter a string to Tokenize :");
 		add_history(read);
 		token_list = shell_tokenizer(read);
-		clean_token_list(&token_list);
+		token_list_clean(&token_list);
 		printf("Token Cleaned :\n");
 		print_token_list(token_list);
 		node = ast_create(&token_list);
 		print_ast(node);
 		free_ast(&node);
-		free_token_list(&token_list);
+		token_list_destroy(&token_list);
 		free(read);
 	}
 }

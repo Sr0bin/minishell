@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:49:00 by rorollin          #+#    #+#             */
-/*   Updated: 2025/07/29 20:46:28 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/18 16:03:53 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	handle_dquote_end(t_parser *p)
 {
 	p->state = STATE_NORMAL;
 	p->crnt_pos++;
-	generate_token(p, TOKEN_WORD);
+	token_generate(p, TOKEN_WORD);
 	if (char_type(p->crnt_pos[-1]) != CHAR_DQUOTE && p->crnt_pos[-1] != '\0')
 		p->crnt_pos--;
 	if (p->start_pos != p->input)

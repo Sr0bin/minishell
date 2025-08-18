@@ -6,7 +6,7 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/08/18 15:51:07 by rorollin         ###   ########.fr        #
+#    Updated: 2025/08/18 16:12:29 by rorollin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,18 +16,14 @@ NAME = minishell
 
 SOURCES_DIR = src
 
-SOURCES_NAME = main.c token_utils.c
+SOURCES_NAME = main.c
 
-SOURCES_AST = ast_generation.c  ast_core.c token_to_node.c cmd_core.c node_generation.c\
-			  redir_core.c redir_list_core.c
+#---------------------------
 
-SOURCES_PARSER_HANDLER = handle_normal.c handle_dquote.c handle_squote.c handle_op.c
+SOURCES_DEBUG = debug.c
 
-SOURCES_PARSER_STATE = transition_utils.c
+#---------------------------
 
-SOURCES_PARSER = $(addprefix handler/, $(SOURCES_PARSER_HANDLER))\
-				 $(addprefix state/, $(SOURCES_PARSER_STATE)) \
-				 parser_utils.c string_utils.c clean_token.c assign_token.c
 SOURCES_PIPEX_EXEC = exec_multipipes.c  main.c path.c pipes.c exec.c free_utils.c\
 
 SOURCES_BUILTINS = export.c export_args.c export_no_args.c cd.c echo.c env.c pwd.c\
@@ -35,8 +31,24 @@ SOURCES_BUILTINS = export.c export_args.c export_no_args.c cd.c echo.c env.c pwd
 
 SOURCES_PIPEX_AST = ast_to_cmds.c ast_utils.c\
 
-SOURCES_DEBUG = debug.c
 
+#---------------------------
+
+SOURCES_AST = ast_generation.c  ast_core.c token_to_node.c cmd_core.c node_generation.c\
+			  redir_core.c redir_list_core.c
+
+#---------------------------
+SOURCES_PARSER_HANDLER = handle_normal.c handle_dquote.c handle_squote.c handle_op.c
+
+SOURCES_PARSER_STATE = transition_utils.c
+
+SOURCES_PARSER_TOKEN = token_assign.c token_core.c token_list_clean.c
+
+SOURCES_PARSER = $(addprefix handler/, $(SOURCES_PARSER_HANDLER))\
+				 $(addprefix state/, $(SOURCES_PARSER_STATE)) \
+				 $(addprefix token/, $(SOURCES_PARSER_TOKEN)) \
+				 parser_core.c string_utils.c 
+#---------------------------
 SOURCES = $(addprefix $(SOURCES_DIR)/,\
 		  $(SOURCES_NAME)\
 		  $(addprefix parser/, $(SOURCES_PARSER))\

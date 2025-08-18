@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:30:03 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/18 15:33:44 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/18 16:03:53 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PARSING_H
 # include "../struct.h"
 
-t_token	*generate_token(t_parser *parser, t_token_type type);
+t_token	*token_generate(t_parser *parser, t_token_type type);
 t_token_list	*shell_tokenizer(char *input);
 t_token_list	*generate_token_list(t_parser *parser);
 void	*update_parser_token(t_parser *parser);

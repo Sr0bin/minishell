@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:40:49 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/18 15:39:08 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/18 16:05:13 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ t_token_list	*generate_token_list(t_parser *parser)
 	{
 		tkn_temp = update_parser_token(parser);
 		if (tkn_temp == NULL)	// if memory error in token creation
-			return (free_token_list(&final_list));
+			return (token_list_destroy(&final_list));
 		lst_temp = ft_lstnew(tkn_temp);
 		if (lst_temp == NULL)
-			return (free_token_list(&final_list));
+			return (token_list_destroy(&final_list));
 		ft_lstadd_back(&final_list, lst_temp);
 		parser->crnt_token = NULL;
 	}

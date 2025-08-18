@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:44:40 by rorollin          #+#    #+#             */
-/*   Updated: 2025/07/29 20:47:38 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/18 16:04:09 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	quote_eof(t_parser *p)
 {
-	p->crnt_token = create_token(ft_strdup("ERROR"), TOKEN_EOF);
+	p->crnt_token = token_create(ft_strdup("ERROR"), TOKEN_EOF);
 	p->state = STATE_NORMAL;
 }
 
@@ -28,7 +28,7 @@ void	handle_squote_end(t_parser *p)
 {
 	p->state = STATE_NORMAL;
 	p->crnt_pos++;
-	generate_token(p, TOKEN_WORD);
+	token_generate(p, TOKEN_WORD);
 	if (char_type(p->crnt_pos[-1]) != CHAR_SQUOTE && p->crnt_pos[-1] != '\0')
 		p->crnt_pos--;
 	if (p->start_pos != p->input)
