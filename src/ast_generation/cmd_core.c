@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_generation.c                                   :+:      :+:    :+:   */
+/*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/14 18:25:17 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/18 15:51:07 by rorollin         ###   ########.fr       */
+/*   Created: 2025/08/06 16:56:00 by rorollin          #+#    #+#             */
+/*   Updated: 2025/08/18 15:52:00 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdio.h>
 
-
-
-
-t_ast	*ast_create(t_token_list **list)
+t_cmd	cmd_create(t_token_list *tkn_lst)
 {
-	t_ast *node;
+	t_cmd	cmd;
 
-	node = node_pipe_create(*list, pipe_find_last(*list)->next);
-	return (node);
+	cmd.redir = redir_list_create(tkn_lst);
+	cmd.path = ft_strdup(lst_to_tkn(tkn_lst)->content);
+	cmd.args = NULL;
+	cmd.envp = NULL;
+	return (cmd);
 }
+
+void	*free_parser_cmd(t_cmd cmd)
+{
+
+	ft_lstclear(&cmd.redir, (void (*)) free_redir);
+	free(cmd.path);
+	return (NULL);
+}
+

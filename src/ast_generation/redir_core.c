@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_utils.c                                        :+:      :+:    :+:   */
+/*   redir_core.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/06 16:56:00 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/18 15:37:39 by rorollin         ###   ########.fr       */
+/*   Created: 2025/08/18 15:48:12 by rorollin          #+#    #+#             */
+/*   Updated: 2025/08/18 15:51:07 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,25 +62,9 @@ void	*free_redir(t_redir *redir)
 	return (NULL);
 }
 
-t_cmd	*create_cmd(t_redir_list *redir, char *path, char **args, char **envp)
+void	*redir_destroy(t_redir_list **redir_list, t_redir **redir)
 {
-	t_cmd	*cmd;
-
-	cmd = ft_calloc(1, sizeof(t_cmd));
-	if (cmd == NULL)
-		return (NULL);
-	cmd->redir = redir;
-	cmd->path = path;
-	cmd->args = args;
-	cmd->envp = envp;
-	return (cmd);
-}
-
-void	*free_parser_cmd(t_cmd cmd)
-{
-
-	ft_lstclear(&cmd.redir, (void (*)) free_redir);
-	free(cmd.path);
+	ft_lstclear(redir_list, (void (*)) free_redir);
+	free_redir(*redir);
 	return (NULL);
 }
-
