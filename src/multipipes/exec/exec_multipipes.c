@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/23 13:31:53 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/19 09:11:27 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,18 @@ void	exec_single_cmd(t_utils *utils)
 
 void	exec(t_ast_node *root, char **envp)
 {
-	t_utils	*utils;
+	t_exec_data *exec_data;
 
-	utils = malloc(sizeof(t_utils));
-	if (!utils)
-		ft_error(utils, "minishell: malloc failed", 1);
-	*utils = (t_utils){0};
-	utils->envp = envp;
-	ast_to_cmds(utils, root);
-	if (utils->nb_cmds == 1)
-		exec_single_cmd(utils);
+	exec_data = malloc(sizeof(t_exec_data));
+	if (!exec_data)
+		ft_error(exec_data, "minishell: malloc failed", 1);
+	*exec_data = (t_exec_data){0};
+	ast_to_cmds(exec_data, root);
+	if (exec_data->nb_cmds == 1)
+		exec_single_cmd(exec_data);
 	else
 	{
-		init_pipes(utils);
-		exec_pipex(utils);
+		init_pipes(exec_data);
+		exec_pipex(exec_data);
 	}
 }

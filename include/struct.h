@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:30:44 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/10 17:52:19 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/19 10:42:29 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_ast
 		} pipe;
 	};
 }	t_ast;
+
 typedef struct s_ast_machine
 {
 	t_token_list	*crnt_tkn_lst;

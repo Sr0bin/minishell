@@ -6,12 +6,16 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:50:26 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/20 14:44:13 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/19 10:19:08 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+#include "libft.h"
+
+typedef t_list t_redir_list;
 
 typedef enum s_redir_type
 {
@@ -32,16 +36,13 @@ typedef struct s_cmds
 {
 	char			**cmd;
 	char			*path;
-	t_redir			fd_in;
-	t_redir			fd_out;
+	t_redir_list	*redir;
 }	t_cmds;
 
-typedef struct s_utils
+typedef struct s_exec_data
 {
 	t_cmds	*cmds;
 	int		nb_cmds;
-	int		**fd;
-	char	**envp;
-}	t_utils;
+}	t_exec_data;
 
 #endif
