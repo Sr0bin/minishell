@@ -6,85 +6,54 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:08:44 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/23 13:31:09 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/19 16:41:42 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "multipipes/multipipes.h"
 
-int	set_input_fd(t_utils *utils, int i)
+int	apply_redirections(t_exec_data *exec_data, int i)
 {
-	int	fd_in;
+	int fd;
+	t_list	*node;
+	t_redir *redir;
 
-	fd_in = -1;
-	if (utils->cmds[i].fd_in.fd)
+	fd = -1;
+	node = exec_data->cmds[i].redir;
+	while (node)
 	{
-		fd_in = open(utils->cmds[i].fd_in.fd, O_RDONLY);
-		if (fd_in < 0)
-			ft_error(utils, "minishell: fd_in failed", 1);
-		if (dup2(fd_in, STDIN_FILENO) == -1)
-		{
-			close(fd_in);
-			ft_error(utils, "minishell: dup2 failed", 1);
-		}
+		redir = (t_redir *)node->content;
+		if (redir->type == REDIR_OUTPUT)
+			fd = open(redir->filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		else if (redir->type == REDIR_APPEND)
+			fd = open(redir->filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		else if (redir->type == REDIR_INPUT)
+			fd = open(redir->filename, O_RDONLY);
+		if (fd < 0)
+			return (-1);
+		if (redir->type == REDIR_INPUT)
+			dup2(fd, STDIN_FILENO);
+		else 
+			dup2(fd, STDOUT_FILENO);
+		close (fd);
+		node = node->next;
 	}
-	else if (i > 0)
-	{
-		if (dup2(utils->fd[i - 1][0], STDIN_FILENO) == -1)
-			ft_error(utils, "minishell: dup2 failed", 1);
-	}
-	return (fd_in);
+	return (0);
 }
 
-int	set_output_fd(t_utils *utils, int i)
+void	exec_cmd(t_exec_data *exec_data, int i)
 {
-	int	fd_out;
-
-	fd_out = -1;
-	if (utils->cmds[i].fd_out.fd)
-	{
-		if (utils->cmds[i].fd_out.redir_type == REDIR_APPEND)
-			fd_out = open(utils->cmds[i].fd_out.fd,
-					O_WRONLY | O_CREAT | O_APPEND, 0644);
-		else if (utils->cmds[i].fd_out.redir_type == REDIR_OUTPUT)
-			fd_out = open(utils->cmds[i].fd_out.fd,
-					O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (fd_out < 0)
-			ft_error(utils, "minishell : open failed", 1);
-		if (dup2(fd_out, STDOUT_FILENO) == -1)
-		{
-			close(fd_out);
-			ft_error(utils, "minishell : dup2 failed", 1);
-		}
-	}
-	else if (i < utils->nb_cmds - 1)
-	{
-		if (dup2(utils->fd[i][1], STDOUT_FILENO) == -1)
-			ft_error(utils, "minishell : dup2 failed", 1);
-	}
-	return (fd_out);
+	if (apply_redirections(exec_data, i) < 0)
+		
+	close_pipes(exec_data);
+	exec_data->cmds[i].path = find_path(exec_data);
+	if (!exec_data->cmds[i].path)
+		ft_error(exec_data, "minishell: command not found", 127);
+	if (execve(exec_data->cmds[i].path, exec_data->cmds[i].cmd, exec_data->envp) == -1)
+		ft_error(exec_data, "minishell : execve failed", 1);
 }
 
-void	exec_cmd(t_utils *utils, int i)
-{
-	int		fd_in;
-	int		fd_out;
-
-	fd_in = set_input_fd(utils, i);
-	fd_out = set_output_fd(utils, i);
-	if (fd_in > 2)
-		close(fd_in);
-	if (fd_out > 2)
-		close(fd_out);
-	close_pipes(utils);
-	utils->cmds[i].path = find_path(utils);
-	if (!utils->cmds[i].path)
-		ft_error(utils, "minishell: command not found", 127);
-	if (execve(utils->cmds[i].path, utils->cmds[i].cmd, utils->envp) == -1)
-		ft_error(utils, "minishell : execve failed", 1);
-}
-
-void	close_parent_fds(t_utils *utils, int i)
+void	close_parent_fds(t_exec_data *utils, int i)
 {
 	if (i > 0)
 		close(utils->fd[i - 1][0]);
@@ -92,7 +61,7 @@ void	close_parent_fds(t_utils *utils, int i)
 		close(utils->fd[i][1]);
 }
 
-void	exec_pipex(t_utils *utils)
+void	exec_pipex(t_exec_data *utils)
 {
 	int		i;
 	pid_t	pid;
@@ -116,6 +85,6 @@ void	exec_pipex(t_utils *utils)
 	}
 	while (wait(NULL) > 0)
 		;
-	free_utils(utils);
+	free_exec_data(utils);
 	exit (0);
 }

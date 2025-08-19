@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:04:52 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/20 14:48:12 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/19 14:58:59 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,9 @@ void	free_cmd(t_cmds *cmd)
 		}
 		free(cmd->cmd);
 	}
-	free(cmd->fd_in.fd);
-	free(cmd->fd_out.fd);
 }
 
-void	free_cmds(t_utils *utils)
+void	free_cmds(t_exec_data *utils)
 {
 	int	i;
 
@@ -59,20 +57,20 @@ void	free_fds(int **fd)
 	free(fd);
 }
 
-void	free_utils(t_utils *utils)
+void	free_exec_data(t_exec_data *exec_data)
 {
-	if (!utils)
+	if (!exec_data)
 		exit (1);
-	if (utils->cmds)
-		free_cmds(utils);
-	if (utils->fd)
-		free_fds(utils->fd);
-	free (utils);
+	if (exec_data->cmds)
+		free_cmds(exec_data);
+	if (exec_data->fd)
+		free_fds(exec_data->fd);
+	free (exec_data);
 }
 
-void	ft_error(t_utils *utils, const char *msg, int exit_code)
+void	ft_error(t_exec_data *exec_data, const char *msg, int exit_code)
 {
 	perror(msg);
-	free_utils(utils);
+	free_exec_data(exec_data);
 	exit (exit_code);
 }

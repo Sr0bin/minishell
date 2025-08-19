@@ -6,14 +6,14 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:31:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/19 10:43:56 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/19 16:37:18 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "multipipes/multipipes.h"
-#include "../struct.h"
+#include "struct.h"
 
-void	init_exec_data(t_exec_data *exec_data, t_ast_node *root)
+void	init_exec_data(t_exec_data *exec_data, t_ast *root)
 {
 	int	i;
 
@@ -31,46 +31,45 @@ void	init_exec_data(t_exec_data *exec_data, t_ast_node *root)
 	}
 }
 
-void	fill_one_cmd(t_exec_data *exec_data, t_token *token, int *i)
+void	fill_one_cmd(t_exec_data *exec_data, t_cmd cmd, int *i)
 {
-	int	j;
 	int count;
-
+	int	j;
+	
 	j = 0;
-	count = count_nbr_args(token);
+	count = count_nbr_args(cmd.args);
 	exec_data->cmds[*i].cmd = malloc(sizeof(char *)
 			* (long unsigned int)(count + 1));
 	if (!exec_data->cmds[*i].cmd)
 		ft_error(exec_data, "minishell : malloc failed", 1);
-	while (token)
+	while (cmd.args[j])
 	{
-		exec_data->cmds[*i].redir = 
-		exec_data->cmds[*i].cmd[j] = ft_strdup(token->content);
+		exec_data->cmds[*i].cmd[j] = ft_strdup(cmd.args[j]);
 		if (!exec_data->cmds[*i].cmd[j])
 			ft_error(exec_data, "minishell : strdup failed", 1);
-		token = token->next;
 		j++;
 	}
+	exec_data->cmds[*i].redir = cmd.redir;
 	exec_data->cmds[*i].cmd[j] = NULL;
 }
 
 void	fill_cmds(t_exec_data *exec_data, t_ast *ast, int *i)
 {
-	if (!node)
+	if (!ast)
 		return ;
-	if (node->type == NODE_PIPE)
+	if (ast->type == NODE_PIPE)
 	{
-		fill_cmds(exec_data, node->left, i);
-		fill_cmds(exec_data, node->right, i);
+		fill_cmds(exec_data, ast->pipe.left, i);
+		fill_cmds(exec_data, ast->pipe.right, i);
 	}
-	else if (node->type == NODE_COMMAND)
+	else if (ast->type == NODE_COMMAND)
 	{
-		fill_one_cmd(exec_data, node->token_list, i);
+		fill_one_cmd(exec_data, ast->cmd, i);
 		(*i)++;
 	}
 }
 
-void	ast_to_cmds(t_exec_data *exec_data, t_ast_node *root)
+void	ast_to_cmds(t_exec_data *exec_data, t_ast *root)
 {
 	int	i;
 

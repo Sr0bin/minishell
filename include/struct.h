@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:30:44 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/19 10:42:29 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/19 14:37:21 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ typedef enum e_shell_state
 	INPUT,
 	HEREDOC,
 }	t_shell_state;
-
-
 
 typedef struct s_var
 {
@@ -87,14 +85,11 @@ typedef struct s_redir
 	char			*filename;
 }	t_redir;
 
-
-
 typedef struct s_context
 {
 	t_list			*env;
 	t_shell_state	state;
 }	t_context;
-
 
 typedef void	(*t_handler)(char c, t_parser *p);
 

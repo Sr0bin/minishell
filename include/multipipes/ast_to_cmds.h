@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:53:51 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/02 12:07:01 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/19 16:39:16 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 # include "struct.h"
 # include "structs.h"
 
-int		count_commands(t_ast_node *node);
-int		count_nbr_args(t_token *token);
-void	ast_to_cmds(t_utils *utils, t_ast_node *root);
-void	fill_one_cmd(t_utils *utils, t_token *token, int *i);
-void	fill_cmds(t_utils *utils, t_ast_node *node, int *i);
-void	fill_redir(t_utils *utils, t_node_type redir_type, t_ast_node *node,
+int		count_commands(t_ast *node);
+int		count_nbr_args(char **args);
+void	ast_to_cmds(t_exec_data *exec_data, t_ast *root);
+void	fill_one_cmd(t_exec_data *exec_data, t_cmd cmd, int *i);
+void	fill_cmds(t_exec_data *exec_data, t_ast *node, int *i);
+void	fill_redir(t_exec_data *exec_data, t_node_type redir_type, t_ast *node,
 			int *i);
-void	init_utils(t_utils *utils, t_ast_node *root);
+void	init_exec_data(t_exec_data *exec_data, t_ast *root);
 
 #endif

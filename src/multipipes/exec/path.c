@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 09:36:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/20 11:18:45 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/19 12:47:53 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_array(char **array)
 	free(array);
 }
 
-char	*get_env_path( t_utils *utils, char **envp)
+char	*get_env_path( t_exec_data *utils, char **envp)
 {
 	int		i;
 	char	*path;
@@ -45,7 +45,7 @@ char	*get_env_path( t_utils *utils, char **envp)
 	return (NULL);
 }
 
-char	**get_path_array(t_utils *utils)
+char	**get_path_array(t_exec_data *utils)
 {
 	char	*path;
 	char	**path_array;
@@ -60,7 +60,7 @@ char	**get_path_array(t_utils *utils)
 	return (path_array);
 }
 
-char	*build_cmd_path(t_utils *utils, char *dir)
+char	*build_cmd_path(t_exec_data *utils, char *dir)
 {
 	char	*tmp_path;
 	char	*cmd_path;
@@ -75,7 +75,7 @@ char	*build_cmd_path(t_utils *utils, char *dir)
 	return (cmd_path);
 }
 
-char	*find_path(t_utils *utils)
+char	*find_path(t_exec_data *utils)
 {
 	char	**path_array;
 	char	*cmd_path;

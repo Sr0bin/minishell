@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:29:18 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/18 15:35:56 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/19 16:58:30 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@
 # include "debug.h"
 # include "parsing/enums.h"
 # include "parsing/parsing_struct.h"
+# include "multipipes/exec_multipipes.h"
 #endif

@@ -6,26 +6,26 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/19 09:11:27 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/19 16:41:57 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "multipipes/multipipes.h"
 
-void	exec_single_cmd(t_utils *utils)
+void	exec_single_cmd(t_exec_data *exec_data)
 {
 	pid_t	pid;
 
 	pid = fork();
 	if (pid == -1)
-		ft_error(utils, "minishell: fork failed", 1);
+		ft_error(exec_data, "minishell: fork failed", 1);
 	else if (pid == 0)
-		exec_cmd(utils, 0);
-	free_utils(utils);
+		exec_cmd(exec_data, 0);
+	free_exec_data(exec_data);
 	exit (0);
 }
 
-void	exec(t_ast_node *root, char **envp)
+void	exec(t_ast *root)
 {
 	t_exec_data *exec_data;
 
