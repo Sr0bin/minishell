@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:30:44 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/19 14:37:21 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/20 14:03:13 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,7 @@ typedef struct s_var
 typedef struct s_cmd
 {
 	t_redir_list	*redir;
-	char	*path;
 	char	**args;
-	char	**envp;
 }	t_cmd;
 
 typedef struct s_ast

@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:49 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/10 17:54:30 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/20 14:13:34 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,12 +128,12 @@ static void print_cmd_details(t_cmd *cmd, int depth)
 {
 	int i;
 	
-	if (cmd->path)
-	{
-		for (i = 0; i < depth; i++)
-			printf("│  ");
-		printf("├─ path: %s\n", cmd->path);
-	}
+	/*if (cmd->path)*/
+	/*{*/
+	/*	for (i = 0; i < depth; i++)*/
+	/*		printf("│  ");*/
+	/*	printf("├─ path: %s\n", cmd->path);*/
+	/*}*/
 	
 	if (cmd->args)
 	{
