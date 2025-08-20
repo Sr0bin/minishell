@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:47:55 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/19 16:38:18 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:51:05 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	count_commands(t_ast *node)
 	if (node->type == NODE_COMMAND)
 		return (1);
 	else if (node->type == NODE_PIPE)
-		return (count_commands(node->pipe.left) + count_commands(node->pipe.right));
+		return (count_commands(node->s_pipe.left) + count_commands(node->s_pipe.right));
 	return (0);
 }
 

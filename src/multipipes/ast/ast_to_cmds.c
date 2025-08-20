@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:31:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/19 16:37:18 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:51:04 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	fill_cmds(t_exec_data *exec_data, t_ast *ast, int *i)
 		return ;
 	if (ast->type == NODE_PIPE)
 	{
-		fill_cmds(exec_data, ast->pipe.left, i);
-		fill_cmds(exec_data, ast->pipe.right, i);
+		fill_cmds(exec_data, ast->s_pipe.left, i);
+		fill_cmds(exec_data, ast->s_pipe.right, i);
 	}
 	else if (ast->type == NODE_COMMAND)
 	{
