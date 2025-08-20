@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 16:48:47 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/18 15:34:03 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:01:20 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,20 @@ t_ast	*node_pipe_create(t_token_list *tkn_lst, t_token_list *last_pipe);
 t_ast	*generate_node(t_node_type type, t_cmd cmd);
 t_ast_machine	*create_ast_machine(t_token_list *input_list);
 t_ast_machine	*advance_token(t_ast_machine *mchn);
-void	*free_ast(t_ast **node);
+void	*ast_destroy(t_ast **node);
 void	*free_ast_machine(t_ast_machine **machine);
 void	*free_node(t_ast **node);
 t_node_type token_to_node_type(t_token_type type);
 void	*free_token_only_list(t_token_list **t_list);
 int	token_type_redir(t_token *token);
+int	token_list_type_redir(t_token_list *tkn_lst);
+t_token_list	*token_list_skip_redir(t_token_list *tkn_lst);
 t_token_list	*redir_find_first(t_token_list *list);
 t_token_list	*pipe_find_first(t_token_list *list);
 t_token_list	*pipe_find_n(t_token_list *list, int count);
 t_token_list	*pipe_find_last(t_token_list *list);
 int	pipe_count(t_token_list	*tkn_lst, t_token_list *last);
+size_t	args_cmd_count(t_token_list *tkn_lst);
+t_cmd	cmd_free_args(t_cmd cmd);
 #endif
 

@@ -6,21 +6,23 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 17:53:12 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/18 15:37:21 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:12:13 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parsing/enums.h"
 
-void	*free_ast(t_ast **node)
+void	*ast_destroy(t_ast **node)
 {
+	if (*node == NULL)
+		return (NULL);
 	if ((*node)->type == NODE_PIPE)
 	{
 		if ((*node)->pipe.left != NULL)
-			free_ast(&(*node)->pipe.left);
+			ast_destroy(&(*node)->pipe.left);
 		if ((*node)->pipe.right != NULL)
-			free_ast(&(*node)->pipe.right);
+			ast_destroy(&(*node)->pipe.right);
 	}
 	free_node(node);
 	return (NULL);
@@ -55,7 +57,6 @@ t_ast	*generate_node(t_node_type type, t_cmd cmd)
 	node->type = type;
 	if (node->type == NODE_COMMAND)
 		node->cmd = cmd;
-	/*node->token = token;*/
 	return (node);
 }
 

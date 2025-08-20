@@ -6,7 +6,7 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/08/19 16:59:24 by lserodon         ###   ########.fr        #
+#    Updated: 2025/08/20 14:12:34 by rorollin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,9 +35,10 @@ SOURCES_PIPEX_AST = ast_to_cmds.c ast_utils.c\
 #---------------------------
 
 SOURCES_AST = ast_generation.c  ast_core.c token_to_node.c cmd_core.c node_generation.c\
-			  redir_core.c redir_list_core.c
+			  redir_core.c redir_list_core.c pipe_find.c
 
 #---------------------------
+
 SOURCES_PARSER_HANDLER = handle_normal.c handle_dquote.c handle_squote.c handle_op.c
 
 SOURCES_PARSER_STATE = transition_utils.c
@@ -49,6 +50,7 @@ SOURCES_PARSER = $(addprefix handler/, $(SOURCES_PARSER_HANDLER))\
 				 $(addprefix token/, $(SOURCES_PARSER_TOKEN)) \
 				 parser_core.c string_utils.c 
 #---------------------------
+
 SOURCES = $(addprefix $(SOURCES_DIR)/,\
 		  $(SOURCES_NAME)\
 		  $(addprefix parser/, $(SOURCES_PARSER))\
