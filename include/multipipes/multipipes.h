@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 14:08:59 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/19 16:58:42 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/20 10:30:50 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "path.h"
 # include "pipes.h"
 # include "structs.h"
+# include "builtins/builtins.h"
 # include "../../libft/include/libft.h"
 
 #endif

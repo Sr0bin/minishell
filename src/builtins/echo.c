@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:20:54 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/20 11:29:02 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/20 11:22:59 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,29 @@ int	newline(char *str)
 	return (1);
 }
 
-void	ft_echo(int argc, char **argv)
+int	ft_echo(t_cmds *cmd)
 {
 	int	i;
 	int	no_newline;
+	int count;
 
 	no_newline = 0;
 	i = 1;
-	while (argv[i] && newline(argv[i]))
+	count = count_nbr_args(cmd->cmd);
+	while (cmd->cmd[i] && newline(cmd->cmd[i]))
 	{
 		no_newline = 1;
 		i++;
 	}
-	while (i < argc)
+	while (i < count)
 	{
-		printf("%s", argv[i]);
-		if (i < argc - 1)
+		printf("%s", cmd->cmd[i]);
+		if (i < count - 1)
 			printf(" ");
 		i++;
 	}
 	if (no_newline == 0)
 		printf("\n");
+	return (1);
 }
 
-/* int	main(int argc, char **argv)
-{
-	ft_echo(argc, argv);
-} */

@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:04:52 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/19 14:58:59 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/20 10:06:55 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ void	free_cmd(t_cmds *cmd)
 	}
 }
 
-void	free_cmds(t_exec_data *utils)
+void	free_cmds(t_exec_data *exec_data)
 {
 	int	i;
 
 	i = 0;
-	while (i < utils->nb_cmds)
+	while (i < exec_data->nb_cmds)
 	{
-		free_cmd(&utils->cmds[i]);
+		free_cmd(&exec_data->cmds[i]);
 		i++;
 	}
-	free(utils->cmds);
+	free(exec_data->cmds);
 }
 
 void	free_fds(int **fd)

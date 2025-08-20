@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 13:43:16 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/20 11:13:46 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/20 13:23:34 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 #include "builtins.h"
 
-void	ft_unset(t_list **env, char **args);
+int	ft_unset(t_list **env, char **args);
 
 #endif
