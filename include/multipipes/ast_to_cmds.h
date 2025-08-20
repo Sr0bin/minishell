@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:53:51 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/19 16:39:16 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/20 11:18:29 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int		count_nbr_args(char **args);
 void	ast_to_cmds(t_exec_data *exec_data, t_ast *root);
 void	fill_one_cmd(t_exec_data *exec_data, t_cmd cmd, int *i);
 void	fill_cmds(t_exec_data *exec_data, t_ast *node, int *i);
-void	fill_redir(t_exec_data *exec_data, t_node_type redir_type, t_ast *node,
-			int *i);
+/* void	fill_redir(t_exec_data *exec_data, t_node_type redir_type, t_ast *node,
+			int *i); */
 void	init_exec_data(t_exec_data *exec_data, t_ast *root);
 
 #endif

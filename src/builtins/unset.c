@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:07:58 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/20 11:20:04 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/20 13:26:37 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,11 @@ void	check_var(t_list **env, char **args)
 	}
 }
 
-void	ft_unset(t_list **env, char **args)
+int	ft_unset(t_list **env, char **args)
 {
 	if (!args)
-		return ;
+		return (-1);
 	else
 		check_var(env, args);
+	return (1);
 }

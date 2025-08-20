@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 09:36:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/19 12:47:53 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/20 10:07:09 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_array(char **array)
 	free(array);
 }
 
-char	*get_env_path( t_exec_data *utils, char **envp)
+char	*get_env_path( t_exec_data *exec_data, char **envp)
 {
 	int		i;
 	char	*path;
@@ -37,7 +37,7 @@ char	*get_env_path( t_exec_data *utils, char **envp)
 		{
 			path = ft_substr(envp[i], 5, ft_strlen(envp[i]) - 5);
 			if (!path)
-				ft_error(utils, "minishell: malloc", 1);
+				ft_error(exec_data, "minishell: malloc", 1);
 			return (path);
 		}
 		i++;
@@ -45,48 +45,48 @@ char	*get_env_path( t_exec_data *utils, char **envp)
 	return (NULL);
 }
 
-char	**get_path_array(t_exec_data *utils)
+char	**get_path_array(t_exec_data *exec_data)
 {
 	char	*path;
 	char	**path_array;
 
-	path = get_env_path(utils, utils->envp);
+	path = get_env_path(exec_data, exec_data->envp);
 	if (!path)
-		ft_error(utils, "minishell: missing PATH", 127);
+		ft_error(exec_data, "minishell: missing PATH", 127);
 	path_array = ft_split(path, ':');
 	free(path);
 	if (!path_array)
-		ft_error(utils, "minishell: ft_split", 1);
+		ft_error(exec_data, "minishell: ft_split", 1);
 	return (path_array);
 }
 
-char	*build_cmd_path(t_exec_data *utils, char *dir)
+char	*build_cmd_path(t_exec_data *exec_data, char *dir)
 {
 	char	*tmp_path;
 	char	*cmd_path;
 
 	tmp_path = ft_strjoin(dir, "/");
 	if (!tmp_path)
-		ft_error(utils, "minishell: ft_strjoin", 1);
-	cmd_path = ft_strjoin(tmp_path, utils->cmds->cmd[0]);
+		ft_error(exec_data, "minishell: ft_strjoin", 1);
+	cmd_path = ft_strjoin(tmp_path, exec_data->cmds->cmd[0]);
 	free(tmp_path);
 	if (!cmd_path)
-		ft_error(utils, "minishell: ft_strjoin", 1);
+		ft_error(exec_data, "minishell: ft_strjoin", 1);
 	return (cmd_path);
 }
 
-char	*find_path(t_exec_data *utils)
+char	*find_path(t_exec_data *exec_data)
 {
 	char	**path_array;
 	char	*cmd_path;
 	int		j;
 
-	path_array = get_path_array(utils);
+	path_array = get_path_array(exec_data);
 	cmd_path = NULL;
 	j = 0;
 	while (path_array[j])
 	{
-		cmd_path = build_cmd_path(utils, path_array[j]);
+		cmd_path = build_cmd_path(exec_data, path_array[j]);
 		if (access(cmd_path, X_OK) == 0)
 		{
 			free_array(path_array);

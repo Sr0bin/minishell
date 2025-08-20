@@ -6,10 +6,15 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 13:41:25 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/18 15:16:34 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/20 13:26:22 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef CD_H
+# define CD_H
+
 #include "builtins.h"
 
-void	ft_cd(int argc, char **argv);
+int	ft_cd(t_cmds *cmd);
+
+#endif

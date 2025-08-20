@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:31:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/20 15:51:04 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/20 18:01:52 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	init_exec_data(t_exec_data *exec_data, t_ast *root)
 
 void	fill_one_cmd(t_exec_data *exec_data, t_cmd cmd, int *i)
 {
-	int count;
+	int	count;
 	int	j;
-	
+
 	j = 0;
 	count = count_nbr_args(cmd.args);
 	exec_data->cmds[*i].cmd = malloc(sizeof(char *)

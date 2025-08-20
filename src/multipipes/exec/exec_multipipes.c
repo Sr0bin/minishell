@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/19 16:41:57 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/19 17:14:15 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	exec_single_cmd(t_exec_data *exec_data)
 
 void	exec(t_ast *root)
 {
-	t_exec_data *exec_data;
+	t_exec_data	*exec_data;
 
 	exec_data = malloc(sizeof(t_exec_data));
 	if (!exec_data)

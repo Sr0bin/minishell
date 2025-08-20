@@ -2,6 +2,10 @@
 	"files.associations": {
 		"struct.h": "c",
 		"enums.h": "c",
-		"minishell.h": "c"
+		"minishell.h": "c",
+		"builtins.h": "c",
+		"echo.h": "c",
+		"env.h": "c",
+		"cd.h": "c"
 	}
 }
