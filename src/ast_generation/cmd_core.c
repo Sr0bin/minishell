@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 16:56:00 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 15:12:13 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:44:44 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,11 @@ t_token_list	*token_list_skip_redir(t_token_list *tkn_lst)
 	if (tkn_lst == pipe_first || tkn_lst == NULL)
 		return (NULL);
 	return (tkn_lst);
-	
 }
 
 size_t	args_cmd_count(t_token_list *tkn_lst)
 {
-	size_t	i;
+	size_t			i;
 	t_token_list	*pipe_first;
 
 	i = 0;
@@ -68,12 +67,10 @@ t_cmd	cmd_free_args(t_cmd cmd)
 
 t_cmd	cmd_create(t_token_list *tkn_lst)
 {
-	char	**crnt_arg;
-	t_cmd	cmd;
+	char			**crnt_arg;
+	t_cmd			cmd;
 	t_token_list	*pipe_first;
 
-
-	
 	cmd.redir = redir_list_create(tkn_lst);
 	cmd.args = ft_calloc(args_cmd_count(tkn_lst) + 1, sizeof(char *));
 	pipe_first = pipe_find_first(tkn_lst);
@@ -96,7 +93,6 @@ t_cmd	cmd_create(t_token_list *tkn_lst)
 
 void	*free_parser_cmd(t_cmd cmd)
 {
-
 	ft_lstclear(&cmd.redir, (void (*)) free_redir);
 	cmd_free_args(cmd);
 	return (NULL);

@@ -6,12 +6,11 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:44:40 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/18 16:04:09 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/20 17:56:47 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	quote_eof(t_parser *p)
 {

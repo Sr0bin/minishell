@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:08:38 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/08 14:27:56 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:53:29 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,13 @@
 
 typedef struct s_var		t_var;
 typedef struct s_token		t_token;
-typedef struct s_ast	t_ast;
+typedef struct s_ast		t_ast;
 typedef struct s_parser		t_parser;
 typedef struct s_transition	t_transition;
 
 typedef t_list				t_env;
 typedef t_list				t_token_list;
 typedef t_list				t_transition_list;
-
 
 typedef struct s_token
 {
@@ -36,7 +35,6 @@ typedef struct s_token
 }	t_token;
 
 typedef struct s_parser
-
 {
 	t_ps_state		state;
 	char			*input;
@@ -46,4 +44,3 @@ typedef struct s_parser
 	t_list			*token_list;
 }	t_parser;
 #endif
-

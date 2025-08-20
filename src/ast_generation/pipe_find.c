@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 14:04:29 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 14:11:30 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:50:10 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_token_list	*pipe_find_n(t_token_list *list, int count)
 t_token_list	*pipe_find_last(t_token_list *list)
 {
 	t_token_list	*crnt_pipe;
+
 	crnt_pipe = list;
 	while (list != NULL)
 	{

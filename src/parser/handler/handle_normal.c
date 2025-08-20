@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:10:17 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/18 16:03:53 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/20 17:56:15 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,4 @@ void	handle_normal_escape(t_parser *p)
 {
 	remove_char(p->crnt_pos);
 	p->crnt_pos++;
-}
-
-void	handle_normal_newline(t_parser *p)
-{
-	token_generate(p, TOKEN_WORD);
-}
-
-void	handle_normal_eof(t_parser *p)
-{
-	token_generate(p, TOKEN_EOF);
 }

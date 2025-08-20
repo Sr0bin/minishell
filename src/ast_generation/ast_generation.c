@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 18:25:17 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 14:37:31 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:44:22 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 t_ast	*ast_create(t_token_list **list)
 {
-	t_ast *node;
+	t_ast	*node;
 
 	if (*list == NULL)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:30:44 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 14:03:13 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:51:29 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct s_var		t_var;
 typedef struct s_token		t_token;
-typedef struct s_ast	t_ast;
+typedef struct s_ast		t_ast;
 typedef struct s_parser		t_parser;
 typedef struct s_transition	t_transition;
 typedef struct s_cmd		t_cmd;
@@ -28,7 +28,7 @@ typedef t_list				t_token_list;
 typedef t_list				t_transition_list;
 
 typedef struct s_redir		t_redir;
-typedef t_list  t_redir_list;
+typedef t_list				t_redir_list;
 
 typedef enum e_shell_state
 {
@@ -47,18 +47,20 @@ typedef struct s_var
 typedef struct s_cmd
 {
 	t_redir_list	*redir;
-	char	**args;
+	char			**args;
 }	t_cmd;
 
 typedef struct s_ast
 {
 	t_node_type	type;
-	union {
+	union
+	{
 		t_cmd	cmd;
-		struct {
+		struct
+		{
 			t_ast	*left;
 			t_ast	*right;
-		} pipe;
+		} s_pipe;
 	};
 }	t_ast;
 
@@ -89,6 +91,6 @@ typedef struct s_context
 	t_shell_state	state;
 }	t_context;
 
-typedef void	(*t_handler)(char c, t_parser *p);
+typedef void				(*t_handler)(char c, t_parser *p);
 
 #endif

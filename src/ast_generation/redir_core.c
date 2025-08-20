@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 15:48:12 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/18 15:51:07 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:42:41 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_redir	*create_redir(t_redir_type type, char *filename)
 	return (redir);
 }
 
-t_redir	*create_redir_token(t_token_list *tkn_lst)
+t_redir	*redir_token_create(t_token_list *tkn_lst)
 {
 	t_redir	*redir;
 	char	*filename;

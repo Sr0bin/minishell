@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:53:27 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/18 16:05:13 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/20 17:21:15 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ t_token	*token_create(char *text, t_token_type type)
 
 t_token	*token_generate(t_parser *parser, t_token_type type)
 {
-	t_token	*token;
-	char	*token_content;
+	t_token		*token;
+	char		*token_content;
 	ptrdiff_t	len;
 
 	len = parser->crnt_pos - parser->start_pos;
-	token_content = malloc((unsigned) (len + 1) * sizeof(char));
+	token_content = malloc((unsigned)(len + 1) * sizeof(char));
 	if (token_content == NULL)
 		return (NULL);
 	ft_strlcpy(token_content, parser->start_pos, (unsigned) len + 1);
@@ -54,7 +54,7 @@ t_token	*token_generate(t_parser *parser, t_token_type type)
 
 t_token_list	*token_list_create(t_token *first)
 {
-	t_token_list *list;
+	t_token_list	*list;
 
 	list = ft_lstnew((void *) first);
 	return (list);
@@ -66,28 +66,7 @@ void	*token_list_add(t_token_list **list, t_token_list *token)
 	return (token);
 }
 
-void	*token_ptr_destroy(t_token **token)
-{
-	if (*token != NULL)
-		free((*token)->content);
-	free(*token);
-	*token = NULL;
-	return (NULL);
-}
-void	*token_destroy(t_token *token)
-{
-	if (token != NULL)
-		free(token->content);
-	free(token);
-	return (NULL);
-}
-
 inline t_token	*lst_to_tkn(t_token_list *tkn_list)
 {
 	return ((t_token *)tkn_list->content);
-}
-void	*token_list_destroy(t_token_list **t_list)
-{
-	ft_lstclear(t_list, (void (*)) token_destroy);
-	return (NULL);
 }

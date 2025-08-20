@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:54:37 by rorollin          #+#    #+#             */
-/*   Updated: 2025/06/27 21:09:03 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:55:15 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 t_char_type	safe_char_type(t_parser *p, int offset)
 {
-	ptrdiff_t begin_len;
-	int end_len;
+	ptrdiff_t	begin_len;
+	int			end_len;
 
-	
 	begin_len = p->crnt_pos - p->input;
 	end_len = (int) ft_strlen(p->crnt_pos);
 	if (offset >= 0)

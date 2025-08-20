@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 17:53:12 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 15:12:13 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:51:04 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	*ast_destroy(t_ast **node)
 		return (NULL);
 	if ((*node)->type == NODE_PIPE)
 	{
-		if ((*node)->pipe.left != NULL)
-			ast_destroy(&(*node)->pipe.left);
-		if ((*node)->pipe.right != NULL)
-			ast_destroy(&(*node)->pipe.right);
+		if ((*node)->s_pipe.left != NULL)
+			ast_destroy(&(*node)->s_pipe.left);
+		if ((*node)->s_pipe.right != NULL)
+			ast_destroy(&(*node)->s_pipe.right);
 	}
 	free_node(node);
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:49 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 14:13:34 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:51:05 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,12 +188,12 @@ static void print_ast_helper(t_ast *node, int depth)
 		for (i = 0; i < depth; i++)
 			printf("│  ");
 		printf("├─ left:\n");
-		print_ast_helper(node->pipe.left, depth + 1);
+		print_ast_helper(node->s_pipe.left, depth + 1);
 		
 		for (i = 0; i < depth; i++)
 			printf("│  ");
 		printf("└─ right:\n");
-		print_ast_helper(node->pipe.right, depth + 1);
+		print_ast_helper(node->s_pipe.right, depth + 1);
 	}
 }
 void print_redir_list(t_list *redir_list)

@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:10:50 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/04 20:18:43 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/20 15:51:56 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,3 @@ typedef enum e_node_type
 }	t_node_type;
 
 #endif
-

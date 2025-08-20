@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.h                                            :+:      :+:    :+:   */
+/*   handle_normal_end.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/05 18:32:23 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 15:51:48 by rorollin         ###   ########.fr       */
+/*   Created: 2025/08/20 17:55:47 by rorollin          #+#    #+#             */
+/*   Updated: 2025/08/20 17:56:15 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEBUG_H
-# define DEBUG_H
-# include "struct.h"
+#include "minishell.h"
 
-void	print_token(t_token token);
-void	print_token_list(t_token_list *list);
-void	print_parser_state(t_parser *parser);
-void	print_ast(t_ast *root);
-void	print_ast_state(t_ast_machine *mchn, const char *location);
-void	print_redir_list(t_list *redir_list);
-void	print_redir(t_redir *redir);
-#endif
+void	handle_normal_newline(t_parser *p)
+{
+	token_generate(p, TOKEN_WORD);
+}
+
+void	handle_normal_eof(t_parser *p)
+{
+	token_generate(p, TOKEN_EOF);
+}
