@@ -6,6 +6,7 @@
 		"builtins.h": "c",
 		"echo.h": "c",
 		"env.h": "c",
-		"cd.h": "c"
+		"cd.h": "c",
+		"multipipes.h": "c"
 	}
 }

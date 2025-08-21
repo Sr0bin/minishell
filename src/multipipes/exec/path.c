@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 09:36:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/20 10:07:09 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/21 19:15:37 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	**get_path_array(t_exec_data *exec_data)
 	return (path_array);
 }
 
-char	*build_cmd_path(t_exec_data *exec_data, char *dir)
+char	*build_cmd_path(t_exec_data *exec_data, char *dir, int i)
 {
 	char	*tmp_path;
 	char	*cmd_path;
@@ -68,14 +68,14 @@ char	*build_cmd_path(t_exec_data *exec_data, char *dir)
 	tmp_path = ft_strjoin(dir, "/");
 	if (!tmp_path)
 		ft_error(exec_data, "minishell: ft_strjoin", 1);
-	cmd_path = ft_strjoin(tmp_path, exec_data->cmds->cmd[0]);
+	cmd_path = ft_strjoin(tmp_path, exec_data->cmds[i].cmd[0]);
 	free(tmp_path);
 	if (!cmd_path)
 		ft_error(exec_data, "minishell: ft_strjoin", 1);
 	return (cmd_path);
 }
 
-char	*find_path(t_exec_data *exec_data)
+char	*find_path(t_exec_data *exec_data, int i)
 {
 	char	**path_array;
 	char	*cmd_path;
@@ -86,7 +86,7 @@ char	*find_path(t_exec_data *exec_data)
 	j = 0;
 	while (path_array[j])
 	{
-		cmd_path = build_cmd_path(exec_data, path_array[j]);
+		cmd_path = build_cmd_path(exec_data, path_array[j], i);
 		if (access(cmd_path, X_OK) == 0)
 		{
 			free_array(path_array);

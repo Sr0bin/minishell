@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:52 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 15:43:29 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/21 09:30:52 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-int	main (int argc, char **argv)
+int	main (int argc, char **argv, char **envp)
 {
 	(void) argc;
 	(void) argv;
@@ -29,11 +29,11 @@ int	main (int argc, char **argv)
 		add_history(read);
 		token_list = shell_tokenizer(read);
 		token_list_clean(&token_list);
-		printf("Token Cleaned :\n");
-		print_token_list(token_list);
+		/* printf("Token Cleaned :\n");
+		print_token_list(token_list); */
 		node = ast_create(&token_list);
-		print_ast(node);
-		exec(node);
+		//print_ast(node);
+		exec(node, envp);
 		ast_destroy(&node);
 		token_list_destroy(&token_list);
 		free(read);
