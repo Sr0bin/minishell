@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:08:44 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/21 21:05:29 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/21 21:19:21 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	apply_redirections(t_exec_data *exec_data, int i)
  /* 
 int		exec_builtin(t_cmds *cmd)
 {
-	if (ft_strcmp(cmd->cmd, "cd"))
+	if (ft_strcmp(cmd->cmd[0], "cd"))
 		return (ft_cd(cmd));
 	else if (ft_strcmp (cmd->cmd[0], "echo"))
 		return (ft_echo(cmd));

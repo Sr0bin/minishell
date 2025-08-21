@@ -6,16 +6,11 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:10:10 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/21 13:31:44 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/21 21:15:03 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "multipipes/multipipes.h"
-/* 
-void	close_pipes(t_exec_data *exec_data, int i)
-{
-	
-}  */
 
 void	init_pipes(t_exec_data *exec_data)
 {

@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 15:53:29 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/18 16:03:53 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/21 18:08:59 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 
 void	handle_op_extend(t_parser *p)
 {
-	p->crnt_pos++;
+	if (p->crnt_pos != p->input && p->crnt_pos[0] != p->crnt_pos[-1])
+	{
+		token_generate(p, TOKEN_OPERATOR);
+		p->start_pos--;
+	}
+	else
+		p->crnt_pos++;
 }
 
 void	handle_op_other(t_parser *p)
