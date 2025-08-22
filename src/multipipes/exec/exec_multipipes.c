@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/20 21:36:37 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/22 15:37:38 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	exec_single_cmd(t_exec_data *exec_data)
 	else
 		waitpid(pid, &status, 0);
 	free_exec_data(exec_data);
-	//exit (0);
 }
 
 void	exec(t_ast *root, char **envp)
@@ -38,6 +37,8 @@ void	exec(t_ast *root, char **envp)
 	*exec_data = (t_exec_data){0};
 	exec_data->envp = envp;
 	ast_to_cmds(exec_data, root);
+	if (!ft_strcmp(exec_data->cmds[0].cmd[0], "exit"))
+		ft_exit(exec_data);
 	if (exec_data->nb_cmds == 1)
 		exec_single_cmd(exec_data);
 	else

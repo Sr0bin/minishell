@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   exit.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/15 17:21:09 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/22 15:14:53 by lserodon         ###   ########.fr       */
+/*   Created: 2025/08/22 14:05:14 by lserodon          #+#    #+#             */
+/*   Updated: 2025/08/22 14:08:24 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#ifndef EXIT_H
+# define EXIT_H
 
-/* ----- LIBRARIES ----- */
-# include <stdio.h>
-# include "../libft/include/libft.h"
-# include "multipipes/multipipes.h"
-# include "cd.h"
-# include "echo.h"
-# include "env.h"
-# include "export.h"
-# include "pwd.h"
-# include "unset.h"
-# include "exit.h"
-
-typedef struct s_list	t_env;
-
-int	exec_builtin(t_exec_data *exec_data, int i);
+int ft_exit(t_exec_data *exec_data);
 
 #endif

@@ -6,11 +6,12 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:08:44 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/21 21:19:21 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/22 17:06:27 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "multipipes/multipipes.h"
+#include "builtins/builtins.h"
 
 int	apply_redirections(t_exec_data *exec_data, int i)
 {
@@ -40,23 +41,25 @@ int	apply_redirections(t_exec_data *exec_data, int i)
 	}
 	return (0);
 }
- /* 
-int		exec_builtin(t_cmds *cmd)
+
+int		exec_builtin(t_exec_data *exec_data, int i)
 {
-	if (ft_strcmp(cmd->cmd[0], "cd"))
-		return (ft_cd(cmd));
-	else if (ft_strcmp (cmd->cmd[0], "echo"))
-		return (ft_echo(cmd));
-	else if (ft_strcmp (cmd->cmd, "env"))
-		return (ft_env);
-	else if (ft_strcmp(cmd->cmd, "export"))
-		return (ft_export);
-	else if (ft_strcmp(cmd->cmd, "pwd"))
+	if (!ft_strcmp(exec_data->cmds[i].cmd[0], "cd"))
+		return (ft_cd(exec_data->cmds[i]));
+	else if (!ft_strcmp (exec_data->cmds[i].cmd[0], "echo"))
+		return (ft_echo(exec_data->cmds[i]));
+	/*else if (ft_strcmp (exec_data->cmds[i].cmd[0], "env"))
+		return (ft_env());
+	else if (ft_strcmp(exec_data->cmds[i].cmd[0], "export"))
+		return (ft_export); */
+	else if (!ft_strcmp(exec_data->cmds[i].cmd[0], "pwd"))
 		return (ft_pwd());
-	else if (ft_strcmp(cmd->cmd, "unset"))
-		return (ft_unset);
+	else if (!ft_strcmp(exec_data->cmds[i].cmd[0], "exit"))
+		return (ft_exit(exec_data));
+	/* else if (ft_strcmp(exec_data->cmds[i].cmd[0], "unset"))
+		return (ft_unset); */
 	return (-1);
-}  */
+} 
 
 void exec_cmd(t_exec_data *exec_data, int i)
 {
@@ -100,6 +103,8 @@ void	exec_pipex(t_exec_data *exec_data)
 	i = 0;
 	while (i < exec_data->nb_cmds)
 	{
+		if (exec_builtin(exec_data, i))
+			return ;
 		if (i < exec_data->nb_cmds - 1)
 		{
 			if (pipe(exec_data->fd[i]) == -1)

@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 13:41:25 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/20 13:26:22 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/22 15:15:15 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 #include "builtins.h"
 
-int	ft_cd(t_cmds *cmd);
+int	ft_cd(t_cmds cmd);
 
 #endif
