@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:08:44 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/22 17:06:27 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/22 17:30:20 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,10 @@ void	exec_pipex(t_exec_data *exec_data)
 	while (i < exec_data->nb_cmds)
 	{
 		if (exec_builtin(exec_data, i))
+		{
+			free_exec_data(exec_data);
 			return ;
+		}
 		if (i < exec_data->nb_cmds - 1)
 		{
 			if (pipe(exec_data->fd[i]) == -1)
