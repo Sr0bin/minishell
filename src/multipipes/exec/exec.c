@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:08:44 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/22 20:38:59 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/24 17:22:05 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,40 @@ int	apply_redirections(t_exec_data *exec_data, int i)
 	return (0);
 }
 
-int		exec_builtin(t_exec_data *exec_data, int i)
+char	**t_env_to_array(t_exec_data *exec_data)
 {
-	if (!ft_strcmp(exec_data->cmds[i].cmd[0], "cd"))
-		return (ft_cd(exec_data->cmds[i]));
-	else if (!ft_strcmp (exec_data->cmds[i].cmd[0], "echo"))
-		return (ft_echo(exec_data->cmds[i]));
-	/*else if (ft_strcmp (exec_data->cmds[i].cmd[0], "env"))
-		return (ft_env());
-	else if (ft_strcmp(exec_data->cmds[i].cmd[0], "export"))
-		return (ft_export); */
-	else if (!ft_strcmp(exec_data->cmds[i].cmd[0], "pwd"))
-		return (ft_pwd());
-	else if (!ft_strcmp(exec_data->cmds[i].cmd[0], "exit"))
-		return (ft_exit(exec_data));
-	/* else if (ft_strcmp(exec_data->cmds[i].cmd[0], "unset"))
-		return (ft_unset); */
-	return (-1);
-} 
+	char	**array;
+	char	*str_tmp;
+	int		i;
+	t_var	*var;
+	t_list	*tmp;
 
-void exec_cmd(t_exec_data *exec_data, int i)
+	tmp = exec_data->envp;
+	array = malloc(sizeof(char *) * (ft_lstsize(exec_data->envp) + 1));
+	if (!array)
+		ft_error (exec_data, "minishell: malloc failed", 1);
+	i = 0;
+	while (tmp)
+	{
+		var = (t_var *)tmp->content;
+		str_tmp = ft_strjoin(var->key, "=");
+		if (var->value)
+			array[i] = ft_strjoin(str_tmp, var->value);
+		else
+			array[i] = ft_strdup(str_tmp);
+		free(str_tmp);
+		i++;
+		tmp = tmp->next;
+	}
+	array[i] = NULL;
+	return (array);
+}
+
+void	exec_cmd(t_exec_data *exec_data, int i)
 {
-	int j;
+	int		j;
+	char	**env;
+	
 	if (apply_redirections(exec_data, i) < 0)
 		ft_error(exec_data, "minishell: no such file or directory", 1);
 	if (i > 0)
@@ -82,15 +94,16 @@ void exec_cmd(t_exec_data *exec_data, int i)
 	exec_data->cmds[i].path = find_path(exec_data, i);
 	if (!exec_data->cmds[i].path)
 		ft_error(exec_data, "minishell: command not found", 127);
+	env = t_env_to_array(exec_data);
 	if (execve(exec_data->cmds[i].path, exec_data->cmds[i].cmd,
-		exec_data->envp) == -1)
+		env) == -1)
 		ft_error(exec_data, "minishell: execve failed", 1);
 }
 
 void	close_parent_fds(t_exec_data *exec_data, int i)
 {
 	if (i > 0)
-		close(exec_data->fd[i-1][0]);
+		close(exec_data->fd[i - 1][0]);
 	if (i < exec_data->nb_cmds - 1)
 		close(exec_data->fd[i][1]);
 }
@@ -111,7 +124,7 @@ void	exec_pipex(t_exec_data *exec_data)
 		if (i < exec_data->nb_cmds - 1)
 		{
 			if (pipe(exec_data->fd[i]) == -1)
-    			ft_error(exec_data, "minishell: pipe failed", 1);
+				ft_error(exec_data, "minishell: pipe failed", 1);
 		}
 		pid = fork();
 		if (pid == -1)
@@ -130,4 +143,3 @@ void	exec_pipex(t_exec_data *exec_data)
 	}
 	free_exec_data(exec_data);
 }
-

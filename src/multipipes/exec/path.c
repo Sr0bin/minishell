@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 09:36:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/21 19:15:37 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/23 10:07:58 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,22 @@ void	free_array(char **array)
 	free(array);
 }
 
-char	*get_env_path( t_exec_data *exec_data, char **envp)
+char	*get_env_path( t_exec_data *exec_data)
 {
-	int		i;
-	char	*path;
+	t_var	*var;
+	t_list	*tmp;
 
-	i = 0;
-	while (envp && envp[i])
+	tmp = exec_data->envp;
+	while (tmp)
 	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+		var = (t_var *)tmp->content;
+		if (ft_strcmp(var->key, "PATH") == 0)
 		{
-			path = ft_substr(envp[i], 5, ft_strlen(envp[i]) - 5);
-			if (!path)
-				ft_error(exec_data, "minishell: malloc", 1);
-			return (path);
+			if (!var->value)
+				ft_error(exec_data, "minishell: PATH is empty", 127);
+			return (ft_strdup(var->value));
 		}
-		i++;
+		tmp = tmp->next;
 	}
 	return (NULL);
 }
@@ -50,7 +50,7 @@ char	**get_path_array(t_exec_data *exec_data)
 	char	*path;
 	char	**path_array;
 
-	path = get_env_path(exec_data, exec_data->envp);
+	path = get_env_path(exec_data);
 	if (!path)
 		ft_error(exec_data, "minishell: missing PATH", 127);
 	path_array = ft_split(path, ':');

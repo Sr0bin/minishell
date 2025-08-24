@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 13:43:11 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/20 13:23:57 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/23 17:32:22 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 typedef struct s_list	t_env;
 typedef struct s_var	t_var;
  
+int		is_sorted(t_env *env);
 int		check_export_var(char *args);
 int		check_in_env(t_env *env, t_var *var);
-int		 ft_export(t_env **env, char **args);
-int		is_sorted(t_env *env);
+int		ft_export(t_exec_data *exec_data, t_cmds cmd);
 void	check_var(t_list **env, char **args);
 void	delete_var(t_list **env, char *args);
-void	export_with_args(t_env **env, char **args);
-void	export_without_args(t_env *env);
+void	export_with_args(t_exec_data *exec_data, char **args);
+void	export_without_args(t_exec_data *exec_data);
 void	free_var(void	*content);
 void	ft_swap(t_env *a, t_env *b);
 void	parse_args(char *arg, t_var *var);

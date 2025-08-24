@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:19:22 by lserodon          #+#    #+#             */
-/*   Updated: 2025/06/23 13:30:55 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/24 17:14:07 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,19 @@ int	check_export_var(char *args)
 	int	i;
 
 	i = 0;
-	if (ft_isalpha(args[0]) == 0 && args[0] != '_')
+	if (!ft_isalpha(args[0]) && args[0] != '_')
 	{
 		perror("minishell: export:");
 		return (1);
 	}
-	else
+	while (args[i] && args[i] != '=')
 	{
-		while (args[i])
+		if (!ft_isalnum(args[i]) && args[i] != '_')
 		{
-			if (ft_isalnum(args[i]) == 0 && args[i] != '_')
-			{
-				perror("minishell: export");
-				return (1);
-			}
-			i++;
+			perror("minishell: export failed");
+			return (1);
 		}
+		i++;
 	}
 	return (0);
 }
@@ -64,42 +61,17 @@ int	check_in_env(t_env *env, t_var *var)
 	while (env)
 	{
 		var_env = (t_var *)env->content;
-		if (ft_strncmp(var_env->key, var->key, ft_strlen(var_env->key)) == 0)
+		if (ft_strcmp(var_env->key, var->key) == 0)
 		{
 			if (var->value)
 			{
 				free(var_env->value);
 				var_env->value = ft_strdup(var->value);
 			}
-			return (0);
+			return (1);
 		}
 		env = env->next;
 	}
-	return (1);
+	return (0);
 }
 
-void	export_with_args(t_env **env, char **args)
-{
-	int		i;
-	t_var	*var;
-
-	i = 0;
-	while (args[i])
-	{
-		if (check_export_var(args[i]) == 0)
-		{
-			var = malloc(sizeof(t_var));
-			if (!var)
-				perror("minishell: malloc:");
-			parse_args(args[i], var);
-			if (!check_in_env(*env, var))
-				ft_lstadd_back(env, ft_lstnew(var));
-			else
-			{
-				free(var->key);
-				free(var);
-			}
-		}
-		i++;
-	}
-}

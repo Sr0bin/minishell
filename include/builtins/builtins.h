@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:21:09 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/22 15:14:53 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/23 09:37:27 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,9 @@
 typedef struct s_list	t_env;
 
 int	exec_builtin(t_exec_data *exec_data, int i);
+
+t_list  *envp_to_list(char **envp);
+t_var	*create_var(char *env);
+
 
 #endif
