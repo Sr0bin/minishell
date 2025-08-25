@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:50:26 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/23 09:41:47 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/25 18:57:13 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ typedef struct s_cmds
 
 typedef struct s_exec_data
 {
-	int		nb_cmds;
-	int 	**fd;
-	int		status;
-	t_cmds	*cmds;
-	t_list	*envp;
+	int				nb_cmds;
+	int 			**fd;
+	int				status;
+	t_cmds			*cmds;
+	t_list			*envp;
 }	t_exec_data;
 
 #endif

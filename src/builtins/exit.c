@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:19:01 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/25 14:31:32 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/25 18:41:37 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	ft_exit(t_exec_data *exec_data)
 
 	status = exec_data->status;
 	ft_printf("exit\n");
-	//free_exec_data(exec_data);
+	free_envp(exec_data->envp);
+	free_exec_data(exec_data);
 	exit(status);
 }

@@ -1,1 +1,2 @@
 echo > "test \$"| cat salut | grep
+echo a | cat | grep a
