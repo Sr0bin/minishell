@@ -6,11 +6,29 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:04:52 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/21 21:10:17 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/25 16:48:19 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "multipipes/multipipes.h"
+
+void	free_envp(t_env	*env)
+{
+	t_var	*var;
+	t_env	*next_node;
+
+	while (env)
+	{
+		next_node = env->next;
+		var = (t_var *)env->content;
+		free(var->key);
+		if (var->value)
+			free(var->value);
+		free(var);
+		free(env);
+		env = next_node;
+	}
+}
 
 void	free_cmd(t_cmds *cmd)
 {

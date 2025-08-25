@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:52 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/24 16:50:25 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/25 16:21:24 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ int	main (int argc, char **argv, char **envp)
 		exec(node, env);
 		ast_destroy(&node);
 		token_list_destroy(&token_list);
+		free_envp(env);
 		free(read);
 	}
 }
+
 /*int	main (int argc, char **argv)*/
 /*{*/
 /*	(void) argc;*/

@@ -7,6 +7,7 @@
 		"echo.h": "c",
 		"env.h": "c",
 		"cd.h": "c",
-		"multipipes.h": "c"
+		"multipipes.h": "c",
+		"history.h": "c"
 	}
 }

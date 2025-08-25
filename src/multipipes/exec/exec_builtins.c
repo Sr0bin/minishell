@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 17:18:02 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/24 17:19:32 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/25 13:36:16 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	exec_builtin(t_exec_data *exec_data, int i)
 		return (ft_pwd());
 	else if (!ft_strcmp(exec_data->cmds[i].cmd[0], "exit"))
 		return (ft_exit(exec_data));
-	/* else if (!ft_strcmp(exec_data->cmds[i].cmd[0], "unset"))
-		return (ft_unset(exec_data->envp, exec_data->cmds[i])); */
+	else if (!ft_strcmp(exec_data->cmds[i].cmd[0], "unset"))
+		return (ft_unset(&exec_data->envp, exec_data->cmds[i]));
 	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:08:44 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/24 17:22:05 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/25 16:55:01 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	**t_env_to_array(t_exec_data *exec_data)
 	t_list	*tmp;
 
 	tmp = exec_data->envp;
-	array = malloc(sizeof(char *) * (ft_lstsize(exec_data->envp) + 1));
+	array = malloc(sizeof(char *) * ((unsigned long)ft_lstsize(exec_data->envp) + 1));
 	if (!array)
 		ft_error (exec_data, "minishell: malloc failed", 1);
 	i = 0;
@@ -118,7 +118,7 @@ void	exec_pipex(t_exec_data *exec_data)
 	{
 		if (exec_builtin(exec_data, i) == 1)
 		{
-			free_exec_data(exec_data);
+			//free_exec_data(exec_data);
 			return ;
 		}
 		if (i < exec_data->nb_cmds - 1)
@@ -141,5 +141,5 @@ void	exec_pipex(t_exec_data *exec_data)
 		wait(NULL);
 		i++;
 	}
-	free_exec_data(exec_data);
+	//free_exec_data(exec_data);
 }

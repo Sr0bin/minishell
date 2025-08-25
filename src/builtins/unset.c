@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:07:58 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/24 11:23:06 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/25 13:43:39 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	delete_var(t_list **env, char *args)
 	while (*current)
 	{
 		var = (t_var *)(*current)->content;
-		if (ft_strncmp(var->key, args, ft_strlen(args)) == 0)
+		if (!ft_strcmp(var->key, args))
 		{
 			tmp = *current;
 			*current = (*current)->next;
@@ -57,7 +57,7 @@ void	check_var(t_list **env, char **args)
 
 int	ft_unset(t_list **env, t_cmds cmd)
 {
-	if (!cmd.cmd[1])
+	if (!cmd.cmd[1] || !env)
 		return (-1);
 	else
 		check_var(env, cmd.cmd);

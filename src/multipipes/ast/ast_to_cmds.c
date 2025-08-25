@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:31:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/20 18:01:52 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/25 16:39:09 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_exec_data(t_exec_data *exec_data, t_ast *root)
 	i = 0;
 	exec_data->nb_cmds = count_commands(root);
 	exec_data->cmds = malloc(sizeof(t_cmds)
-			* (long unsigned int)(exec_data->nb_cmds + 1));
+			* (long unsigned int)(exec_data->nb_cmds));
 	if (!exec_data->cmds)
 		ft_error(exec_data, "minishell : malloc failed", 1);
 	while (i < exec_data->nb_cmds)

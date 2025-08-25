@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 09:33:49 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/24 11:25:41 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/25 14:17:13 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,30 @@ t_var	*create_var(char *env)
 
 t_list  *envp_to_list(char **envp)
 {
-    t_list  *list;
-    t_list  *node;
-    t_var   *var;
-    int     i;
+	t_list	*list;
+	t_list	*node;
+	t_var	*var;
+	int		i;
 
-    list = NULL;
-    i = 0;
-    while (envp[i])
-    {
-        var = create_var(envp[i]);
-        if (!var)
-            return (NULL);
-        node = ft_lstnew(var);
-        if (!node)
-            return (NULL);
-        ft_lstadd_back(&list, node);
-        i++;
-    }
-    return (list);
+	list = NULL;
+	i = 0;
+	while (envp[i])
+	{
+		var = create_var(envp[i]);
+		if (!var)
+		{
+			free(var);
+			return (NULL);
+		}
+		node = ft_lstnew(var);
+		if (!node)
+		{
+			free(var);
+			return (NULL);
+		}
+		ft_lstadd_back(&list, node);
+		i++;
+	}
+	return (list);
 }
 

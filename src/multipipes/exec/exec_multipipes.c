@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/24 10:52:07 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/25 16:21:32 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ void	exec(t_ast *root, t_env	*env)
 	ast_to_cmds(exec_data, root);
 	init_pipes(exec_data);
 	exec_pipex(exec_data);
+	free_exec_data(exec_data);
 }
