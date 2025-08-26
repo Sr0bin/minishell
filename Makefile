@@ -6,7 +6,7 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/08/26 17:19:26 by lserodon         ###   ########.fr        #
+#    Updated: 2025/08/26 19:25:51 by rorollin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,8 @@ SOURCES_BUILTINS = export.c export_args.c export_no_args.c cd.c echo.c env.c pwd
 
 SOURCES_PIPEX_AST = ast_to_cmds.c ast_utils.c\
 
+#---------------------------
+
 SOURCES_SIGNALS = signals.c\
 
 #---------------------------
@@ -41,11 +43,15 @@ SOURCES_AST = ast_generation.c  ast_core.c token_to_node.c cmd_core.c node_gener
 
 #---------------------------
 
+SOURCES_EXPAND = expand.c
+
+#---------------------------
+
 SOURCES_PARSER_HANDLER = handle_normal.c handle_dquote.c handle_squote.c handle_op.c handle_normal_end.c
 
 SOURCES_PARSER_STATE = transition_utils.c
 
-SOURCES_PARSER_TOKEN = token_assign.c token_core.c token_list_clean.c
+SOURCES_PARSER_TOKEN = token_assign.c token_core.c token_list_clean.c token_expand.c
 
 SOURCES_PARSER = $(addprefix handler/, $(SOURCES_PARSER_HANDLER))\
 				 $(addprefix state/, $(SOURCES_PARSER_STATE)) \
@@ -61,6 +67,7 @@ SOURCES = $(addprefix $(SOURCES_DIR)/,\
 		  $(addprefix exec/exec/, $(SOURCES_PIPEX_EXEC))\
 		  $(addprefix exec/ast/, $(SOURCES_PIPEX_AST))\
 		  $(addprefix builtins/, $(SOURCES_BUILTINS))\
+		  $(addprefix expand/, $(SOURCES_EXPAND))\
 		  $(addprefix signals/, $(SOURCES_SIGNALS))\
 		  )
 		  
