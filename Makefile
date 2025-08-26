@@ -6,7 +6,7 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/08/25 13:30:12 by lserodon         ###   ########.fr        #
+#    Updated: 2025/08/26 16:34:24 by lserodon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,15 @@ SOURCES_DEBUG = debug.c
 
 #---------------------------
 
-SOURCES_PIPEX_EXEC = exec_multipipes.c path.c pipes.c exec.c free_utils.c exec_builtins.c\
+SOURCES_PIPEX_EXEC = env_to_array.c error.c exec_multipipes.c path.c pipes.c exec.c free_utils.c exec_builtins.c\
+						exec_cmd.c
 
 SOURCES_BUILTINS = export.c export_args.c export_no_args.c cd.c echo.c env.c pwd.c\
 				unset.c exit.c create_env.c
 
 SOURCES_PIPEX_AST = ast_to_cmds.c ast_utils.c\
 
+SOURCES_SIGNALS = signals.c\
 
 #---------------------------
 
@@ -56,9 +58,10 @@ SOURCES = $(addprefix $(SOURCES_DIR)/,\
 		  $(addprefix parser/, $(SOURCES_PARSER))\
 		  $(addprefix ast_generation/, $(SOURCES_AST))\
 		  $(addprefix .hidden/, $(SOURCES_DEBUG))\
-		  $(addprefix multipipes/exec/, $(SOURCES_PIPEX_EXEC))\
-		  $(addprefix multipipes/ast/, $(SOURCES_PIPEX_AST))\
+		  $(addprefix exec/exec/, $(SOURCES_PIPEX_EXEC))\
+		  $(addprefix exec/ast/, $(SOURCES_PIPEX_AST))\
 		  $(addprefix builtins/, $(SOURCES_BUILTINS))\
+		  $(addprefix signals/, $(SOURCES_SIGNALS))\
 		  )
 		  
 #OBJECTS#######################

@@ -6,11 +6,28 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 07:58:00 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/26 08:17:28 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/26 14:45:47 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec/multipipes.h"
+
+void	exec_single_cmd(t_exec_data *exec_data, int i)
+{
+	pid_t	pid;
+	int 	status;
+	
+	if(exec_builtins(exec_data, i) != -1)
+		return ;
+	pid = fork();
+	if (pid == -1)
+		ft_error(exec_data, "minishell: fork failed", 1);
+	else if (pid == 0)
+		exec_cmd(exec_data, 0);
+	else
+		waitpid(pid, &status, 0);
+	
+}
 
 int	apply_redirections(t_exec_data *exec_data, int i)
 {
@@ -27,7 +44,7 @@ int	apply_redirections(t_exec_data *exec_data, int i)
 			fd = open(redir->filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		else if (redir->type == REDIR_APPEND)
 			fd = open(redir->filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		else if (redir->type == REDIR_INPUT)
+		else if (redir->type == REDIR_INPUT || redir->type == REDIR_HEREDOC)
 			fd = open(redir->filename, O_RDONLY);
 		if (fd < 0)
 			return (-1);
@@ -55,11 +72,16 @@ void	exec_cmd(t_exec_data *exec_data, int i)
 	j = 0;
 	while (j < exec_data->nb_cmds - 1)
 	{
-		if (j != i - 1 && exec_data->fd[j][0] >= 0)
+		if (exec_data->fd[j][0] >= 0)
 			close(exec_data->fd[j][0]);
-		if (j != i && exec_data->fd[j][1] >= 0)
+		if (exec_data->fd[j][1] >= 0)
 			close(exec_data->fd[j][1]);
 		j++;
+	}
+	if (exec_builtins(exec_data, i) != -1)
+	{
+		free_exec_data(exec_data);
+		exit(0);
 	}
 	exec_data->cmds[i].path = find_path(exec_data, i);
 	if (!exec_data->cmds[i].path)

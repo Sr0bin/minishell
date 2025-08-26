@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:52 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/25 19:14:05 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/26 17:04:57 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,37 @@ int	main (int argc, char **argv, char **envp)
 	env = envp_to_list(envp);
 	while (1)
 	{
+		setup_signals();
 		read = readline("minishell> ");
+		if (g_received_signal == SIGINT)
+		{
+			free(read);
+			g_received_signal = 0;
+			//mettre code erreur 
+			continue;
+		}
+		if (read == NULL)
+		{
+			free(read);
+			free_envp(env);
+			printf("exit\n");
+			exit (1);		
+		}
 		add_history(read);
 		token_list = shell_tokenizer(read);
 		token_list_clean(&token_list);
-		/* printf("Token Cleaned :\n");
-		print_token_list(token_list); */
+		//printf("Token Cleaned :\n");
+		//print_token_list(token_list);
 		node = ast_create(&token_list);
 		//print_ast(node);
-		exec(node, token_list, env);
-		//ast_destroy(&node);
-		//token_list_destroy(&token_list);
+		exec(node, &token_list, env);
+		ast_destroy(&node);
+		token_list_destroy(&token_list);
 		free(read);
 	}
 	free_envp(env);
 }
+
 
 /*int	main (int argc, char **argv)*/
 /*{*/

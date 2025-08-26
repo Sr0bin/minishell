@@ -8,6 +8,12 @@
 		"env.h": "c",
 		"cd.h": "c",
 		"multipipes.h": "c",
-		"history.h": "c"
+		"history.h": "c",
+		"token.h": "c",
+		"ast.h": "c",
+		"unistd.h": "c",
+		"readline.h": "c",
+		"stdlib.h": "c",
+		"parsing.h": "c"
 	}
 }

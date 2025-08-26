@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:08:44 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/26 08:06:27 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/26 14:20:23 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,15 @@
 void	close_parent_fds(t_exec_data *exec_data, int i)
 {
 	if (i > 0)
+	{
 		close(exec_data->fd[i - 1][0]);
+		exec_data->fd[i - 1][0] = -1;
+	}
 	if (i < exec_data->nb_cmds - 1)
+	{
 		close(exec_data->fd[i][1]);
+		exec_data->fd[i][1] = -1;
+	}
 }
 
 void	wait_for_children(t_exec_data *exec_data)
@@ -41,8 +47,6 @@ void	exec_pipex(t_exec_data *exec_data)
 	i = 0;
 	while (i < exec_data->nb_cmds)
 	{
-		if (exec_builtins(exec_data, i) == 1)
-			return ;
 		if (i < exec_data->nb_cmds - 1)
 		{
 			if (pipe(exec_data->fd[i]) == -1)
