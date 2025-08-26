@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 17:54:22 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 17:56:57 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/26 16:47:45 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void	*p(void *p)
 	return (NULL);
 }
 
-void	*free_token_only_list(t_token_list **t_list)
+void	*free_token_only_list(t_token_list **tkn_lst)
 {
-	ft_lstclear(t_list, (void (*)) p);
+	ft_lstclear(tkn_lst, (void (*)) p);
 	return (NULL);
 }
 

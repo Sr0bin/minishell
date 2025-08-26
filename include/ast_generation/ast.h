@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 16:48:47 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 15:54:42 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/26 16:47:45 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void			*ast_destroy(t_ast **node);
 void			*free_ast_machine(t_ast_machine **machine);
 void			*free_node(t_ast **node);
 t_node_type		token_to_node_type(t_token_type type);
-void			*free_token_only_list(t_token_list **t_list);
+void			*free_token_only_list(t_token_list **tkn_lst);
 int				token_type_redir(t_token *token);
 int				token_list_type_redir(t_token_list *tkn_lst);
 t_token_list	*token_list_skip_redir(t_token_list *tkn_lst);

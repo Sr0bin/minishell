@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 16:56:00 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 15:44:44 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/26 16:49:12 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,12 @@ size_t	args_cmd_count(t_token_list *tkn_lst)
 t_cmd	cmd_free_args(t_cmd cmd)
 {
 	char	**ptr;
-	char	*temp;
 
 	ptr = cmd.args;
 	while (*ptr != NULL)
 	{
-		temp = *ptr;
 		free(*ptr);
 		ptr++;
-		temp = NULL;
 	}
 	free(cmd.args);
 	return ((t_cmd){0});

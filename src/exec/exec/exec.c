@@ -6,13 +6,15 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/26 13:42:54 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/26 17:23:04 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ast_generation/ast.h"
+#include "parsing/token.h"
 #include "exec/multipipes.h"
 
-void	exec(t_ast *root, t_token_list **t_list, t_env	*env)
+void	exec(t_ast *root, t_token_list **tkn_lst, t_env	*env)
 {
 	t_exec_data	*exec_data;
 
@@ -23,7 +25,7 @@ void	exec(t_ast *root, t_token_list **t_list, t_env	*env)
 	exec_data->envp = env;
 	ast_to_cmds(exec_data, root);
 	ast_destroy(&root);
-	token_list_destroy(t_list);
+	token_list_destroy(tkn_lst);
 	if (exec_data->nb_cmds == 1)
 		exec_single_cmd(exec_data, 0);
 	else
