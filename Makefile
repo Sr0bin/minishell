@@ -6,7 +6,7 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/08/25 13:30:12 by lserodon         ###   ########.fr        #
+#    Updated: 2025/08/26 16:53:12 by rorollin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,7 +102,7 @@ export CFLAGS
 all: make_libft $(NAME)
 
 $(NAME):  $(OBJECTS) $(LIBFT_PATH)
-	$(COMPILER) $(CFLAGS) $(INCLUDES) -lreadline $^ -o $@
+	$(COMPILER) $(CFLAGS) $(INCLUDES) $^ -lreadline -o $@
 	@echo "$(NAME) built succesfully."
 
 
