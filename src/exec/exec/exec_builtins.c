@@ -6,16 +6,16 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 17:18:02 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/25 13:36:16 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/26 08:01:58 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins/builtins.h"
 
-int	exec_builtin(t_exec_data *exec_data, int i)
+int	exec_builtins(t_exec_data *exec_data, int i)
 {
 	if (!ft_strcmp(exec_data->cmds[i].cmd[0], "cd"))
-		return (ft_cd(exec_data->cmds[i]));
+		return (ft_cd(exec_data, exec_data->cmds[i]));
 	else if (!ft_strcmp (exec_data->cmds[i].cmd[0], "echo"))
 		return (ft_echo(exec_data->cmds[i]));
 	else if (!ft_strcmp (exec_data->cmds[i].cmd[0], "env"))

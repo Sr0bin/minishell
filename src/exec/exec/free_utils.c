@@ -6,11 +6,11 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:04:52 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/25 18:56:32 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/26 08:11:07 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "multipipes/multipipes.h"
+#include "exec/multipipes.h"
 
 void	free_envp(t_env	*env)
 {
@@ -84,11 +84,4 @@ void	free_exec_data(t_exec_data *exec_data)
 	if (exec_data->fd)
 		free_fds(exec_data->fd, exec_data->nb_cmds);
 	free (exec_data);
-}
-
-void	ft_error(t_exec_data *exec_data, const char *msg, int exit_code)
-{
-	perror(msg);
-	free_exec_data(exec_data);
-	exit (exit_code);
 }

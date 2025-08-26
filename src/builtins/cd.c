@@ -6,13 +6,13 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:49:30 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/22 15:17:10 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/26 08:02:54 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins/builtins.h"
 
-int	ft_cd(t_cmds cmd)
+int	ft_cd(t_exec_data *exec_data, t_cmds cmd)
 {
 	char	*path;
 	int		count;
@@ -22,13 +22,13 @@ int	ft_cd(t_cmds cmd)
 	{
 		path = getenv("HOME");
 		if (!path || chdir(path) == -1)
-			perror("minishell: cd");
+			ft_error(exec_data, "minishell: cd", 1);
 	}
 	else
 	{
 		path = cmd.cmd[1];
 		if (chdir(path) == -1)
-			perror("minishell: cd");
+			ft_error(exec_data, "minishell: cd", 1);
 	}
 	return (1);
 }

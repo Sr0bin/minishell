@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:19:22 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/24 17:14:07 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/26 08:18:25 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,3 @@ int	check_in_env(t_env *env, t_var *var)
 	}
 	return (0);
 }
-

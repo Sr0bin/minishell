@@ -6,11 +6,11 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 09:36:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/23 10:07:58 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/26 07:38:13 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "multipipes/multipipes.h"
+#include "exec/multipipes.h"
 
 void	free_array(char **array)
 {

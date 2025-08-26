@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:20:54 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/22 15:16:10 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/26 08:18:50 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_echo(t_cmds cmd)
 {
 	int	i;
 	int	no_newline;
-	int count;
+	int	count;
 
 	no_newline = 0;
 	i = 1;
@@ -53,4 +53,3 @@ int	ft_echo(t_cmds cmd)
 		printf("\n");
 	return (1);
 }
-
