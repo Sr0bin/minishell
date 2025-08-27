@@ -6,22 +6,17 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 13:57:41 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/26 08:18:32 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/27 14:09:22 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins/builtins.h"
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 30
-
-#endif
-
 int	ft_pwd(void)
 {
-	char	buffer[BUFFER_SIZE];
+	char	*buffer;
 
-	if (getcwd(buffer, BUFFER_SIZE) == NULL)
+	if ((buffer = getcwd(NULL, 0)) == NULL)
 		perror("minishell: pwd");
 	printf("%s\n", buffer);
 	return (1);

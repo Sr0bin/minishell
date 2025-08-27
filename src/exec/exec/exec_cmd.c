@@ -6,11 +6,12 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 07:58:00 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/26 14:45:47 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:28:09 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec/multipipes.h"
+#include <signal.h>
 
 void	exec_single_cmd(t_exec_data *exec_data, int i)
 {
@@ -25,8 +26,10 @@ void	exec_single_cmd(t_exec_data *exec_data, int i)
 	else if (pid == 0)
 		exec_cmd(exec_data, 0);
 	else
+	{
 		waitpid(pid, &status, 0);
-	
+		analyze_status(exec_data, status);
+	}
 }
 
 int	apply_redirections(t_exec_data *exec_data, int i)
@@ -58,11 +61,18 @@ int	apply_redirections(t_exec_data *exec_data, int i)
 	return (0);
 }
 
+void	signal_in_child()
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+}
+
 void	exec_cmd(t_exec_data *exec_data, int i)
 {
 	int		j;
 	char	**env;
 
+	signal_in_child();
 	if (apply_redirections(exec_data, i) < 0)
 		ft_error(exec_data, "minishell: no such file or directory", 1);
 	if (i > 0)

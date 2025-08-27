@@ -6,20 +6,43 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:19:01 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/26 08:18:15 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:37:54 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins/builtins.h"
 #include "exec/multipipes.h"
 
-int	ft_exit(t_exec_data *exec_data)
+int	ft_exit(t_exec_data *exec_data, t_cmds cmd)
 {
+	int i;
 	int	status;
 
-	status = exec_data->status;
-	ft_printf("exit\n");
-	free_envp(exec_data->envp);
-	free_exec_data(exec_data);
-	exit(status);
+	i = 0;
+	if (count_nbr_args(cmd.cmd) == 1)
+	{
+		status = exec_data->exit_code;
+		printf("exit\n");
+		free_envp(exec_data->envp);
+		free_exec_data(exec_data);
+		exit(status);	
+	}
+	else if (count_nbr_args(cmd.cmd) == 2)
+	{
+		if(ft_atoi(cmd.cmd[1]) != 0)
+		{
+			status = ft_atoi(cmd.cmd[1]);
+			printf("exit\n");
+			free_envp(exec_data->envp);
+			free_exec_data(exec_data);
+			exit(status);
+		}
+		else
+			ft_error(exec_data, "minishell: wrong scope of arguments", 2);
+	}
+	else if (count_nbr_args(cmd.cmd) > 2)
+	{
+		printf("minishell: exit: too many arguments\n");
+	}
+	return (1);
 }
