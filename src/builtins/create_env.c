@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 09:33:49 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/26 08:20:33 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/28 12:47:20 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ t_list	*envp_to_list(char **envp)
 		var = create_var(envp[i]);
 		if (!var)
 		{
-			free(var);
+			free_var(var);
 			return (NULL);
 		}
 		node = ft_lstnew(var);
 		if (!node)
 		{
-			free(var);
+			free_var(var);
 			return (NULL);
 		}
 		ft_lstadd_back(&list, node);

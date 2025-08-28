@@ -6,12 +6,13 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:08:44 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/26 14:20:23 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/27 21:13:55 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec/multipipes.h"
 #include "builtins/builtins.h"
+#include <signal.h>
 
 void	close_parent_fds(t_exec_data *exec_data, int i)
 {
@@ -27,21 +28,27 @@ void	close_parent_fds(t_exec_data *exec_data, int i)
 	}
 }
 
-void	wait_for_children(t_exec_data *exec_data)
+void	analyze_status(t_exec_data *exec_data, int status)
 {
-	int	i;
+	int sig;
 
-	i = 0;
-	while (i < exec_data->nb_cmds)
-	{
-		wait(NULL);
-		i++;
+	if (WIFSIGNALED(status))
+	{	
+		sig = WTERMSIG(status);
+		if (sig == SIGINT)
+			printf("\n");
+		else if (sig == SIGQUIT)
+			printf("Quit (core dumped)\n");
+		exec_data->exit_code = WTERMSIG(status) + 128;
 	}
+	else if (WIFEXITED(status))
+		exec_data->exit_code = WEXITSTATUS(status);
 }
 
 void	exec_pipex(t_exec_data *exec_data)
 {
 	int		i;
+	int		status;
 	pid_t	pid;
 
 	i = 0;
@@ -61,5 +68,11 @@ void	exec_pipex(t_exec_data *exec_data)
 			close_parent_fds(exec_data, i);
 		i++;
 	}
-	wait_for_children(exec_data);
+	i = 0;
+	while (i < exec_data->nb_cmds)
+	{
+		waitpid(pid, &status, 0);
+		analyze_status(exec_data, status);
+		i++;
+	}
 }

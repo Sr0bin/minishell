@@ -6,13 +6,13 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:05:14 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/22 14:08:24 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/27 14:19:11 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXIT_H
 # define EXIT_H
 
-int ft_exit(t_exec_data *exec_data);
+int	ft_exit(t_exec_data *exec_data, t_cmds cmd);
 
 #endif

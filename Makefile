@@ -103,9 +103,9 @@ CFLAGS_DEBUG = -Wall -Wextra -Werror -MMD -MP -ggdb3 -Wshadow -Wconversion -Wsig
 -Wwrite-strings -Wuninitialized -fno-delete-null-pointer-checks -fno-omit-frame-pointer -std=c11 \
 -Iinclude
 
-CFLAGS_PROD = -Wall -Wextra -Werror -MMD -MP -ggdb3 -O3
+CFLAGS_PROD = -Wall -Wextra -Werror -MMD -MP -g
 
-CFLAGS = $(CFLAGS_DEBUG)
+CFLAGS = $(CFLAGS_PROD)
 
 export CFLAGS
 

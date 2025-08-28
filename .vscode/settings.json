@@ -14,6 +14,17 @@
 		"unistd.h": "c",
 		"readline.h": "c",
 		"stdlib.h": "c",
-		"parsing.h": "c"
+		"parsing.h": "c",
+		"exec_multipipes.h": "c",
+		"path.h": "c",
+		"exec.h": "c",
+		"signal.h": "c",
+		"sig_atomic_t.h": "c",
+		"features.h": "c",
+		"siginfo_t.h": "c",
+		"pwd.h": "c",
+		"exit.h": "c",
+		"unset.h": "c",
+		"libft.h": "c"
 	}
 }

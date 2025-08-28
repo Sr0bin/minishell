@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:31:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/26 07:38:13 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:30:26 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	init_exec_data(t_exec_data *exec_data, t_ast *root)
 		exec_data->cmds[i].redir = NULL;
 		i++;
 	}
+	exec_data->exit_code = 0;
 }
 
 void	fill_one_cmd(t_exec_data *exec_data, t_cmd cmd, int *i)
