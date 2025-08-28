@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:08:44 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/27 16:27:40 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/27 21:13:55 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	analyze_status(t_exec_data *exec_data, int status)
 	{	
 		sig = WTERMSIG(status);
 		if (sig == SIGINT)
-			write(1, "\n", 1);
+			printf("\n");
 		else if (sig == SIGQUIT)
 			printf("Quit (core dumped)\n");
 		exec_data->exit_code = WTERMSIG(status) + 128;

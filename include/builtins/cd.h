@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 13:41:25 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/26 08:02:16 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/28 11:16:53 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CD_H
 
 #include "builtins.h"
+#include "cd.h"
 
 int	ft_cd(t_exec_data *exec_data, t_cmds cmd);
 

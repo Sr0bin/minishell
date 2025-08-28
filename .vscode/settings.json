@@ -21,6 +21,10 @@
 		"signal.h": "c",
 		"sig_atomic_t.h": "c",
 		"features.h": "c",
-		"siginfo_t.h": "c"
+		"siginfo_t.h": "c",
+		"pwd.h": "c",
+		"exit.h": "c",
+		"unset.h": "c",
+		"libft.h": "c"
 	}
 }

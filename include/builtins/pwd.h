@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 13:43:14 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/20 13:23:38 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/28 07:42:45 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 #include "builtins.h"
 
-int	ft_pwd(void);
+int	ft_pwd(t_exec_data *exec_data);
 
 #endif

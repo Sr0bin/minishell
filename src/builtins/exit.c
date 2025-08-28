@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:19:01 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/27 16:37:54 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/27 21:14:10 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 
 int	ft_exit(t_exec_data *exec_data, t_cmds cmd)
 {
-	int i;
 	int	status;
 
-	i = 0;
 	if (count_nbr_args(cmd.cmd) == 1)
 	{
 		status = exec_data->exit_code;

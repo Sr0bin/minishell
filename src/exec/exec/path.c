@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 09:36:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/26 07:38:13 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/28 08:57:41 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,22 @@ void	free_array(char **array)
 		i++;
 	}
 	free(array);
+}
+
+char *get_env_value(t_exec_data *exec_data, char *key)
+{
+	t_var	*var;
+	t_env	*current;
+
+	current = exec_data->envp;
+	while (current)
+	{
+		var = (t_var *)current->content;
+		if (ft_strcmp(var->key, key) == 0)
+			return(var->value);
+		current = current->next;
+	}
+	return (NULL);
 }
 
 char	*get_env_path( t_exec_data *exec_data)

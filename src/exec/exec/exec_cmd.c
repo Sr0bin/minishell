@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 07:58:00 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/27 16:28:09 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/28 07:38:45 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,14 @@ void	exec_cmd(t_exec_data *exec_data, int i)
 		free_exec_data(exec_data);
 		exit(0);
 	}
-	exec_data->cmds[i].path = find_path(exec_data, i);
-	if (!exec_data->cmds[i].path)
-		ft_error(exec_data, "minishell: command not found", 127);
+	if (exec_data->cmds[i].cmd[0][0] == '/')
+		exec_data->cmds[i].path = exec_data->cmds[i].cmd[0];
+	else
+	{
+		exec_data->cmds[i].path = find_path(exec_data, i);
+		if (!exec_data->cmds[i].path)
+			ft_error(exec_data, "minishell: command not found", 127);
+	}
 	env = t_env_to_array(exec_data);
 	if (execve(exec_data->cmds[i].path, exec_data->cmds[i].cmd,
 			env) == -1)
