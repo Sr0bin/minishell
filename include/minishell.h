@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:29:18 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/26 16:58:16 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/26 19:15:07 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "parsing/parsing_struct.h"
 # include "exec/multipipes.h"
 # include "signals/signals.h"
+# include "expand.h"
 # include <signal.h>
 
 extern volatile	sig_atomic_t	g_received_signal; 
