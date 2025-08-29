@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:20:54 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/26 13:55:02 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/28 20:04:16 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ int	ft_echo(t_cmds cmd)
 	}
 	if (no_newline == 0)
 		printf("\n");
-	return (1);
+	return (0);
 }
 

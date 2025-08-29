@@ -6,23 +6,23 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 07:58:00 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/28 07:38:45 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/29 16:11:51 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec/multipipes.h"
 #include <signal.h>
 
-void	exec_single_cmd(t_exec_data *exec_data, int i)
+int	exec_single_cmd(t_exec_data *exec_data, int i)
 {
 	pid_t	pid;
 	int 	status;
 	
-	if(exec_builtins(exec_data, i) != -1)
-		return ;
+	if(exec_builtins(exec_data, i) == 0)
+		return (0);
 	pid = fork();
 	if (pid == -1)
-		ft_error(exec_data, "minishell: fork failed", 1);
+		ft_fatal_error(exec_data, "minishell: fork failed", 1);
 	else if (pid == 0)
 		exec_cmd(exec_data, 0);
 	else
@@ -30,6 +30,7 @@ void	exec_single_cmd(t_exec_data *exec_data, int i)
 		waitpid(pid, &status, 0);
 		analyze_status(exec_data, status);
 	}
+	return (0);
 }
 
 int	apply_redirections(t_exec_data *exec_data, int i)
@@ -67,14 +68,17 @@ void	signal_in_child()
 	signal(SIGQUIT, SIG_DFL);
 }
 
-void	exec_cmd(t_exec_data *exec_data, int i)
+int	exec_cmd(t_exec_data *exec_data, int i)
 {
 	int		j;
 	char	**env;
 
 	signal_in_child();
 	if (apply_redirections(exec_data, i) < 0)
-		ft_error(exec_data, "minishell: no such file or directory", 1);
+	{
+		ft_error(exec_data, "minishell: ", 1);
+		return (1);
+	}
 	if (i > 0)
 		dup2(exec_data->fd[i - 1][0], STDIN_FILENO);
 	if (i < exec_data->nb_cmds - 1)
@@ -88,21 +92,28 @@ void	exec_cmd(t_exec_data *exec_data, int i)
 			close(exec_data->fd[j][1]);
 		j++;
 	}
-	if (exec_builtins(exec_data, i) != -1)
+	if (exec_builtins(exec_data, i) == 0)
 	{
 		free_exec_data(exec_data);
 		exit(0);
 	}
-	if (exec_data->cmds[i].cmd[0][0] == '/')
+	if (exec_data->cmds[i].cmd[0][0] == '/' || exec_data->cmds[i].cmd[0][0] == '.')
 		exec_data->cmds[i].path = exec_data->cmds[i].cmd[0];
 	else
 	{
 		exec_data->cmds[i].path = find_path(exec_data, i);
 		if (!exec_data->cmds[i].path)
+		{
 			ft_error(exec_data, "minishell: command not found", 127);
+			return (127);
+		}
 	}
 	env = t_env_to_array(exec_data);
 	if (execve(exec_data->cmds[i].path, exec_data->cmds[i].cmd,
 			env) == -1)
-		ft_error(exec_data, "minishell: execve failed", 1);
+		{
+			ft_error(exec_data, "minishell: command not found", 127);
+			exit (127);
+		}
+	return (0);
 }

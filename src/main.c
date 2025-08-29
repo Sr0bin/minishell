@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:52 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/26 17:21:52 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/28 18:56:42 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	main (int argc, char **argv, char **envp)
 		{
 			free(read);
 			g_received_signal = 0;
-			//mettre code erreur 
 			continue;
 		}
 		if (read == NULL)

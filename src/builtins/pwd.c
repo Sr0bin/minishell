@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 13:57:41 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/28 08:57:26 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/28 20:04:01 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ int	ft_pwd(t_exec_data *exec_data)
 		printf("%s\n", buffer);
 		free(buffer);
 	}
-	return (1);
+	return (0);
 }

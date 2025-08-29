@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:07:58 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/25 13:43:39 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/28 20:03:43 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,5 @@ int	ft_unset(t_list **env, t_cmds cmd)
 		return (-1);
 	else
 		check_var(env, cmd.cmd);
-	return (1);
+	return (0);
 }

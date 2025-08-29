@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:19:01 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/27 21:14:10 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/28 20:03:55 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,5 @@ int	ft_exit(t_exec_data *exec_data, t_cmds cmd)
 	{
 		printf("minishell: exit: too many arguments\n");
 	}
-	return (1);
+	return (0);
 }

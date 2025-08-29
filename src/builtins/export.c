@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:09:13 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/26 08:00:30 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/28 20:04:06 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,5 @@ int	ft_export(t_exec_data *exec_data, t_cmds cmd)
 		export_without_args(exec_data);
 	else
 		export_with_args(exec_data, cmd.cmd);
-	return (1);
+	return (0);
 }

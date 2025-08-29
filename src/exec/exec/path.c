@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 09:36:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/28 08:57:41 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/28 18:33:20 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,18 @@ char	*find_path(t_exec_data *exec_data, int i)
 	while (path_array[j])
 	{
 		cmd_path = build_cmd_path(exec_data, path_array[j], i);
-		if (access(cmd_path, X_OK) == 0)
+		if (access(cmd_path, F_OK) == 0)
 		{
-			free_array(path_array);
-			return (cmd_path);
+			if (access(cmd_path, X_OK) == 0)
+			{
+				free_array(path_array);
+				return (cmd_path);
+			}
+			else
+			{
+				free_array(path_array);
+				ft_error(exec_data, "minishell: Permission denied", 126);
+			}
 		}
 		free(cmd_path);
 		j++;

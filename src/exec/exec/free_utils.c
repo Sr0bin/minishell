@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:04:52 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/28 11:34:33 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/29 15:47:54 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,6 @@ void	free_envp(t_env	*env)
 	}
 }
 
-void	free_cmd(t_cmds *cmd)
-{
-	int	i;
-
-	i = 0;
-	if (cmd->cmd)
-	{
-		while (cmd->cmd[i])
-		{
-			free(cmd->cmd[i]);
-			i++;
-		}
-		free(cmd->cmd);
-	}
-}
-
 void	free_cmds(t_exec_data *exec_data)
 {
 	int	i;
@@ -54,7 +38,7 @@ void	free_cmds(t_exec_data *exec_data)
 	i = 0;
 	while (i < exec_data->nb_cmds)
 	{
-		free_cmd(&exec_data->cmds[i]);
+		free(exec_data->cmds[i].cmd);
 		i++;
 	}
 	free(exec_data->cmds);

@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 13:09:50 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/20 11:10:01 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/28 20:04:10 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ int	ft_env(t_env *env)
 			printf("%s=%s\n", var->key, var->value);
 		env = env->next;
 	}
-	return (1);
+	return (0);
 }

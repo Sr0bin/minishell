@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:31:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/27 16:30:26 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/29 15:19:59 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_exec_data(t_exec_data *exec_data, t_ast *root)
 	exec_data->cmds = malloc(sizeof(t_cmds)
 			* (long unsigned int)(exec_data->nb_cmds));
 	if (!exec_data->cmds)
-		ft_error(exec_data, "minishell : malloc failed", 1);
+		ft_fatal_error(exec_data, "minishell : malloc failed", 1);
 	while (i < exec_data->nb_cmds)
 	{
 		exec_data->cmds[i].cmd = NULL;
@@ -30,6 +30,29 @@ void	init_exec_data(t_exec_data *exec_data, t_ast *root)
 		i++;
 	}
 	exec_data->exit_code = 0;
+}
+
+t_list	*fill_redir(t_exec_data *exec_data, t_cmd cmd)
+{
+	t_list	*new;
+	t_redir	*redir;
+
+	if (!cmd.redir)
+		return (NULL);
+	new = NULL;
+	while (cmd.redir)
+	{
+		redir = malloc(sizeof(t_redir));
+		if (!redir)
+			ft_fatal_error(exec_data, "minishell: malloc failed", 1);
+		redir->type = ((t_redir *)cmd.redir->content)->type;
+		redir->filename = ft_strdup(((t_redir *)cmd.redir->content)->filename);
+		if (!redir->filename)
+			ft_fatal_error(exec_data, "minishell: strdup failed", 1);
+		ft_lstadd_back(&new, ft_lstnew(redir));
+		cmd.redir = cmd.redir->next;
+	}
+	return (new);
 }
 
 void	fill_one_cmd(t_exec_data *exec_data, t_cmd cmd, int *i)
@@ -42,12 +65,12 @@ void	fill_one_cmd(t_exec_data *exec_data, t_cmd cmd, int *i)
 	exec_data->cmds[*i].cmd = malloc(sizeof(char *)
 			* (long unsigned int)(count + 1));
 	if (!exec_data->cmds[*i].cmd)
-		ft_error(exec_data, "minishell : malloc failed", 1);
+		ft_fatal_error(exec_data, "minishell : malloc failed", 1);
 	while (cmd.args[j])
 	{
-		exec_data->cmds[*i].cmd[j] = ft_strdup(cmd.args[j]);
+		exec_data->cmds[*i].cmd[j] = cmd.args[j];
 		if (!exec_data->cmds[*i].cmd[j])
-			ft_error(exec_data, "minishell : strdup failed", 1);
+			ft_fatal_error(exec_data, "minishell : strdup failed", 1);
 		j++;
 	}
 	exec_data->cmds[*i].redir = cmd.redir;

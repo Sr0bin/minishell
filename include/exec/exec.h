@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:07:32 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/26 13:40:35 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/29 11:49:11 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,10 @@
 
 # include "structs.h"
 
+int		exec_single_cmd(t_exec_data *exec_data, int i);
 void	close_parent_fds(t_exec_data *utils, int i);
-void	exec_cmd(t_exec_data *utils, int i);
-void	exec_multipipes(t_ast *root, char **envp);
-void	exec_pipex(t_exec_data *utils);
-void	exec_single_cmd(t_exec_data *exec_data, int i);
+int		exec_cmd(t_exec_data *utils, int i);
+int		exec_pipex(t_exec_data *utils);
 
 
 #endif

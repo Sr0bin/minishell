@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:08:44 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/27 21:13:55 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/28 19:08:59 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	analyze_status(t_exec_data *exec_data, int status)
 		exec_data->exit_code = WEXITSTATUS(status);
 }
 
-void	exec_pipex(t_exec_data *exec_data)
+int	exec_pipex(t_exec_data *exec_data)
 {
 	int		i;
 	int		status;
@@ -57,11 +57,11 @@ void	exec_pipex(t_exec_data *exec_data)
 		if (i < exec_data->nb_cmds - 1)
 		{
 			if (pipe(exec_data->fd[i]) == -1)
-				ft_error(exec_data, "minishell: pipe failed", 1);
+				ft_fatal_error(exec_data, "minishell: pipe failed", 1);
 		}
 		pid = fork();
 		if (pid == -1)
-			ft_error(exec_data, "minishell: fork failed", 1);
+			ft_fatal_error(exec_data, "minishell: fork failed", 1);
 		else if (pid == 0)
 			exec_cmd(exec_data, i);
 		else
@@ -75,4 +75,5 @@ void	exec_pipex(t_exec_data *exec_data)
 		analyze_status(exec_data, status);
 		i++;
 	}
+	return (0);
 }
