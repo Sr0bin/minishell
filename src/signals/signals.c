@@ -6,17 +6,13 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 15:42:31 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/30 10:28:44 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/30 16:01:36 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <signal.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
+#include "signals/signals.h"
 
-volatile	sig_atomic_t	g_received_signal = 0; 
+volatile sig_atomic_t	g_received_signal = 0;
 
 void	handler_signals(int signum)
 {
@@ -27,13 +23,13 @@ void	handler_signals(int signum)
 	}
 }
 
-void	signal_in_child()
+void	signal_in_child(void)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 }
 
-int		nonnull(void)
+int	nonnull(void)
 {
 	return (1);
 }

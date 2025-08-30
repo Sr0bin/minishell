@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/30 11:51:28 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/30 15:24:24 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	exec_pipex(t_exec_data *exec_data)
 	pid_t	pid;
 
 	i = 0;
+	status = 0;
 	while (i < exec_data->nb_cmds)
 	{
 		if (i < exec_data->nb_cmds - 1)

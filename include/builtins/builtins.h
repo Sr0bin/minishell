@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:21:09 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/30 11:42:25 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/30 16:18:22 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,44 @@
 /* ----- LIBRARIES ----- */
 # include <stdio.h>
 # include "../libft/include/libft.h"
+# include "exec/ast_to_cmds.h"
 # include "exec/exec.h"
-# include "cd.h"
-# include "echo.h"
-# include "env.h"
-# include "export.h"
-# include "pwd.h"
-# include "unset.h"
-# include "exit.h"
 
 typedef struct s_list	t_env;
 
+/* ----- BUILTINS.C ----- */
 int		exec_builtins(t_exec_data *exec_data, int i);
-t_list  *envp_to_list(char **envp);
+t_list	*envp_to_list(char **envp);
 t_var	*create_var(char *env);
+void	run_builtins(t_exec_data *exec_data, int i);
 
+/* ----- CD.C ----- */
+int		ft_cd(t_exec_data *exec_data, t_cmds cmd);
+
+/* ----- ECHO.C ----- */
+int		ft_echo(t_cmds cmd);
+int		newline(char *str);
+
+/* ----- ENV.C ----- */
+int		ft_env(t_list *env);
+
+/* ----- EXIT.C ----- */
+int		ft_exit(t_exec_data *exec_data, t_cmds cmd);
+
+/* ----- EXPORT.C ----- */
+int		is_sorted(t_env *env);
+int		check_export_var(char *args);
+int		check_in_env(t_env *env, t_var *var);
+int		ft_export(t_exec_data *exec_data, t_cmds cmd);
+void	check_var(t_list **env, char **args);
+void	delete_var(t_list **env, char *args);
+void	export_with_args(t_exec_data *exec_data, char **args);
+void	export_without_args(t_exec_data *exec_data);
+void	free_var(void	*content);
+void	ft_swap(t_env *a, t_env *b);
+void	parse_args(char *arg, t_var *var);
+void	print_export_list(t_env *env);
+int		ft_pwd(t_exec_data *exec_data);
+int		ft_unset(t_list **env, t_cmds cmd);
 
 #endif

@@ -25,6 +25,7 @@
 		"pwd.h": "c",
 		"exit.h": "c",
 		"unset.h": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"signals.h": "c"
 	}
 }

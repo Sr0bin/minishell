@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:07:32 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/30 11:48:25 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/30 15:22:32 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@
 # include <signal.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include "structs.h"
 # include "builtins/builtins.h"
+# include "signals/signals.h"
 
 /* ----- ENV_TO_ARRAY.C ----- */
 
@@ -41,6 +44,7 @@ void	wait_cmd(t_exec_data *exec_data, pid_t pid, int status);
 /* ----- EXTERNAL.C ----- */
 
 void	exec_external(t_exec_data *exec_data, int i);
+void	check_path(t_exec_data *exec_data, int i);
 
 /* ----- FREE_UTILS.C ----- */
 
@@ -58,11 +62,11 @@ void	close_parent_fds(t_exec_data *exec_data, int i);
 
 /* ----- PATH.C ----- */
 
-void	check_path(t_exec_data *exec_data, int i);
 char	*get_env_path( t_exec_data *exec_data);
 char	**get_path_array(t_exec_data *exec_data);
 char	*build_cmd_path(t_exec_data *exec_data, char *dir, int i);
 char	*find_path(t_exec_data *exec_data, int i);
+char	*check_access(t_exec_data *exec_data, char **array, char *path);
 
 /* ----- PIPES.C ----- */
 
