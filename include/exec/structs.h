@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:50:26 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/27 13:52:01 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/30 09:08:31 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define STRUCTS_H
 
 #include "libft.h"
+#include "ast_generation/ast.h"
+#include "parsing/token.h"
 
 typedef t_list t_redir_list;
 
@@ -31,6 +33,8 @@ typedef struct s_exec_data
 	int 			**fd;
 	t_cmds			*cmds;
 	t_list			*envp;
+	t_ast			*root;
+	t_token_list	**tkn_list;
 }	t_exec_data;
 
 #endif

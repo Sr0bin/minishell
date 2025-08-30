@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_multipipes.h                                  :+:      :+:    :+:   */
+/*   status.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 12:12:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/29 11:48:55 by lserodon         ###   ########.fr       */
+/*   Created: 2025/08/30 11:15:44 by lserodon          #+#    #+#             */
+/*   Updated: 2025/08/30 11:52:15 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_MULTIPIPES_H
-# define EXEC_MULTIPIPES_H
+#include "exec/exec.h"
+#include <signal.h>
 
-int	exec(t_ast *root, t_token_list **tkn_lst, t_env *env);
+void	analyze_status(t_exec_data *exec_data, int status)
+{
+	int	sig;
 
-#endif
+	if (WIFSIGNALED(status))
+	{
+		sig = WTERMSIG(status);
+		if (sig == SIGINT)
+			printf("\n");
+		else if (sig == SIGQUIT)
+			printf("Quit (core dumped)\n");
+		exec_data->exit_code = WTERMSIG(status) + 128;
+	}
+	else if (WIFEXITED(status))
+		exec_data->exit_code = WEXITSTATUS(status);
+}

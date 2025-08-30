@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:29:18 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/26 19:15:07 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/08/30 11:50:30 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@
 # include "debug.h"
 # include "parsing/enums.h"
 # include "parsing/parsing_struct.h"
-# include "exec/multipipes.h"
 # include "signals/signals.h"
+# include "exec/exec.h"
+# include "exec/ast_to_cmds.h"
+# include "builtins/builtins.h"
 # include "expand.h"
 # include <signal.h>
 

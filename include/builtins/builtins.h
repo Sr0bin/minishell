@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:21:09 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/28 11:15:58 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/30 11:42:25 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 /* ----- LIBRARIES ----- */
 # include <stdio.h>
 # include "../libft/include/libft.h"
-# include "exec/path.h"
-# include "exec/multipipes.h"
+# include "exec/exec.h"
 # include "cd.h"
 # include "echo.h"
 # include "env.h"

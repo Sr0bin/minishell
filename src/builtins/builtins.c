@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 17:18:02 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/28 20:03:38 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/30 11:15:26 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,14 @@ int	exec_builtins(t_exec_data *exec_data, int i)
 	else if (!ft_strcmp(exec_data->cmds[i].cmd[0], "unset"))
 		return (ft_unset(&exec_data->envp, exec_data->cmds[i]));
 	return (1);
+}
+
+void	run_builtins(t_exec_data *exec_data, int i)
+{
+	if (exec_builtins(exec_data, i) == 0)
+	{
+		free_envp(exec_data->envp);
+		free_exec_data(exec_data);
+		exit(0);
+	}
 }

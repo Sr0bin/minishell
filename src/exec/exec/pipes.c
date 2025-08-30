@@ -6,11 +6,26 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:10:10 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/28 19:06:45 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/30 11:38:19 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec/multipipes.h"
+#include "exec/exec.h"
+
+void	close_pipes(t_exec_data *exec_data)
+{
+	int	j;
+
+	j = 0;
+	while (j < exec_data->nb_cmds - 1)
+	{
+		if (exec_data->fd[j][0] >= 0)
+			close(exec_data->fd[j][0]);
+		if (exec_data->fd[j][1] >= 0)
+			close(exec_data->fd[j][1]);
+		j++;
+	}
+}
 
 void	init_pipes(t_exec_data *exec_data)
 {

@@ -6,40 +6,11 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 09:36:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/28 18:33:20 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/30 14:44:09 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec/multipipes.h"
-
-void	free_array(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-}
-
-char *get_env_value(t_exec_data *exec_data, char *key)
-{
-	t_var	*var;
-	t_env	*current;
-
-	current = exec_data->envp;
-	while (current)
-	{
-		var = (t_var *)current->content;
-		if (ft_strcmp(var->key, key) == 0)
-			return(var->value);
-		current = current->next;
-	}
-	return (NULL);
-}
+#include "exec/exec.h"
 
 char	*get_env_path( t_exec_data *exec_data)
 {
@@ -91,10 +62,30 @@ char	*build_cmd_path(t_exec_data *exec_data, char *dir, int i)
 	return (cmd_path);
 }
 
+char	*check_access(t_exec_data *exec_data, char **array, char *path, int i)
+{
+	if (access(path, F_OK) == 0)
+	{
+		if (access(path, X_OK) == 0)
+		{
+			free_array(array);
+			return (path);
+		}
+		else
+		{
+			free_array(array);
+			free(path);
+			ft_fatal_error(exec_data, "minishell: Permission denied", 126);
+		}
+	}
+	return (NULL);
+}
+
 char	*find_path(t_exec_data *exec_data, int i)
 {
 	char	**path_array;
 	char	*cmd_path;
+	char	*tmp;
 	int		j;
 
 	path_array = get_path_array(exec_data);
@@ -103,19 +94,9 @@ char	*find_path(t_exec_data *exec_data, int i)
 	while (path_array[j])
 	{
 		cmd_path = build_cmd_path(exec_data, path_array[j], i);
-		if (access(cmd_path, F_OK) == 0)
-		{
-			if (access(cmd_path, X_OK) == 0)
-			{
-				free_array(path_array);
-				return (cmd_path);
-			}
-			else
-			{
-				free_array(path_array);
-				ft_error(exec_data, "minishell: Permission denied", 126);
-			}
-		}
+		tmp = check_access(exec_data, path_array, cmd_path, i);
+		if (tmp)
+			return (tmp);
 		free(cmd_path);
 		j++;
 	}

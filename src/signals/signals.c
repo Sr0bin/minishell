@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 15:42:31 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/26 16:55:36 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/30 10:28:44 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ void	handler_signals(int signum)
 	{
 		rl_done = 1;
 	}
+}
+
+void	signal_in_child()
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 }
 
 int		nonnull(void)

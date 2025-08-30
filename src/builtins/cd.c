@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:49:30 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/28 20:04:20 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/30 14:53:27 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	update_env(t_exec_data *exec_data, char *key, char *value)
 {
-	t_env 	*env;
+	t_env	*env;
 	t_var	*var;
-	
+
 	if (!value)
 		return ;
 	env = exec_data->envp;
@@ -52,9 +52,8 @@ int	ft_cd(t_exec_data *exec_data, t_cmds cmd)
 		ft_error(exec_data, "minishell: cd:", 1);
 	new_pwd = getcwd(NULL, 0);
 	if (!new_pwd)
-		ft_error(exec_data, "minishell: malloc failed", 1);
-	else
-		update_env(exec_data, "PWD", new_pwd);
+		ft_fatal_error(exec_data, "minishell: malloc failed", 1);
+	update_env(exec_data, "PWD", new_pwd);
 	if (old_pwd)
 		update_env(exec_data, "OLDPWD", old_pwd);
 	if (count == 2 && ft_strcmp(cmd.cmd[1], "-") == 0)

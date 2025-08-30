@@ -6,19 +6,75 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:07:32 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/29 11:49:11 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/30 11:48:25 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
 
+# include <stdio.h>
+# include <stdlib.h>
+# include <signal.h>
+# include <unistd.h>
+# include <fcntl.h>
 # include "structs.h"
+# include "builtins/builtins.h"
+
+/* ----- ENV_TO_ARRAY.C ----- */
+
+char	**env_to_array(t_exec_data *exec_data);
+
+/* ----- ERROR.C ----- */
+
+void	ft_error(t_exec_data *exec_data, const char *msg, int exit_code);
+void	ft_fatal_error(t_exec_data *exec_data, const char *msg, int exit_code);
+
+/* ----- EXEC.C ----- */
 
 int		exec_single_cmd(t_exec_data *exec_data, int i);
-void	close_parent_fds(t_exec_data *utils, int i);
-int		exec_cmd(t_exec_data *utils, int i);
-int		exec_pipex(t_exec_data *utils);
+int		exec_cmd(t_exec_data *exec_data, int i);
+int		exec_pipex(t_exec_data *exec_data);
+int		exec(t_ast *root, t_token_list **tkn_lst, t_env	*env);
+void	wait_cmd(t_exec_data *exec_data, pid_t pid, int status);
 
+/* ----- EXTERNAL.C ----- */
+
+void	exec_external(t_exec_data *exec_data, int i);
+
+/* ----- FREE_UTILS.C ----- */
+
+void	free_array(char **array);
+void	free_envp(t_env	*env);
+void	free_cmds(t_exec_data *exec_data);
+void	free_fds(int **fd, int nb_cmbs);
+void	free_exec_data(t_exec_data *exec_data);
+
+/* ------ IO.C ----- */
+
+int		apply_redirections(t_exec_data *exec_data, int i);
+void	setup_io(t_exec_data *exec_data, int i);
+void	close_parent_fds(t_exec_data *exec_data, int i);
+
+/* ----- PATH.C ----- */
+
+void	check_path(t_exec_data *exec_data, int i);
+char	*get_env_path( t_exec_data *exec_data);
+char	**get_path_array(t_exec_data *exec_data);
+char	*build_cmd_path(t_exec_data *exec_data, char *dir, int i);
+char	*find_path(t_exec_data *exec_data, int i);
+
+/* ----- PIPES.C ----- */
+
+void	close_pipes(t_exec_data *exec_data);
+void	init_pipes(t_exec_data *exec_data);
+
+/* ----- STATUS.C ----- */
+
+void	analyze_status(t_exec_data *exec_data, int status);
+
+/* ----- UTILS.C ----- */
+
+char	*get_env_value(t_exec_data *exec_data, char *key);
 
 #endif
