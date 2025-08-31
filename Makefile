@@ -6,7 +6,7 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/08/30 11:46:40 by lserodon         ###   ########.fr        #
+#    Updated: 2025/08/31 23:07:42 by rorollin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,8 +38,11 @@ SOURCES_SIGNALS = signals.c\
 
 #---------------------------
 
-SOURCES_AST = ast_generation.c  ast_core.c token_to_node.c cmd_core.c node_generation.c\
-			  redir_core.c redir_list_core.c pipe_find.c
+SOURCES_AST_CORE = ast_core.c cmd_core.c redir_core.c redir_list_core.c 
+
+SOURCES_AST =$(addprefix core/, $(SOURCES_AST_CORE))\
+			 ast_generation.c token_to_node.c node_generation.c\
+			 pipe_find.c
 
 #---------------------------
 
