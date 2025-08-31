@@ -6,7 +6,7 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/08/30 11:46:40 by lserodon         ###   ########.fr        #
+#    Updated: 2025/08/31 19:30:57 by rorollin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,10 @@ SOURCES_EXPAND = expand.c
 
 #---------------------------
 
+SOURCES_HEREDOC = heredoc.c
+
+#---------------------------
+
 SOURCES_PARSER_HANDLER = handle_normal.c handle_dquote.c handle_squote.c handle_op.c handle_normal_end.c
 
 SOURCES_PARSER_STATE = transition_utils.c
@@ -69,6 +73,7 @@ SOURCES = $(addprefix $(SOURCES_DIR)/,\
 		  $(addprefix builtins/, $(SOURCES_BUILTINS))\
 		  $(addprefix expand/, $(SOURCES_EXPAND))\
 		  $(addprefix signals/, $(SOURCES_SIGNALS))\
+		  $(addprefix heredoc/, $(SOURCES_HEREDOC))\
 		  )
 		  
 #OBJECTS#######################

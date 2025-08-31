@@ -6,12 +6,13 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:29:18 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/30 11:50:30 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/31 21:29:47 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+# define _GNU_SOURCE
 # include "libft.h"
 # include "parsing/parsing.h"
 # include "ast_generation/ast.h"
@@ -27,6 +28,7 @@
 # include "exec/ast_to_cmds.h"
 # include "builtins/builtins.h"
 # include "expand.h"
+# include "heredoc.h"
 # include <signal.h>
 
 extern volatile	sig_atomic_t	g_received_signal; 

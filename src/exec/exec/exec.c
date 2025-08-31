@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/31 14:43:45 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/31 21:34:14 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,18 +92,40 @@ int	exec_pipex(t_exec_data *exec_data)
 	return (0);
 }
 
-int	exec(t_ast *root, t_token_list **tkn_lst, t_env	*env)
+static t_exec_data	*exec_data_init(t_ast *ast_root,t_token_list **tkn_lst, t_env *env)
 {
 	t_exec_data	*exec_data;
 
-	exec_data = malloc(sizeof(t_exec_data));
+	exec_data = ft_calloc(1, sizeof(t_exec_data));
 	if (!exec_data)
 		ft_fatal_error(exec_data, "minishell: malloc failed", 1);
 	*exec_data = (t_exec_data){0};
 	exec_data->envp = env;
-	exec_data->root = root;
+	exec_data->root = ast_root;
 	exec_data->tkn_list = tkn_lst;
-	ast_to_cmds(exec_data, root);
+	return (exec_data);
+}
+
+t_exec_data	*exec_data_context(t_exec_data *ptr, t_exec_data_context flag)
+{
+	static t_exec_data *exec_data;
+	if (flag == SET_EXEC_DATA)
+		exec_data = ptr;
+	else if (flag == UNSET_EXEC_DATA)
+			exec_data = NULL;
+	else if (flag == READ_EXEC_DATA)
+			return (exec_data);
+	return (NULL);
+}
+
+
+int	exec(t_ast *ast_root, t_token_list **tkn_lst, t_env	*env)
+{
+	t_exec_data	*exec_data;
+
+	exec_data = exec_data_init(ast_root, tkn_lst, env);
+	exec_data_context(exec_data, SET_EXEC_DATA);
+	ast_to_cmds(exec_data, ast_root);
 	if (exec_data->nb_cmds == 1)
 	{
 		if ((exec_single_cmd(exec_data, 0)) == 1)
@@ -114,6 +136,7 @@ int	exec(t_ast *root, t_token_list **tkn_lst, t_env	*env)
 		init_pipes(exec_data);
 		exec_pipex(exec_data);
 	}
+	exec_data_context(NULL, UNSET_EXEC_DATA);
 	free_exec_data(exec_data);
 	return (0);
 }

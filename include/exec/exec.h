@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:07:32 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/31 14:44:12 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/31 21:34:14 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int		exec_single_cmd(t_exec_data *exec_data, int i);
 int		exec_cmd(t_exec_data *exec_data, int i);
 int		exec_pipex(t_exec_data *exec_data);
 int		exec(t_ast *root, t_token_list **tkn_lst, t_env	*env);
+t_exec_data	*exec_data_context(t_exec_data *ptr, t_exec_data_context flag);
 void	wait_cmd(t_exec_data *exec_data, pid_t pid, int status);
 
 /* ----- EXTERNAL.C ----- */
