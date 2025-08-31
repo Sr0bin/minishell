@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:20:54 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/30 14:52:36 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/31 14:20:09 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ int	ft_echo(t_cmds cmd)
 	}
 	while (i < count)
 	{
-		printf("%s", cmd.cmd[i]);
+		write(STDOUT_FILENO, cmd.cmd[i], ft_strlen(cmd.cmd[i]));
 		if (i < count - 1)
-			printf(" ");
+			write(STDOUT_FILENO, " ", 1);
 		i++;
 	}
 	if (no_newline == 0)
-		printf("\n");
+		write(STDOUT_FILENO, "\n", 1);
 	return (0);
 }

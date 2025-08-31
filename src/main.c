@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:52 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/29 16:18:03 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/31 14:53:26 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main (int argc, char **argv, char **envp)
 	t_ast	*node;
 	char	*read;
 	t_env	*env;
-	
+
 	env = envp_to_list(envp);
 	while (1)
 	{

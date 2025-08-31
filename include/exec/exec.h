@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:07:32 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/30 15:22:32 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/31 14:44:12 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,11 @@ void	init_pipes(t_exec_data *exec_data);
 /* ----- STATUS.C ----- */
 
 void	analyze_status(t_exec_data *exec_data, int status);
+void	wait_cmd(t_exec_data *exec_data, pid_t pid, int status);
 
 /* ----- UTILS.C ----- */
 
+int		is_builtin(char *cmd);
 char	*get_env_value(t_exec_data *exec_data, char *key);
 
 #endif

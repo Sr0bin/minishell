@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:21:09 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/30 16:18:22 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/31 11:20:54 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_list	t_env;
 int		exec_builtins(t_exec_data *exec_data, int i);
 t_list	*envp_to_list(char **envp);
 t_var	*create_var(char *env);
-void	run_builtins(t_exec_data *exec_data, int i);
+int		run_builtins(t_exec_data *exec_data, int i);
 
 /* ----- CD.C ----- */
 int		ft_cd(t_exec_data *exec_data, t_cmds cmd);

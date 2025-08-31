@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_builtins.c                                    :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 17:18:02 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/30 11:15:26 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/08/31 14:41:25 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@ int	exec_builtins(t_exec_data *exec_data, int i)
 	return (1);
 }
 
-void	run_builtins(t_exec_data *exec_data, int i)
+int	run_builtins(t_exec_data *exec_data, int i)
 {
 	if (exec_builtins(exec_data, i) == 0)
 	{
 		free_envp(exec_data->envp);
 		free_exec_data(exec_data);
-		exit(0);
+		exit (0);
 	}
+	return (1);
 }
