@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:49:30 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/30 14:53:27 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:42:58 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,18 @@ int	ft_cd(t_exec_data *exec_data, t_cmds cmd)
 		path = get_env_value(exec_data, "OLDPWD");
 	else
 		path = cmd.cmd[1];
-	old_pwd = get_env_value(exec_data, "PWD");
+	old_pwd = ft_strdup(get_env_value(exec_data, "PWD"));
 	if (chdir(path) == -1)
-		ft_error(exec_data, "minishell: cd:", 1);
+		ft_error(exec_data, "cd: no such file or directory", 1);
 	new_pwd = getcwd(NULL, 0);
 	if (!new_pwd)
-		ft_fatal_error(exec_data, "minishell: malloc failed", 1);
+		ft_fatal_error(exec_data, "malloc failed", 1);
 	update_env(exec_data, "PWD", new_pwd);
 	if (old_pwd)
 		update_env(exec_data, "OLDPWD", old_pwd);
 	if (count == 2 && ft_strcmp(cmd.cmd[1], "-") == 0)
 		ft_pwd(exec_data);
 	free(new_pwd);
+	free(old_pwd);
 	return (0);
 }
