@@ -4,3 +4,5 @@
  - Refarire erreur du cote parsing 1 bonne grosse journée 
  - Heredocavavo 1 Journée 
  
+	echo '''ho"''''l"a'''
+	check the squote requirement

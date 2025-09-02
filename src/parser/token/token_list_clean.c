@@ -25,6 +25,12 @@ t_token_list	*token_list_clean(t_token_list **list)
 	if (iter_prev->next != NULL)
 	{
 		assign_token_type((*list)->content);
+		iter = iter_prev;
+		crnt_token = iter->content;
+		token_expand(crnt_token, env);
+		token_clean_quote(crnt_token);
+		if (crnt_token->to_join == 1)
+			token_join(iter, iter->next);
 		iter = iter_prev->next;
 	}
 	else
@@ -42,6 +48,13 @@ t_token_list	*token_list_clean(t_token_list **list)
 			assign_token_type(crnt_token);
 			token_expand(crnt_token);
 			token_clean_quote(crnt_token);
+			if (crnt_token->to_join == 1)
+			{
+				token_join(iter, iter->next);
+				continue ;
+			}
+			if (iter_prev->next == NULL)
+				break;
 			iter_prev = iter;
 			iter = iter->next;
 		}

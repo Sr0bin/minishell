@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:10:17 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 17:56:15 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/02 23:35:34 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	handle_normal_quote(t_parser *p)
 	if (p->crnt_pos != p->input && safe_char_type(p, -1) != CHAR_WHITESPACE)
 	{
 		token_generate(p, TOKEN_WORD);
+		p->crnt_token->to_join = 1;
 		p->crnt_pos--;
 		p->start_pos--;
 	}
