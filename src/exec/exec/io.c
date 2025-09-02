@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:09:28 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/30 18:34:10 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/03 01:26:13 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	setup_io(t_exec_data *exec_data, int i)
 	if (i < exec_data->nb_cmds - 1)
 		dup2(exec_data->fd[i][1], STDOUT_FILENO);
 	if (apply_redirections(exec_data, i) < 0)
-		ft_fatal_error(exec_data, "minishell: ", 1);
+		ft_fatal_error(exec_data, "minishell: ", 1, &free_exec);
 }
 
 void	close_parent_fds(t_exec_data *exec_data, int i)

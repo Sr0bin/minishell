@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:49:30 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/02 17:56:32 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/03 01:26:46 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_cd(t_exec_data *exec_data, t_cmds cmd)
 		ft_error("cd: no such file or directory", 1);
 	new_pwd = getcwd(NULL, 0);
 	if (!new_pwd)
-		ft_fatal_error(exec_data, "malloc failed", 1);
+		ft_fatal_error(exec_data, "malloc failed", 1, &free_exec);
 	update_env(exec_data, "PWD", new_pwd);
 	if (old_pwd)
 		update_env(exec_data, "OLDPWD", old_pwd);
