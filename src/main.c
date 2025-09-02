@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:52 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/02 17:01:04 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/03 01:41:35 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main (int argc, char **argv, char **envp)
 		}
 		add_history(read);
 		token_list = shell_tokenizer(read);
-		token_list_clean(&token_list, env);
+		token_list_clean(&token_list);
 		//printf("Token Cleaned :\n");
 		/*print_token_list(token_list);*/
 		node = ast_create(&token_list);
