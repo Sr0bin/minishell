@@ -6,11 +6,12 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:22:58 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/28 18:30:29 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/02 16:58:24 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parsing/token.h"
 
 t_token_list	*token_list_clean(t_token_list **list, t_env *env)
 {
@@ -40,6 +41,7 @@ t_token_list	*token_list_clean(t_token_list **list, t_env *env)
 		{
 			assign_token_type(crnt_token);
 			token_expand(crnt_token, env);
+			token_clean_quote(crnt_token);
 			iter_prev = iter;
 			iter = iter->next;
 		}
