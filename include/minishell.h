@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:29:18 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/30 11:50:30 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:42:04 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include "exec/ast_to_cmds.h"
 # include "builtins/builtins.h"
 # include "expand.h"
+# include "context.h"
 # include <signal.h>
 
 extern volatile	sig_atomic_t	g_received_signal; 

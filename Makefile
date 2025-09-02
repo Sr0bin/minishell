@@ -60,6 +60,11 @@ SOURCES_PARSER = $(addprefix handler/, $(SOURCES_PARSER_HANDLER))\
 				 $(addprefix state/, $(SOURCES_PARSER_STATE)) \
 				 $(addprefix token/, $(SOURCES_PARSER_TOKEN)) \
 				 parser_core.c string_utils.c 
+
+#---------------------------
+
+SOURCES_CONTEXT = context_init.c exit_code.c
+
 #---------------------------
 
 SOURCES = $(addprefix $(SOURCES_DIR)/,\
@@ -72,6 +77,7 @@ SOURCES = $(addprefix $(SOURCES_DIR)/,\
 		  $(addprefix builtins/, $(SOURCES_BUILTINS))\
 		  $(addprefix expand/, $(SOURCES_EXPAND))\
 		  $(addprefix signals/, $(SOURCES_SIGNALS))\
+		  $(addprefix context/, $(SOURCES_CONTEXT))\
 		  )
 		  
 #OBJECTS#######################

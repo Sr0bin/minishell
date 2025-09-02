@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:30:44 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 15:51:29 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:21:12 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,18 @@ typedef struct s_redir
 
 typedef struct s_context
 {
-	t_list			*env;
+	t_env			*env;
+	int				exit_code;
 	t_shell_state	state;
+	t_ast			*crnt_node;
 }	t_context;
 
+typedef	enum	e_data_set
+{
+	SET,
+	UNSET,
+	READ
+}	t_data_set;
 typedef void				(*t_handler)(char c, t_parser *p);
 
 #endif

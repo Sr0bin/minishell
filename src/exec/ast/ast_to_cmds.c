@@ -6,12 +6,13 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:31:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/30 13:59:18 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:53:26 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec/exec.h"
 #include "struct.h"
+#include "context.h"
 
 void	init_exec_data(t_exec_data *exec_data, t_ast *root)
 {
@@ -30,7 +31,7 @@ void	init_exec_data(t_exec_data *exec_data, t_ast *root)
 		exec_data->cmds[i].path = NULL;
 		i++;
 	}
-	exec_data->exit_code = 0;
+	exit_code_update(0);
 }
 
 t_list	*fill_redir(t_exec_data *exec_data, t_cmd cmd)

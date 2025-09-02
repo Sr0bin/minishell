@@ -14,15 +14,18 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+
 int	main (int argc, char **argv, char **envp)
 {
 	(void) argc;
 	(void) argv;
+	t_context	*context;
 	t_list	*token_list;
 	t_ast	*node;
 	char	*read;
 	t_env	*env;
 
+	context = context_init(envp);
 	env = envp_to_list(envp);
 	while (1)
 	{
@@ -39,7 +42,7 @@ int	main (int argc, char **argv, char **envp)
 			free(read);
 			free_envp(env);
 			printf("exit\n");
-			exit (1);		
+			exit (EXIT_FAILURE);		
 		}
 		add_history(read);
 		token_list = shell_tokenizer(read);
@@ -55,32 +58,3 @@ int	main (int argc, char **argv, char **envp)
 	}
 	free_envp(env);
 }
-
-
-/*int	main (int argc, char **argv)*/
-/*{*/
-/*	(void) argc;*/
-/*	(void) argv;*/
-/*	t_list	*token_list;*/
-	/*t_redir_list	*redir_list;*/
-/*	t_ast	*node;*/
-/*	char	*read;*/
-/**/
-/*	while (1)*/
-/*	{*/
-/*		read = readline("Enter a string to Tokenize :");*/
-/*		add_history(read);*/
-/*		token_list = shell_tokenizer(read);*/
-/*		token_list_clean(&token_list);*/
-/*		printf("Token Cleaned :\n");*/
-/*		print_token_list(token_list);*/
-/*		node = ast_create(&token_list);*/
-/*		print_ast(node);*/
-		/*print_token_list(token_list_skip_redir(token_list));*/
-		/*printf("Args count : %zu\n", args_cmd_count(token_list));*/
-		/*exec(node);*/
-/*		ast_destroy(&node);*/
-/*		token_list_destroy(&token_list);*/
-/*		free(read);*/
-/*	}*/
-/*}*/
