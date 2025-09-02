@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:52 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/03 01:41:35 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/03 01:58:22 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main (int argc, char **argv, char **envp)
 	t_env	*env;
 
 	context = context_init(envp);
-	env = envp_to_list(envp);
+	env = context->env;
 	while (1)
 	{
 		setup_signals();
@@ -57,4 +57,5 @@ int	main (int argc, char **argv, char **envp)
 		free(read);
 	}
 	free_envp(env);
+	free(context); //TODO: clean context destruction
 }
