@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:52 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/31 14:53:26 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/01 13:30:40 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int	main (int argc, char **argv, char **envp)
 		//print_token_list(token_list);
 		node = ast_create(&token_list);
 		//print_ast(node);
-		exec(node, &token_list, env);
+		if (node)
+			exec(node, &token_list, env);
 		//ast_destroy(&node);
 		//token_list_destroy(&token_list);
 		free(read);
