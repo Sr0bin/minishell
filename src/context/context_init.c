@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 17:40:42 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/02 17:48:00 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/03 01:11:58 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ t_context	*context_set(t_context	*context, t_data_set operation)
 	return (saved_context);
 }
 
-t_context	*context_read()
+t_context	*context_read(void)
 {
 	return (context_set(NULL, READ));
-
 }
 
 t_context	*context_init(char **envp)

@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/31 14:43:45 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/03 01:26:13 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	exec_single_cmd(t_exec_data *exec_data, int i)
 	}
 	pid = fork();
 	if (pid == -1)
-		ft_fatal_error(exec_data, "minishell: fork failed", 1);
+		ft_fatal_error(exec_data, "minishell: fork failed", 1, &free_exec);
 	else if (pid == 0)
 		exec_cmd(exec_data, i);
 	else
@@ -77,11 +77,11 @@ int	exec_pipex(t_exec_data *exec_data)
 		if (i < exec_data->nb_cmds - 1)
 		{
 			if (pipe(exec_data->fd[i]) == -1)
-				ft_fatal_error(exec_data, "minishell: pipe failed", 1);
+				ft_fatal_error(exec_data, "minishell: pipe failed", 1, &free_exec);
 		}
 		pid = fork();
 		if (pid == -1)
-			ft_fatal_error(exec_data, "minishell: fork failed", 1);
+			ft_fatal_error(exec_data, "minishell: fork failed", 1, &free_exec);
 		else if (pid == 0)
 			exec_cmd(exec_data, i);
 		else
@@ -98,7 +98,7 @@ int	exec(t_ast *root, t_token_list **tkn_lst, t_env	*env)
 
 	exec_data = malloc(sizeof(t_exec_data));
 	if (!exec_data)
-		ft_fatal_error(exec_data, "minishell: malloc failed", 1);
+		ft_fatal_error(exec_data, "minishell: malloc failed", 1, &free_exec);
 	*exec_data = (t_exec_data){0};
 	exec_data->envp = env;
 	exec_data->root = root;
