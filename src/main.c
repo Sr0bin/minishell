@@ -48,7 +48,7 @@ int	main (int argc, char **argv, char **envp)
 		token_list = shell_tokenizer(read);
 		token_list_clean(&token_list);
 		//printf("Token Cleaned :\n");
-		/*print_token_list(token_list);*/
+		print_token_list(token_list);
 		node = ast_create(&token_list);
 		token_list_destroy(&token_list);
 		/*print_ast(node);*/

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parsing/token.h"
 
 static int	char_end_expand(char c)
 {
@@ -36,7 +37,24 @@ char	*var_expand_end(const char *key)
 
 }
 
-t_token *token_expand(t_token *tkn)
+t_token_list	*token_join(t_token_list *first, t_token_list *deleted)
+{
+	t_token	*frst_tkn;
+	t_token	*del_tkn;
+	
+	frst_tkn = lst_to_tkn(first);
+	del_tkn = lst_to_tkn(deleted);
+	if (del_tkn->to_join != 1)
+		frst_tkn->to_join = 0;
+	// TODO : add expand when the global context works
+	// token_expand(del_tkn, env);
+	token_clean_quote(del_tkn);
+	ft_strcat(&frst_tkn->content, del_tkn->content);
+	ft_lstpop(&first, (void *) free);
+	return (first);
+}
+
+t_token *token_expand(t_token *tkn, t_env *env)
 {
 	// t_ps_state state;
 	t_var	*found_var;

@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:49 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 15:51:05 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:58:07 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 void	print_token(t_token token)
 {
 	printf("Token content : \"%s\"\n", token.content);
+	if (token.to_join == 1)
+		printf("To be joined!\n");
 	/*printf("Token Type : %i\n",token.type);*/
 	
 }
