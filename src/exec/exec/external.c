@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:16:49 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/30 14:44:17 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/02 14:53:01 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	check_path(t_exec_data *exec_data, int i)
 			exec_data->cmds[i].cmd[0][0] == '.')
 	{
 		if (access(exec_data->cmds[i].cmd[0], F_OK) != 0)
-			ft_fatal_error(exec_data, "minishell", 127);
+			ft_fatal_error(exec_data, "minishell: acces F_OK", 127);
 		if (access(exec_data->cmds[i].cmd[0], X_OK) != 0)
-			ft_fatal_error(exec_data, "minishell", 126);
+			ft_fatal_error(exec_data, "minishell: acces X_OK", 126);
 		exec_data->cmds[i].path = exec_data->cmds[i].cmd[0];
 	}
 	else
@@ -40,6 +40,6 @@ void	exec_external(t_exec_data *exec_data, int i)
 			env) == -1)
 	{
 		free_array(env);
-		ft_fatal_error(exec_data, "minishell", 127);
+		ft_fatal_error(exec_data, "minishell: execve", 127);
 	}
 }
