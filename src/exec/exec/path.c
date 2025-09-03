@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 09:36:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/30 15:41:21 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/03 01:26:13 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_env_path( t_exec_data *exec_data)
 		if (ft_strcmp(var->key, "PATH") == 0)
 		{
 			if (!var->value)
-				ft_error(exec_data, "minishell: PATH is empty", 127);
+				ft_error("minishell: PATH is empty", 127);
 			return (ft_strdup(var->value));
 		}
 		tmp = tmp->next;
@@ -39,11 +39,11 @@ char	**get_path_array(t_exec_data *exec_data)
 
 	path = get_env_path(exec_data);
 	if (!path)
-		ft_fatal_error(exec_data, "minishell: missing PATH", 127);
+		ft_fatal_error(exec_data, "minishell: missing PATH", 127, &free_exec);
 	path_array = ft_split(path, ':');
 	free(path);
 	if (!path_array)
-		ft_fatal_error(exec_data, "minishell: ft_split", 1);
+		ft_fatal_error(exec_data, "minishell: ft_split", 1, &free_exec);
 	return (path_array);
 }
 
@@ -54,11 +54,11 @@ char	*build_cmd_path(t_exec_data *exec_data, char *dir, int i)
 
 	tmp_path = ft_strjoin(dir, "/");
 	if (!tmp_path)
-		ft_fatal_error(exec_data, "minishell: ft_strjoin", 1);
+		ft_fatal_error(exec_data, "minishell: ft_strjoin", 1, &free_exec);
 	cmd_path = ft_strjoin(tmp_path, exec_data->cmds[i].cmd[0]);
 	free(tmp_path);
 	if (!cmd_path)
-		ft_fatal_error(exec_data, "minishell: ft_strjoin", 1);
+		ft_fatal_error(exec_data, "minishell: ft_strjoin", 1, &free_exec);
 	return (cmd_path);
 }
 
@@ -75,7 +75,7 @@ char	*check_access(t_exec_data *exec_data, char **array, char *path)
 		{
 			free_array(array);
 			free(path);
-			ft_fatal_error(exec_data, "minishell: Permission denied", 126);
+			ft_fatal_error(exec_data, "minishell: Permission denied", 126, &free_exec);
 		}
 	}
 	return (NULL);

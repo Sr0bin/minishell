@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 13:57:41 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/30 14:51:49 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:55:46 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@ int	ft_pwd(t_exec_data *exec_data)
 			if (pwd != NULL)
 				printf("%s\n", pwd);
 			else
-				ft_error (exec_data,
-					"minishell: pwd: error retrieving current directory", 1);
+				ft_error("minishell: pwd: error retrieving current directory", 1);
 		}
 		else
-			ft_error(exec_data, "minishell: pwd:", 1);
+			ft_error("minishell: pwd:", 1);
 	}
 	else
 	{

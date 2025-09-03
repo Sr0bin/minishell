@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 19:23:15 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/28 19:23:48 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/03 01:41:04 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*var_expand_end(const char *key)
 
 }
 
-t_token *token_expand(t_token *tkn, t_env *env)
+t_token *token_expand(t_token *tkn)
 {
 	// t_ps_state state;
 	t_var	*found_var;
@@ -52,7 +52,7 @@ t_token *token_expand(t_token *tkn, t_env *env)
 	dollar = ft_strchr(tkn->content, '$');
 	if (dollar == NULL)
 		return (tkn);
-	found_var = var_search(env, &dollar[1]);
+	found_var = var_search(context_read()->env, &dollar[1]);
 	if (found_var == NULL)
 		return (tkn);
 	new_size = ft_strlen(tkn->content) + ft_strlen(found_var->value);

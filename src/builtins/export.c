@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:09:13 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/02 14:50:52 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/03 13:14:06 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	export_with_args(t_exec_data *exec_data, char **cmd)
 		{
 			var = malloc(sizeof(t_var));
 			if (!var)
-				ft_fatal_error(exec_data, "minishell: malloc failed", 1);
+				ft_error("minishell: malloc failed", 1);
 			parse_args(cmd[i], var);
 			if (!check_in_env(exec_data->envp, var))
 				ft_lstadd_back(&exec_data->envp, ft_lstnew(var));
