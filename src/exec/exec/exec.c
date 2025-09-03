@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/31 14:43:45 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:20:02 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	exec_pipex(t_exec_data *exec_data)
 	return (0);
 }
 
-int	exec(t_ast *root, t_token_list **tkn_lst, t_env	*env)
+int	 exec(t_ast *root, t_token_list **tkn_lst, t_env	*env)
 {
 	t_exec_data	*exec_data;
 
@@ -103,7 +103,8 @@ int	exec(t_ast *root, t_token_list **tkn_lst, t_env	*env)
 	exec_data->envp = env;
 	exec_data->root = root;
 	exec_data->tkn_list = tkn_lst;
-	ast_to_cmds(exec_data, root);
+	if (ast_to_cmds(exec_data, root) == 1)
+		return (1);
 	if (exec_data->nb_cmds == 1)
 	{
 		if ((exec_single_cmd(exec_data, 0)) == 1)

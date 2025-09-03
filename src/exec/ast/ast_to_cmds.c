@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:31:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/30 13:59:18 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:16:52 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_list	*fill_redir(t_exec_data *exec_data, t_cmd cmd)
 	return (new);
 }
 
-void	fill_one_cmd(t_exec_data *exec_data, t_cmd cmd, int *i)
+int	fill_one_cmd(t_exec_data *exec_data, t_cmd cmd, int *i)
 {
 	int	count;
 	int	j;
@@ -67,21 +67,22 @@ void	fill_one_cmd(t_exec_data *exec_data, t_cmd cmd, int *i)
 			* (long unsigned int)(count + 1));
 	if (!exec_data->cmds[*i].cmd)
 		ft_fatal_error(exec_data, "minishell : malloc failed", 1);
+	if (ft_strcmp(cmd.args[0], "") == 0)
+		return (1);
 	while (cmd.args[j])
 	{
 		exec_data->cmds[*i].cmd[j] = cmd.args[j];
-		if (!exec_data->cmds[*i].cmd[j])
-			ft_fatal_error(exec_data, "minishell : strdup failed", 1);
 		j++;
 	}
 	exec_data->cmds[*i].redir = cmd.redir;
 	exec_data->cmds[*i].cmd[j] = NULL;
+	return (0);
 }
 
-void	fill_cmds(t_exec_data *exec_data, t_ast *ast, int *i)
+int	fill_cmds(t_exec_data *exec_data, t_ast *ast, int *i)
 {
 	if (!ast)
-		return ;
+		return (-1);
 	if (ast->type == NODE_PIPE)
 	{
 		fill_cmds(exec_data, ast->s_pipe.left, i);
@@ -89,16 +90,20 @@ void	fill_cmds(t_exec_data *exec_data, t_ast *ast, int *i)
 	}
 	else if (ast->type == NODE_COMMAND)
 	{
-		fill_one_cmd(exec_data, ast->cmd, i);
+		if (fill_one_cmd(exec_data, ast->cmd, i) == 1)
+			return (1);
 		(*i)++;
 	}
+	return (0);
 }
 
-void	ast_to_cmds(t_exec_data *exec_data, t_ast *root)
+int	ast_to_cmds(t_exec_data *exec_data, t_ast *root)
 {
 	int	i;
 
 	i = 0;
 	init_exec_data(exec_data, root);
-	fill_cmds(exec_data, root, &i);
+	if (fill_cmds(exec_data, root, &i) == 1)
+		return (1);
+	return (0);
 }
