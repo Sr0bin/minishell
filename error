@@ -2,3 +2,8 @@ echo > "test \$"| cat salut | grep
 echo a | cat | grep a
 check lors de l'expand les characteres autorisees
 expand lorsque lavariable existe pas
+
+mkdir a
+mkdir a/b
+cd a/b rm -rf ../../a
+cd ..
