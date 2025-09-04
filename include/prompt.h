@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand.c                                           :+:      :+:    :+:   */
+/*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/26 18:02:54 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/04 15:28:21 by rorollin         ###   ########.fr       */
+/*   Created: 2025/09/04 17:24:09 by rorollin          #+#    #+#             */
+/*   Updated: 2025/09/04 18:10:18 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef PROMPT_H
+# define PROMPT_H
+# define PROMPT_NORMAL "minishell> "
+# define PROMPT_HEREDOC "minishell> "
+# include "struct.h"
 
-t_var	*var_search(t_env *env, const char *key)
-{
-	t_env	*crnt_var;
-	ptrdiff_t	len;
-	
+char	*prompt(void);
+t_ast	*root_generation(char *str);
+#endif
 
-	crnt_var = env;
-	len = var_expand_end(key) - key;
-	while (crnt_var != NULL)
-	{
-		if (ft_strncmp(((t_var *) (crnt_var->content))->key, key, (size_t) len) == 0)
-			return (crnt_var->content);
-		crnt_var = crnt_var->next;
-	}
-	return (NULL);
-}

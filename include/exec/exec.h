@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:07:32 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/04 09:11:46 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/04 18:14:41 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_fatal_error(void *arg, const char *msg, int exit_code, void *(*f)(void *
 int		exec_single_cmd(t_exec_data *exec_data, int i);
 int		exec_cmd(t_exec_data *exec_data, int i);
 int		exec_pipex(t_exec_data *exec_data);
-int		exec(t_ast *root, t_token_list **tkn_lst, t_env	*env);
+int		exec(t_ast *root);
 
 /* ----- EXTERNAL.C ----- */
 
