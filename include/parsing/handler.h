@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 15:00:00 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 15:52:37 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/02 23:25:50 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void		handle_op_eof(t_parser *p);
 void		handle_op_other(t_parser *p);
 
 t_char_type	char_type(char c);
+char	*join_check_quote(t_parser *p);
+char	*join_check_normal(t_parser *p);
 
 void		handle_op(t_parser *p);
 void		handle_dquote(t_parser *p);

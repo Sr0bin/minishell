@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:09:28 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/03 01:26:13 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 19:22:16 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ int	apply_redirections(t_exec_data *exec_data, int i)
 			fd = open(redir->filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		else if (redir->type == REDIR_APPEND)
 			fd = open(redir->filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		else if (redir->type == REDIR_INPUT || redir->type == REDIR_HEREDOC)
+		else if (redir->type == REDIR_INPUT)
 			fd = open(redir->filename, O_RDONLY);
+		else if (redir->type == REDIR_HEREDOC)
+				fd = redir->s_heredoc.read;
 		if (fd < 0)
 			return (-1);
-		if (redir->type == REDIR_INPUT)
+		if (redir->type == REDIR_INPUT || redir->type == REDIR_HEREDOC)
 			dup2(fd, STDIN_FILENO);
 		else
 			dup2(fd, STDOUT_FILENO);
@@ -48,7 +50,7 @@ void	setup_io(t_exec_data *exec_data, int i)
 	if (i < exec_data->nb_cmds - 1)
 		dup2(exec_data->fd[i][1], STDOUT_FILENO);
 	if (apply_redirections(exec_data, i) < 0)
-		ft_fatal_error(exec_data, "minishell: ", 1, &free_exec);
+		ft_fatal_error(exec_data, "redirections failed", 1, &free_exec);
 }
 
 void	close_parent_fds(t_exec_data *exec_data, int i)

@@ -26,6 +26,7 @@
 		"exit.h": "c",
 		"unset.h": "c",
 		"libft.h": "c",
-		"signals.h": "c"
+		"signals.h": "c",
+		"context.h": "c"
 	}
 }

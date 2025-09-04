@@ -6,7 +6,7 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/08/31 23:07:42 by rorollin         ###   ########.fr        #
+#    Updated: 2025/09/04 18:05:26 by rorollin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,8 +50,16 @@ SOURCES_EXPAND = expand.c
 
 #---------------------------
 
-SOURCES_PARSER_HANDLER = handle_normal.c handle_dquote.c handle_squote.c handle_op.c handle_normal_end.c
+SOURCES_PROMPT = prompt.c
 
+#---------------------------
+
+SOURCES_HEREDOC = heredoc.c
+
+#---------------------------
+
+SOURCES_PARSER_HANDLER = handle_normal.c handle_dquote.c handle_squote.c handle_op.c handle_normal_end.c\
+						 quote_join.c
 SOURCES_PARSER_STATE = transition_utils.c
 
 SOURCES_PARSER_TOKEN = token_assign.c token_core.c token_list_clean.c token_expand.c
@@ -77,7 +85,9 @@ SOURCES = $(addprefix $(SOURCES_DIR)/,\
 		  $(addprefix builtins/, $(SOURCES_BUILTINS))\
 		  $(addprefix expand/, $(SOURCES_EXPAND))\
 		  $(addprefix signals/, $(SOURCES_SIGNALS))\
+		  $(addprefix heredoc/, $(SOURCES_HEREDOC))\
 		  $(addprefix context/, $(SOURCES_CONTEXT))\
+		  $(addprefix prompt/, $(SOURCES_PROMPT))\
 		  )
 		  
 #OBJECTS#######################

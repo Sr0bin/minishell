@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_normal_end.c                                :+:      :+:    :+:   */
+/*   prompt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/20 17:55:47 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/02 23:35:34 by rorollin         ###   ########.fr       */
+/*   Created: 2025/09/04 17:24:09 by rorollin          #+#    #+#             */
+/*   Updated: 2025/09/04 21:18:13 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef PROMPT_H
+# define PROMPT_H
+# define PROMPT_NORMAL "minishell> "
+# define PROMPT_HEREDOC "minishell> "
+# include "struct.h"
 
-void	handle_normal_newline(t_parser *p)
-{
-	token_generate(p, TOKEN_WORD);
-}
+char	*prompt(void);
+t_ast	*root_generation(char *prompt);
+#endif
 
-void	handle_normal_eof(t_parser *p)
-{
-	char	*join;
-
-	join = join_check_normal(p);
-	token_generate(p, TOKEN_WORD);
-	if (join != NULL)
-		p->crnt_token->to_join = 1;
-}

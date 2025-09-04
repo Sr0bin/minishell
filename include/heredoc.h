@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_normal_end.c                                :+:      :+:    :+:   */
+/*   heredoc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/20 17:55:47 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/02 23:35:34 by rorollin         ###   ########.fr       */
+/*   Created: 2025/08/31 19:29:31 by rorollin          #+#    #+#             */
+/*   Updated: 2025/09/04 19:18:48 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef HEREDOC_H
+# define HEREDOC_H
+# include "struct.h"
 
-void	handle_normal_newline(t_parser *p)
-{
-	token_generate(p, TOKEN_WORD);
-}
+t_redir	*heredoc_create_fd();
+#endif
 
-void	handle_normal_eof(t_parser *p)
-{
-	char	*join;
-
-	join = join_check_normal(p);
-	token_generate(p, TOKEN_WORD);
-	if (join != NULL)
-		p->crnt_token->to_join = 1;
-}

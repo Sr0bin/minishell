@@ -38,8 +38,7 @@ void	ft_fatal_error(void *arg, const char *msg, int exit_code, void *(*f)(void *
 int		exec_single_cmd(t_exec_data *exec_data, int i);
 int		exec_cmd(t_exec_data *exec_data, int i);
 int		exec_pipex(t_exec_data *exec_data);
-int		exec(t_ast *root, t_token_list **tkn_lst, t_env	*env);
-void	wait_cmd(t_exec_data *exec_data, pid_t pid, int status);
+int		exec(t_ast *root);
 
 /* ----- EXTERNAL.C ----- */
 
@@ -76,8 +75,8 @@ void	init_pipes(t_exec_data *exec_data);
 
 /* ----- STATUS.C ----- */
 
-void	analyze_status(t_exec_data *exec_data, int status);
-void	wait_cmd(t_exec_data *exec_data, pid_t pid, int status);
+void	analyze_status(int status);
+void	wait_cmd(t_exec_data *exec_data);
 
 /* ----- UTILS.C ----- */
 
