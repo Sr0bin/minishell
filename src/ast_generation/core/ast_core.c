@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 17:53:12 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 15:51:04 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 21:56:00 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_ast_machine	*create_ast_machine(t_token_list *input_list)
 
 	ast_machine = ft_calloc(1, sizeof(t_ast_machine));
 	if (ast_machine == NULL)
-		return (NULL);
+		return (ft_error("AST Machine failed", MALLOC_FAILED));
 	ast_machine->crnt_tkn_lst = input_list;
 	ast_machine->crnt_tkn = input_list->content;
 	return (ast_machine);
@@ -53,7 +53,7 @@ t_ast	*generate_node(t_node_type type, t_cmd cmd)
 
 	node = ft_calloc(1, sizeof(t_ast));
 	if (node == NULL)
-		return (NULL);
+		return (ft_error("Node creation failed", MALLOC_FAILED));
 	node->type = type;
 	if (node->type == NODE_COMMAND)
 		node->cmd = cmd;

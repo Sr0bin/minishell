@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:10:50 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 15:51:56 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 21:40:16 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,10 @@ typedef enum e_node_type
 	NODE_FILE,
 	NODE_ERROR,
 }	t_node_type;
+
+typedef enum e_error_code
+{
+	MALLOC_FAILED = 127,
+}	t_error_code;
 
 #endif

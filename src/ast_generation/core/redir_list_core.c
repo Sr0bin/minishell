@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 15:49:24 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 15:42:41 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 21:51:29 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_redir_list	*redir_list_create(t_token_list *tkn_lst)
 	if (crnt_tkn == NULL)
 		return (NULL);
 	crnt_redir = redir_token_create(crnt_tkn);
+	if (crnt_redir == NULL)
+		return (ft_error("Redir token creation failed", MALLOC_FAILED));
 	redir_list = ft_lstnew(crnt_redir);
 	if (redir_list == NULL)
 		return (redir_destroy(&redir_list, &crnt_redir));

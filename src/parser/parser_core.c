@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:40:49 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/02 20:20:28 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 21:45:36 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_parser	*parser_init(char *input)
 	t_parser	*parser;
 
 	parser = ft_calloc(1, sizeof(t_parser));
+	if (parser == NULL)
+		return (ft_error("Parser init failed.", MALLOC_FAILED));
 	parser->state = STATE_NORMAL;
 	parser->input = input;
 	parser->crnt_pos = input;

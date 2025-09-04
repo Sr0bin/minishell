@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:49:00 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/04 02:20:52 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 21:45:36 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	handle_dquote_end(t_parser *p)
 	if (char_type(*p->crnt_pos) != CHAR_DQUOTE)
 		p->state = STATE_NORMAL;
 	token_generate(p, TOKEN_WORD);
-	if (join != NULL)
+	if (p->crnt_token != NULL && join != NULL)
 		p->crnt_token->to_join = 1;
 	if (char_type(p->crnt_pos[-1]) != CHAR_DQUOTE && p->crnt_pos[-1] != '\0')
 		p->crnt_pos--;

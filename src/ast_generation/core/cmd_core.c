@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 16:56:00 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/26 16:49:12 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 21:56:00 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,11 @@ t_cmd	cmd_create(t_token_list *tkn_lst)
 	t_token_list	*pipe_first;
 
 	cmd.redir = redir_list_create(tkn_lst);
+	if (cmd.redir == NULL)
+		return ((t_cmd){0});
 	cmd.args = ft_calloc(args_cmd_count(tkn_lst) + 1, sizeof(char *));
+	/*if (cmd.args == NULL)*/
+	//TODO: Create helper cmd error function
 	pipe_first = pipe_find_first(tkn_lst);
 	crnt_arg = cmd.args;
 	tkn_lst = token_list_skip_redir(tkn_lst);

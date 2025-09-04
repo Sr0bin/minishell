@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:07:32 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/03 01:23:18 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 21:38:50 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ char	**env_to_array(t_exec_data *exec_data);
 
 /* ----- ERROR.C ----- */
 
-void	ft_error(const char *msg, int exit_code);
-void	ft_fatal_error(void *arg, const char *msg, int exit_code, void *(*f)(void *));
+void	*ft_error(const char *msg, int exit_code);
+void	*ft_fatal_error(void *arg, const char *msg, int exit_code, void *(*f)(void *));
 
 /* ----- EXEC.C ----- */
 

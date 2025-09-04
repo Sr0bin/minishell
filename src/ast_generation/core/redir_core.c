@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 15:48:12 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/04 19:19:42 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 21:56:52 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_redir	*create_redir(t_redir_type type, char *filename)
 
 	redir = ft_calloc(1, sizeof(t_redir));
 	if (redir == NULL)
-		return (NULL);
+		return (ft_error("Redir token failed", MALLOC_FAILED));
 	redir->type = type;
 	redir->filename = filename;
 	return (redir);
@@ -48,7 +48,7 @@ t_redir	*redir_token_create(t_token_list *tkn_lst)
 	}
 	filename = ft_strdup(lst_to_tkn(tkn_lst->next)->content);
 	if (filename == NULL)
-		return (NULL);
+		return (ft_error("strdup failed in redir_token", MALLOC_FAILED));
 	redir = create_redir(redir_type, filename);
 	if (redir == NULL)
 	{

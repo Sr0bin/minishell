@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 17:23:08 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/04 21:17:34 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 21:45:36 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ t_ast	*root_generation(char *prompt)
 	t_ast	*node;
 
 	token_list = shell_tokenizer(prompt);
+	if (token_list == NULL)
+		return (NULL);
 	token_list_clean(&token_list);
 	//printf("Token Cleaned :\n");
 	// print_token_list(token_list);

@@ -6,13 +6,13 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 08:10:16 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/04 21:32:36 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 21:38:49 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_error(const char *msg, int exit_code)
+void	*ft_error(const char *msg, int exit_code)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putendl_fd((char *)msg, 2);
@@ -29,7 +29,7 @@ void	*free_exec(void *exec_data)
 	return (NULL);
 }
 
-void	ft_fatal_error(void *arg, const char *msg, int exit_code, void *(*f)(void *))
+void	*ft_fatal_error(void *arg, const char *msg, int exit_code, void *(*f)(void *))
 {
 	if (!arg)
 		exit(exit_code);

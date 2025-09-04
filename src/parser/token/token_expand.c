@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 19:23:15 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/03 01:41:04 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 21:51:29 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ t_token_list	*token_join(t_token_list *first, t_token_list *deleted)
 	// token_expand(del_tkn, env);
 	token_clean_quote(del_tkn);
 	ft_strcat(&frst_tkn->content, del_tkn->content);
+	if (frst_tkn->content == NULL)
+		return (ft_error("ft_strcat failed in token_join", MALLOC_FAILED));
 	ft_lstpop(&first, (void *) free);
 	return (first);
 }
@@ -75,6 +77,8 @@ t_token *token_expand(t_token *tkn)
 		return (tkn);
 	new_size = ft_strlen(tkn->content) + ft_strlen(found_var->value);
 	ft_strrsz(&tkn->content, new_size);
+	if (tkn->content == NULL)
+		return (ft_error("Resize failed in expand", MALLOC_FAILED));
 	dollar = ft_strchr(tkn->content, '$');
 	space = var_expand_end(dollar); 
 	ft_memcpy(dollar + ft_strlen(found_var->value), space, ft_strlen(tkn->content) - ft_strlen(dollar));

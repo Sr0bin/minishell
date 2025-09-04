@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:53:27 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/02 19:49:00 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 21:45:36 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_token	*token_create(char *text, t_token_type type)
 
 	new = ft_calloc(1, sizeof(t_token));
 	if (new == NULL)
-		return (NULL);
+		return (ft_error("Token creation failed", MALLOC_FAILED));
 	*new = (const t_token){0};
 	new->content = text;
 	new->type = type;
@@ -36,7 +36,7 @@ t_token	*token_generate(t_parser *parser, t_token_type type)
 	len = parser->crnt_pos - parser->start_pos;
 	token_content = malloc((unsigned)(len + 1) * sizeof(char));
 	if (token_content == NULL)
-		return (NULL);
+		return (ft_error("Token content failed", MALLOC_FAILED));
 	ft_strlcpy(token_content, parser->start_pos, (unsigned) len + 1);
 	token = token_create(token_content, type);
 	if (token == NULL)
@@ -58,6 +58,8 @@ t_token_list	*token_list_create(t_token *first)
 	t_token_list	*list;
 
 	list = ft_lstnew((void *) first);
+	if (list == NULL)
+		return (ft_error("Token list failed ", MALLOC_FAILED));
 	return (list);
 }
 
