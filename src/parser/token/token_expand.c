@@ -54,7 +54,7 @@ t_token_list	*token_join(t_token_list *first, t_token_list *deleted)
 	return (first);
 }
 
-t_token *token_expand(t_token *tkn, t_env *env)
+t_token *token_expand(t_token *tkn)
 {
 	// t_ps_state state;
 	t_var	*found_var;
