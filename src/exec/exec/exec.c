@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/03 18:04:02 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/04 09:12:54 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	exec_single_builtin(t_exec_data *exec_data, int i)
 	apply_redirections(exec_data, i);
 	if (exec_builtins(exec_data, i) == -1)
 	//lose + ft_error
-	if ((!dup2(tmp_stdin, STDIN_FILENO)) == -1)
+	if ((dup2(tmp_stdin, STDIN_FILENO)) == -1)
 		ft_fatal_error(exec_data, "dup2 failed", 2, free_exec);
 	if ((dup2(tmp_stdout, STDOUT_FILENO)) == -1)
 		ft_fatal_error(exec_data, "dup2 failed", 2, free_exec);
@@ -53,7 +53,7 @@ int	exec_single_cmd(t_exec_data *exec_data, int i)
 	else
 	{
 		waitpid(pid, &status, 0);
-		analyze_status(exec_data, status);
+		analyze_status(status);
 	}
 	return (0);
 }
@@ -72,11 +72,9 @@ int	exec_cmd(t_exec_data *exec_data, int i)
 int	exec_pipex(t_exec_data *exec_data)
 {
 	int		i;
-	int		status;
 	pid_t	pid;
 
 	i = 0;
-	status = 0;
 	while (i < exec_data->nb_cmds)
 	{
 		if (i < exec_data->nb_cmds - 1)
@@ -93,7 +91,7 @@ int	exec_pipex(t_exec_data *exec_data)
 			close_parent_fds(exec_data, i);
 		i++;
 	}
-	wait_cmd(exec_data, pid, status);
+	wait_cmd(exec_data);
 	return (0);
 }
 
