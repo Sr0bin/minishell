@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/04 18:44:43 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/04 19:58:00 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,15 +98,18 @@ int	exec_pipex(t_exec_data *exec_data)
 int	 exec(t_ast *root)
 {
 	t_exec_data	*exec_data;
+	t_context	*context;
+	
 
+	context = context_read();
 	if (!root)
 		return (1);
 	exec_data = malloc(sizeof(t_exec_data));
 	if (!exec_data)
 	{
-		free_envp(env);
-		token_list_destroy(tkn_lst);
+		free_envp(context->env);
 		ast_destroy(&root);
+		//TODO: free token_list_from parsing
 		ft_fatal_error(NULL, "malloc failed", 1, NULL);
 	}
 	*exec_data = (t_exec_data){0};
