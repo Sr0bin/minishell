@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:29:18 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/31 21:29:47 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 17:25:11 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include "expand.h"
 # include "heredoc.h"
 # include "context.h"
+# include "prompt.h"
 # include <signal.h>
 
 extern volatile	sig_atomic_t	g_received_signal; 

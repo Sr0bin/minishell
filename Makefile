@@ -6,7 +6,7 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/09/02 19:50:46 by rorollin         ###   ########.fr        #
+#    Updated: 2025/09/04 18:05:26 by rorollin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,10 @@ SOURCES_EXPAND = expand.c
 
 #---------------------------
 
+SOURCES_PROMPT = prompt.c
+
+#---------------------------
+
 SOURCES_HEREDOC = heredoc.c
 
 #---------------------------
@@ -83,6 +87,7 @@ SOURCES = $(addprefix $(SOURCES_DIR)/,\
 		  $(addprefix signals/, $(SOURCES_SIGNALS))\
 		  $(addprefix heredoc/, $(SOURCES_HEREDOC))\
 		  $(addprefix context/, $(SOURCES_CONTEXT))\
+		  $(addprefix prompt/, $(SOURCES_PROMPT))\
 		  )
 		  
 #OBJECTS#######################

@@ -6,13 +6,14 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/04 15:52:34 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 18:14:48 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ast_generation/ast.h"
 #include "parsing/token.h"
 #include "exec/exec.h"
+#include "context.h"
 
 int	exec_single_builtin(t_exec_data *exec_data, int i)
 {
@@ -95,7 +96,7 @@ int	exec_pipex(t_exec_data *exec_data)
 	return (0);
 }
 
-int	 exec(t_ast *root, t_token_list **tkn_lst, t_env *env)
+int	 exec(t_ast *root)
 {
 	t_exec_data	*exec_data;
 
@@ -105,9 +106,8 @@ int	 exec(t_ast *root, t_token_list **tkn_lst, t_env *env)
 	if (!exec_data)
 		ft_fatal_error(exec_data, "malloc failed", 1, &free_exec);
 	*exec_data = (t_exec_data){0};
-	exec_data->envp = env;
+	exec_data->envp = (context_read())->env;
 	exec_data->root = root;
-	exec_data->tkn_list = tkn_lst;
 	if (ast_to_cmds(exec_data, root) == 1)
 		return (1);
 	if (exec_data->nb_cmds == 1)
