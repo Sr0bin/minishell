@@ -6,10 +6,11 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 15:48:12 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/29 15:14:04 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/04 19:19:42 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "heredoc.h"
 #include "minishell.h"
 
 t_redir	*create_redir(t_redir_type type, char *filename)
@@ -41,7 +42,10 @@ t_redir	*redir_token_create(t_token_list *tkn_lst)
 	if (lst_to_tkn(tkn_lst)->type == TOKEN_REDIR_APPEND)
 		redir_type = REDIR_APPEND;
 	if (lst_to_tkn(tkn_lst)->type == TOKEN_HEREDOC)
+	{
 		redir_type = REDIR_HEREDOC;
+		return (heredoc_create_fd());
+	}
 	filename = ft_strdup(lst_to_tkn(tkn_lst->next)->content);
 	if (filename == NULL)
 		return (NULL);
@@ -56,7 +60,7 @@ t_redir	*redir_token_create(t_token_list *tkn_lst)
 
 void	*free_redir(t_redir *redir)
 {
-	if (redir != NULL)
+	if (redir != NULL && redir->type != REDIR_HEREDOC)
 		free((redir)->filename);
 	free(redir);
 	return (NULL);
