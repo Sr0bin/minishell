@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:50:26 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/31 11:21:03 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/03 16:07:38 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ typedef struct s_cmds
 
 typedef struct s_exec_data
 {
-	int				exit_code;
-	int				nb_cmds;
-	int				**fd;
-	t_cmds			*cmds;
-	t_list			*envp;
-	t_ast			*root;
-	t_token_list	**tkn_list;
+	int					exit_code;
+	int					nb_cmds;
+	int					**fd;
+	t_cmds				*cmds;
+	t_list				*envp;
+	t_ast				*root;
+	t_token_list		**tkn_list;
 }	t_exec_data;
 
 #endif

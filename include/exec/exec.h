@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:07:32 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/31 21:34:14 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 15:52:34 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ char	**env_to_array(t_exec_data *exec_data);
 
 /* ----- ERROR.C ----- */
 
-void	ft_error(t_exec_data *exec_data, const char *msg, int exit_code);
-void	ft_fatal_error(t_exec_data *exec_data, const char *msg, int exit_code);
+void	ft_error(const char *msg, int exit_code);
+void	ft_fatal_error(void *arg, const char *msg, int exit_code, void *(*f)(void *));
 
 /* ----- EXEC.C ----- */
 
@@ -39,8 +39,6 @@ int		exec_single_cmd(t_exec_data *exec_data, int i);
 int		exec_cmd(t_exec_data *exec_data, int i);
 int		exec_pipex(t_exec_data *exec_data);
 int		exec(t_ast *root, t_token_list **tkn_lst, t_env	*env);
-t_exec_data	*exec_data_context(t_exec_data *ptr, t_exec_data_context flag);
-void	wait_cmd(t_exec_data *exec_data, pid_t pid, int status);
 
 /* ----- EXTERNAL.C ----- */
 
@@ -54,6 +52,7 @@ void	free_envp(t_env	*env);
 void	free_cmds(t_exec_data *exec_data);
 void	free_fds(int **fd, int nb_cmbs);
 void	free_exec_data(t_exec_data *exec_data);
+void	*free_exec(void *exec_data);
 
 /* ------ IO.C ----- */
 
@@ -76,8 +75,8 @@ void	init_pipes(t_exec_data *exec_data);
 
 /* ----- STATUS.C ----- */
 
-void	analyze_status(t_exec_data *exec_data, int status);
-void	wait_cmd(t_exec_data *exec_data, pid_t pid, int status);
+void	analyze_status(int status);
+void	wait_cmd(t_exec_data *exec_data);
 
 /* ----- UTILS.C ----- */
 

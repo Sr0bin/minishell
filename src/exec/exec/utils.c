@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 10:58:11 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/31 14:43:09 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/03 13:44:01 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	is_builtin(char *cmd)
 {
+	if (cmd == NULL)
+		return (0);
 	if (!ft_strcmp(cmd, "cd")
 		|| !ft_strcmp(cmd, "echo")
 		|| !ft_strcmp(cmd, "env")

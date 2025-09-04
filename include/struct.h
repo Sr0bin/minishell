@@ -96,10 +96,18 @@ typedef struct s_redir
 
 typedef struct s_context
 {
-	t_list			*env;
+	t_env			*env;
+	int				exit_code;
 	t_shell_state	state;
+	t_ast			*crnt_node;
 }	t_context;
 
+typedef	enum	e_data_set
+{
+	SET,
+	UNSET,
+	READ
+}	t_data_set;
 typedef void				(*t_handler)(char c, t_parser *p);
 
 typedef enum s_exec_data_context {

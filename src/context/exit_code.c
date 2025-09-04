@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_normal_end.c                                :+:      :+:    :+:   */
+/*   exit_code.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/20 17:55:47 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/02 23:35:34 by rorollin         ###   ########.fr       */
+/*   Created: 2025/09/02 17:45:26 by rorollin          #+#    #+#             */
+/*   Updated: 2025/09/02 17:49:55 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_normal_newline(t_parser *p)
+int	exit_code_read()
 {
-	token_generate(p, TOKEN_WORD);
+	t_context	*context;
+
+	context = context_read();
+	if (context == NULL)
+		return (-1);
+	return (context->exit_code);
 }
 
-void	handle_normal_eof(t_parser *p)
+int	exit_code_update(int exit_code)
 {
-	char	*join;
+	t_context	*context;
 
-	join = join_check_normal(p);
-	token_generate(p, TOKEN_WORD);
-	if (join != NULL)
-		p->crnt_token->to_join = 1;
+	context = context_read();
+	if (context == NULL)
+		return (1);
+	context->exit_code = exit_code;
+	return (0);
 }

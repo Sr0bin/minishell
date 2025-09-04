@@ -6,7 +6,7 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/08/31 19:30:57 by rorollin         ###   ########.fr        #
+#    Updated: 2025/09/02 19:50:46 by rorollin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,8 +38,11 @@ SOURCES_SIGNALS = signals.c\
 
 #---------------------------
 
-SOURCES_AST = ast_generation.c  ast_core.c token_to_node.c cmd_core.c node_generation.c\
-			  redir_core.c redir_list_core.c pipe_find.c
+SOURCES_AST_CORE = ast_core.c cmd_core.c redir_core.c redir_list_core.c 
+
+SOURCES_AST =$(addprefix core/, $(SOURCES_AST_CORE))\
+			 ast_generation.c token_to_node.c node_generation.c\
+			 pipe_find.c
 
 #---------------------------
 
@@ -51,8 +54,8 @@ SOURCES_HEREDOC = heredoc.c
 
 #---------------------------
 
-SOURCES_PARSER_HANDLER = handle_normal.c handle_dquote.c handle_squote.c handle_op.c handle_normal_end.c
-
+SOURCES_PARSER_HANDLER = handle_normal.c handle_dquote.c handle_squote.c handle_op.c handle_normal_end.c\
+						 quote_join.c
 SOURCES_PARSER_STATE = transition_utils.c
 
 SOURCES_PARSER_TOKEN = token_assign.c token_core.c token_list_clean.c token_expand.c
@@ -61,6 +64,11 @@ SOURCES_PARSER = $(addprefix handler/, $(SOURCES_PARSER_HANDLER))\
 				 $(addprefix state/, $(SOURCES_PARSER_STATE)) \
 				 $(addprefix token/, $(SOURCES_PARSER_TOKEN)) \
 				 parser_core.c string_utils.c 
+
+#---------------------------
+
+SOURCES_CONTEXT = context_init.c exit_code.c
+
 #---------------------------
 
 SOURCES = $(addprefix $(SOURCES_DIR)/,\
@@ -74,6 +82,7 @@ SOURCES = $(addprefix $(SOURCES_DIR)/,\
 		  $(addprefix expand/, $(SOURCES_EXPAND))\
 		  $(addprefix signals/, $(SOURCES_SIGNALS))\
 		  $(addprefix heredoc/, $(SOURCES_HEREDOC))\
+		  $(addprefix context/, $(SOURCES_CONTEXT))\
 		  )
 		  
 #OBJECTS#######################

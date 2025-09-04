@@ -29,6 +29,7 @@
 # include "builtins/builtins.h"
 # include "expand.h"
 # include "heredoc.h"
+# include "context.h"
 # include <signal.h>
 
 extern volatile	sig_atomic_t	g_received_signal; 

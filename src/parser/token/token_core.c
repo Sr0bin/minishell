@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:53:27 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 17:21:15 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:49:00 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_token	*token_create(char *text, t_token_type type)
 	*new = (const t_token){0};
 	new->content = text;
 	new->type = type;
+	new->to_join = 0;
 	return (new);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:16:49 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/30 14:44:17 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/03 14:07:44 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ void	check_path(t_exec_data *exec_data, int i)
 			exec_data->cmds[i].cmd[0][0] == '.')
 	{
 		if (access(exec_data->cmds[i].cmd[0], F_OK) != 0)
-			ft_fatal_error(exec_data, "minishell", 127);
+			ft_fatal_error(exec_data, "access denied", 127, &free_exec);
 		if (access(exec_data->cmds[i].cmd[0], X_OK) != 0)
-			ft_fatal_error(exec_data, "minishell", 126);
+			ft_fatal_error(exec_data, "access denied", 126, &free_exec);
 		exec_data->cmds[i].path = exec_data->cmds[i].cmd[0];
 	}
 	else
 	{
 		exec_data->cmds[i].path = find_path(exec_data, i);
 		if (!exec_data->cmds[i].path)
-			ft_fatal_error(exec_data, "minishell: command not found", 127);
+			ft_fatal_error(exec_data, "command not found", 127, &free_exec);
 	}
 }
 
@@ -40,6 +40,6 @@ void	exec_external(t_exec_data *exec_data, int i)
 			env) == -1)
 	{
 		free_array(env);
-		ft_fatal_error(exec_data, "minishell", 127);
+		ft_fatal_error(exec_data, "command not found", 127, &free_exec);
 	}
 }

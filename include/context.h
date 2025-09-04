@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_normal_end.c                                :+:      :+:    :+:   */
+/*   context.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/20 17:55:47 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/02 23:35:34 by rorollin         ###   ########.fr       */
+/*   Created: 2025/09/02 17:41:15 by rorollin          #+#    #+#             */
+/*   Updated: 2025/09/02 17:51:23 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef CONTEXT_H
+# define CONTEXT_H
+# include "struct.h"
 
-void	handle_normal_newline(t_parser *p)
-{
-	token_generate(p, TOKEN_WORD);
-}
+int	exit_code_read();
+int	exit_code_update(int exit_code);
+t_context	*context_set(t_context	*context, t_data_set operation);
+t_context	*context_read();
+t_context	*context_init(char **envp);
+#endif
 
-void	handle_normal_eof(t_parser *p)
-{
-	char	*join;
-
-	join = join_check_normal(p);
-	token_generate(p, TOKEN_WORD);
-	if (join != NULL)
-		p->crnt_token->to_join = 1;
-}

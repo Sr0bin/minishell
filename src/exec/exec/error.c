@@ -10,22 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec/exec.h"
+#include "minishell.h"
 
-void	ft_error(t_exec_data *exec_data, const char *msg, int exit_code)
+void	ft_error(const char *msg, int exit_code)
 {
-	perror(msg);
-	if (exec_data != NULL)
-		exec_data->exit_code = exit_code;
+	ft_putstr_fd("minishell: ", 2);
+	ft_putendl_fd((char *)msg, 2);
+	exit_code_update(exit_code);
 }
 
-void	ft_fatal_error(t_exec_data *exec_data, const char *msg, int exit_code)
+void	*free_exec(void *exec_data)
 {
-	perror(msg);
-	if (exec_data != NULL)
-	{
-		free_envp(exec_data->envp);
-		free_exec_data(exec_data);
-	}
+	if (exec_data == NULL)
+		return (NULL);
+	free_envp(((t_exec_data *) exec_data)->envp);
+	free_exec_data(exec_data);
+	return (NULL);
+}
+
+void	ft_fatal_error(void *arg, const char *msg, int exit_code, void *(*f)(void *))
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putendl_fd((char *)msg, 2);
+	f(arg);
 	exit (exit_code);
 }

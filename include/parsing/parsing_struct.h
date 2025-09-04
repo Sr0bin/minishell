@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:08:38 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 15:53:29 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/02 19:49:00 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ typedef struct s_token
 {
 	char			*content;
 	t_token_type	type;
-	t_token			*next;
-	t_token			*prev;
+	char			to_join;
 }	t_token;
 
 typedef struct s_parser
