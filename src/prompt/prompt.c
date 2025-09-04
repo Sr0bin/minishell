@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 17:23:08 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/04 18:09:46 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 21:17:34 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-
 char	*prompt(void)
 {
-	char	*read;
+	char		*read;
 	t_context	*context;
 
 	context = context_read();
@@ -34,10 +33,10 @@ char	*prompt(void)
 		free(read);
 		free_envp(context->env);
 		printf("exit\n");
-		exit (EXIT_FAILURE);		
+		exit(EXIT_FAILURE);		
 	}
 	add_history(read);
-	return(read);
+	return (read);
 }
 
 t_ast	*root_generation(char *prompt)
@@ -53,4 +52,3 @@ t_ast	*root_generation(char *prompt)
 	token_list_destroy(&token_list);
 	return (node);
 }
-
