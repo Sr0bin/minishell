@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 19:50:23 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/02 23:38:11 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 02:21:37 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*join_check_normal(t_parser *p)
 }
 char	*join_check_quote(t_parser *p)
 {
+	//TODO: Create a while loop to include quotes that need to be joined, but pinallaige
 	if (char_type(p->crnt_pos[0]) == CHAR_OTHER)
 		return (p->crnt_pos);
 	return (NULL);
