@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:47:55 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/30 11:40:17 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/04 18:36:37 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	count_nbr_args(char **args)
 	int	i;
 
 	i = 0;
+	if (!args)
+		return (0);
 	while (args[i])
 		i++;
 	return (i);

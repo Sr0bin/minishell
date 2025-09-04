@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:49:30 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/03 18:03:37 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/04 16:35:52 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,18 @@ int	ft_cd(t_exec_data *exec_data, t_cmds cmd)
 		path = cmd.cmd[1];
 	old_pwd = ft_strdup(get_env_value(exec_data, "PWD"));
 	if (!old_pwd)
-		ft_fatal_error(exec_data, "error retrieving current directory", 2, free_exec);
+	{
+		ft_error("error retrieving current directory", 2);
+		return (-1);
+	}
 	if (chdir(path) == -1)
 		ft_error("cd: no such file or directory", 1);
 	new_pwd = getcwd(NULL, 0);
 	if (!new_pwd)
 	{
-		perror("error retrieving current directory");
+		ft_error("error retrieving current directory", 2);
 		return (-1);
 	}
-		ft_fatal_error(exec_data, "malloc failed", 1, &free_exec);
 	update_env(exec_data, "PWD", new_pwd);
 	if (old_pwd)
 		update_env(exec_data, "OLDPWD", old_pwd);

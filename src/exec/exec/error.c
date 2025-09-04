@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 08:10:16 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/31 21:41:15 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 18:42:48 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	*free_exec(void *exec_data)
 
 void	ft_fatal_error(void *arg, const char *msg, int exit_code, void *(*f)(void *))
 {
+	if (!arg)
+		exit(exit_code);
 	ft_putstr_fd("minishell: ", 2);
 	ft_putendl_fd((char *)msg, 2);
 	f(arg);

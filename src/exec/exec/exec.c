@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/04 18:14:48 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 18:44:43 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int	exec_single_builtin(t_exec_data *exec_data, int i)
 	if (tmp_stdin == -1 || tmp_stdout == -1)
 		ft_fatal_error(exec_data, "error retrieving current directory", 2, free_exec);
 	apply_redirections(exec_data, i);
-	if (exec_builtins(exec_data, i) == -1)
-	//lose + ft_error
+	exec_builtins(exec_data, i);
 	if ((dup2(tmp_stdin, STDIN_FILENO)) == -1)
 		ft_fatal_error(exec_data, "dup2 failed", 2, free_exec);
 	if ((dup2(tmp_stdout, STDOUT_FILENO)) == -1)
@@ -104,7 +103,12 @@ int	 exec(t_ast *root)
 		return (1);
 	exec_data = malloc(sizeof(t_exec_data));
 	if (!exec_data)
-		ft_fatal_error(exec_data, "malloc failed", 1, &free_exec);
+	{
+		free_envp(env);
+		token_list_destroy(tkn_lst);
+		ast_destroy(&root);
+		ft_fatal_error(NULL, "malloc failed", 1, NULL);
+	}
 	*exec_data = (t_exec_data){0};
 	exec_data->envp = (context_read())->env;
 	exec_data->root = root;
