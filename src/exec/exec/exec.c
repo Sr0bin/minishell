@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/03 01:26:13 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/03 18:04:02 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,15 @@ int	exec_single_builtin(t_exec_data *exec_data, int i)
 
 	tmp_stdin = dup(STDIN_FILENO);
 	tmp_stdout = dup(STDOUT_FILENO);
+	if (tmp_stdin == -1 || tmp_stdout == -1)
+		ft_fatal_error(exec_data, "error retrieving current directory", 2, free_exec);
 	apply_redirections(exec_data, i);
-	exec_builtins(exec_data, i);
-	dup2(tmp_stdin, STDIN_FILENO);
-	dup2(tmp_stdout, STDOUT_FILENO);
+	if (exec_builtins(exec_data, i) == -1)
+	//lose + ft_error
+	if ((!dup2(tmp_stdin, STDIN_FILENO)) == -1)
+		ft_fatal_error(exec_data, "dup2 failed", 2, free_exec);
+	if ((dup2(tmp_stdout, STDOUT_FILENO)) == -1)
+		ft_fatal_error(exec_data, "dup2 failed", 2, free_exec);
 	close(tmp_stdin);
 	close(tmp_stdout);
 	return (0);
@@ -42,7 +47,7 @@ int	exec_single_cmd(t_exec_data *exec_data, int i)
 	}
 	pid = fork();
 	if (pid == -1)
-		ft_fatal_error(exec_data, "minishell: fork failed", 1, &free_exec);
+		ft_fatal_error(exec_data, "fork failed", 1, &free_exec);
 	else if (pid == 0)
 		exec_cmd(exec_data, i);
 	else
@@ -77,11 +82,11 @@ int	exec_pipex(t_exec_data *exec_data)
 		if (i < exec_data->nb_cmds - 1)
 		{
 			if (pipe(exec_data->fd[i]) == -1)
-				ft_fatal_error(exec_data, "minishell: pipe failed", 1, &free_exec);
+				ft_fatal_error(exec_data, "pipe failed", 1, &free_exec);
 		}
 		pid = fork();
 		if (pid == -1)
-			ft_fatal_error(exec_data, "minishell: fork failed", 1, &free_exec);
+			ft_fatal_error(exec_data, "fork failed", 1, &free_exec);
 		else if (pid == 0)
 			exec_cmd(exec_data, i);
 		else
@@ -92,18 +97,21 @@ int	exec_pipex(t_exec_data *exec_data)
 	return (0);
 }
 
-int	exec(t_ast *root, t_token_list **tkn_lst, t_env	*env)
+int	 exec(t_ast *root, t_token_list **tkn_lst, t_env *env)
 {
 	t_exec_data	*exec_data;
 
+	if (!root)
+		return (1);
 	exec_data = malloc(sizeof(t_exec_data));
 	if (!exec_data)
-		ft_fatal_error(exec_data, "minishell: malloc failed", 1, &free_exec);
+		ft_fatal_error(exec_data, "malloc failed", 1, &free_exec);
 	*exec_data = (t_exec_data){0};
 	exec_data->envp = env;
 	exec_data->root = root;
 	exec_data->tkn_list = tkn_lst;
-	ast_to_cmds(exec_data, root);
+	if (ast_to_cmds(exec_data, root) == 1)
+		return (1);
 	if (exec_data->nb_cmds == 1)
 	{
 		if ((exec_single_cmd(exec_data, 0)) == 1)
