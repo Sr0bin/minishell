@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 17:45:01 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/04 22:58:59 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/05 16:11:37 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,5 @@ t_redir	*heredoc_create_fd()
 	}
 	redir->s_heredoc.read = r_fd;
 	close(w_fd);
-	redir->s_heredoc.write = w_fd;
 	return (redir);
 }

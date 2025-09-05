@@ -7,3 +7,5 @@
  """l"'s'
 	echo '''ho"''''l"a'''
 	check the squote requirement
+
+	ne pas afficher la variable expand si elle n'existe pas

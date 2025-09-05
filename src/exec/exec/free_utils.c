@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:04:52 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/04 18:11:29 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/05 16:49:45 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	free_envp(t_env	*env)
 	t_env	*tmp;
 
 	current = env;
-	while (current)
+	while (current != NULL)
 	{
 		var = (t_var *)current->content;
 		free(var->key);
@@ -47,12 +47,14 @@ void	free_envp(t_env	*env)
 void	free_cmds(t_exec_data *exec_data)
 {
 	int	i;
+	t_cmds	crnt_cmd;
 
 	i = 0;
 	while (i < exec_data->nb_cmds)
 	{
-		free(exec_data->cmds[i].cmd);
-		if (!exec_data->cmds[i].path)
+		crnt_cmd = exec_data->cmds[i];
+		free(crnt_cmd.cmd);
+		if (crnt_cmd.path != NULL)
 			free(exec_data->cmds[i].path);
 		i++;
 	}

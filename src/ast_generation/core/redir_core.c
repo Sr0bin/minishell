@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 15:48:12 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/04 19:19:42 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/05 16:50:11 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	*free_redir(t_redir *redir)
 {
 	if (redir != NULL && redir->type != REDIR_HEREDOC)
 		free((redir)->filename);
+	if (redir != NULL && redir->type == REDIR_HEREDOC)
+		close(redir->s_heredoc.read);
 	free(redir);
 	return (NULL);
 }
