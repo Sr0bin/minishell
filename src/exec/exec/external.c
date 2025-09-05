@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:16:49 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/05 11:26:25 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/05 12:05:18 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	check_path(t_exec_data *exec_data, int i)
 		if (access(exec_data->cmds[i].cmd[0], F_OK) != 0)
 			ft_fatal_error(exec_data, "minishell: access", 127, &free_exec);
 		if (access(exec_data->cmds[i].cmd[0], X_OK) != 0)
-			ft_error_child("minishell: access", 127);
+			ft_fatal_error(exec_data, "minishell: access", 127, &free_exec);
 		exec_data->cmds[i].path = exec_data->cmds[i].cmd[0];
 	}
 	else
 	{
 		exec_data->cmds[i].path = find_path(exec_data, i);
 		if (!exec_data->cmds[i].path)
-			ft_error_child("minishell: command not found", 127);
+			ft_fatal_error(exec_data, "minishell: command not found", 127, &free_exec);
 	}
 }
 
@@ -40,6 +40,6 @@ void	exec_external(t_exec_data *exec_data, int i)
 			env) == -1)
 	{
 		free_array(env);
-		ft_error_child(exec_data->cmds->cmd[0], 127);
+		ft_fatal_error(exec_data, "minishell: command not found", 127, &free_exec);
 	}
 }
