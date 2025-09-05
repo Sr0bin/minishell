@@ -6,13 +6,14 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:22:58 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/04 02:36:10 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 22:57:44 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parsing/token.h"
 
+//TODO: remove only whitespace token
 t_token_list	*token_list_clean(t_token_list **list)
 {
 	t_token_list	*iter_prev;

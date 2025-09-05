@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 17:45:01 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/04 19:21:07 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/04 22:58:59 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ static char	*temp_folder_path(int fd)
 	char	*fd_ascii;
 
 	temp_path = ft_strdup("/proc/self/fd/");
+	//TODO: Error check
 	fd_ascii = ft_itoa(fd);
 	temp_path = ft_strcat(&temp_path, fd_ascii);
+	//TODO: Error check
 	return (temp_path);
 }
 
@@ -46,6 +48,7 @@ t_redir	*heredoc_create_fd()
 	}
 	write(w_fd, "test decriture", 20);
 	temp_path = temp_folder_path(w_fd);
+	//TODO: Error check
 	r_fd = open(temp_path, O_RDONLY);
 	free(temp_path);
 	if (r_fd < 0)
