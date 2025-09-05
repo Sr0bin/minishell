@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:07:32 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/04 18:14:41 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/05 10:38:06 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <errno.h>
 # include "structs.h"
 # include "builtins/builtins.h"
 # include "signals/signals.h"
@@ -30,6 +31,7 @@ char	**env_to_array(t_exec_data *exec_data);
 
 /* ----- ERROR.C ----- */
 
+void	ft_error_child(const char *msg, int exit_code);
 void	ft_error(const char *msg, int exit_code);
 void	ft_fatal_error(void *arg, const char *msg, int exit_code, void *(*f)(void *));
 
@@ -57,7 +59,7 @@ void	*free_exec(void *exec_data);
 /* ------ IO.C ----- */
 
 int		apply_redirections(t_exec_data *exec_data, int i);
-void	setup_io(t_exec_data *exec_data, int i);
+int		setup_io(t_exec_data *exec_data, int i);
 void	close_parent_fds(t_exec_data *exec_data, int i);
 
 /* ----- PATH.C ----- */

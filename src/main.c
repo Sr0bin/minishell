@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:52 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/04 19:21:39 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/05 08:58:50 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main (int argc, char **argv, char **envp)
 		node = root_generation(read); 
 		/*print_ast(node);*/
 		/*heredoc_create_fd();*/
-		exec(node);
+		exec(node);	
 		free(read);
 	}
 	free(context); //TODO: clean context destruction
