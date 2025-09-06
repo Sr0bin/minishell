@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:21:09 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/06 11:19:45 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/06 15:31:47 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../libft/include/libft.h"
 # include "exec/ast_to_cmds.h"
 # include "exec/exec.h"
+# include "context.h"
 
 typedef struct s_list	t_env;
 

@@ -27,6 +27,7 @@
 		"unset.h": "c",
 		"libft.h": "c",
 		"signals.h": "c",
-		"context.h": "c"
+		"context.h": "c",
+		"cerrno": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:19:22 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/05 20:24:02 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/06 22:46:15 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ int	check_export_var(char *args)
 	if (!ft_isalpha(args[0]) && args[0] != '_')
 	{
 		ft_putendl_fd("minishell: export: not a valid identifier", 2);
-		return (1);
+		return (-1);
 	}
 	while (args[i] && args[i] != '=')
 	{
 		if (!ft_isalnum(args[i]) && args[i] != '_')
 		{
 			ft_putendl_fd("minishell: export: not a valid identifier", 2);
-			return (1);
+			return (-1);
 		}
 		i++;
 	}
@@ -43,6 +43,11 @@ int	parse_args(char *arg, t_var *var)
 	if (equal == NULL)
 	{
 		var->key = ft_strdup(arg);
+		if (!var->key)
+		{
+			ft_error("minishell: ft_strdup failed", 1);
+			return (-1);
+		}
 		var->value = NULL;
 	}
 	else
@@ -58,6 +63,7 @@ int	parse_args(char *arg, t_var *var)
 				ft_strlen(arg) - (key_len + 1));
 		if (!var->value)
 		{
+			free(var->key);
 			ft_error("minishell: ft_substr failed", 1);
 			return (-1);
 		}
@@ -78,6 +84,11 @@ int	check_in_env(t_env *env, t_var *var)
 			{
 				free(var_env->value);
 				var_env->value = ft_strdup(var->value);
+				if (!var_env->value)
+				{
+					ft_error("minishell: ft_strdup failed", 1);
+					return (-1);
+				}
 			}
 			return (1);
 		}

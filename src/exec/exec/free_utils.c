@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:04:52 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/05 16:49:45 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/06 15:43:10 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	free_cmds(t_exec_data *exec_data)
 		crnt_cmd = exec_data->cmds[i];
 		free(crnt_cmd.cmd);
 		if (crnt_cmd.path != NULL)
-			free(exec_data->cmds[i].path);
+			free(crnt_cmd.path);
 		i++;
 	}
 	free(exec_data->cmds);
@@ -81,11 +81,11 @@ void	free_exec_data(t_exec_data *exec_data)
 {
 	if (!exec_data)
 		exit (1);
-	if (exec_data->root)
+	if (exec_data->root != NULL)
 		ast_destroy(&exec_data->root);
-	if (exec_data->cmds)
+	if (exec_data->cmds != NULL)
 		free_cmds(exec_data);
-	if (exec_data->fd)
+	if (exec_data->fd != NULL)
 		free_fds(exec_data->fd, exec_data->nb_cmds);
 	free (exec_data);
 }

@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 10:53:51 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/02 17:14:39 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/06 15:13:07 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 
 /* ----- AST_TO_CMDS.C ----- */
 
-void	init_exec_data(t_exec_data *exec_data, t_ast *root);
 t_list	*fill_redir(t_exec_data *exec_data, t_cmd cmd);
-int		fill_one_cmd(t_exec_data *exec_data, t_cmd cmd, int *i);
-int		fill_cmds(t_exec_data *exec_data, t_ast *node, int *i);
-int		ast_to_cmds(t_exec_data *exec_data, t_ast *root);
+void	ast_to_cmds(t_exec_data *exec_data, t_ast *root);
+void	fill_one_cmd(t_exec_data *exec_data, t_cmd cmd, int *i);
+void	fill_cmds(t_exec_data *exec_data, t_ast *node, int *i);
+void	init_exec_data(t_exec_data *exec_data, t_ast *root);
 
 
 /* ----- AST_UTILS.C ----- */

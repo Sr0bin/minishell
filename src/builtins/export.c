@@ -6,16 +6,19 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:09:13 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/06 08:43:24 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/06 22:49:32 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins/builtins.h"
 
+
+/* TO DO : AJOUTER UNE VARIABLE POUR RECUPERER LE RETOUR DE CHECK_IN_ENV */
 int	export_with_args(t_exec_data *exec_data, char **cmd)
 {
 	int		i;
 	t_var	*var;
+	t_list	*new_lst;
 
 	i = 1;
 	while (cmd[i])
@@ -31,15 +34,19 @@ int	export_with_args(t_exec_data *exec_data, char **cmd)
 			}	
 			if (parse_args(cmd[i], var) == -1)
 				return (-1);
-			if (!check_in_env(exec_data->envp, var))
-				ft_lstadd_back(&exec_data->envp, ft_lstnew(var));
-			else
+			if (check_in_env(exec_data->envp, var) == 0)
 			{
-				free(var->key);
-				if (var->value)
-					free(var->value);
-				free(var);
+				new_lst = ft_lstnew(var);
+				if (!new_lst)
+				{
+					free(var);
+					ft_error("minishell: malloc failed", 1);
+					return (-1);
+				}
+				ft_lstadd_back(&exec_data->envp, new_lst);
 			}
+			else
+				free_var(var);
 		}
 		i++;
 	}

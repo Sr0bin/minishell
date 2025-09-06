@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:09:28 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/05 17:04:08 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/06 15:45:47 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,25 @@ int	apply_redirections(t_exec_data *exec_data, int i)
 		else if (redir->type == REDIR_HEREDOC)
 				fd = redir->s_heredoc.read;
 		if (fd < 0)
+		{
+			ft_error("minishell", 1);
 			return (-1);
+		}
 		if (redir->type == REDIR_INPUT || redir->type == REDIR_HEREDOC)
 		{
 			if (dup2(fd, STDIN_FILENO) == -1)
+			{
+				ft_error("minishell: dup2 failed", 1);
 				return (-1);
+			}
 		}
 		else
 		{
 			if (dup2(fd, STDOUT_FILENO) == -1)
+			{
+				ft_error("minishell: dup2 failed", 1);
 				return (-1);
+			}
 		}
 		close(fd);
 		node = node->next;
@@ -49,14 +58,24 @@ int	apply_redirections(t_exec_data *exec_data, int i)
 	return (0);
 }
 
-void	setup_io(t_exec_data *exec_data, int i)
+int	setup_io(t_exec_data *exec_data, int i)
 {
 	if (i > 0)
-		dup2(exec_data->fd[i - 1][0], STDIN_FILENO);
+	{
+		if (dup2(exec_data->fd[i - 1][0], STDIN_FILENO) == -1)
+			ft_fatal_error(exec_data, "minishell: dup2 failed", 1, &free_exec);
+	}
 	if (i < exec_data->nb_cmds - 1)
-		dup2(exec_data->fd[i][1], STDOUT_FILENO);
-	if (apply_redirections(exec_data, i) < 0)
-		ft_fatal_error(exec_data, "redirections failed", 1, &free_exec);
+	{
+		if (dup2(exec_data->fd[i][1], STDOUT_FILENO) == -1)
+			ft_fatal_error(exec_data, "minishell: dup2 failed", 1, &free_exec);
+	}
+	if (apply_redirections(exec_data, i) == -1)
+	{
+		free_exec(exec_data);
+		exit(exit_code_read());
+	}
+	return (0);
 }
 
 void	close_parent_fds(t_exec_data *exec_data, int i)

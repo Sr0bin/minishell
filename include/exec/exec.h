@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:07:32 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/05 15:11:57 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/06 22:41:16 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_fatal_error(void *arg, const char *msg, int exit_code, void *(*f)(void *
 /* ----- EXEC.C ----- */
 
 int		exec_single_cmd(t_exec_data *exec_data, int i);
-int		exec_cmd(t_exec_data *exec_data, int i);
+void	exec_cmd(t_exec_data *exec_data, int i);
 int		exec_pipex(t_exec_data *exec_data);
 int		exec(t_ast *root);
 
@@ -58,7 +58,7 @@ void	*free_exec(void *exec_data);
 /* ------ IO.C ----- */
 
 int		apply_redirections(t_exec_data *exec_data, int i);
-void	setup_io(t_exec_data *exec_data, int i);
+int		setup_io(t_exec_data *exec_data, int i);
 void	close_parent_fds(t_exec_data *exec_data, int i);
 
 /* ----- PATH.C ----- */
@@ -83,5 +83,6 @@ void	wait_cmd(t_exec_data *exec_data);
 
 int		is_builtin(char *cmd);
 char	*get_env_value(t_exec_data *exec_data, char *key);
+void	free_var(t_var *var);
 
 #endif
