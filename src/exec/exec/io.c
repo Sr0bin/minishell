@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:09:28 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/04 19:22:16 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/05 17:04:08 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,16 @@ int	apply_redirections(t_exec_data *exec_data, int i)
 		if (fd < 0)
 			return (-1);
 		if (redir->type == REDIR_INPUT || redir->type == REDIR_HEREDOC)
-			dup2(fd, STDIN_FILENO);
+		{
+			if (dup2(fd, STDIN_FILENO) == -1)
+				return (-1);
+		}
 		else
-			dup2(fd, STDOUT_FILENO);
-		close (fd);
+		{
+			if (dup2(fd, STDOUT_FILENO) == -1)
+				return (-1);
+		}
+		close(fd);
 		node = node->next;
 	}
 	return (0);

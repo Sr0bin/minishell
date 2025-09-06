@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:31:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/04 19:26:22 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:17:16 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ int	fill_one_cmd(t_exec_data *exec_data, t_cmd cmd, int *i)
 	while (cmd.args[j])
 	{
 		exec_data->cmds[*i].cmd[j] = cmd.args[j];
-		if (!exec_data->cmds[*i].cmd[j])
-			ft_fatal_error(exec_data, "strdup failed", 1, &free_exec);
 		j++;
 	}
 	exec_data->cmds[*i].redir = cmd.redir;

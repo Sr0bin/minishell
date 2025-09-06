@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:16:31 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/04 13:33:04 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/05 20:20:51 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_sorted(t_env *env)
 	{
 		var = (t_var *)env->content;
 		var2 = (t_var *)env->next->content;
-		if (ft_strncmp(var->key, var2->key, ft_strlen(var->key)))
+		if (ft_strcmp(var->key, var2->key))
 			return (0);
 		env = env->next;
 	}

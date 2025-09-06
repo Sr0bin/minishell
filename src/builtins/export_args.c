@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:19:22 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/04 13:45:23 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/05 20:24:02 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	check_export_var(char *args)
 	return (0);
 }
 
-void	parse_args(char *arg, t_var *var)
+int	parse_args(char *arg, t_var *var)
 {
 	char	*equal;
 	size_t	key_len;
@@ -49,9 +49,20 @@ void	parse_args(char *arg, t_var *var)
 	{
 		key_len = (size_t)(equal - arg);
 		var->key = ft_substr(arg, 0, key_len);
+		if (!var->key)	
+		{
+			ft_error("minishell: ft_substr failed", 1);
+			return (-1);
+		}
 		var->value = ft_substr(arg, (unsigned int)(key_len + 1),
 				ft_strlen(arg) - (key_len + 1));
+		if (!var->value)
+		{
+			ft_error("minishell: ft_substr failed", 1);
+			return (-1);
+		}
 	}
+	return (0);
 }
 
 int	check_in_env(t_env *env, t_var *var)

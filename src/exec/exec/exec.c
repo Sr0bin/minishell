@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/04 19:58:00 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/06 11:50:23 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,18 @@ int	exec_single_builtin(t_exec_data *exec_data, int i)
 	tmp_stdout = dup(STDOUT_FILENO);
 	if (tmp_stdin == -1 || tmp_stdout == -1)
 		ft_fatal_error(exec_data, "error retrieving current directory", 2, free_exec);
-	apply_redirections(exec_data, i);
-	exec_builtins(exec_data, i);
+	if (apply_redirections(exec_data, i) == -1)
+	{
+		close(tmp_stdin);
+		close(tmp_stdout);
+		return (-1);
+	}
+	if (exec_builtins(exec_data, i) == -1)
+	{
+		close(tmp_stdin);
+		close(tmp_stdout);
+		return (-1);
+	}
 	if ((dup2(tmp_stdin, STDIN_FILENO)) == -1)
 		ft_fatal_error(exec_data, "dup2 failed", 2, free_exec);
 	if ((dup2(tmp_stdout, STDOUT_FILENO)) == -1)
@@ -42,7 +52,8 @@ int	exec_single_cmd(t_exec_data *exec_data, int i)
 
 	if (is_builtin(exec_data->cmds->cmd[0]))
 	{
-		exec_single_builtin(exec_data, i);
+		if (exec_single_builtin(exec_data, i) == -1)
+			return (-1);
 		return (0);
 	}
 	pid = fork();
@@ -119,8 +130,11 @@ int	 exec(t_ast *root)
 		return (1);
 	if (exec_data->nb_cmds == 1)
 	{
-		if ((exec_single_cmd(exec_data, 0)) == 1)
-			return (1);
+		if ((exec_single_cmd(exec_data, 0)) == -1)
+		{
+			free_exec_data(exec_data);
+			return (-1);
+		}
 	}
 	else
 	{

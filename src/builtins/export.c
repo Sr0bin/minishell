@@ -6,13 +6,13 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:09:13 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/04 13:28:21 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/06 08:43:24 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins/builtins.h"
 
-void	export_with_args(t_exec_data *exec_data, char **cmd)
+int	export_with_args(t_exec_data *exec_data, char **cmd)
 {
 	int		i;
 	t_var	*var;
@@ -25,8 +25,12 @@ void	export_with_args(t_exec_data *exec_data, char **cmd)
 		{
 			var = malloc(sizeof(t_var));
 			if (!var)
+			{
 				ft_error("minishell: malloc failed", 1);
-			parse_args(cmd[i], var);
+				return (-1);
+			}	
+			if (parse_args(cmd[i], var) == -1)
+				return (-1);
 			if (!check_in_env(exec_data->envp, var))
 				ft_lstadd_back(&exec_data->envp, ft_lstnew(var));
 			else
@@ -39,9 +43,10 @@ void	export_with_args(t_exec_data *exec_data, char **cmd)
 		}
 		i++;
 	}
+	return (0);
 }
 
-void	export_without_args(t_exec_data *exec_data)
+int	export_without_args(t_exec_data *exec_data)
 {
 	t_var	*var;
 	t_var	*var2;
@@ -67,13 +72,20 @@ void	export_without_args(t_exec_data *exec_data)
 		}
 	}
 	print_export_list(head);
+	return (0);
 }
 
 int	ft_export(t_exec_data *exec_data, t_cmds cmd)
 {
 	if (count_nbr_args(cmd.cmd) <= 1)
-		export_without_args(exec_data);
+	{
+		if (export_without_args(exec_data) == -1)
+			return (-1);
+	}
 	else
-		export_with_args(exec_data, cmd.cmd);
+	{
+		if (export_with_args(exec_data, cmd.cmd) == -1)
+			return (-1);
+	}
 	return (0);
 }

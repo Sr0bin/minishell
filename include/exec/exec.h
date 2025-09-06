@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:07:32 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/04 18:14:41 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/05 15:11:57 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <errno.h>
 # include "structs.h"
 # include "builtins/builtins.h"
 # include "signals/signals.h"
