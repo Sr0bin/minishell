@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:09:13 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/06 22:49:32 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/06 22:57:50 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	export_with_args(t_exec_data *exec_data, char **cmd)
 				ft_lstadd_back(&exec_data->envp, new_lst);
 			}
 			else
-				free_var(var);
+				free_var(&var);
 		}
 		i++;
 	}

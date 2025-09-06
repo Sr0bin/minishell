@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:07:32 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/06 22:41:16 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/06 22:58:01 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ void	wait_cmd(t_exec_data *exec_data);
 
 int		is_builtin(char *cmd);
 char	*get_env_value(t_exec_data *exec_data, char *key);
-void	free_var(t_var *var);
+//void	free_var(t_var *var);
 
 #endif
