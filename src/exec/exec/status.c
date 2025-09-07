@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:15:44 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/06 22:23:41 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/07 14:08:59 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void wait_cmd(t_exec_data *exec_data)
 	{
 		pid = wait(&status);
 		if (pid == -1)
-			ft_fatal_error(exec_data, "minishell: wait failed", 1, &free_exec);
+			ft_error("minishell: wait failed", 1);
 		analyze_status(status);
 		i++;
 	}

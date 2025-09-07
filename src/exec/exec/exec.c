@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/06 22:21:32 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/07 14:03:13 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include "parsing/token.h"
 #include "exec/exec.h"
 #include "context.h"
+
+static void	close_tmp_fds(int fd_in, int fd_out)
+{
+	close(fd_in);
+	close(fd_out);
+}
 
 int	exec_single_builtin(t_exec_data *exec_data, int i)
 {
@@ -23,25 +29,28 @@ int	exec_single_builtin(t_exec_data *exec_data, int i)
 	tmp_stdin = dup(STDIN_FILENO);
 	tmp_stdout = dup(STDOUT_FILENO);
 	if (tmp_stdin == -1 || tmp_stdout == -1)
-		ft_fatal_error(exec_data, "minishell: error retrieving current directory", 2, free_exec);
+		ft_error("minishell: error retrieving current directory", 2);
 	if (apply_redirections(exec_data, i) == -1)
 	{
-		close(tmp_stdin);
-		close(tmp_stdout);
+		close_tmp_fds(tmp_stdin, tmp_stdout);
 		return (-1);
 	}
 	if (exec_builtins(exec_data, i) == -1)
 	{
-		close(tmp_stdin);
-		close(tmp_stdout);
+		close_tmp_fds(tmp_stdin, tmp_stdout);
 		return (-1);
 	}
 	if ((dup2(tmp_stdin, STDIN_FILENO)) == -1)
-		ft_fatal_error(exec_data, "minishell: dup2 failed", 2, free_exec);
+	{
+		close_tmp_fds(tmp_stdin, tmp_stdout);
+		ft_error("minishell: dup2 failed", 2);
+	}
 	if ((dup2(tmp_stdout, STDOUT_FILENO)) == -1)
-		ft_fatal_error(exec_data, "minishell: dup2 failed", 2, free_exec);
-	close(tmp_stdin);
-	close(tmp_stdout);
+	{
+		close_tmp_fds(tmp_stdin, tmp_stdout);
+		ft_error("minishell: dup2 failed", 2);
+	}
+	close_tmp_fds(tmp_stdin, tmp_stdout);
 	return (0);
 }
 

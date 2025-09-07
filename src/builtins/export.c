@@ -6,17 +6,17 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:09:13 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/06 22:57:50 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/07 12:52:02 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins/builtins.h"
 
-
 /* TO DO : AJOUTER UNE VARIABLE POUR RECUPERER LE RETOUR DE CHECK_IN_ENV */
 int	export_with_args(t_exec_data *exec_data, char **cmd)
 {
 	int		i;
+	int		check_env;
 	t_var	*var;
 	t_list	*new_lst;
 
@@ -34,7 +34,8 @@ int	export_with_args(t_exec_data *exec_data, char **cmd)
 			}	
 			if (parse_args(cmd[i], var) == -1)
 				return (-1);
-			if (check_in_env(exec_data->envp, var) == 0)
+			check_env = check_in_env(exec_data->envp, var);
+			if (check_env == 0)
 			{
 				new_lst = ft_lstnew(var);
 				if (!new_lst)
@@ -45,15 +46,20 @@ int	export_with_args(t_exec_data *exec_data, char **cmd)
 				}
 				ft_lstadd_back(&exec_data->envp, new_lst);
 			}
+			else if (check_env == -1)
+			{
+				free_var(var);
+				return (-1);
+			}
 			else
-				free_var(&var);
+				free_var(var);
 		}
 		i++;
 	}
 	return (0);
 }
 
-int	export_without_args(t_exec_data *exec_data)
+void export_without_args(t_exec_data *exec_data)
 {
 	t_var	*var;
 	t_var	*var2;
@@ -79,16 +85,12 @@ int	export_without_args(t_exec_data *exec_data)
 		}
 	}
 	print_export_list(head);
-	return (0);
 }
 
 int	ft_export(t_exec_data *exec_data, t_cmds cmd)
 {
 	if (count_nbr_args(cmd.cmd) <= 1)
-	{
-		if (export_without_args(exec_data) == -1)
-			return (-1);
-	}
+		export_without_args(exec_data);
 	else
 	{
 		if (export_with_args(exec_data, cmd.cmd) == -1)

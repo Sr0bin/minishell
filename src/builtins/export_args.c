@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:19:22 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/06 22:46:15 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/07 13:23:15 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	check_export_var(char *args)
 	i = 0;
 	if (!ft_isalpha(args[0]) && args[0] != '_')
 	{
-		ft_putendl_fd("minishell: export: not a valid identifier", 2);
+		ft_error("minishell: export: not a valid identifier", 2);
 		return (-1);
 	}
 	while (args[i] && args[i] != '=')
 	{
 		if (!ft_isalnum(args[i]) && args[i] != '_')
 		{
-			ft_putendl_fd("minishell: export: not a valid identifier", 2);
+			ft_error("minishell: export: not a valid identifier", 2);
 			return (-1);
 		}
 		i++;

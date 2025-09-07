@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 09:33:49 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/28 12:47:20 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/07 13:02:20 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,29 @@ t_var	*create_var(char *env)
 	if (equal_sign)
 	{
 		var->key = ft_substr(env, 0, (ft_strlen(env) - ft_strlen(equal_sign)));
+		if (!var->key)
+		{
+			free(var);
+			ft_error("minishell: ft_substr failed", 1);
+			return (NULL);
+		}
 		var->value = ft_strdup(equal_sign + 1);
+		if (!var->value)
+		{
+			free_var(var);
+			ft_error("minishell: ft_strdup failed", 1);
+			return (NULL);
+		}
 	}
 	else
 	{
 		var->key = ft_strdup(env);
+		if (!var->key)
+		{
+			free_var(var);
+			ft_error("minishell: ft_strdup failed", 1);
+			return (NULL);
+		}
 		var->value = NULL;
 	}
 	return (var);
@@ -49,10 +67,7 @@ t_list	*envp_to_list(char **envp)
 	{
 		var = create_var(envp[i]);
 		if (!var)
-		{
-			free_var(var);
 			return (NULL);
-		}
 		node = ft_lstnew(var);
 		if (!node)
 		{

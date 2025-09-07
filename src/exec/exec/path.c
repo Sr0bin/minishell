@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 09:36:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/06 22:19:12 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/07 14:24:23 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	*get_env_path( t_exec_data *exec_data)
 {
 	t_var	*var;
 	t_list	*tmp;
+	char	*value;
 
 	tmp = exec_data->envp;
 	while (tmp)
@@ -23,9 +24,10 @@ char	*get_env_path( t_exec_data *exec_data)
 		var = (t_var *)tmp->content;
 		if (ft_strcmp(var->key, "PATH") == 0)
 		{
-			if (!var->value)
-				ft_error("minishell: PATH is empty", 127);
-			return (ft_strdup(var->value));
+			value = ft_strdup(var->value);
+			if (!value)
+				ft_fatal_error(exec_data, "minishell: ft_strdup failed", 1, &free_exec);
+			return (value);
 		}
 		tmp = tmp->next;
 	}

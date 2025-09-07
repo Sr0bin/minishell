@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:21:09 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/06 15:31:47 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/07 12:52:11 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		ft_export(t_exec_data *exec_data, t_cmds cmd);
 void	check_var(t_list **env, char **args);
 void	delete_var(t_list **env, char *args);
 int		export_with_args(t_exec_data *exec_data, char **args);
-int		export_without_args(t_exec_data *exec_data);
+void	export_without_args(t_exec_data *exec_data);
 void	free_var(void	*content);
 void	ft_swap(t_env *a, t_env *b);
 int		parse_args(char *arg, t_var *var);
