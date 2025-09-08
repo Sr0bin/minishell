@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/07 14:03:13 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/08 08:23:38 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	exec_single_builtin(t_exec_data *exec_data, int i)
 		close_tmp_fds(tmp_stdin, tmp_stdout);
 		return (-1);
 	}
+	if (ft_strcmp(exec_data->cmds[i].cmd[0], "exit") == 0) 
+		close_tmp_fds(tmp_stdin, tmp_stdout);
 	if (exec_builtins(exec_data, i) == -1)
 	{
 		close_tmp_fds(tmp_stdin, tmp_stdout);
