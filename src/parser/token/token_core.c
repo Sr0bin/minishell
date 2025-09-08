@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:53:27 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/02 19:49:00 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/08 18:21:18 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,7 @@ void	*token_list_add(t_token_list **list, t_token_list *token)
 
 inline t_token	*lst_to_tkn(t_token_list *tkn_list)
 {
+	if (tkn_list == NULL)
+		return (NULL);
 	return ((t_token *)tkn_list->content);
 }

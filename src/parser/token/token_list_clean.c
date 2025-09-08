@@ -6,14 +6,45 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:22:58 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/04 22:57:44 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/08 18:51:03 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parsing/token.h"
 
+static t_token_list	*token_list_empty(t_token *crnt_token, t_token_list **lst_del)
+{
+	if (ft_strcmp(crnt_token->content, "") == 0)
+	{
+		ft_lstpop(lst_del, (void *) token_destroy);
+		return (*lst_del);
+	}
+	return (NULL);
+}
+
 //TODO: remove only whitespace token
+static t_token_list	*token_clean(t_token_list *tkn_lst)
+{
+	t_token	*tkn;
+	t_token	*tkn_next;
+	tkn = lst_to_tkn(tkn_lst);
+	tkn_next = lst_to_tkn(tkn_lst->next);
+	assign_token_type(tkn);
+	//TODO: Error
+	token_expand(tkn);
+	token_clean_quote(tkn);
+	if (tkn_next != NULL && tkn->to_join == 1)
+	{
+		//TODO: error
+		token_join(tkn_lst, tkn_lst->next);
+		if (tkn->content == NULL)
+			return (NULL);
+		return (tkn_lst->next);
+	}
+	return (tkn_lst);
+}
+
 t_token_list	*token_list_clean(t_token_list **list)
 {
 	t_token_list	*iter_prev;
@@ -23,15 +54,11 @@ t_token_list	*token_list_clean(t_token_list **list)
 	if (*list == NULL)
 		return (*list);
 	iter_prev = *list;
+	iter = iter_prev;
 	if (iter_prev->next != NULL)
 	{
-		assign_token_type((*list)->content);
-		iter = iter_prev;
-		crnt_token = iter->content;
-		token_expand(crnt_token);
-		token_clean_quote(crnt_token);
-		if (crnt_token->to_join == 1)
-			token_join(iter, iter->next);
+		token_clean(iter);
+		//TODO: error
 		iter = iter_prev->next;
 	}
 	else
@@ -39,21 +66,12 @@ t_token_list	*token_list_clean(t_token_list **list)
 	while (iter != NULL)
 	{
 		crnt_token = iter->content;
-		if (ft_strcmp(crnt_token->content, "") == 0)
-		{
-			ft_lstpop(&iter_prev, (void *) token_destroy);
+		if (token_list_empty(crnt_token, &iter_prev))
 			iter = iter_prev->next;
-		}
 		else
 		{
-			assign_token_type(crnt_token);
-			token_expand(crnt_token);
-			token_clean_quote(crnt_token);
-			if (crnt_token->to_join == 1)
-			{
-				token_join(iter, iter->next);
+			if (token_clean(iter) == iter->next)
 				continue ;
-			}
 			if (iter_prev->next == NULL)
 				break;
 			iter_prev = iter;
@@ -62,7 +80,6 @@ t_token_list	*token_list_clean(t_token_list **list)
 	}
 	return (*list);
 }
-
 void	*token_ptr_destroy(t_token **token)
 {
 	if (*token != NULL)
