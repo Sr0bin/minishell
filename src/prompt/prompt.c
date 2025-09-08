@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 17:23:08 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/08 18:07:39 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/08 19:46:00 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	*prompt_heredoc(int	w_fd, char *eof)
 		write(w_fd, "\n", 1);
 		free(prompt);
 	}
+	free(prompt);
 	return (NULL);
 
 }
