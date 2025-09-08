@@ -3,6 +3,10 @@ echo a | cat | grep a
 check lors de l'expand les characteres autorisees
 expand lorsque lavariable existe pas
 $ tout seul
+export avec une variable qui commence par un _
+isatty
+expand qpres heredoc
+> out sans rien
 
 mkdir a
 mkdir a/b
