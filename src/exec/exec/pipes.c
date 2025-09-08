@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:10:10 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/08 18:25:53 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/08 20:02:19 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,6 @@ void	close_pipes(t_exec_data *exec_data)
 	int	j;
 
 	j = 0;
-	if (exec_data->nb_cmds == 1)
-	{
-		if (exec_data->fd[0][0] >= 0)
-		close(exec_data->fd[0][0]);
-		if (exec_data->fd[0][1] >= 0)
-		close(exec_data->fd[0][1]);
-	}
-	else
 	{	
 		while (j < exec_data->nb_cmds - 1)
 		{
