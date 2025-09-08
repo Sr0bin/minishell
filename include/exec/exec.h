@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:07:32 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/06 22:58:01 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/08 20:03:27 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int		exec_single_cmd(t_exec_data *exec_data, int i);
 void	exec_cmd(t_exec_data *exec_data, int i);
 int		exec_pipex(t_exec_data *exec_data);
 int		exec(t_ast *root);
+void	close_tmp_fds(int fd_in, int fd_out);
 
 /* ----- EXTERNAL.C ----- */
 
