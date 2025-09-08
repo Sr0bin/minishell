@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 17:23:08 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/04 21:17:34 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/08 18:07:39 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,23 @@ char	*prompt(void)
 	}
 	add_history(read);
 	return (read);
+}
+void	*prompt_heredoc(int	w_fd, char *eof)
+{
+	char	*prompt;
+
+
+	while (1)
+	{
+		prompt = readline(PROMPT_HEREDOC);
+		if (prompt == NULL || ft_strcmp(eof, prompt) == 0)
+			break;
+		write(w_fd, prompt, ft_strlen(prompt));
+		write(w_fd, "\n", 1);
+		free(prompt);
+	}
+	return (NULL);
+
 }
 
 t_ast	*root_generation(char *prompt)

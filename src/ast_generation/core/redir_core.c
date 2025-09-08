@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 15:48:12 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/05 16:50:11 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/08 18:04:33 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_redir	*redir_token_create(t_token_list *tkn_lst)
 	if (lst_to_tkn(tkn_lst)->type == TOKEN_HEREDOC)
 	{
 		redir_type = REDIR_HEREDOC;
-		return (heredoc_create_fd());
+		return (heredoc_create_fd(tkn_lst));
 	}
 	filename = ft_strdup(lst_to_tkn(tkn_lst->next)->content);
 	if (filename == NULL)

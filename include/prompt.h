@@ -6,17 +6,18 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 17:24:09 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/04 21:18:13 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/08 17:59:39 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROMPT_H
 # define PROMPT_H
 # define PROMPT_NORMAL "minishell> "
-# define PROMPT_HEREDOC "minishell> "
+# define PROMPT_HEREDOC "> "
 # include "struct.h"
 
 char	*prompt(void);
+void	*prompt_heredoc(int	w_fd, char *eof);
 t_ast	*root_generation(char *prompt);
 #endif
 
