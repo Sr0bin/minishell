@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:16:49 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/06 16:26:52 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/08 14:00:29 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		is_whitespace(char	*cmd)
 
 void	check_path(t_exec_data *exec_data, int i)
 {
-	if (exec_data->cmds[i].cmd[0][0] == NULL || exec_data->cmds[i].cmd[0][0] == '\0' || is_whitespace(exec_data->cmds[i].cmd[0]) != 0)
+	if (exec_data->cmds[i].cmd[0][0] == '\0' || is_whitespace(exec_data->cmds[i].cmd[0]) != 0)
 	{
 		free_exec(exec_data);
 		exit(0);

@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:04:52 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/06 15:43:10 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/08 18:25:03 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,25 @@ void	free_cmds(t_exec_data *exec_data)
 	free(exec_data->cmds);
 }
 
-void	free_fds(int **fd, int nb_cmbs)
+void	free_fds(int **fd, int nb_cmds)
 {
 	int	i;
 
 	i = 0;
 	if (!fd)
 		return ;
-	while (i < nb_cmbs - 1)
+	if (nb_cmds == 1)
 	{
-		if (fd[i])
+		free(fd[0]);
+	}
+	else
+	{
+		while (i < nb_cmds - 1)
+		{
+			if (fd[i])
 			free(fd[i]);
-		i++;
+			i++;
+		}
 	}
 	free(fd);
 }

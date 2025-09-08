@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 17:18:02 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/06 15:39:12 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/08 17:04:49 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,12 @@ int	run_builtins(t_exec_data *exec_data, int i)
 {
 	if (is_builtin(exec_data->cmds[i].cmd[0]) == 1)
 	{
+		free_envp(exec_data->envp);
+		free_exec_data(exec_data);
 		if (exec_builtins(exec_data, i) == -1)
-		{
-			free_envp(exec_data->envp);
-			free_exec_data(exec_data);
 			exit(exit_code_read());
-		}
 		else 
-		{
-			free_envp(exec_data->envp);
-			free_exec_data(exec_data);
 			exit (0);
-		}
 	}
 	return (0);
 }

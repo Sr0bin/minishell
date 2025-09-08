@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/08 08:23:38 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/08 18:32:37 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,38 +21,50 @@ static void	close_tmp_fds(int fd_in, int fd_out)
 	close(fd_out);
 }
 
+void	restore_fds(t_exec_data *exec_data)
+{
+	dup2(exec_data->fd[0][0], STDIN_FILENO);
+	dup2(exec_data->fd[0][1], STDOUT_FILENO);
+	close_tmp_fds(exec_data->fd[0][0], exec_data->fd[0][1]);
+}
+
 int	exec_single_builtin(t_exec_data *exec_data, int i)
 {
-	int	tmp_stdin;
-	int	tmp_stdout;
-
-	tmp_stdin = dup(STDIN_FILENO);
-	tmp_stdout = dup(STDOUT_FILENO);
-	if (tmp_stdin == -1 || tmp_stdout == -1)
-		ft_error("minishell: error retrieving current directory", 2);
+	exec_data->fd = malloc(sizeof(int *));
+	if (!exec_data->fd)
+		ft_fatal_error(exec_data, "minishell: malloc failed", 1, &free_exec);
+	exec_data->fd[0] = malloc(sizeof(int) * 2);
+	if (!exec_data->fd[0])
+		ft_fatal_error(exec_data, "minishell: malloc failed", 1, &free_exec);
+	exec_data->fd[0][0] = dup(STDIN_FILENO);
+	exec_data->fd[0][1] = dup(STDOUT_FILENO);
+	if (exec_data->fd[0][0] == -1 || exec_data->fd[0][1] == -1)
+	{
+		close(exec_data->fd[0][0]);
+		close(exec_data->fd[0][1]);
+		ft_fatal_error(exec_data, "minishell: dup failed", 1, &free_exec);
+	}
 	if (apply_redirections(exec_data, i) == -1)
 	{
-		close_tmp_fds(tmp_stdin, tmp_stdout);
+		restore_fds(exec_data);
 		return (-1);
 	}
-	if (ft_strcmp(exec_data->cmds[i].cmd[0], "exit") == 0) 
-		close_tmp_fds(tmp_stdin, tmp_stdout);
 	if (exec_builtins(exec_data, i) == -1)
 	{
-		close_tmp_fds(tmp_stdin, tmp_stdout);
+		restore_fds(exec_data);
 		return (-1);
 	}
-	if ((dup2(tmp_stdin, STDIN_FILENO)) == -1)
+	if ((dup2(exec_data->fd[0][0], STDIN_FILENO)) == -1)
 	{
-		close_tmp_fds(tmp_stdin, tmp_stdout);
-		ft_error("minishell: dup2 failed", 2);
+		close_tmp_fds(exec_data->fd[0][0],exec_data->fd[0][1]);
+		ft_fatal_error(exec_data, "minishell: dup2 failed", 2, &free_exec);
 	}
-	if ((dup2(tmp_stdout, STDOUT_FILENO)) == -1)
+	if ((dup2(exec_data->fd[0][1], STDOUT_FILENO)) == -1)
 	{
-		close_tmp_fds(tmp_stdin, tmp_stdout);
-		ft_error("minishell: dup2 failed", 2);
+		close_tmp_fds(exec_data->fd[0][0],exec_data->fd[0][1]);
+		ft_fatal_error(exec_data, "minishell: dup2 failed", 2, &free_exec);
 	}
-	close_tmp_fds(tmp_stdin, tmp_stdout);
+	close_tmp_fds(exec_data->fd[0][0], exec_data->fd[0][1]);
 	return (0);
 }
 
@@ -132,17 +144,10 @@ int	 exec(t_ast *root)
 		//TODO: free token_list_from parsing
 		ft_fatal_error(NULL, "minishell: malloc failed", 1, NULL);
 	}
-	*exec_data = (t_exec_data){0};
-	exec_data->envp = (context_read())->env;
-	exec_data->root = root;
 	ast_to_cmds(exec_data, root);
 	if (exec_data->nb_cmds == 1)
 	{
-		if (exec_single_cmd(exec_data, 0) == -1)
-		{
-			free_exec_data(exec_data);
-			return (-1);
-		}
+		exec_single_cmd(exec_data, 0);
 	}
 	else
 	{

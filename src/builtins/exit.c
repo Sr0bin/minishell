@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:19:01 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/08 08:13:52 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/08 18:14:41 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	handle_exit(t_exec_data *exec_data, int exit_code)
 
 	status = exit_code;
 	printf("exit\n");
+	close_pipes(exec_data);
 	free_envp(exec_data->envp);
 	free_exec_data(exec_data);
 	exit (status);
@@ -28,9 +29,11 @@ int	ft_is_digit_and_sign(char *cmd)
 	int	i;
 
 	i = 0;
+	if (cmd[i] == '-' || cmd[i] == '+')
+		i++;
 	while (cmd[i])
 	{
-		if ((cmd[i] < '0' || cmd[i] > '9') && (cmd[i] != '+' && cmd[i] != '-'))
+		if ((cmd[i] < '0' || cmd[i] > '9'))
 			return (1);
 		i++;
 	}
@@ -44,9 +47,15 @@ int	ft_exit(t_exec_data *exec_data, t_cmds cmd)
 	else if (count_nbr_args(cmd.cmd) >= 2)
 	{
 		if (ft_is_digit_and_sign(cmd.cmd[1]) == 1)
+		{
+			ft_putendl_fd("exit\n", 2);	
 			ft_fatal_error(exec_data, "minishell: exit: numeric argument required", 2, free_exec);
+		}
 		else if (count_nbr_args(cmd.cmd) > 2)
-			printf("minishell: exit: too many arguments\n");
+		{
+			ft_error("minishell: exit: too many arguments", 2);
+			return (-1);			
+		}
 		else
 			handle_exit(exec_data, ft_atoi(cmd.cmd[1]));
 	}

@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:31:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/06 15:45:03 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/08 18:16:29 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ void	init_exec_data(t_exec_data *exec_data, t_ast *root)
 	int	i;
 
 	i = 0;
+	*exec_data = (t_exec_data){0};
+	exec_data->envp = (context_read())->env;
+	exec_data->root = root;
 	exec_data->nb_cmds = count_commands(root);
 	exec_data->cmds = malloc(sizeof(t_cmds)
 			* (long unsigned int)(exec_data->nb_cmds));
@@ -33,34 +36,6 @@ void	init_exec_data(t_exec_data *exec_data, t_ast *root)
 	}
 	exit_code_update(0);
 }
-/* 
-t_list	*fill_redir(t_exec_data *exec_data, t_cmd cmd)
-{
-	t_list	*new;
-	t_redir	*new_redir;
-	t_redir	*old_redir;
-
-	old_redir = (t_redir *) cmd.redir->content;
-	if (!cmd.redir)
-		return (NULL);
-	new = NULL;
-	while (cmd.redir)
-	{
-		new_redir = malloc(sizeof(t_redir));
-		if (!new_redir)
-			ft_fatal_error(exec_data, "malloc failed", 1, &free_exec);
-		new_redir->type = old_redir->type;
-		if (new_redir->type == REDIR_HEREDOC)
-			new_redir->s_heredoc.read = old_redir->s_heredoc.read;
-		else
-			new_redir->filename = ft_strdup(old_redir->filename);
-		if (!new_redir->filename)
-			ft_fatal_error(exec_data, "strdup failed", 1, &free_exec);
-		ft_lstadd_back(&new, ft_lstnew(new_redir));
-		cmd.redir = cmd.redir->next;
-	}
-	return (new);
-} */
 
 void	fill_one_cmd(t_exec_data *exec_data, t_cmd cmd, int *i)
 {

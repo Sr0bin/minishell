@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:49:30 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/07 11:48:16 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/08 13:52:24 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,5 @@ int ft_cd(t_exec_data *exec_data, t_cmds cmd)
 	if (cmd.cmd[1] && ft_strcmp(cmd.cmd[1], "-") == 0)
 		printf("%s\n", new_pwd);
 	free(new_pwd);
-	return 0;
+	return (0);
 }
