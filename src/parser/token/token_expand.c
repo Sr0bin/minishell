@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 19:23:15 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/08 18:31:51 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/09 17:32:21 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ t_token *token_expand(t_token *tkn)
 	char	*dollar;
 	char	*space;
 	size_t	new_size;
+	size_t	len_space;
 
 
 	// if (tkn->content[0] == '"')
@@ -78,8 +79,11 @@ t_token *token_expand(t_token *tkn)
 	ft_strrsz(&tkn->content, new_size);
 	dollar = ft_strchr(tkn->content, '$');
 	space = var_expand_end(dollar); 
-	ft_memcpy(dollar + ft_strlen(found_var->value), space, ft_strlen(tkn->content) - ft_strlen(dollar));
-	ft_memcpy(dollar, found_var->value, ft_strlen(found_var->value));
+	len_space = ft_strlen(space);
+	ft_memmove(dollar + ft_strlen(found_var->value), space, ft_strlen(space));
+	ft_memmove(dollar, found_var->value, ft_strlen(found_var->value));
+	dollar[ft_strlen(found_var->value) + len_space] = '\0';
+	/*ft_memcpy(dollar + ft_strlen(found_var->value), space, ft_strlen(tkn->content) - ft_strlen(dollar));*/
 	// (void) state;
 	return (tkn);
 }
