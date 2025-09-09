@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:09:28 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/09 14:13:13 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/09 16:28:38 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	apply_redirections(t_exec_data *exec_data, int i)
 				fd = redir->s_heredoc.read;
 		if (fd < 0)
 		{
-			ft_error("minishell", 1);
+			ft_error("minishell\n", 1);
 			return (-1);
 		}
 		if (redir->type == REDIR_INPUT || redir->type == REDIR_HEREDOC)
@@ -41,7 +41,7 @@ int	apply_redirections(t_exec_data *exec_data, int i)
 			if (dup2(fd, STDIN_FILENO) == -1)
 			{
 				close(fd);
-				ft_error("minishell: dup2 failed", 1);
+				ft_error("minishell: dup2 failed\n", 1);
 				return (-1);
 			}
 		}
@@ -50,7 +50,7 @@ int	apply_redirections(t_exec_data *exec_data, int i)
 			if (dup2(fd, STDOUT_FILENO) == -1)
 			{
 				close(fd);
-				ft_error("minishell: dup2 failed", 1);
+				ft_error("minishell: dup2 failed\n", 1);
 				return (-1);
 			}
 		}
@@ -67,7 +67,7 @@ int	setup_io(t_exec_data *exec_data, int i)
 		if (dup2(exec_data->fd[i - 1][0], STDIN_FILENO) == -1)
 		{
 			close_pipes(exec_data);
-			ft_fatal_error(exec_data, "minishell: dup2 failed", 1, &free_exec);
+			ft_fatal_error(exec_data, "minishell: dup2 failed\n", 1, &free_exec);
 		}
 	}
 	if (i < exec_data->nb_cmds - 1)
@@ -75,7 +75,7 @@ int	setup_io(t_exec_data *exec_data, int i)
 		if (dup2(exec_data->fd[i][1], STDOUT_FILENO) == -1)
 		{
 			close_pipes(exec_data);
-			ft_fatal_error(exec_data, "minishell: dup2 failed", 1, &free_exec);
+			ft_fatal_error(exec_data, "minishell: dup2 failed\n", 1, &free_exec);
 		}
 	}
 	if (apply_redirections(exec_data, i) == -1)

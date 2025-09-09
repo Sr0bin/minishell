@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:52 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/09 16:02:37 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/09 16:20:16 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ int	main (int argc, char **argv, char **envp)
 		exec(node);
 		free(read);
 	}
+	rl_clear_history();
 	free(context); //TODO: clean context destruction
 }

@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:49:30 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/08 13:52:24 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/09 16:25:27 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	update_env(t_exec_data *exec_data, char *key, char *value)
 			var->value = ft_strdup(value);
 			if (!var->value)
 			{
-				ft_error("minishell: ft_strdup failed", 1);
+				ft_error("minishell: ft_strdup failed\n", 1);
 				return (-1);
 			}
 			return (0);
@@ -50,7 +50,7 @@ int ft_cd(t_exec_data *exec_data, t_cmds cmd)
 		path = get_env_value(exec_data, "HOME");
 		if (!path || ft_strcmp(path, "") == 0)
 		{
-			ft_error("minishell: cd: HOME not set", 1);
+			ft_error("minishell: cd: HOME not set\n", 1);
 			return (-1);
 		}
 	}
@@ -59,7 +59,7 @@ int ft_cd(t_exec_data *exec_data, t_cmds cmd)
 		path = get_env_value(exec_data, "OLDPWD");
 		if (!path || ft_strcmp(path, "") == 0)
 		{
-			ft_error("minishell: cd: OLDPWD not set", 1);
+			ft_error("minishell: cd: OLDPWD not set\n", 1);
 			return (-1);
 		}
 	}
@@ -74,7 +74,7 @@ int ft_cd(t_exec_data *exec_data, t_cmds cmd)
 	new_pwd = getcwd(NULL, 0);
 	if (!new_pwd)
 	{
-		ft_error("minishell: error retrieving current directory", 2);
+		ft_error("minishell: error retrieving current directory\n", 2);
 		return(-1);
 	}
 	if (old_pwd)

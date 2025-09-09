@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:19:22 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/07 13:23:15 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/09 16:26:29 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	check_export_var(char *args)
 	i = 0;
 	if (!ft_isalpha(args[0]) && args[0] != '_')
 	{
-		ft_error("minishell: export: not a valid identifier", 2);
+		ft_error("minishell: export: not a valid identifier\n", 2);
 		return (-1);
 	}
 	while (args[i] && args[i] != '=')
 	{
 		if (!ft_isalnum(args[i]) && args[i] != '_')
 		{
-			ft_error("minishell: export: not a valid identifier", 2);
+			ft_error("minishell: export: not a valid identifier\n", 2);
 			return (-1);
 		}
 		i++;
@@ -45,7 +45,7 @@ int	parse_args(char *arg, t_var *var)
 		var->key = ft_strdup(arg);
 		if (!var->key)
 		{
-			ft_error("minishell: ft_strdup failed", 1);
+			ft_error("minishell: ft_strdup failed\n", 1);
 			return (-1);
 		}
 		var->value = NULL;
@@ -56,7 +56,7 @@ int	parse_args(char *arg, t_var *var)
 		var->key = ft_substr(arg, 0, key_len);
 		if (!var->key)	
 		{
-			ft_error("minishell: ft_substr failed", 1);
+			ft_error("minishell: ft_substr failed\n", 1);
 			return (-1);
 		}
 		var->value = ft_substr(arg, (unsigned int)(key_len + 1),
@@ -64,7 +64,7 @@ int	parse_args(char *arg, t_var *var)
 		if (!var->value)
 		{
 			free(var->key);
-			ft_error("minishell: ft_substr failed", 1);
+			ft_error("minishell: ft_substr failed\n", 1);
 			return (-1);
 		}
 	}
@@ -86,7 +86,7 @@ int	check_in_env(t_env *env, t_var *var)
 				var_env->value = ft_strdup(var->value);
 				if (!var_env->value)
 				{
-					ft_error("minishell: ft_strdup failed", 1);
+					ft_error("minishell: ft_strdup failed\n", 1);
 					return (-1);
 				}
 			}
