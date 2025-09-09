@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:19:01 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/08 20:02:49 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/09 16:24:49 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	handle_exit(t_exec_data *exec_data, int exit_code)
 	close_tmp_fds(exec_data->fd[0][0], exec_data->fd[0][1]);
 	free_envp(exec_data->envp);
 	free_exec_data(exec_data);
+	rl_clear_history();
 	exit (status);
 }
 
@@ -49,11 +50,11 @@ int	ft_exit(t_exec_data *exec_data, t_cmds cmd)
 		if (ft_is_digit_and_sign(cmd.cmd[1]) == 1)
 		{
 			ft_putendl_fd("exit\n", 2);	
-			ft_fatal_error(exec_data, "minishell: exit: numeric argument required", 2, free_exec);
+			ft_fatal_error(exec_data, "minishell: exit: numeric argument required\n", 2, free_exec);
 		}
 		else if (count_nbr_args(cmd.cmd) > 2)
 		{
-			ft_error("minishell: exit: too many arguments", 2);
+			ft_error("minishell: exit: too many arguments\n", 2);
 			return (-1);			
 		}
 		else

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   token_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 19:23:15 by rorollin          #+#    #+#             */
 /*   Updated: 2025/09/09 17:32:21 by rorollin         ###   ########.fr       */
@@ -75,7 +75,7 @@ t_token *token_expand(t_token *tkn)
 	found_var = var_search(context_read()->env, &dollar[1]);
 	if (found_var == NULL)
 		return (tkn);
-	new_size = ft_strlen(tkn->content) + ft_strlen(found_var->value);
+	new_size = ft_strlen(found_var->value);//ft_strlen(tkn->content) + ft_strlen(found_var->value);
 	ft_strrsz(&tkn->content, new_size);
 	dollar = ft_strchr(tkn->content, '$');
 	space = var_expand_end(dollar); 

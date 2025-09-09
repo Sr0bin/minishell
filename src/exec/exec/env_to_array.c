@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 07:53:11 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/02 17:56:22 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/09 16:27:39 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**env_to_array(t_exec_data *exec_data)
 	tmp = exec_data->envp;
 	array = malloc(sizeof(char *) * ((unsigned long)ft_lstsize(tmp) + 1));
 	if (!array)
-		ft_error("minishell: malloc failed", 1);
+		ft_error("minishell: malloc failed\n", 1);
 	i = 0;
 	while (tmp)
 	{

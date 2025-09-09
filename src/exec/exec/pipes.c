@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:10:10 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/08 20:02:19 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/09 16:29:02 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ void	init_pipes(t_exec_data *exec_data)
 	exec_data->fd = malloc(sizeof(int *)
 			* (long unsigned int)(exec_data->nb_cmds - 1));
 	if (!exec_data->fd)
-		ft_fatal_error(exec_data, "minishell: malloc failed", 1, &free_exec);
+		ft_fatal_error(exec_data, "minishell: malloc failed\n", 1, &free_exec);
 	while (i < exec_data->nb_cmds - 1)
 	{
 		exec_data->fd[i] = malloc(sizeof(int) * 2);
 		if (!exec_data->fd[i])
-			ft_fatal_error(exec_data, "minishell: malloc failed", 1, &free_exec);
+			ft_fatal_error(exec_data, "minishell: malloc failed\n", 1, &free_exec);
 		exec_data->fd[i][0] = -1;
 		exec_data->fd[i][1] = -1;
 		i++;

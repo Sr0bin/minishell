@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/08 20:03:10 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/09 16:47:57 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@ int	exec_single_builtin(t_exec_data *exec_data, int i)
 {
 	exec_data->fd = malloc(sizeof(int *));
 	if (!exec_data->fd)
-		ft_fatal_error(exec_data, "minishell: malloc failed", 1, &free_exec);
+		ft_fatal_error(exec_data, "minishell: malloc failed\n", 1, &free_exec);
 	exec_data->fd[0] = malloc(sizeof(int) * 2);
 	if (!exec_data->fd[0])
-		ft_fatal_error(exec_data, "minishell: malloc failed", 1, &free_exec);
+		ft_fatal_error(exec_data, "minishell: malloc failed\n", 1, &free_exec);
 	exec_data->fd[0][0] = dup(STDIN_FILENO);
 	exec_data->fd[0][1] = dup(STDOUT_FILENO);
 	if (exec_data->fd[0][0] == -1 || exec_data->fd[0][1] == -1)
 	{
 		close(exec_data->fd[0][0]);
 		close(exec_data->fd[0][1]);
-		ft_fatal_error(exec_data, "minishell: dup failed", 1, &free_exec);
+		ft_fatal_error(exec_data, "minishell: dup failed\n", 1, &free_exec);
 	}
 	if (apply_redirections(exec_data, i) == -1)
 	{
@@ -57,12 +57,12 @@ int	exec_single_builtin(t_exec_data *exec_data, int i)
 	if ((dup2(exec_data->fd[0][0], STDIN_FILENO)) == -1)
 	{
 		close_tmp_fds(exec_data->fd[0][0], exec_data->fd[0][1]);
-		ft_fatal_error(exec_data, "minishell: dup2 failed", 2, &free_exec);
+		ft_fatal_error(exec_data, "minishell: dup2 failed\n", 2, &free_exec);
 	}
 	if ((dup2(exec_data->fd[0][1], STDOUT_FILENO)) == -1)
 	{
 		close_tmp_fds(exec_data->fd[0][0],exec_data->fd[0][1]);
-		ft_fatal_error(exec_data, "minishell: dup2 failed", 2, &free_exec);
+		ft_fatal_error(exec_data, "minishell: dup2 failed\n", 2, &free_exec);
 	}
 	close_tmp_fds(exec_data->fd[0][0], exec_data->fd[0][1]);
 	return (0);
@@ -81,7 +81,7 @@ int	exec_single_cmd(t_exec_data *exec_data, int i)
 	}
 	pid = fork();
 	if (pid == -1)
-		ft_fatal_error(exec_data, "minishell: fork failed", 1, &free_exec);
+		ft_fatal_error(exec_data, "minishell: fork failed\n", 1, &free_exec);
 	else if (pid == 0)
 		exec_cmd(exec_data, i);
 	else
@@ -113,11 +113,11 @@ int	exec_pipex(t_exec_data *exec_data)
 		if (i < exec_data->nb_cmds - 1)
 		{
 			if (pipe(exec_data->fd[i]) == -1)
-				ft_fatal_error(exec_data, "minishell: pipe failed", 1, &free_exec);
+				ft_fatal_error(exec_data, "minishell: pipe failed\n", 1, &free_exec);
 		}
 		pid = fork();
 		if (pid == -1)
-			ft_fatal_error(exec_data, "minishell: fork failed", 1, &free_exec);
+			ft_fatal_error(exec_data, "minishell: fork failed\n", 1, &free_exec);
 		else if (pid == 0)
 			exec_cmd(exec_data, i);
 		else
@@ -142,7 +142,7 @@ int	 exec(t_ast *root)
 		free_envp(context->env);
 		ast_destroy(&root);
 		//TODO: free token_list_from parsing
-		ft_fatal_error(NULL, "minishell: malloc failed", 1, NULL);
+		ft_fatal_error(NULL, "minishell: malloc failed\n", 1, NULL);
 	}
 	ast_to_cmds(exec_data, root);
 	if (exec_data->nb_cmds == 1)

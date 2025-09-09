@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 09:33:49 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/07 13:02:20 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/09 16:25:45 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ t_var	*create_var(char *env)
 		if (!var->key)
 		{
 			free(var);
-			ft_error("minishell: ft_substr failed", 1);
+			ft_error("minishell: ft_substr failed\n", 1);
 			return (NULL);
 		}
 		var->value = ft_strdup(equal_sign + 1);
 		if (!var->value)
 		{
 			free_var(var);
-			ft_error("minishell: ft_strdup failed", 1);
+			ft_error("minishell: ft_strdup failed\n", 1);
 			return (NULL);
 		}
 	}
@@ -46,7 +46,7 @@ t_var	*create_var(char *env)
 		if (!var->key)
 		{
 			free_var(var);
-			ft_error("minishell: ft_strdup failed", 1);
+			ft_error("minishell: ft_strdup failed\n", 1);
 			return (NULL);
 		}
 		var->value = NULL;

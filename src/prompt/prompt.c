@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 17:23:08 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/08 19:46:00 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/09 16:18:42 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char	*prompt(void)
 	{
 		free(read);
 		free_envp(context->env);
+		rl_clear_history();
 		printf("exit\n");
 		exit(EXIT_FAILURE);		
 	}

@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:31:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/08 18:16:29 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/09 16:27:34 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	init_exec_data(t_exec_data *exec_data, t_ast *root)
 	exec_data->cmds = malloc(sizeof(t_cmds)
 			* (long unsigned int)(exec_data->nb_cmds));
 	if (!exec_data->cmds)
-		ft_fatal_error(exec_data, "minishell: malloc failed", 1, &free_exec);
+		ft_fatal_error(exec_data, "minishell: malloc failed\n", 1, &free_exec);
 	while (i < exec_data->nb_cmds)
 	{
 		exec_data->cmds[i].cmd = NULL;
@@ -47,7 +47,7 @@ void	fill_one_cmd(t_exec_data *exec_data, t_cmd cmd, int *i)
 	exec_data->cmds[*i].cmd = malloc(sizeof(char *)
 			* (long unsigned int)(count + 1));
 	if (!exec_data->cmds[*i].cmd)
-		ft_fatal_error(exec_data, "minishell: malloc failed", 1, &free_exec);
+		ft_fatal_error(exec_data, "minishell: malloc failed\n", 1, &free_exec);
 	while (cmd.args[j])
 	{
 		exec_data->cmds[*i].cmd[j] = cmd.args[j];

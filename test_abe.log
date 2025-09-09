@@ -212,7 +212,23 @@ warning : heredoc exited before EOF
 (3) ==898929==    by 0x407C8C: context_init (context_init.c:43)
 (3) ==898929==    by 0x4012C2: main (main.c:23)
 (3) ==898929== 
-(3) ==898929== 912 bytes in 57 blocks are still reachable in loss record 65 of 106
+(3) ==898929== 9==81586== 
+==81586== Open file descriptor 1: /dev/pts/1
+==81586==    at 0x49DD01B: dup2 (syscall-template.S:120)
+==81586==    by 0x4047CB: exec_single_builtin (exec.c:62)
+==81586==    by 0x404886: exec_single_cmd (exec.c:78)
+==81586==    by 0x404B3C: exec (exec.c:150)
+==81586==    by 0x4012FA: main (main.c:33)
+==81586== 
+==81586== Open file descriptor 0: /dev/pts/1
+==81586==    at 0x49DD01B: dup2 (syscall-template.S:120)
+==81586==    by 0x404768: exec_single_builtin (exec.c:57)
+==81586==    by 0x404886: exec_single_cmd (exec.c:78)
+==81586==    by 0x404B3C: exec (exec.c:150)
+==81586==    by 0x4012FA: main (main.c:33)
+==81586== 
+==81586== 
+12 bytes in 57 blocks are still reachable in loss record 65 of 106
 (3) ==898929==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
 (3) ==898929==    by 0x4090A8: ft_calloc (ft_calloc.c:25)
 (3) ==898929==    by 0x40910A: ft_lstnew (ft_lstnew.c:20)
