@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 17:18:02 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/08 17:04:49 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/16 09:11:06 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,15 @@ int	exec_builtins(t_exec_data *exec_data, int i)
 
 int	run_builtins(t_exec_data *exec_data, int i)
 {
+	int ret;
+
+	ret = 0;
 	if (is_builtin(exec_data->cmds[i].cmd[0]) == 1)
 	{
+		ret = exec_builtins(exec_data, i);
 		free_envp(exec_data->envp);
 		free_exec_data(exec_data);
-		if (exec_builtins(exec_data, i) == -1)
+		if (ret == -1)
 			exit(exit_code_read());
 		else 
 			exit (0);

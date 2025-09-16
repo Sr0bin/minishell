@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:15:44 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/09 16:29:07 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/16 10:33:42 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,17 @@ void	analyze_status(int status)
 			printf("\n");
 		else if (sig == SIGQUIT)
 			printf("Quit (core dumped)\n");
-
 		exit_code_update(WTERMSIG(status) + 128);
 	}
 	else if (WIFEXITED(status))
 		exit_code_update(WEXITSTATUS(status));
 }
 
-void wait_cmd(t_exec_data *exec_data)
+void	wait_cmd(t_exec_data *exec_data)
 {
-	int status;
-	int	i;
-	pid_t pid;
+	int		status;
+	int		i;
+	pid_t	pid;
 
 	i = 0;
 	status = 0;

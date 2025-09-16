@@ -6,13 +6,13 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:16:49 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/09 16:28:23 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/16 10:31:53 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec/exec.h"
 
-int		is_whitespace(char	*cmd)
+int	is_whitespace(char	*cmd)
 {
 	int	i;
 
@@ -28,7 +28,8 @@ int		is_whitespace(char	*cmd)
 
 void	check_path(t_exec_data *exec_data, int i)
 {
-	if (exec_data->cmds[i].cmd[0] == NULL || ft_strcmp(exec_data->cmds[i].cmd[0], "") == 0)
+	if (exec_data->cmds[i].cmd[0] == NULL
+		|| ft_strcmp(exec_data->cmds[i].cmd[0], "") == 0)
 	{
 		free_exec(exec_data);
 		exit(0);
@@ -37,16 +38,19 @@ void	check_path(t_exec_data *exec_data, int i)
 			exec_data->cmds[i].cmd[0][0] == '.')
 	{
 		if (access(exec_data->cmds[i].cmd[0], F_OK) != 0)
-			ft_fatal_error(exec_data, "minishell: command not found\n", 127, &free_exec);
+			ft_fatal_error(exec_data, "minishell: command not found\n",
+				127, &free_exec);
 		if (access(exec_data->cmds[i].cmd[0], X_OK) != 0)
-			ft_fatal_error(exec_data, "minishell: permission denied\n", 126, &free_exec);
+			ft_fatal_error(exec_data, "minishell: permission denied\n",
+				126, &free_exec);
 		exec_data->cmds[i].path = exec_data->cmds[i].cmd[0];
 	}
 	else
 	{
 		exec_data->cmds[i].path = find_path(exec_data, i);
 		if (!exec_data->cmds[i].path)
-			ft_fatal_error(exec_data, "minishell: command not found\n", 127, &free_exec);
+			ft_fatal_error(exec_data, "minishell: command not found\n",
+				127, &free_exec);
 	}
 }
 
@@ -59,6 +63,7 @@ void	exec_external(t_exec_data *exec_data, int i)
 			env) == -1)
 	{
 		free_array(env);
-		ft_fatal_error(exec_data, "minishell: command not found\n", 127, &free_exec);
+		ft_fatal_error(exec_data, "minishell: command not found\n",
+			127, &free_exec);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:31:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/09 16:27:34 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/16 13:48:44 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,15 @@ void	init_exec_data(t_exec_data *exec_data, t_ast *root)
 	exec_data->envp = (context_read())->env;
 	exec_data->root = root;
 	exec_data->nb_cmds = count_commands(root);
+	exec_data->pids = malloc(sizeof(int)
+			* (long unsigned int)(exec_data->nb_cmds));
 	exec_data->cmds = malloc(sizeof(t_cmds)
 			* (long unsigned int)(exec_data->nb_cmds));
-	if (!exec_data->cmds)
+	if (!exec_data->cmds || !exec_data->pids)
 		ft_fatal_error(exec_data, "minishell: malloc failed\n", 1, &free_exec);
 	while (i < exec_data->nb_cmds)
 	{
+		exec_data->pids[i] = -1;
 		exec_data->cmds[i].cmd = NULL;
 		exec_data->cmds[i].redir = NULL;
 		exec_data->cmds[i].path = NULL;

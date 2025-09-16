@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:50:26 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/08 17:35:24 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/16 08:09:02 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_exec_data
 {
 	int					exit_code;
 	int					nb_cmds;
+	int					*pids;
 	int					**fd;
 	t_cmds				*cmds;
 	t_list				*envp;

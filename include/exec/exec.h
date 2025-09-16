@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:07:32 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/08 20:03:27 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/16 10:55:08 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@ void	exec_cmd(t_exec_data *exec_data, int i);
 int		exec_pipex(t_exec_data *exec_data);
 int		exec(t_ast *root);
 void	close_tmp_fds(int fd_in, int fd_out);
+
+/* ----- EXEC_UTILS.C ----- */
+
+void	cleanup(t_exec_data *exec_data);
+void	restore_fds(t_exec_data *exec_data);
+void	close_tmp_fds(int fd_in, int fd_out);
+
 
 /* ----- EXTERNAL.C ----- */
 

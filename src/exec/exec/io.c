@@ -6,11 +6,47 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:09:28 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/09 16:28:38 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/16 10:53:53 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec/exec.h"
+
+int	open_redir_file(t_redir *redir)
+{
+	if (redir->type == REDIR_OUTPUT)
+		return (open(redir->filename, O_WRONLY | O_CREAT | O_TRUNC, 0644));
+	else if (redir->type == REDIR_APPEND)
+		return (open(redir->filename, O_WRONLY | O_CREAT | O_APPEND, 0644));
+	else if (redir->type == REDIR_INPUT)
+		return (open(redir->filename, O_RDONLY));
+	else if (redir->type == REDIR_HEREDOC)
+		return (redir->s_heredoc.read);
+	return (0);
+}
+
+int	apply_dup2_close(int fd, int type)
+{
+	if (type == REDIR_INPUT || type == REDIR_HEREDOC)
+	{
+		if (dup2(fd, STDIN_FILENO) == -1)
+		{
+			close(fd);
+			ft_error("minishell: dup2 failed\n", 1);
+			return (-1);
+		}
+	}
+	else
+	{
+		if (dup2(fd, STDOUT_FILENO) == -1)
+		{
+			close(fd);
+			ft_error("minishell: dup2 failed\n", 1);
+			return (-1);
+		}
+	}
+	return (0);
+}
 
 int	apply_redirections(t_exec_data *exec_data, int i)
 {
@@ -23,37 +59,14 @@ int	apply_redirections(t_exec_data *exec_data, int i)
 	while (node)
 	{
 		redir = (t_redir *)node->content;
-		if (redir->type == REDIR_OUTPUT)
-			fd = open(redir->filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		else if (redir->type == REDIR_APPEND)
-			fd = open(redir->filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		else if (redir->type == REDIR_INPUT)
-			fd = open(redir->filename, O_RDONLY);
-		else if (redir->type == REDIR_HEREDOC)
-				fd = redir->s_heredoc.read;
+		fd = open_redir_file(redir);
 		if (fd < 0)
 		{
 			ft_error("minishell\n", 1);
 			return (-1);
 		}
-		if (redir->type == REDIR_INPUT || redir->type == REDIR_HEREDOC)
-		{
-			if (dup2(fd, STDIN_FILENO) == -1)
-			{
-				close(fd);
-				ft_error("minishell: dup2 failed\n", 1);
-				return (-1);
-			}
-		}
-		else
-		{
-			if (dup2(fd, STDOUT_FILENO) == -1)
-			{
-				close(fd);
-				ft_error("minishell: dup2 failed\n", 1);
-				return (-1);
-			}
-		}
+		if (apply_dup2_close(fd, redir->type) == -1)
+			return (-1);
 		close(fd);
 		node = node->next;
 	}
@@ -67,7 +80,8 @@ int	setup_io(t_exec_data *exec_data, int i)
 		if (dup2(exec_data->fd[i - 1][0], STDIN_FILENO) == -1)
 		{
 			close_pipes(exec_data);
-			ft_fatal_error(exec_data, "minishell: dup2 failed\n", 1, &free_exec);
+			ft_fatal_error(exec_data, "minishell: dup2 failed\n",
+				1, &free_exec);
 		}
 	}
 	if (i < exec_data->nb_cmds - 1)
@@ -75,7 +89,8 @@ int	setup_io(t_exec_data *exec_data, int i)
 		if (dup2(exec_data->fd[i][1], STDOUT_FILENO) == -1)
 		{
 			close_pipes(exec_data);
-			ft_fatal_error(exec_data, "minishell: dup2 failed\n", 1, &free_exec);
+			ft_fatal_error(exec_data, "minishell: dup2 failed\n",
+				1, &free_exec);
 		}
 	}
 	if (apply_redirections(exec_data, i) == -1)

@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 09:14:56 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/09 16:47:57 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/16 13:52:09 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,59 +14,6 @@
 #include "parsing/token.h"
 #include "exec/exec.h"
 #include "context.h"
-
-void	close_tmp_fds(int fd_in, int fd_out)
-{
-	close(fd_in);
-	close(fd_out);
-}
-
-void	restore_fds(t_exec_data *exec_data)
-{
-	dup2(exec_data->fd[0][0], STDIN_FILENO);
-	dup2(exec_data->fd[0][1], STDOUT_FILENO);
-	close_tmp_fds(exec_data->fd[0][0], exec_data->fd[0][1]);
-}
-
-int	exec_single_builtin(t_exec_data *exec_data, int i)
-{
-	exec_data->fd = malloc(sizeof(int *));
-	if (!exec_data->fd)
-		ft_fatal_error(exec_data, "minishell: malloc failed\n", 1, &free_exec);
-	exec_data->fd[0] = malloc(sizeof(int) * 2);
-	if (!exec_data->fd[0])
-		ft_fatal_error(exec_data, "minishell: malloc failed\n", 1, &free_exec);
-	exec_data->fd[0][0] = dup(STDIN_FILENO);
-	exec_data->fd[0][1] = dup(STDOUT_FILENO);
-	if (exec_data->fd[0][0] == -1 || exec_data->fd[0][1] == -1)
-	{
-		close(exec_data->fd[0][0]);
-		close(exec_data->fd[0][1]);
-		ft_fatal_error(exec_data, "minishell: dup failed\n", 1, &free_exec);
-	}
-	if (apply_redirections(exec_data, i) == -1)
-	{
-		restore_fds(exec_data);
-		return (-1);
-	}
-	if (exec_builtins(exec_data, i) == -1)
-	{
-		restore_fds(exec_data);
-		return (-1);
-	}
-	if ((dup2(exec_data->fd[0][0], STDIN_FILENO)) == -1)
-	{
-		close_tmp_fds(exec_data->fd[0][0], exec_data->fd[0][1]);
-		ft_fatal_error(exec_data, "minishell: dup2 failed\n", 2, &free_exec);
-	}
-	if ((dup2(exec_data->fd[0][1], STDOUT_FILENO)) == -1)
-	{
-		close_tmp_fds(exec_data->fd[0][0],exec_data->fd[0][1]);
-		ft_fatal_error(exec_data, "minishell: dup2 failed\n", 2, &free_exec);
-	}
-	close_tmp_fds(exec_data->fd[0][0], exec_data->fd[0][1]);
-	return (0);
-}
 
 int	exec_single_cmd(t_exec_data *exec_data, int i)
 {
@@ -102,6 +49,16 @@ void	exec_cmd(t_exec_data *exec_data, int i)
 	exec_external(exec_data, i);
 }
 
+int	open_pipe(t_exec_data *exec_data, int i)
+{
+	if (i < exec_data->nb_cmds - 1)
+	{
+		if (pipe(exec_data->fd[i]) == -1)
+			ft_fatal_error(exec_data, "minishell: pipe failed\n",
+				1, &free_exec);
+	}
+}
+
 int	exec_pipex(t_exec_data *exec_data)
 {
 	int		i;
@@ -110,29 +67,32 @@ int	exec_pipex(t_exec_data *exec_data)
 	i = 0;
 	while (i < exec_data->nb_cmds)
 	{
-		if (i < exec_data->nb_cmds - 1)
-		{
-			if (pipe(exec_data->fd[i]) == -1)
-				ft_fatal_error(exec_data, "minishell: pipe failed\n", 1, &free_exec);
-		}
+		open_pipe(exec_data, i);
 		pid = fork();
 		if (pid == -1)
-			ft_fatal_error(exec_data, "minishell: fork failed\n", 1, &free_exec);
+		{
+			cleanup(exec_data);
+			ft_fatal_error(exec_data, "minishell: fork failed\n",
+				1, &free_exec);
+		}
 		else if (pid == 0)
 			exec_cmd(exec_data, i);
 		else
+		{
+			exec_data->pids[i] = pid;
 			close_parent_fds(exec_data, i);
+		}
 		i++;
 	}
 	wait_cmd(exec_data);
 	return (0);
 }
 
-int	 exec(t_ast *root)
+int	exec(t_ast *root)
 {
 	t_exec_data	*exec_data;
 	t_context	*context;
-	
+
 	context = context_read();
 	if (!root)
 		return (1);
@@ -146,9 +106,7 @@ int	 exec(t_ast *root)
 	}
 	ast_to_cmds(exec_data, root);
 	if (exec_data->nb_cmds == 1)
-	{
 		exec_single_cmd(exec_data, 0);
-	}
 	else
 	{
 		init_pipes(exec_data);

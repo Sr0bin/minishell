@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 09:36:39 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/09 16:28:56 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/16 10:34:11 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ char	*get_env_path( t_exec_data *exec_data)
 		{
 			value = ft_strdup(var->value);
 			if (!value)
-				ft_fatal_error(exec_data, "minishell: ft_strdup failed\n", 1, &free_exec);
+				ft_fatal_error(exec_data, "minishell: ft_strdup failed\n",
+					1, &free_exec);
 			return (value);
 		}
 		tmp = tmp->next;
@@ -77,7 +78,8 @@ char	*check_access(t_exec_data *exec_data, char **array, char *path)
 		{
 			free_array(array);
 			free(path);
-			ft_fatal_error(exec_data, "minishell: permission denied\n", 126, &free_exec);
+			ft_fatal_error(exec_data, "minishell: permission denied\n",
+				126, &free_exec);
 		}
 	}
 	return (NULL);
