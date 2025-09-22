@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:08:38 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/02 19:49:00 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 10:29:32 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ typedef t_list				t_env;
 typedef t_list				t_token_list;
 typedef t_list				t_transition_list;
 
+typedef enum e_parser_error
+{
+	MALLOC_FAIL = 1,
+	SYNTAX_ERROR
+}	t_parser_error;
 typedef struct s_token
 {
 	char			*content;
@@ -41,5 +46,6 @@ typedef struct s_parser
 	char			*start_pos;
 	t_token			*crnt_token;
 	t_list			*token_list;
+	char			error_code;
 }	t_parser;
 #endif

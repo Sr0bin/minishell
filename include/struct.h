@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:30:44 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/31 22:22:01 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 09:20:27 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct s_ast_machine
 
 typedef enum s_redir_type
 {
-	REDIR_INPUT,
+	REDIR_INPUT = 1,
 	REDIR_OUTPUT,
 	REDIR_APPEND,
 	REDIR_HEREDOC,
