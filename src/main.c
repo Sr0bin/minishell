@@ -29,7 +29,6 @@ int	main(int argc, char **argv, char **envp)
 		if (read == NULL)
 			continue ;
 		node = root_generation(read);
-		// print_ast(node);
 		exec(node);
 		free(read);
 	}
