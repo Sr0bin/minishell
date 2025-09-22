@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 14:10:20 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 17:54:58 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 10:28:06 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_char_type	char_type(char c)
 
 void	handle_normal(t_parser *p)
 {
-	t_char_type type;
+	t_char_type	type;
 
 	type = char_type(*p->crnt_pos);
 	if (type == CHAR_WHITESPACE)
@@ -69,7 +69,7 @@ void	handle_squote(t_parser *p)
 
 void	handle_dquote(t_parser *p)
 {
-	t_char_type type;
+	t_char_type	type;
 
 	type = char_type(*p->crnt_pos);
 	if (type == CHAR_DQUOTE)
@@ -84,7 +84,7 @@ void	handle_dquote(t_parser *p)
 
 void	handle_op(t_parser *p)
 {
-	t_char_type type;
+	t_char_type	type;
 
 	type = char_type(*p->crnt_pos);
 	if (type == CHAR_OPERATOR)

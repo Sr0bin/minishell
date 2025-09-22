@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 14:53:27 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/08 18:21:18 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/19 18:57:59 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,28 @@ t_token	*token_create(char *text, t_token_type type)
 	return (new);
 }
 
-t_token	*token_generate(t_parser *parser, t_token_type type)
+t_token	*token_generate(t_parser *p, t_token_type type)
 {
 	t_token		*token;
 	char		*token_content;
 	ptrdiff_t	len;
 
-	len = parser->crnt_pos - parser->start_pos;
+	len = p->crnt_pos - p->start_pos;
 	token_content = malloc((unsigned)(len + 1) * sizeof(char));
 	if (token_content == NULL)
-		return (NULL);
-	ft_strlcpy(token_content, parser->start_pos, (unsigned) len + 1);
+		return (parser_update_error(p, MALLOC_FAIL));
+	ft_strlcpy(token_content, p->start_pos, (unsigned) len + 1);
 	token = token_create(token_content, type);
 	if (token == NULL)
 	{
 		free(token_content);
-		return (NULL);
+		return (parser_update_error(p, MALLOC_FAIL));
 	}
-	parser->crnt_token = token;
-	if (*parser->crnt_pos != '\0')
+	p->crnt_token = token;
+	if (*p->crnt_pos != '\0')
 	{
-		parser->crnt_pos++;
-		parser->start_pos = parser->crnt_pos;
+		p->crnt_pos++;
+		p->start_pos = p->crnt_pos;
 	}
 	return (token);
 }
