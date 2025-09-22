@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:29:18 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/22 08:38:19 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 15:43:55 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 # include "prompt.h"
 # include <signal.h>
 
-extern volatile	sig_atomic_t	g_received_signal; 
+extern volatile sig_atomic_t	g_received_signal;
 
-__attribute__((noreturn)) void	exit_minishell(char *prompt);
+void	exit_minishell(char *prompt) __attribute__((noreturn));
 
 #endif

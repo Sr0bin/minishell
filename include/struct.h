@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:30:44 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/22 09:20:27 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 15:42:03 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ typedef struct s_redir
 			int				read;
 			int				write;
 		} s_heredoc;
-
 	};
 }	t_redir;
 
@@ -102,7 +101,7 @@ typedef struct s_context
 	t_ast			*crnt_node;
 }	t_context;
 
-typedef	enum	e_data_set
+typedef enum e_data_set
 {
 	SET,
 	UNSET,
@@ -110,10 +109,11 @@ typedef	enum	e_data_set
 }	t_data_set;
 typedef void				(*t_handler)(char c, t_parser *p);
 
-typedef enum s_exec_data_context {
+typedef enum s_exec_data_context
+{
 	SET_EXEC_DATA,
 	READ_EXEC_DATA,
 	UNSET_EXEC_DATA
-} t_exec_data_context;
+}	t_exec_data_context;
 
 #endif

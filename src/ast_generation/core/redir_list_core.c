@@ -6,13 +6,31 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 15:49:24 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/22 14:47:52 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 15:58:20 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_redir_list	*redir_list_append(t_redir_list *redir_list
+t_token_list	*token_list_skip_redir(t_token_list *tkn_lst)
+{
+	t_token_list	*pipe_first;
+
+	pipe_first = pipe_find_first(tkn_lst);
+	while (tkn_lst != pipe_first)
+	{
+		if (token_list_type_redir(tkn_lst) == 0)
+			return (tkn_lst);
+		tkn_lst = tkn_lst->next;
+		if (tkn_lst != NULL && tkn_lst != pipe_first)
+			tkn_lst = tkn_lst->next;
+	}
+	if (tkn_lst == pipe_first || tkn_lst == NULL)
+		return (NULL);
+	return (tkn_lst);
+}
+
+t_redir_list	*redir_list_append(t_redir_list *rdr_lst,
 		t_token_list *tkn_lst)
 {
 	t_token_list	*crnt_tkn;

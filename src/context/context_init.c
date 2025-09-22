@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 17:40:42 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/04 23:49:03 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 15:40:35 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,11 @@ t_context	*context_init(char **envp)
 	context = ft_calloc(1, sizeof(t_context));
 	if (context == NULL)
 	{
-		//TODO: create a error handler function when there is no context 
 		exit(EXIT_FAILURE);
 	}
 	context->env = envp_to_list(envp);
-	//TODO: Check failed vs empty env
-	if (context->env == NULL)
+	if (context->env == NULL && errno != 0)
 	{
-		//TODO: create a error handler function when there is no context 
 		free(context);
 		exit(EXIT_FAILURE);
 	}

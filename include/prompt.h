@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 17:24:09 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/08 17:59:39 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 15:43:09 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "struct.h"
 
 char	*prompt(void);
-void	*prompt_heredoc(int	w_fd, char *eof);
+void	*prompt_heredoc(int w_fd, char *eof);
 t_ast	*root_generation(char *prompt);
 #endif
-
