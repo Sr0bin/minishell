@@ -6,7 +6,7 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/09/22 11:07:17 by rorollin         ###   ########.fr        #
+#    Updated: 2025/09/22 13:04:08 by rorollin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,8 @@ SOURCES_PARSER_HANDLER = handle_normal.c handle_dquote.c handle_squote.c handle_
 
 SOURCES_PARSER_STATE = transition_utils.c error_parser.c
 
-SOURCES_PARSER_TOKEN = token_assign.c token_core.c token_list_clean.c token_expand.c token_destroy.c
+SOURCES_PARSER_TOKEN = token_assign.c token_core.c token_list_clean.c token_expand.c token_destroy.c\
+					   token_join.c
 
 SOURCES_PARSER = $(addprefix handler/, $(SOURCES_PARSER_HANDLER))\
 				 $(addprefix state/, $(SOURCES_PARSER_STATE)) \

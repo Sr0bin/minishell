@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 19:23:15 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/22 12:38:06 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 13:04:53 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	char_end_expand(char c)
 	return (0);
 }
 
-char	*var_expand_end(const char *key)
+static char	*var_expand_end(const char *key)
 {
 	while (*key != '\0')
 	{
@@ -36,27 +36,7 @@ char	*var_expand_end(const char *key)
 	return ((char *) key);
 }
 
-t_token_list	*token_join(t_token_list *first, t_token_list *deleted)
-{
-	t_token	*frst_tkn;
-	t_token	*del_tkn;
-	char	*ret;
-
-	frst_tkn = lst_to_tkn(first);
-	del_tkn = lst_to_tkn(deleted);
-	if (del_tkn->to_join != 1)
-		frst_tkn->to_join = 0;
-	// TODO : add expand when the global context works
-	// token_expand(del_tkn, env);
-	token_clean_quote(del_tkn);
-	ret = ft_strcat(&frst_tkn->content, del_tkn->content);
-	if (ret == NULL)
-		return (NULL);
-	ft_lstpop(&first, (void *) free);
-	return (first);
-}
-
-static	char *expanded_string(char *key)
+static	char	*expanded_string(char *key, int *exit)
 {
 	t_var	*found_var;
 	char	*var_value;
@@ -66,6 +46,7 @@ static	char *expanded_string(char *key)
 		var_value = ft_itoa(exit_code_read());
 		if (var_value == NULL)
 			return (NULL);
+		*exit = 1;
 	}
 	else
 	{
@@ -73,37 +54,42 @@ static	char *expanded_string(char *key)
 		if (found_var == NULL)
 			return (key);
 		var_value = found_var->value;
+		*exit = 0;
 	}
 	return (var_value);
 }
 
-t_token *token_expand(t_token *tkn)
+inline static void	expand_move(char *dollar, char *var_value, char *space)
+{
+	ft_memmove(dollar + ft_strlen(var_value), space, ft_strlen(space));
+	ft_memmove(dollar, var_value, ft_strlen(var_value));
+}
+
+void	*token_expand(t_token *tkn)
 {
 	char	*var_value;
 	char	*dollar;
 	char	*space;
 	size_t	len_space;
+	int		exit;
 
 	if (tkn->content[0] == '\'')
 		return (tkn);
 	dollar = ft_strchr(tkn->content, '$');
 	if (dollar == NULL)
 		return (tkn);
-	if (ft_strcmp("$", dollar) == 0)
-		return (tkn);
-	var_value = expanded_string(dollar);
-	if (var_value == dollar)
-		return (tkn);
-	if (var_value == NULL)
-		return (NULL);
+	var_value = expanded_string(dollar, &exit);
+	if (var_value == dollar || var_value == NULL)
+		return (var_value);
 	ft_strrsz(&tkn->content, ft_strlen(tkn->content) + ft_strlen(var_value));
 	if (tkn->content == NULL)
 		return (NULL);
 	dollar = ft_strchr(tkn->content, '$');
-	space = var_expand_end(dollar); 
+	space = var_expand_end(dollar);
 	len_space = ft_strlen(space);
-	ft_memmove(dollar + ft_strlen(var_value), space, ft_strlen(space));
-	ft_memmove(dollar, var_value, ft_strlen(var_value));
+	expand_move(dollar, var_value, space);
 	dollar[ft_strlen(var_value) + len_space] = '\0';
+	if (exit != 0)
+		free(var_value);
 	return (tkn);
 }
