@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 18:16:04 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/22 10:30:13 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 17:18:34 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	*parser_handle_error(t_parser *p, t_token_list **final_list)
 {
 	if (p->error_code == SYNTAX_ERROR)
-		printf("Syntax error !\n");
+		printf("Please close quotes !\n");
 	else if (p->error_code == MALLOC_FAIL)
 		printf("Malloc failed !\n");
 	if (p->error_code != 0)

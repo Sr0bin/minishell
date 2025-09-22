@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:22:58 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/22 14:56:19 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 17:20:10 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ static t_token	*token_expand_loop(t_token	*tkn)
 	void	*ret;
 	char	*crnt_pos;
 
+	if (tkn->content[0] == '\'')
+		return (tkn);
 	crnt_pos = ft_strchr(tkn->content, '$');
-	while (crnt_pos++ != NULL 
+	while (crnt_pos++ != NULL
 		&& (var_search(crnt_pos) != NULL || ft_strcmp(crnt_pos, "?") == 0))
 	{
 		ret = token_expand(tkn);
