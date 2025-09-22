@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 19:23:15 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/22 11:17:19 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 12:38:06 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,33 +56,54 @@ t_token_list	*token_join(t_token_list *first, t_token_list *deleted)
 	return (first);
 }
 
-t_token *token_expand(t_token *tkn)
+static	char *expanded_string(char *key)
 {
 	t_var	*found_var;
+	char	*var_value;
+
+	if (ft_strcmp(key, "$?") == 0)
+	{
+		var_value = ft_itoa(exit_code_read());
+		if (var_value == NULL)
+			return (NULL);
+	}
+	else
+	{
+		found_var = var_search(context_read()->env, &key[1]);
+		if (found_var == NULL)
+			return (key);
+		var_value = found_var->value;
+	}
+	return (var_value);
+}
+
+t_token *token_expand(t_token *tkn)
+{
+	char	*var_value;
 	char	*dollar;
 	char	*space;
-	size_t	new_size;
 	size_t	len_space;
-
 
 	if (tkn->content[0] == '\'')
 		return (tkn);
 	dollar = ft_strchr(tkn->content, '$');
 	if (dollar == NULL)
 		return (tkn);
-	//TODO: Put exit code here
-	found_var = var_search(context_read()->env, &dollar[1]);
-	if (found_var == NULL)
+	if (ft_strcmp("$", dollar) == 0)
 		return (tkn);
-	new_size = ft_strlen(found_var->value);
-	ft_strrsz(&tkn->content, new_size);
+	var_value = expanded_string(dollar);
+	if (var_value == dollar)
+		return (tkn);
+	if (var_value == NULL)
+		return (NULL);
+	ft_strrsz(&tkn->content, ft_strlen(tkn->content) + ft_strlen(var_value));
 	if (tkn->content == NULL)
 		return (NULL);
 	dollar = ft_strchr(tkn->content, '$');
 	space = var_expand_end(dollar); 
 	len_space = ft_strlen(space);
-	ft_memmove(dollar + ft_strlen(found_var->value), space, ft_strlen(space));
-	ft_memmove(dollar, found_var->value, ft_strlen(found_var->value));
-	dollar[ft_strlen(found_var->value) + len_space] = '\0';
+	ft_memmove(dollar + ft_strlen(var_value), space, ft_strlen(space));
+	ft_memmove(dollar, var_value, ft_strlen(var_value));
+	dollar[ft_strlen(var_value) + len_space] = '\0';
 	return (tkn);
 }
