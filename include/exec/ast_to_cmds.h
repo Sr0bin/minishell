@@ -18,11 +18,10 @@
 
 /* ----- AST_TO_CMDS.C ----- */
 
-t_list	*fill_redir(t_exec_data *exec_data, t_cmd cmd);
-void	ast_to_cmds(t_exec_data *exec_data, t_ast *root);
+void	init_exec_data(t_exec_data *exec_data, t_ast *root);
 void	fill_one_cmd(t_exec_data *exec_data, t_cmd cmd, int *i);
 void	fill_cmds(t_exec_data *exec_data, t_ast *node, int *i);
-void	init_exec_data(t_exec_data *exec_data, t_ast *root);
+void	ast_to_cmds(t_exec_data *exec_data, t_ast *root);
 
 /* ----- AST_UTILS.C ----- */
 

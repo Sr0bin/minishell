@@ -49,7 +49,8 @@ int	ft_exit(t_exec_data *exec_data, t_cmds cmd)
 	{
 		if (ft_is_digit_and_sign(cmd.cmd[1]) == 1)
 		{
-			ft_putendl_fd("exit\n", 2);
+			close_tmp_fds(exec_data->fd[0][0], exec_data->fd[0][1]);
+			ft_putendl_fd((char *) "exit", 2);
 			ft_fatal_error(exec_data,
 				"minishell: exit: numeric argument required\n", 2, free_exec);
 		}

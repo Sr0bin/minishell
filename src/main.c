@@ -35,7 +35,7 @@ int	main (int argc, char **argv, char **envp)
 	}
 }
 
-[[noreturn]] void	exit_minishell(char *prompt)
+__attribute((noreturn)) void	exit_minishell(char *prompt)
 {
 	t_context	*context;
 

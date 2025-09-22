@@ -32,26 +32,33 @@ char	**env_to_array(t_exec_data *exec_data);
 /* ----- ERROR.C ----- */
 
 void	ft_error(const char *msg, int exit_code);
+void	*free_exec(void *exec_data);
 void	ft_fatal_error(void *arg, const char *msg, int exit_code,
 			void *(*f)(void *));
+
+/* ----- EXEC_BUILTINS.C ----- */
+
+void	init_fds(t_exec_data *exec_data);
+void	close_dup2_builtins(t_exec_data *exec_data);
+int		exec_single_builtin(t_exec_data *exec_data, int i);
+
+/* ----- EXEC_UTILS.C ----- */
+
+void	close_tmp_fds(int fd_in, int fd_out);
+void	restore_fds(t_exec_data *exec_data);
+void	cleanup(t_exec_data *exec_data);
 
 /* ----- EXEC.C ----- */
 
 int		exec_single_cmd(t_exec_data *exec_data, int i);
-int		exec_single_builtin(t_exec_data *exec_data, int i);
 void	exec_cmd(t_exec_data *exec_data, int i);
+int		open_pipe(t_exec_data *exec_data, int i);
 int		exec_pipex(t_exec_data *exec_data);
 int		exec(t_ast *root);
-void	close_tmp_fds(int fd_in, int fd_out);
-
-/* ----- EXEC_UTILS.C ----- */
-
-void	cleanup(t_exec_data *exec_data);
-void	restore_fds(t_exec_data *exec_data);
-void	close_tmp_fds(int fd_in, int fd_out);
 
 /* ----- EXTERNAL.C ----- */
 
+int		is_whitespace(char	*cmd);
 void	exec_external(t_exec_data *exec_data, int i);
 void	check_path(t_exec_data *exec_data, int i);
 
@@ -62,10 +69,11 @@ void	free_envp(t_env	*env);
 void	free_cmds(t_exec_data *exec_data);
 void	free_fds(int **fd, int nb_cmbs);
 void	free_exec_data(t_exec_data *exec_data);
-void	*free_exec(void *exec_data);
 
 /* ------ IO.C ----- */
 
+int		open_redir_file(t_redir *redir);
+int		apply_dup2_close(int fd, t_redir_type type);
 int		apply_redirections(t_exec_data *exec_data, int i);
 int		setup_io(t_exec_data *exec_data, int i);
 void	close_parent_fds(t_exec_data *exec_data, int i);
@@ -75,8 +83,8 @@ void	close_parent_fds(t_exec_data *exec_data, int i);
 char	*get_env_path( t_exec_data *exec_data);
 char	**get_path_array(t_exec_data *exec_data);
 char	*build_cmd_path(t_exec_data *exec_data, char *dir, int i);
-char	*find_path(t_exec_data *exec_data, int i);
 char	*check_access(t_exec_data *exec_data, char **array, char *path);
+char	*find_path(t_exec_data *exec_data, int i);
 
 /* ----- PIPES.C ----- */
 
@@ -92,9 +100,5 @@ void	wait_cmd(t_exec_data *exec_data);
 
 int		is_builtin(char *cmd);
 char	*get_env_value(t_exec_data *exec_data, const char *key);
-
-/* ----- EXEC_BUILTINS.C ----- */
-
-int		exec_single_builtin(t_exec_data *exec_data, int i);
 
 #endif

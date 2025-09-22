@@ -35,6 +35,6 @@
 
 extern volatile	sig_atomic_t	g_received_signal; 
 
-[[noreturn]] void	exit_minishell(char *prompt);
+__attribute__((noreturn)) void	exit_minishell(char *prompt);
 
 #endif

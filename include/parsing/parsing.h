@@ -23,6 +23,6 @@ t_parser		*parser_init(char *input);
 int				parser_stop(t_parser *p);
 void			remove_char(char *text);
 t_char_type		safe_char_type(t_parser *p, int offset);
-void	*parser_update_error(t_parser *p, char error_code);
-void	*parser_handle_error (t_parser *p, t_token_list **final_list);
+void	        *parser_update_error(t_parser *p, char error_code);
+void	        *parser_handle_error (t_parser *p, t_token_list **final_list);
 #endif
