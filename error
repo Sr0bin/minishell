@@ -12,3 +12,14 @@ mkdir a
 mkdir a/b
 cd a/b rm -rf ../../a
 cd ..
+
+
+ctrl + \ in prompt or 
+void	analyze_status(int status)
+ctrl + C dans une co;;ande bloquante
+
+modifier le message syntax error
+
+single quote expand belek
+
+var_search peut etre pas la bonne longuer

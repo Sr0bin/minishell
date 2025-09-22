@@ -32,7 +32,8 @@ static t_token	*token_expand_loop(t_token	*tkn)
 	char	*crnt_pos;
 
 	crnt_pos = ft_strchr(tkn->content, '$');
-	while (crnt_pos++ != NULL && var_search(crnt_pos) != NULL)
+	while (crnt_pos++ != NULL 
+		&& (var_search(crnt_pos) != NULL || ft_strcmp(crnt_pos, "?") == 0))
 	{
 		ret = token_expand(tkn);
 		if (ret == NULL)

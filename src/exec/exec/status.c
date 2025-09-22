@@ -25,7 +25,7 @@ void	analyze_status(int status)
 			printf("\n");
 		else if (sig == SIGQUIT)
 			printf("Quit (core dumped)\n");
-		exit_code_update(WTERMSIG(status) + 128);
+		exit(WTERMSIG(status) + 128);
 	}
 	else if (WIFEXITED(status))
 		exit_code_update(WEXITSTATUS(status));

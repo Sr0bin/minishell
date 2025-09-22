@@ -22,9 +22,9 @@ int	main(int argc, char **argv, char **envp)
 	if (isatty(0) != 1)
 		return (EXIT_FAILURE);
 	context_init(envp);
-	setup_signals();
 	while (1)
 	{
+		setup_signals();
 		read = prompt();
 		if (read == NULL)
 			continue ;
