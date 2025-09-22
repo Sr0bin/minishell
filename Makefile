@@ -128,7 +128,7 @@ CFLAGS = $(CFLAGS_PROD)
 
 export CFLAGS
 
-all: make_libft $(NAME)
+all: git make_libft $(NAME)
 
 $(NAME):  $(OBJECTS) $(LIBFT_PATH)
 	$(COMPILER) $(CFLAGS) $(INCLUDES) $^ -lreadline -o $@
