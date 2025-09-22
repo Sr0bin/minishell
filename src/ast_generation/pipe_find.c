@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 14:04:29 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/26 16:44:49 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 14:48:07 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int	pipe_count(t_token_list	*tkn_lst, t_token_list *last)
 	return (count);
 }
 
-t_token_list	*pipe_find_first(t_token_list *list)
+t_token_list	*pipe_find_first(t_token_list *lst)
 {
-	while (list != NULL && token_type_redir((t_token *) list->content) != TOKEN_PIPE)
-		list = list->next;
-	return (list);
+	while (lst != NULL && token_type_redir((t_token *) lst->content) != TOKEN_PIPE)
+		lst = lst->next;
+	return (lst);
 }
 
 t_token_list	*pipe_find_n(t_token_list *list, int count)

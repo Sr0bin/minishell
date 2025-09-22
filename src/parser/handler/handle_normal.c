@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:10:17 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/02 23:35:34 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 14:50:51 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 
 void	handle_normal_whitespace(t_parser *p)
 {
-	if (p->crnt_pos != p->input\
-		&& char_type((p->crnt_pos)[-1]) != CHAR_WHITESPACE\
-		&& char_type((p->crnt_pos)[-1]) != CHAR_DQUOTE\
-		&& char_type((p->crnt_pos)[-1]) != CHAR_SQUOTE\
+	if (p->crnt_pos != p->input
+		&& char_type((p->crnt_pos)[-1]) != CHAR_WHITESPACE
+		&& char_type((p->crnt_pos)[-1]) != CHAR_DQUOTE
+		&& char_type((p->crnt_pos)[-1]) != CHAR_SQUOTE
 		&& char_type((p->crnt_pos)[-1]) != CHAR_OPERATOR)
 		token_generate(p, TOKEN_WORD);
 	else

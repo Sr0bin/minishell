@@ -6,13 +6,13 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 17:45:26 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/02 17:49:55 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 14:49:48 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exit_code_read()
+int	exit_code_read(void)
 {
 	t_context	*context;
 
