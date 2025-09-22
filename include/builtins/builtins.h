@@ -54,7 +54,7 @@ void	free_var(void	*content);
 void	ft_swap(t_env *a, t_env *b);
 int		parse_args(char *arg, t_var *var);
 void	print_export_list(t_env *env);
-int		ft_pwd();
+int		ft_pwd(void);
 int		ft_unset(t_list **env, t_cmds cmd);
 
 #endif

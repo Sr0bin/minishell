@@ -57,6 +57,7 @@ int	open_pipe(t_exec_data *exec_data, int i)
 			ft_fatal_error(exec_data, "minishell: pipe failed\n",
 				1, &free_exec);
 	}
+	return (0);
 }
 
 int	exec_pipex(t_exec_data *exec_data)
@@ -101,7 +102,6 @@ int	exec(t_ast *root)
 	{
 		free_envp(context->env);
 		ast_destroy(&root);
-		//TODO: free token_list_from parsing
 		ft_fatal_error(NULL, "minishell: malloc failed\n", 1, NULL);
 	}
 	ast_to_cmds(exec_data, root);

@@ -32,7 +32,8 @@ char	**env_to_array(t_exec_data *exec_data);
 /* ----- ERROR.C ----- */
 
 void	ft_error(const char *msg, int exit_code);
-void	ft_fatal_error(void *arg, const char *msg, int exit_code, void *(*f)(void *));
+void	ft_fatal_error(void *arg, const char *msg, int exit_code,
+			void *(*f)(void *));
 
 /* ----- EXEC.C ----- */
 
@@ -47,7 +48,6 @@ void	close_tmp_fds(int fd_in, int fd_out);
 void	cleanup(t_exec_data *exec_data);
 void	restore_fds(t_exec_data *exec_data);
 void	close_tmp_fds(int fd_in, int fd_out);
-
 
 /* ----- EXTERNAL.C ----- */
 
@@ -91,6 +91,9 @@ void	wait_cmd(t_exec_data *exec_data);
 
 int		is_builtin(char *cmd);
 char	*get_env_value(t_exec_data *exec_data, char *key);
-//void	free_var(t_var *var);
+
+/* ----- EXEC_BUILTINS.C ----- */
+
+int		exec_single_builtin(t_exec_data *exec_data, int i);
 
 #endif

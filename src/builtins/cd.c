@@ -39,11 +39,9 @@ int	update_env(t_exec_data *exec_data, char *key, char *value)
 	return (0);
 }
 
-int ft_cd(t_exec_data *exec_data, t_cmds cmd)
+char	*ft_cd_set_path(t_exec_data *exec_data, t_cmds cmd)
 {
-	char *path;
-	char *old_pwd;
-	char *new_pwd;
+	char	*path;
 
 	if (!cmd.cmd[1])
 	{
@@ -51,7 +49,7 @@ int ft_cd(t_exec_data *exec_data, t_cmds cmd)
 		if (!path || ft_strcmp(path, "") == 0)
 		{
 			ft_error("minishell: cd: HOME not set\n", 1);
-			return (-1);
+			return (NULL);
 		}
 	}
 	else if (ft_strcmp(cmd.cmd[1], "-") == 0)
@@ -60,23 +58,17 @@ int ft_cd(t_exec_data *exec_data, t_cmds cmd)
 		if (!path || ft_strcmp(path, "") == 0)
 		{
 			ft_error("minishell: cd: OLDPWD not set\n", 1);
-			return (-1);
+			return (NULL);
 		}
 	}
 	else
 		path = cmd.cmd[1];
-	old_pwd = get_env_value(exec_data, "PWD");
-	if (chdir(path) == -1)
-	{
-		ft_error("minishell: cd", 1);
-		return (-1);
-	}
-	new_pwd = getcwd(NULL, 0);
-	if (!new_pwd)
-	{
-		ft_error("minishell: error retrieving current directory\n", 2);
-		return(-1);
-	}
+	return (path);
+}
+
+int	ft_cd_update_env(t_exec_data *exec_data, char *old_pwd, char *new_pwd,
+		t_cmds cmd)
+{
 	if (old_pwd)
 	{
 		if (update_env(exec_data, "OLDPWD", old_pwd) == -1)
@@ -92,6 +84,32 @@ int ft_cd(t_exec_data *exec_data, t_cmds cmd)
 	}
 	if (cmd.cmd[1] && ft_strcmp(cmd.cmd[1], "-") == 0)
 		printf("%s\n", new_pwd);
+	return (0);
+}
+
+int	ft_cd(t_exec_data *exec_data, t_cmds cmd)
+{
+	char	*path;
+	char	*old_pwd;
+	char	*new_pwd;
+
+	path = ft_cd_set_path(exec_data, cmd);
+	if (path == NULL)
+		return (-1);
+	old_pwd = get_env_value(exec_data, "PWD");
+	if (chdir(path) == -1)
+	{
+		ft_error("minishell: cd", 1);
+		return (-1);
+	}
+	new_pwd = getcwd(NULL, 0);
+	if (!new_pwd)
+	{
+		ft_error("minishell: error retrieving current directory\n", 2);
+		return (-1);
+	}
+	if (ft_cd_update_env(exec_data, old_pwd, new_pwd, cmd) == -1)
+		return (-1);
 	free(new_pwd);
 	return (0);
 }

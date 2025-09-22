@@ -13,7 +13,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # define _GNU_SOURCE
-# include "libft.h"
+# include "../libft/include/libft.h"
 # include "parsing/parsing.h"
 # include "ast_generation/ast.h"
 # include "ast_generation/cmd.h"

@@ -24,7 +24,6 @@ void	fill_one_cmd(t_exec_data *exec_data, t_cmd cmd, int *i);
 void	fill_cmds(t_exec_data *exec_data, t_ast *node, int *i);
 void	init_exec_data(t_exec_data *exec_data, t_ast *root);
 
-
 /* ----- AST_UTILS.C ----- */
 
 int		count_commands(t_ast *node);

@@ -35,17 +35,18 @@ int	exec_builtins(t_exec_data *exec_data, int i)
 
 int	run_builtins(t_exec_data *exec_data, int i)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
 	if (is_builtin(exec_data->cmds[i].cmd[0]) == 1)
 	{
 		ret = exec_builtins(exec_data, i);
 		free_envp(exec_data->envp);
+		free(context_read());
 		free_exec_data(exec_data);
 		if (ret == -1)
 			exit(exit_code_read());
-		else 
+		else
 			exit (0);
 	}
 	return (0);

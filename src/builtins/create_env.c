@@ -14,6 +14,25 @@
 #include "libft.h"
 #include "struct.h"
 
+int	create_var_with_value(t_var *var, char *env, char *equal_sign)
+{
+	var->key = ft_substr(env, 0, (ft_strlen(env) - ft_strlen(equal_sign)));
+	if (!var->key)
+	{
+		free(var);
+		ft_error("minishell: ft_substr failed\n", 1);
+		return (-1);
+	}
+	var->value = ft_strdup(equal_sign + 1);
+	if (!var->value)
+	{
+		free_var(var);
+		ft_error("minishell: ft_strdup failed\n", 1);
+		return (-1);
+	}
+	return (0);
+}
+
 t_var	*create_var(char *env)
 {
 	t_var	*var;
@@ -25,20 +44,8 @@ t_var	*create_var(char *env)
 	equal_sign = ft_strchr(env, '=');
 	if (equal_sign)
 	{
-		var->key = ft_substr(env, 0, (ft_strlen(env) - ft_strlen(equal_sign)));
-		if (!var->key)
-		{
-			free(var);
-			ft_error("minishell: ft_substr failed\n", 1);
+		if (create_var_with_value(var, env, equal_sign) == -1)
 			return (NULL);
-		}
-		var->value = ft_strdup(equal_sign + 1);
-		if (!var->value)
-		{
-			free_var(var);
-			ft_error("minishell: ft_strdup failed\n", 1);
-			return (NULL);
-		}
 	}
 	else
 	{
