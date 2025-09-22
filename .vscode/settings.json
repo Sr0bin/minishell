@@ -28,6 +28,8 @@
 		"libft.h": "c",
 		"signals.h": "c",
 		"context.h": "c",
-		"cerrno": "c"
+		"cerrno": "c",
+		"ast_to_cmds.h": "c",
+		"structs.h": "c"
 	}
 }

@@ -12,15 +12,40 @@
 
 #include "builtins/builtins.h"
 
-/* TO DO : AJOUTER UNE VARIABLE POUR RECUPERER LE RETOUR DE CHECK_IN_ENV */
+int	add_new_var(t_exec_data *exec_data, t_list *new_lst, t_var *var)
+{
+	int		check_env;
+
+	check_env = check_in_env(exec_data->envp, var);
+	if (check_env == 0)
+	{
+		new_lst = ft_lstnew(var);
+		if (!new_lst)
+		{
+			free(var);
+			ft_error("minishell: malloc failed\n", 1);
+			return (-1);
+		}
+		ft_lstadd_back(&exec_data->envp, new_lst);
+	}
+	else if (check_env == -1)
+	{
+		free_var(var);
+		return (-1);
+	}
+	else
+		free_var(var);
+	return (0);
+}
+
 int	export_with_args(t_exec_data *exec_data, char **cmd)
 {
 	int		i;
-	int		check_env;
 	t_var	*var;
 	t_list	*new_lst;
 
 	i = 1;
+	new_lst = NULL;
 	while (cmd[i])
 	{
 		var = 0;
@@ -31,35 +56,18 @@ int	export_with_args(t_exec_data *exec_data, char **cmd)
 			{
 				ft_error("minishell: malloc failed\n", 1);
 				return (-1);
-			}	
+			}
 			if (parse_args(cmd[i], var) == -1)
 				return (-1);
-			check_env = check_in_env(exec_data->envp, var);
-			if (check_env == 0)
-			{
-				new_lst = ft_lstnew(var);
-				if (!new_lst)
-				{
-					free(var);
-					ft_error("minishell: malloc failed\n", 1);
-					return (-1);
-				}
-				ft_lstadd_back(&exec_data->envp, new_lst);
-			}
-			else if (check_env == -1)
-			{
-				free_var(var);
+			if (add_new_var(exec_data, new_lst, var) == -1)
 				return (-1);
-			}
-			else
-				free_var(var);
 		}
 		i++;
 	}
 	return (0);
 }
 
-void export_without_args(t_exec_data *exec_data)
+void	export_without_args(t_exec_data *exec_data)
 {
 	t_var	*var;
 	t_var	*var2;

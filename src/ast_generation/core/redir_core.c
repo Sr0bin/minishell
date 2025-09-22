@@ -35,7 +35,7 @@ static t_redir_type	redir_type_token(t_token_list *tkn_lst)
 		return (REDIR_APPEND);
 	if (lst_to_tkn(tkn_lst)->type == TOKEN_HEREDOC)
 		return (REDIR_HEREDOC);
-	return (-1);
+	return ((t_redir_type)-1);
 }
 
 t_redir	*redir_token_create(t_token_list *tkn_lst)

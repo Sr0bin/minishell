@@ -12,7 +12,7 @@
 
 #ifndef STRUCT_H
 # define STRUCT_H
-# include "libft.h"
+# include "../libft/include/libft.h"
 # include "parsing/enums.h"
 # include "stdbool.h"
 

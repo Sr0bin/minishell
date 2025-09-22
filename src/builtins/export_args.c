@@ -34,39 +34,54 @@ int	check_export_var(char *args)
 	return (0);
 }
 
+int	add_var_without_value(t_var *var, char *arg)
+{
+	var->key = ft_strdup(arg);
+	if (!var->key)
+	{
+		ft_error("minishell: ft_strdup failed\n", 1);
+		return (-1);
+	}
+	var->value = NULL;
+	return (0);
+}
+
+int	add_var_with_value(t_var *var, char *equal, char *arg)
+{
+	size_t	key_len;
+
+	key_len = (size_t)(equal - arg);
+	var->key = ft_substr(arg, 0, key_len);
+	if (!var->key)
+	{
+		ft_error("minishell: ft_substr failed\n", 1);
+		return (-1);
+	}
+	var->value = ft_substr(arg, (unsigned int)(key_len + 1),
+			ft_strlen(arg) - (key_len + 1));
+	if (!var->value)
+	{
+		free(var->key);
+		ft_error("minishell: ft_substr failed\n", 1);
+		return (-1);
+	}
+	return (0);
+}
+
 int	parse_args(char *arg, t_var *var)
 {
 	char	*equal;
-	size_t	key_len;
 
 	equal = ft_strchr(arg, '=');
 	if (equal == NULL)
 	{
-		var->key = ft_strdup(arg);
-		if (!var->key)
-		{
-			ft_error("minishell: ft_strdup failed\n", 1);
+		if (add_var_without_value(var, arg) == -1)
 			return (-1);
-		}
-		var->value = NULL;
 	}
 	else
 	{
-		key_len = (size_t)(equal - arg);
-		var->key = ft_substr(arg, 0, key_len);
-		if (!var->key)	
-		{
-			ft_error("minishell: ft_substr failed\n", 1);
+		if (add_var_with_value(var, equal, arg) == -1)
 			return (-1);
-		}
-		var->value = ft_substr(arg, (unsigned int)(key_len + 1),
-				ft_strlen(arg) - (key_len + 1));
-		if (!var->value)
-		{
-			free(var->key);
-			ft_error("minishell: ft_substr failed\n", 1);
-			return (-1);
-		}
 	}
 	return (0);
 }

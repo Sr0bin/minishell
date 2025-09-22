@@ -13,7 +13,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # define _GNU_SOURCE
-# include "libft.h"
+# include "../libft/include/libft.h"
 # include "parsing/parsing.h"
 # include "ast_generation/ast.h"
 # include "ast_generation/cmd.h"
@@ -35,6 +35,6 @@
 
 extern volatile	sig_atomic_t	g_received_signal; 
 
-[[noreturn]] void	exit_minishell(char *prompt);
+__attribute__((noreturn)) void	exit_minishell(char *prompt);
 
 #endif

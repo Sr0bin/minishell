@@ -42,6 +42,7 @@ int	run_builtins(t_exec_data *exec_data, int i)
 	{
 		ret = exec_builtins(exec_data, i);
 		free_envp(exec_data->envp);
+		free(context_read());
 		free_exec_data(exec_data);
 		free(context_read());
 		if (ret == -1)

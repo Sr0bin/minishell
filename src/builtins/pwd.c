@@ -13,7 +13,7 @@
 #include "builtins/builtins.h"
 #include <errno.h>
 
-int	ft_pwd()
+int	ft_pwd(void)
 {
 	char	*buffer;
 

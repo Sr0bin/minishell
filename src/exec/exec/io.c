@@ -25,7 +25,7 @@ int	open_redir_file(t_redir *redir)
 	return (0);
 }
 
-int	apply_dup2_close(int fd, int type)
+int	apply_dup2_close(int fd, t_redir_type type)
 {
 	if (type == REDIR_INPUT || type == REDIR_HEREDOC)
 	{

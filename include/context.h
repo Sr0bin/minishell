@@ -14,10 +14,11 @@
 # define CONTEXT_H
 # include "struct.h"
 
-int	exit_code_read();
-int	exit_code_update(int exit_code);
+int	        exit_code_read();
+int	        exit_code_update(int exit_code);
 t_context	*context_set(t_context	*context, t_data_set operation);
 t_context	*context_read();
 t_context	*context_init(char **envp);
+
 #endif
 
