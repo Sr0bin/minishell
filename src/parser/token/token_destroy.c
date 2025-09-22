@@ -1,18 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.h                                          :+:      :+:    :+:   */
+/*   token_destroy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/31 19:29:31 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/22 09:19:52 by rorollin         ###   ########.fr       */
+/*   Created: 2025/09/22 10:53:56 by rorollin          #+#    #+#             */
+/*   Updated: 2025/09/22 10:54:29 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEREDOC_H
-# define HEREDOC_H
-# include "struct.h"
+#include "minishell.h"
 
-t_redir	*heredoc_create_fd(t_token_list *eof_token);
-#endif
+void	*token_ptr_destroy(t_token **token)
+{
+	if (*token != NULL)
+		free((*token)->content);
+	free(*token);
+	*token = NULL;
+	return (NULL);
+}
+void	*token_destroy(t_token *token)
+{
+	if (token != NULL)
+		free(token->content);
+	free(token);
+	return (NULL);
+}
+
+void	*token_list_destroy(t_token_list **tkn_lst)
+{
+	ft_lstclear(tkn_lst, (void (*)) token_destroy);
+	return (NULL);
+}

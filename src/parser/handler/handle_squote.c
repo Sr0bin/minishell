@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:44:40 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/04 02:20:47 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 10:27:18 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	quote_eof(t_parser *p)
 {
 	p->crnt_token = token_create(ft_strdup("ERROR"), TOKEN_EOF);
 	p->state = STATE_NORMAL;
+	p->error_code = SYNTAX_ERROR;
 }
 
 void	handle_squote_eof(t_parser *p)
@@ -27,7 +28,6 @@ void	handle_squote_end(t_parser *p)
 {
 	char	*join;
 
-	
 	p->crnt_pos++;
 	join = join_check_quote(p);
 	if (char_type(*p->crnt_pos) != CHAR_SQUOTE)

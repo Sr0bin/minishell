@@ -6,13 +6,13 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:49:30 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/09 16:25:27 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/22 11:13:25 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins/builtins.h"
 
-int	update_env(t_exec_data *exec_data, char *key, char *value)
+int	update_env(t_exec_data *exec_data, const char *key, const char *value)
 {
 	t_env	*env;
 	t_var	*var;

@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand.c                                           :+:      :+:    :+:   */
+/*   error_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/26 18:02:54 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/22 13:52:46 by rorollin         ###   ########.fr       */
+/*   Created: 2025/09/19 18:16:04 by rorollin          #+#    #+#             */
+/*   Updated: 2025/09/22 10:30:13 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_var	*var_search(char *key)
+void	*parser_handle_error(t_parser *p, t_token_list **final_list)
 {
-	t_env	*env;
-	t_env	*crnt_var;
-	size_t	len;
+	if (p->error_code == SYNTAX_ERROR)
+		printf("Syntax error !\n");
+	else if (p->error_code == MALLOC_FAIL)
+		printf("Malloc failed !\n");
+	if (p->error_code != 0)
+		token_list_destroy(final_list);
+	return (NULL);
+}
 
-	env = context_read()->env;
-	crnt_var = env;
-	while (crnt_var != NULL)
-	{
-		len = ft_strlen(((t_var *)(crnt_var->content))->key); 
-		if (ft_strncmp(((t_var *)(crnt_var->content))->key, key, (size_t) len)
-			== 0)
-			return (crnt_var->content);
-		crnt_var = crnt_var->next;
-	}
+void	*parser_update_error(t_parser *p, char error_code)
+{
+	p->error_code = error_code;
 	return (NULL);
 }

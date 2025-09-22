@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 16:48:47 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/26 16:47:45 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 08:55:08 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 t_ast			*ast_create(t_token_list **list);
 t_redir			*redir_token_create(t_token_list *tkn_lst);
 void			*redir_destroy(t_redir_list **redir_list, t_redir **redir);
-t_cmd			cmd_create(t_token_list *tkn_lst);
+t_cmd			cmd_create(t_token_list *tkn_lst, int *error);
 t_ast			*node_cmd_create(t_token_list *tkn_lst);
 t_ast			*node_pipe_create(t_token_list *tkn_lst, t_token_list *lst_pp);
 t_ast			*generate_node(t_node_type type, t_cmd cmd);

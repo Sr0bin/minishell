@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:40:49 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/02 20:20:28 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 10:29:31 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_parser	*parser_init(char *input)
 	parser->start_pos = input;
 	parser->crnt_token = NULL;
 	parser->token_list = NULL;
+	parser->error_code = 0;
 	return (parser);
 }
 
@@ -44,13 +45,15 @@ void	advance_parser(t_parser	*parser)
 
 void	*update_parser_token(t_parser *parser)
 {
-	while (parser->crnt_token == NULL)
+	while (parser->crnt_token == NULL && parser->error_code == 0)
 		advance_parser(parser);
 	return (parser->crnt_token);
 }
 
 int	parser_stop(t_parser *p)
 {
+	if (p->error_code != 0)
+		return (0);
 	if (*(p->crnt_pos) == '\0')
 	{
 		if (p->state == STATE_DQUOTE || p->state == STATE_SQUOTE || p->state == STATE_OP)
@@ -69,6 +72,7 @@ t_token_list	*shell_tokenizer(char *input)
 	if (parser == NULL)
 		return (NULL);
 	final_list = generate_token_list(parser);
+	parser_handle_error(parser, &final_list);
 	free(parser);
 	return (final_list);
 }

@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 17:23:08 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/09 16:18:42 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/22 13:24:33 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+
 char	*prompt(void)
 {
 	char		*read;
-	t_context	*context;
 
-	context = context_read();
 	read = readline("minishell> ");
 	if (g_received_signal == SIGINT)
 	{
@@ -29,16 +28,11 @@ char	*prompt(void)
 		return (NULL);
 	}
 	if (read == NULL)
-	{
-		free(read);
-		free_envp(context->env);
-		rl_clear_history();
-		printf("exit\n");
-		exit(EXIT_FAILURE);		
-	}
+		exit_minishell(read);
 	add_history(read);
 	return (read);
 }
+
 void	*prompt_heredoc(int	w_fd, char *eof)
 {
 	char	*prompt;
@@ -64,6 +58,8 @@ t_ast	*root_generation(char *prompt)
 	t_ast	*node;
 
 	token_list = shell_tokenizer(prompt);
+	if (token_list == NULL)
+		return (NULL);
 	token_list_clean(&token_list);
 	//printf("Token Cleaned :\n");
 	// print_token_list(token_list);

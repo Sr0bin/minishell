@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 10:58:11 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/07 09:19:23 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/22 11:13:04 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-char	*get_env_value(t_exec_data *exec_data, char *key)
+char	*get_env_value(t_exec_data *exec_data, const char *key)
 {
 	t_var	*var;
 	t_env	*current;

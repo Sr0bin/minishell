@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 17:18:02 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/16 09:11:06 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/22 11:03:34 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ int	run_builtins(t_exec_data *exec_data, int i)
 		free_envp(exec_data->envp);
 		free(context_read());
 		free_exec_data(exec_data);
+		free(context_read());
 		if (ret == -1)
 			exit(exit_code_read());
 		else
-			exit (0);
+			exit (EXIT_SUCCESS);
 	}
 	return (0);
 }

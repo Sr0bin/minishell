@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:16:49 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/16 10:31:53 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/22 11:05:41 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	check_path(t_exec_data *exec_data, int i)
 		|| ft_strcmp(exec_data->cmds[i].cmd[0], "") == 0)
 	{
 		free_exec(exec_data);
+		free(context_read());
 		exit(0);
 	}
 	if (exec_data->cmds[i].cmd[0][0] == '/' ||

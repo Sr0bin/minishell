@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:29:18 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/04 17:25:11 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 08:38:19 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,7 @@
 # include <signal.h>
 
 extern volatile	sig_atomic_t	g_received_signal; 
+
+[[noreturn]] void	exit_minishell(char *prompt);
 
 #endif

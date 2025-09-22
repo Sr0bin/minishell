@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 15:48:12 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/08 18:04:33 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 09:20:44 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,32 @@ t_redir	*create_redir(t_redir_type type, char *filename)
 	return (redir);
 }
 
+static t_redir_type	redir_type_token(t_token_list *tkn_lst)
+{
+	if (lst_to_tkn(tkn_lst)->type == TOKEN_REDIR_OUT)
+		return (REDIR_OUTPUT);
+	if (lst_to_tkn(tkn_lst)->type == TOKEN_REDIR_IN)
+		return (REDIR_INPUT);
+	if (lst_to_tkn(tkn_lst)->type == TOKEN_REDIR_APPEND)
+		return (REDIR_APPEND);
+	if (lst_to_tkn(tkn_lst)->type == TOKEN_HEREDOC)
+		return (REDIR_HEREDOC);
+	return (-1);
+}
+
 t_redir	*redir_token_create(t_token_list *tkn_lst)
 {
-	t_redir	*redir;
-	char	*filename;
+	t_redir			*redir;
+	char			*filename;
 	t_redir_type	redir_type;
 
 	if (tkn_lst == NULL)
 		return (NULL);
 	if (tkn_lst->next == NULL || lst_to_tkn(tkn_lst->next)->type != TOKEN_WORD)
 		return (NULL);
-	if (lst_to_tkn(tkn_lst)->type == TOKEN_REDIR_OUT)
-		redir_type = REDIR_OUTPUT;
-	if (lst_to_tkn(tkn_lst)->type == TOKEN_REDIR_IN)
-		redir_type = REDIR_INPUT;
-	if (lst_to_tkn(tkn_lst)->type == TOKEN_REDIR_APPEND)
-		redir_type = REDIR_APPEND;
-	if (lst_to_tkn(tkn_lst)->type == TOKEN_HEREDOC)
-	{
-		redir_type = REDIR_HEREDOC;
+	redir_type = redir_type_token(tkn_lst);
+	if (redir_type == REDIR_HEREDOC)
 		return (heredoc_create_fd(tkn_lst));
-	}
 	filename = ft_strdup(lst_to_tkn(tkn_lst->next)->content);
 	if (filename == NULL)
 		return (NULL);
@@ -71,6 +76,7 @@ void	*free_redir(t_redir *redir)
 void	*redir_destroy(t_redir_list **redir_list, t_redir **redir)
 {
 	ft_lstclear(redir_list, (void (*)) free_redir);
-	free_redir(*redir);
+	if (redir != NULL && *redir != NULL)
+		free_redir(*redir);
 	return (NULL);
 }

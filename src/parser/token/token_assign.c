@@ -6,11 +6,12 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:23:50 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/02 19:05:28 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/19 17:58:13 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parsing/token.h"
 #include <stdio.h>
 
 static t_token	*assign_token_operator(t_token *token)
@@ -64,7 +65,10 @@ t_token_list	*generate_token_list(t_parser *parser)
 			return (token_list_destroy(&final_list));
 		lst_temp = ft_lstnew(tkn_temp);
 		if (lst_temp == NULL)
+		{
+			token_destroy(tkn_temp);
 			return (token_list_destroy(&final_list));
+		}
 		ft_lstadd_back(&final_list, lst_temp);
 		parser->crnt_token = NULL;
 	}

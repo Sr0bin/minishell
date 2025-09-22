@@ -6,7 +6,7 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/09/16 14:03:41 by lserodon         ###   ########.fr        #
+#    Updated: 2025/09/22 13:04:08 by rorollin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,9 +60,11 @@ SOURCES_HEREDOC = heredoc.c
 
 SOURCES_PARSER_HANDLER = handle_normal.c handle_dquote.c handle_squote.c handle_op.c handle_normal_end.c\
 						 quote_join.c
-SOURCES_PARSER_STATE = transition_utils.c
 
-SOURCES_PARSER_TOKEN = token_assign.c token_core.c token_list_clean.c token_expand.c
+SOURCES_PARSER_STATE = transition_utils.c error_parser.c
+
+SOURCES_PARSER_TOKEN = token_assign.c token_core.c token_list_clean.c token_expand.c token_destroy.c\
+					   token_join.c
 
 SOURCES_PARSER = $(addprefix handler/, $(SOURCES_PARSER_HANDLER))\
 				 $(addprefix state/, $(SOURCES_PARSER_STATE)) \
@@ -124,7 +126,7 @@ CFLAGS_DEBUG = -Wall -Wextra -Werror -MMD -MP -ggdb3 -Wshadow -Wconversion -Wsig
 
 CFLAGS_PROD = -Wall -Wextra -MMD -MP -g
 
-CFLAGS = $(CFLAGS_PROD)
+CFLAGS = $(CFLAGS_DEBUG)
 
 export CFLAGS
 

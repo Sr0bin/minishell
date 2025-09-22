@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_generation.c                                   :+:      :+:    :+:   */
+/*   token_join.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/14 18:25:17 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/22 09:24:07 by rorollin         ###   ########.fr       */
+/*   Created: 2025/09/22 13:03:23 by rorollin          #+#    #+#             */
+/*   Updated: 2025/09/22 13:16:22 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdio.h>
 
-t_ast	*ast_create(t_token_list **list)
+t_token_list	*token_join(t_token_list *first)
 {
-	t_ast	*node;
+	t_token	*frst_tkn;
+	t_token	*scnd_tkn;
+	char	*ret;
 
-	if (*list == NULL)
+	frst_tkn = lst_to_tkn(first);
+	scnd_tkn = lst_to_tkn(first->next);
+	if (scnd_tkn->to_join == 0)
+		frst_tkn->to_join = 0;
+	token_clean_quote(scnd_tkn);
+	ret = ft_strcat(&frst_tkn->content, scnd_tkn->content);
+	if (ret == NULL)
 		return (NULL);
-	node = node_pipe_create(*list, pipe_find_last(*list)->next);
-	if (node == NULL)
-	{
-		ast_destroy(&node);
-		ft_error("Memory error in AST generation.\n", 127);
-	}
-	return (node);
+	ft_lstpop(&first, (void *) free);
+	if (frst_tkn->to_join == 1)
+		return (token_join(first));
+	return (first);
 }

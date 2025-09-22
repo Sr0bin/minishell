@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:21:09 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/08 17:04:57 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/22 11:13:40 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		run_builtins(t_exec_data *exec_data, int i);
 
 /* ----- CD.C ----- */
 int		ft_cd(t_exec_data *exec_data, t_cmds cmd);
+int	update_env(t_exec_data *exec_data, const char *key, const char *value);
 
 /* ----- ECHO.C ----- */
 int		ft_echo(t_cmds cmd);
