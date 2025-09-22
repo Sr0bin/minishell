@@ -6,7 +6,7 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/09/22 18:04:51 by rorollin         ###   ########.fr        #
+#    Updated: 2025/09/22 19:10:20 by rorollin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -126,7 +126,7 @@ CFLAGS_DEBUG = -Wall -Wextra -Werror -MMD -MP -ggdb3 -Wshadow -Wconversion -Wsig
 
 CFLAGS_PROD = -Wall -Wextra -MMD -MP -g
 
-CFLAGS = $(CFLAGS_DEBUG)
+CFLAGS = $(CFLAGS_PROD)
 
 export CFLAGS
 
