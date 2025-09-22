@@ -23,3 +23,5 @@ modifier le message syntax error
 single quote expand belek
 
 var_search peut etre pas la bonne longuer
+
+<Makefile cat << eof>out1 | cat <out1

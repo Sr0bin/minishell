@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 19:23:15 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/22 13:52:59 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 17:38:11 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	char_end_expand(char c)
 	return (0);
 }
 
-static char	*var_expand_end(const char *key)
+char	*var_expand_end(const char *key)
 {
 	while (*key != '\0')
 	{
