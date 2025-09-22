@@ -20,6 +20,7 @@ int	exec_single_cmd(t_exec_data *exec_data, int i)
 	pid_t			pid;
 	int				status;
 
+	status = 0;
 	if (is_builtin(exec_data->cmds->cmd[0]) == 1)
 	{
 		if (exec_single_builtin(exec_data, i) == -1)

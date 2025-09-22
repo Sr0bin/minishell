@@ -30,6 +30,7 @@
 		"context.h": "c",
 		"cerrno": "c",
 		"ast_to_cmds.h": "c",
-		"structs.h": "c"
+		"structs.h": "c",
+		"stdio.h": "c"
 	}
 }

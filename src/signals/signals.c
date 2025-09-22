@@ -36,6 +36,7 @@ int	nonnull(void)
 
 void	setup_signals(void)
 {
+	g_received_signal = 0;
 	rl_event_hook = nonnull;
 	signal(SIGINT, handler_signals);
 	signal(SIGQUIT, SIG_IGN);
