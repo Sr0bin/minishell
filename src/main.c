@@ -12,13 +12,13 @@
 
 #include "minishell.h"
 
-int	main (int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	(void) argc;
-	(void) argv;
 	t_ast	*node;
 	char	*read;
-	
+
+	(void) argc;
+	(void) argv;
 	if (isatty(0) != 1)
 		return (EXIT_FAILURE);
 	context_init(envp);
@@ -28,8 +28,7 @@ int	main (int argc, char **argv, char **envp)
 		read = prompt();
 		if (read == NULL)
 			continue ;
-		node = root_generation(read); 
-		// print_ast(node);
+		node = root_generation(read);
 		exec(node);
 		free(read);
 	}
@@ -45,5 +44,5 @@ __attribute__((noreturn)) void	exit_minishell(char *prompt)
 	rl_clear_history();
 	free(context);
 	printf("exit\n");
-	exit(EXIT_SUCCESS);		
+	exit(EXIT_SUCCESS);
 }
