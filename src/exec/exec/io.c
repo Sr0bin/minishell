@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:09:28 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/16 10:53:53 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/22 18:03:46 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,35 +69,6 @@ int	apply_redirections(t_exec_data *exec_data, int i)
 			return (-1);
 		close(fd);
 		node = node->next;
-	}
-	return (0);
-}
-
-int	setup_io(t_exec_data *exec_data, int i)
-{
-	if (i > 0)
-	{
-		if (dup2(exec_data->fd[i - 1][0], STDIN_FILENO) == -1)
-		{
-			close_pipes(exec_data);
-			ft_fatal_error(exec_data, "minishell: dup2 failed\n",
-				1, &free_exec);
-		}
-	}
-	if (i < exec_data->nb_cmds - 1)
-	{
-		if (dup2(exec_data->fd[i][1], STDOUT_FILENO) == -1)
-		{
-			close_pipes(exec_data);
-			ft_fatal_error(exec_data, "minishell: dup2 failed\n",
-				1, &free_exec);
-		}
-	}
-	if (apply_redirections(exec_data, i) == -1)
-	{
-		close_pipes(exec_data);
-		free_exec(exec_data);
-		exit(exit_code_read());
 	}
 	return (0);
 }

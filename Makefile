@@ -6,7 +6,7 @@
 #    By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/06 15:18:59 by rorollin          #+#    #+#              #
-#    Updated: 2025/09/22 13:04:08 by rorollin         ###   ########.fr        #
+#    Updated: 2025/09/22 18:04:51 by rorollin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SOURCES_DEBUG = debug.c
 #---------------------------
 
 SOURCES_PIPEX_EXEC = env_to_array.c error.c exec.c external.c free_utils.c io.c path.c pipes.c\
-						status.c utils.c exec_utils.c exec_builtins.c
+						status.c utils.c exec_utils.c exec_builtins.c io_destroy.c
 
 SOURCES_BUILTINS = export.c export_args.c export_no_args.c cd.c echo.c env.c pwd.c\
 				unset.c exit.c create_env.c builtins.c
