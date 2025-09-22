@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:19:01 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/22 11:14:55 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 14:32:28 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	handle_exit(t_exec_data *exec_data, int exit_code)
 	free_envp(exec_data->envp);
 	free_exec_data(exec_data);
 	rl_clear_history();
+	free(context_read());
 	exit (status);
 }
 
