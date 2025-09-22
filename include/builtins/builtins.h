@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:21:09 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/08 17:04:57 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/22 11:13:40 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		run_builtins(t_exec_data *exec_data, int i);
 
 /* ----- CD.C ----- */
 int		ft_cd(t_exec_data *exec_data, t_cmds cmd);
+int	update_env(t_exec_data *exec_data, const char *key, const char *value);
 
 /* ----- ECHO.C ----- */
 int		ft_echo(t_cmds cmd);
@@ -54,7 +55,7 @@ void	free_var(void	*content);
 void	ft_swap(t_env *a, t_env *b);
 int		parse_args(char *arg, t_var *var);
 void	print_export_list(t_env *env);
-int		ft_pwd();
+int		ft_pwd(void);
 int		ft_unset(t_list **env, t_cmds cmd);
 
 #endif

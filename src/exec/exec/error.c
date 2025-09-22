@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 08:10:16 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/16 10:32:25 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/22 10:46:01 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_fatal_error(void *arg, const char *msg, int exit_code,
 	else
 		ft_putstr_fd((char *)msg, 2);
 	f(arg);
-	exit_code_update(exit_code);
 	rl_clear_history();
+	free(context_read());
 	exit(exit_code);
 }
