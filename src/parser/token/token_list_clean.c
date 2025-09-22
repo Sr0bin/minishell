@@ -6,10 +6,11 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:22:58 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/22 13:20:59 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 13:58:41 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "expand.h"
 #include "minishell.h"
 #include "parsing/enums.h"
 #include "parsing/handler.h"
@@ -25,6 +26,22 @@ static t_token_list	*token_list_empty(t_token *crnt_tkn, t_token_list **lst_del)
 	return (NULL);
 }
 
+static t_token	*token_expand_loop(t_token	*tkn)
+{
+	void	*ret;
+	char	*crnt_pos;
+
+	crnt_pos = ft_strchr(tkn->content, '$');
+	while (crnt_pos++ != NULL && var_search(crnt_pos) != NULL)
+	{
+		ret = token_expand(tkn);
+		if (ret == NULL)
+			return (NULL);
+		crnt_pos = ft_strchr(tkn->content, '$');
+	}
+	return (tkn);
+
+}
 static t_token_list	*token_clean(t_token_list *tkn_lst)
 {
 	t_token	*tkn;
@@ -34,12 +51,7 @@ static t_token_list	*token_clean(t_token_list *tkn_lst)
 	tkn = lst_to_tkn(tkn_lst);
 	tkn_next = lst_to_tkn(tkn_lst->next);
 	assign_token_type(tkn);
-	while (ft_strchr(tkn->content, '$') != 0)
-	{
-		ret = token_expand(tkn);
-		if (ret == NULL)
-			return (NULL);
-	}
+	token_expand_loop(tkn);
 	token_clean_quote(tkn);
 	if (tkn_next != NULL && tkn->to_join == 1)
 	{

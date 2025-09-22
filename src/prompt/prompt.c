@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 17:23:08 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/22 13:10:42 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 13:24:33 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_ast	*root_generation(char *prompt)
 		return (NULL);
 	token_list_clean(&token_list);
 	//printf("Token Cleaned :\n");
-	print_token_list(token_list);
+	// print_token_list(token_list);
 	node = ast_create(&token_list);
 	token_list_destroy(&token_list);
 	return (node);

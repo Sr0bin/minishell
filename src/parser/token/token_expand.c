@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 19:23:15 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/22 13:04:53 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 13:52:59 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static	char	*expanded_string(char *key, int *exit)
 	}
 	else
 	{
-		found_var = var_search(context_read()->env, &key[1]);
+		found_var = var_search(&key[1]);
 		if (found_var == NULL)
 			return (key);
 		var_value = found_var->value;

@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:52 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/22 11:03:04 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 13:23:56 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	main (int argc, char **argv, char **envp)
 			continue ;
 		node = root_generation(read); 
 		// print_ast(node);
-		// heredoc_create_fd();
 		exec(node);
 		free(read);
 	}

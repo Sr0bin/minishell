@@ -6,17 +6,19 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 18:02:54 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/22 12:36:59 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 13:52:46 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_var	*var_search(t_env *env, char *key)
+t_var	*var_search(char *key)
 {
-	t_env		*crnt_var;
+	t_env	*env;
+	t_env	*crnt_var;
 	size_t	len;
 
+	env = context_read()->env;
 	crnt_var = env;
 	while (crnt_var != NULL)
 	{
