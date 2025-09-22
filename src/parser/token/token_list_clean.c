@@ -40,8 +40,8 @@ static t_token	*token_expand_loop(t_token	*tkn)
 		crnt_pos = ft_strchr(tkn->content, '$');
 	}
 	return (tkn);
-
 }
+
 static t_token_list	*token_clean(t_token_list *tkn_lst)
 {
 	t_token	*tkn;
@@ -63,7 +63,8 @@ static t_token_list	*token_clean(t_token_list *tkn_lst)
 	return (tkn_lst);
 }
 
-static t_token_list	**token_list_loop(t_token_list **tkn_lst, t_token_list *prev)
+static t_token_list	**token_list_loop(t_token_list **tkn_lst,
+	t_token_list *prev)
 {
 	t_token_list	*iter_prev;
 	t_token_list	*iter;

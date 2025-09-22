@@ -20,6 +20,7 @@ void	*token_ptr_destroy(t_token **token)
 	*token = NULL;
 	return (NULL);
 }
+
 void	*token_destroy(t_token *token)
 {
 	if (token != NULL)

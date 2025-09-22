@@ -12,7 +12,8 @@
 
 #include "minishell.h"
 
-t_redir_list	*redir_list_append(t_redir_list *redir_list, t_token_list *tkn_lst)
+t_redir_list	*redir_list_append(t_redir_list *redir_list
+		t_token_list *tkn_lst)
 {
 	t_token_list	*crnt_tkn;
 	t_redir_list	*list_temp;

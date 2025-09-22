@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	exit_code_read()
+int	exit_code_read(void)
 {
 	t_context	*context;
 

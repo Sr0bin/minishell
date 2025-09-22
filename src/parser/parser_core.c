@@ -56,7 +56,8 @@ int	parser_stop(t_parser *p)
 		return (0);
 	if (*(p->crnt_pos) == '\0')
 	{
-		if (p->state == STATE_DQUOTE || p->state == STATE_SQUOTE || p->state == STATE_OP)
+		if (p->state == STATE_DQUOTE || p->state == STATE_SQUOTE
+			|| p->state == STATE_OP)
 			return (1);
 		return (0);
 	}

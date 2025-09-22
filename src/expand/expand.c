@@ -22,7 +22,7 @@ t_var	*var_search(char *key)
 	crnt_var = env;
 	while (crnt_var != NULL)
 	{
-		len = ft_strlen(((t_var *)(crnt_var->content))->key); 
+		len = ft_strlen(((t_var *)(crnt_var->content))->key);
 		if (ft_strncmp(((t_var *)(crnt_var->content))->key, key, (size_t) len)
 			== 0)
 			return (crnt_var->content);

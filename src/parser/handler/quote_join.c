@@ -18,13 +18,12 @@ char	*join_check_normal(t_parser *p)
 		|| char_type(p->crnt_pos[-1]) == CHAR_DQUOTE)
 		return (&p->start_pos[-1]);
 	return (NULL);
-
 }
+
 char	*join_check_quote(t_parser *p)
 {
 	//TODO: Create a while loop to include quotes that need to be joined, but pinallaige
 	if (char_type(p->crnt_pos[0]) == CHAR_OTHER)
 		return (p->crnt_pos);
 	return (NULL);
-
 }

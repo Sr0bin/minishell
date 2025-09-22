@@ -28,7 +28,8 @@ int	pipe_count(t_token_list	*tkn_lst, t_token_list *last)
 
 t_token_list	*pipe_find_first(t_token_list *list)
 {
-	while (list != NULL && token_type_redir((t_token *) list->content) != TOKEN_PIPE)
+	while (list != NULL
+		&& token_type_redir((t_token *) list->content) != TOKEN_PIPE)
 		list = list->next;
 	return (list);
 }
@@ -72,7 +73,8 @@ t_token_list	*redir_find_first(t_token_list *list)
 {
 	while (list != NULL && (token_type_redir((t_token *) list->content) == 0))
 		list = list->next;
-	if (list != NULL && token_type_redir((t_token *) list->content) == TOKEN_PIPE)
+	if (list != NULL
+		&& token_type_redir((t_token *) list->content) == TOKEN_PIPE)
 		return (NULL);
 	return (list);
 }

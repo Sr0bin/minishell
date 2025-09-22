@@ -16,10 +16,10 @@
 
 void	handle_normal_whitespace(t_parser *p)
 {
-	if (p->crnt_pos != p->input\
-		&& char_type((p->crnt_pos)[-1]) != CHAR_WHITESPACE\
-		&& char_type((p->crnt_pos)[-1]) != CHAR_DQUOTE\
-		&& char_type((p->crnt_pos)[-1]) != CHAR_SQUOTE\
+	if (p->crnt_pos != p->input
+		&& char_type((p->crnt_pos)[-1]) != CHAR_WHITESPACE
+		&& char_type((p->crnt_pos)[-1]) != CHAR_DQUOTE
+		&& char_type((p->crnt_pos)[-1]) != CHAR_SQUOTE
 		&& char_type((p->crnt_pos)[-1]) != CHAR_OPERATOR)
 		token_generate(p, TOKEN_WORD);
 	else

@@ -39,7 +39,7 @@ t_context	*context_init(char **envp)
 	{
 		//TODO: create a error handler function when there is no context 
 		exit(EXIT_FAILURE);
-	}	
+	}
 	context->env = envp_to_list(envp);
 	//TODO: Check failed vs empty env
 	if (context->env == NULL)
