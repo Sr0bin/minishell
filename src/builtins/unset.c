@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:07:58 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/28 20:03:43 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/23 14:09:46 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	delete_var(t_list **env, char *args)
 			tmp = *current;
 			*current = (*current)->next;
 			ft_lstdelone(tmp, free_var);
+			(context_read())->env = *env;
 		}
 		else
 			current = &(*current)->next;

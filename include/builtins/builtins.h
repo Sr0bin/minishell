@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:21:09 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/22 15:46:00 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/23 13:28:09 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		ft_echo(t_cmds cmd);
 int		newline(char *str);
 
 /* ----- ENV.C ----- */
-int		ft_env(t_list *env);
+int		ft_env(t_env *env);
 
 /* ----- EXIT.C ----- */
 int		ft_exit(t_exec_data *exec_data, t_cmds cmd);
