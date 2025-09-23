@@ -6,10 +6,11 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 15:42:31 by lserodon          #+#    #+#             */
-/*   Updated: 2025/08/30 16:01:36 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/23 14:35:26 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 #include "signals/signals.h"
 
 volatile sig_atomic_t	g_received_signal = 0;
@@ -19,6 +20,7 @@ void	handler_signals(int signum)
 	g_received_signal = signum;
 	if (signum == SIGINT)
 	{
+		exit_code_update(signum + 128);
 		rl_done = 1;
 	}
 }
