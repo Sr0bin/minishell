@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 11:16:49 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/22 11:05:41 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/23 09:02:37 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	is_whitespace(char	*cmd)
 
 void	check_path(t_exec_data *exec_data, int i)
 {
+	struct	stat st;
+	
 	if (exec_data->cmds[i].cmd[0] == NULL
 		|| ft_strcmp(exec_data->cmds[i].cmd[0], "") == 0)
 	{
@@ -41,6 +43,11 @@ void	check_path(t_exec_data *exec_data, int i)
 		if (access(exec_data->cmds[i].cmd[0], F_OK) != 0)
 			ft_fatal_error(exec_data, "minishell: command not found\n",
 				127, &free_exec);
+		if (stat(exec_data->cmds[i].cmd[0], &st) == 0)
+		{
+			if (S_ISDIR(st.st_mode))
+				ft_fatal_error(exec_data, "minishell: is a directory\n", 126, &free_exec);
+		}
 		if (access(exec_data->cmds[i].cmd[0], X_OK) != 0)
 			ft_fatal_error(exec_data, "minishell: permission denied\n",
 				126, &free_exec);
