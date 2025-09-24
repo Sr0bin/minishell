@@ -1,0 +1,21 @@
+total 276
+drwxrwxr-x  9 lulussi lulussi   4096 sept. 24 14:07 .
+drwxrwxr-x  5 lulussi lulussi   4096 sept.  4 16:45 ..
+-rw-rw-r--  1 lulussi lulussi      0 sept. 24 14:06 a
+-rw-rw-r--  1 lulussi lulussi      0 sept. 24 14:06 b
+-rw-rw-r--  1 lulussi lulussi      5 sept. 24 14:06 c
+-rw-r--r--  1 lulussi lulussi     81 sept. 24 14:05 d
+drwxrwxr-x  2 lulussi lulussi   4096 sept. 24 14:07 dir
+-rwxrwxr-x  1 lulussi lulussi     26 août  19 09:02 .gdbinit
+drwxrwxr-x  9 lulussi lulussi   4096 sept. 23 14:38 .git
+-rw-rw-r--  1 lulussi lulussi    106 août  19 09:02 .gitignore
+-rw-rw-r--  1 lulussi lulussi     73 mai    8 13:54 .gitmodules
+-rw-rw-r--  1 lulussi lulussi     79 août  19 09:02 ignore_readline.supp
+drwxrwxr-x  7 lulussi lulussi   4096 sept. 23 08:33 include
+-rw-rw-r--  1 lulussi lulussi     18 août  25 19:02 infile.txt
+drwxrwxr-x 12 lulussi lulussi   4096 sept. 24 09:38 libft
+-rw-rw-r--  1 lulussi lulussi   4642 sept. 23 08:33 Makefile
+-rwxrwxr-x  1 lulussi lulussi 206488 sept. 24 10:38 minishell
+drwxrwxr-x  3 lulussi lulussi   4096 sept. 24 09:38 obj
+drwxrwxr-x 12 lulussi lulussi   4096 sept. 24 14:04 src
+drwxrwxr-x  2 lulussi lulussi   4096 sept. 23 08:56 .vscode
