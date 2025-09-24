@@ -6,15 +6,24 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 15:53:29 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/21 18:08:59 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/24 15:28:28 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static int	op_condition(t_parser *p)
+{
+	if ((p->crnt_pos != p->input && p->crnt_pos[0] != p->crnt_pos[-1])
+		|| (p->crnt_pos - p->start_pos > 1)
+		|| (p->crnt_pos != p->input && *p->crnt_pos == '|'))
+		return (1);
+	return (0);
+}
+
 void	handle_op_extend(t_parser *p)
 {
-	if (p->crnt_pos != p->input && p->crnt_pos[0] != p->crnt_pos[-1])
+	if (op_condition(p))
 	{
 		token_generate(p, TOKEN_OPERATOR);
 		p->start_pos--;
