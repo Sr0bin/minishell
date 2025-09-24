@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 19:50:23 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/22 14:51:08 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/24 15:35:27 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ char	*join_check_normal(t_parser *p)
 
 char	*join_check_quote(t_parser *p)
 {
-	if (char_type(p->crnt_pos[0]) == CHAR_OTHER)
+	if (char_type(p->crnt_pos[0]) == CHAR_DIGIT
+		|| char_type(p->crnt_pos[0]) == CHAR_LETTER)
 		return (p->crnt_pos);
 	return (NULL);
 }
