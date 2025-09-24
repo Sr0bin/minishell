@@ -6,10 +6,11 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 14:10:20 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/22 10:28:06 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/24 14:24:10 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "char.h"
 #include "list.h"
 #include "minishell.h"
 #include "struct.h"
@@ -30,6 +31,12 @@ t_char_type	char_type(char c)
 		return (CHAR_NEWLINE);
 	if (c == '\\')
 		return (CHAR_ESCAPE);
+	if (ft_isdigit(c))
+		return (CHAR_DIGIT);
+	if (ft_isalpha(c))
+		return (CHAR_LETTER);
+	if (c == '_')
+		return (CHAR_UNDERSCORE);
 	return (CHAR_OTHER);
 }
 
@@ -50,7 +57,7 @@ void	handle_normal(t_parser *p)
 		handle_normal_escape(p);
 	else if (type == CHAR_EOF)
 		handle_normal_eof(p);
-	else if (type == CHAR_OTHER)
+	else
 		handle_normal_other(p);
 }
 
