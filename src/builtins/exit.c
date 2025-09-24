@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:19:01 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/22 14:32:28 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/24 14:21:29 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	handle_exit(t_exec_data *exec_data, int exit_code)
 	int	status;
 
 	status = exit_code;
-	printf("exit\n");
+	if (exec_data->nb_cmds == 1)
+		printf("exit\n");
 	close_tmp_fds(exec_data->fd[0][0], exec_data->fd[0][1]);
 	free_envp(exec_data->envp);
 	free_exec_data(exec_data);

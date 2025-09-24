@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 15:42:31 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/23 14:35:26 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/24 10:38:30 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void	setup_signals(void)
 	rl_event_hook = nonnull;
 	signal(SIGINT, handler_signals);
 	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
 }
