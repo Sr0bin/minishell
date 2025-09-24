@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 17:23:08 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/22 13:24:33 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/22 18:24:34 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ void	*prompt_heredoc(int w_fd, char *eof)
 	while (1)
 	{
 		prompt = readline(PROMPT_HEREDOC);
+		if (g_received_signal == SIGINT)
+		{
+			free(prompt);
+			g_received_signal = 0;
+			return (NULL);
+		}
 		if (prompt == NULL || ft_strcmp(eof, prompt) == 0)
 			break ;
 		write(w_fd, prompt, ft_strlen(prompt));

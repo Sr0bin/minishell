@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 08:10:16 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/23 14:37:48 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/24 15:05:35 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_error(const char *msg, int exit_code)
 {
-	if (errno)	
+	if (errno)
 		perror(msg);
 	else
 		ft_putstr_fd((char *)msg, 2);

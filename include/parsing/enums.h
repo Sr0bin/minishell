@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:10:50 by rorollin          #+#    #+#             */
-/*   Updated: 2025/08/20 15:51:56 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/24 14:21:06 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ typedef enum e_char_type
 	CHAR_NEWLINE,
 	CHAR_ESCAPE,
 	CHAR_EOF,
+	CHAR_DIGIT,
+	CHAR_LETTER,
+	CHAR_UNDERSCORE,
 	CHAR_OTHER,
 }	t_char_type;
 
