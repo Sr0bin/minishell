@@ -19,6 +19,8 @@ int	newline(char *str)
 	if (!str || str[0] != '-')
 		return (0);
 	i = 1;
+	if (ft_strlen(str) == 1)
+		return (0);
 	while (str[i])
 	{
 		if (str[i] != 'n')

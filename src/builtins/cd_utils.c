@@ -12,7 +12,7 @@
 
 #include "builtins/builtins.h"
 
-int	create_new_var(t_exec_data *exec_data, char *key, char *value)
+int	create_new_var(t_exec_data *exec_data, const char *key, const char *value)
 {
 	t_var	*var;
 
