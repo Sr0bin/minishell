@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 09:33:49 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/25 20:57:14 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/25 21:19:23 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_var	*create_var(char *env)
 		return (NULL);
 	equal_sign = ft_strchr(env, '=');
 	if (equal_sign)
-{
+	{
 		if (create_var_with_value(var, env, equal_sign) == -1)
 			return (NULL);
 	}
@@ -66,22 +66,24 @@ static t_env	*envp_empty(void)
 	t_env	*empty_env;
 	t_var	*empty_var;
 	char	*empty_key;
-	// char	*empty_value;
+	char	*empty_value;
 
 	empty_key = ft_strdup("");
-	if (empty_key == NULL)
+	empty_value = ft_strdup("");
+	if (empty_key == NULL || empty_value == NULL)
 		return (NULL);
 	empty_var = create_var(empty_key);
 	if (empty_var == NULL)
 	{
 		free(empty_key);
+		free(empty_value);
 		return (NULL);
 	}
+	empty_var->value = empty_value;
 	empty_env = ft_lstnew(empty_var);
 	if (empty_env == NULL)
 	{
-		free(empty_var);
-		free(empty_key);
+		free_var(empty_var);
 		return (NULL);
 	}
 	return (empty_env);

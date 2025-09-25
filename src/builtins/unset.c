@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:07:58 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/25 20:57:16 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/25 21:10:00 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	delete_var(t_env **env, char *args)
 	{
 		var = (*current)->content;
 		*var->key = '\0';
-		// *var->value = '\0';
+		*var->value = '\0';
 		return ;
 	}
 	while (current != NULL && *current != NULL)
