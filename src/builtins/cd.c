@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:49:30 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/22 11:13:25 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/24 15:29:03 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	ft_cd_update_env(t_exec_data *exec_data, char *old_pwd, char *new_pwd,
 	return (0);
 }
 
-int	ft_cd(t_exec_data *exec_data, t_cmds cmd)
+int	execute_ft_cd(t_exec_data *exec_data, t_cmds cmd)
 {
 	char	*path;
 	char	*old_pwd;
@@ -111,5 +111,20 @@ int	ft_cd(t_exec_data *exec_data, t_cmds cmd)
 	if (ft_cd_update_env(exec_data, old_pwd, new_pwd, cmd) == -1)
 		return (-1);
 	free(new_pwd);
+	return (0);
+}
+
+int	ft_cd(t_exec_data *exec_data, t_cmds cmd)
+{
+	if (count_nbr_args(cmd.cmd) > 2)
+	{
+		ft_error("minishell: cd: too many arguments\n", 1);
+		return (-1);
+	}
+	else
+	{
+		if (execute_ft_cd(exec_data, cmd) == -1)
+			return (-1);
+	}
 	return (0);
 }
