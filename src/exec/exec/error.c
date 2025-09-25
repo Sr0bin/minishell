@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 08:10:16 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/24 15:05:35 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/25 22:37:27 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	*free_exec(void *exec_data)
 	return (NULL);
 }
 
-void	ft_fatal_error(void *arg, const char *msg, int exit_code,
-	void *(*f)(void *))
+__attribute__((noreturn)) void	ft_fatal_error(void *arg, const char *msg,
+		int exit_code, void *(*f)(void *))
 {
 	if (errno)
 		perror(msg);

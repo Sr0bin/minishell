@@ -6,13 +6,14 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:19:01 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/25 12:51:42 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/25 22:37:52 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	handle_exit(t_exec_data *exec_data, int exit_code)
+__attribute__((noreturn)) int	handle_exit(t_exec_data *exec_data,
+											int exit_code)
 {
 	int	status;
 
