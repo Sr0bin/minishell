@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:49:30 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/25 14:48:02 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/25 22:13:07 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int	update_env(t_exec_data *exec_data, const char *key, const char *value)
 		}
 		env = env->next;
 	}
-	create_new_var(exec_data, key, value);
-	return (0);
+	return (create_new_var(exec_data, key, value));
 }
 
 char	*ft_cd_set_path(t_exec_data *exec_data, t_cmds cmd)

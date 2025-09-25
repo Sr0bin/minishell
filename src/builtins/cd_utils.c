@@ -6,13 +6,13 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 14:45:27 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/25 14:51:36 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/25 22:13:27 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins/builtins.h"
 
-void	create_new_var(t_exec_data *exec_data, char *key, char *value)
+int	create_new_var(t_exec_data *exec_data, char *key, char *value)
 {
 	t_var	*var;
 

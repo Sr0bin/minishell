@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:21:09 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/25 14:47:13 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/25 22:13:22 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_cd_set_path(t_exec_data *exec_data, t_cmds cmd);
 int		ft_cd_update_env(t_exec_data *exec_data, char *old_pwd,
 			char *new_pwd, t_cmds cmd);
 int		update_env(t_exec_data *exec_data, const char *key, const char *value);
-void	create_new_var(t_exec_data *exec_data, char *key, char *value);
+int		create_new_var(t_exec_data *exec_data, char *key, char *value);
 
 /* ----- ECHO.C ----- */
 int		ft_echo(t_cmds cmd);
