@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:07:58 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/23 14:09:46 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/25 20:57:16 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,21 @@ void	free_var(void *content)
 	free(var);
 }
 
-void	delete_var(t_list **env, char *args)
+void	delete_var(t_env **env, char *args)
 {
 	t_list	**current;
 	t_list	*tmp;
 	t_var	*var;
 
 	current = env;
-	while (*current)
+	if ((*current)->next == NULL && current == env)
+	{
+		var = (*current)->content;
+		*var->key = '\0';
+		// *var->value = '\0';
+		return ;
+	}
+	while (current != NULL && *current != NULL)
 	{
 		var = (t_var *)(*current)->content;
 		if (!ft_strcmp(var->key, args))

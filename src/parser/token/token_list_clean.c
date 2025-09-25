@@ -6,7 +6,7 @@
 /*   By: rorollin <rorollin@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 17:22:58 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/25 17:49:04 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/25 19:09:36 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_token_list	*token_list_empty(t_token *crnt_tkn, t_token_list **lst_del)
 	return (NULL);
 }
 
-static t_token	*token_expand_loop(t_token	*tkn)
+t_token	*token_expand_loop(t_token	*tkn)
 {
 	void	*ret;
 	char	*crnt_pos;
@@ -60,7 +60,6 @@ static t_token_list	*token_clean(t_token_list *tkn_lst)
 		ret = token_join(tkn_lst);
 		if (tkn->content == NULL || ret == NULL)
 			return (NULL);
-		token_expand_loop(tkn);
 		return (ret);
 	}
 	return (tkn_lst);

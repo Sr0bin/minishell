@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 15:22:52 by rorollin          #+#    #+#             */
-/*   Updated: 2025/09/22 16:01:37 by rorollin         ###   ########.fr       */
+/*   Updated: 2025/09/25 19:05:44 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void) argc;
 	(void) argv;
-	if (isatty(0) != 1)
+	if (isatty(0) != 1 || isatty(1) != 1)
 		return (EXIT_FAILURE);
 	context_init(envp);
 	while (1)

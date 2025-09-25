@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:16:31 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/09 14:40:49 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/25 21:00:07 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ void	print_export_list(t_env *env)
 	while (env)
 	{
 		var = (t_var *)env->content;
+		if (*var->key == '\0')
+		{
+			env = env->next;
+			continue ;
+		}
 		if (var->value)
 			printf("export %s=\"%s\"\n", var->key, var->value);
 		else

@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:19:22 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/09 16:26:29 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/25 20:44:30 by rorollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,12 @@ int	check_in_env(t_env *env, t_var *var)
 {
 	t_var	*var_env;
 
-	while (env)
+	while (env != NULL && env->content != NULL)
 	{
 		var_env = (t_var *)env->content;
 		if (ft_strcmp(var_env->key, var->key) == 0)
 		{
-			if (var->value)
+			if (var->value != NULL)
 			{
 				free(var_env->value);
 				var_env->value = ft_strdup(var->value);
