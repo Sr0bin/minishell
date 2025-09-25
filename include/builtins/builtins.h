@@ -35,7 +35,8 @@ char	*ft_cd_set_path(t_exec_data *exec_data, t_cmds cmd);
 int		ft_cd_update_env(t_exec_data *exec_data, char *old_pwd,
 			char *new_pwd, t_cmds cmd);
 int		update_env(t_exec_data *exec_data, const char *key, const char *value);
-int		create_new_var(t_exec_data *exec_data, const char *key, const char *value);
+int		create_new_var(t_exec_data *exec_data, const char *key,
+			const char *value);
 
 /* ----- ECHO.C ----- */
 int		ft_echo(t_cmds cmd);
