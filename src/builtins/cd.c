@@ -6,7 +6,7 @@
 /*   By: lserodon <lserodon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:49:30 by lserodon          #+#    #+#             */
-/*   Updated: 2025/09/24 15:29:03 by lserodon         ###   ########.fr       */
+/*   Updated: 2025/09/25 14:48:02 by lserodon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	update_env(t_exec_data *exec_data, const char *key, const char *value)
 		}
 		env = env->next;
 	}
+	create_new_var(exec_data, key, value);
 	return (0);
 }
 
@@ -69,13 +70,12 @@ char	*ft_cd_set_path(t_exec_data *exec_data, t_cmds cmd)
 int	ft_cd_update_env(t_exec_data *exec_data, char *old_pwd, char *new_pwd,
 		t_cmds cmd)
 {
-	if (old_pwd)
+	if (!old_pwd)
+		old_pwd = "";
+	if (update_env(exec_data, "OLDPWD", old_pwd) == -1)
 	{
-		if (update_env(exec_data, "OLDPWD", old_pwd) == -1)
-		{
-			free(new_pwd);
-			return (-1);
-		}
+		free(new_pwd);
+		return (-1);
 	}
 	if (update_env(exec_data, "PWD", new_pwd) == -1)
 	{
